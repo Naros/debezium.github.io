@@ -4,7 +4,7 @@
         <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Debezium connector for Vitess :: Debezium Documentation</title>
-    <link rel="canonical" href="https://www.debezium.io/documentation/reference/stable/connectors/vitess.html">
+    <link rel="canonical" href="https://debezium.io/documentation/reference/stable/connectors/vitess.html">
     <meta name="generator" content="Antora 3.0.0-alpha.9">
 <link rel="stylesheet" href="../../../debezium-antora/css/site.css">
 <link rel="stylesheet" href="../../../debezium-antora/css/debezium-antora.css">
@@ -41,7 +41,7 @@
     </div>
   </nav>
 </header><div class="body">
-<div class="nav-container" data-component="reference" data-version="devel">
+<div class="nav-container" data-component="reference" data-version="stable">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -142,6 +142,9 @@
     <a class="nav-link" href="../transformations/outbox-event-router.html">Outbox Event Router</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/mongodb-outbox-event-router.html">MongoDB Outbox Event Router</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/filtering.html">Message Filtering</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -224,40 +227,40 @@
       <span class="title">Debezium Documentation</span>
       <ul class="versions">
         <li class="version">
-          <a href="../../index.html">Nightly</a>
+          <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version is-current">
-          <a href="../index.html">1.8</a>
+          <a href="/documentation/reference/1.8/index.html">1.8</a>
         </li>
         <li class="version">
-          <a href="../../stable/index.html">1.7</a>
+          <a href="/documentation/reference/1.7/index.html">1.7</a>
         </li>
         <li class="version">
-          <a href="../../1.6/index.html">1.6</a>
+          <a href="/documentation/reference/1.6/index.html">1.6</a>
         </li>
         <li class="version">
-          <a href="../../1.5/index.html">1.5</a>
+          <a href="/documentation/reference/1.5/index.html">1.5</a>
         </li>
         <li class="version">
-          <a href="../../1.4/index.html">1.4</a>
+          <a href="/documentation/reference/1.4/index.html">1.4</a>
         </li>
         <li class="version">
-          <a href="../../1.3/index.html">1.3</a>
+          <a href="/documentation/reference/1.3/index.html">1.3</a>
         </li>
         <li class="version">
-          <a href="../../1.2/index.html">1.2</a>
+          <a href="/documentation/reference/1.2/index.html">1.2</a>
         </li>
         <li class="version">
-          <a href="../../1.1/index.html">1.1</a>
+          <a href="/documentation/reference/1.1/index.html">1.1</a>
         </li>
         <li class="version">
-          <a href="../../1.0/index.html">1.0</a>
+          <a href="/documentation/reference/1.0/index.html">1.0</a>
         </li>
         <li class="version">
-          <a href="../../0.10/index.html">0.10</a>
+          <a href="/documentation/reference/0.10/index.html">0.10</a>
         </li>
         <li class="version">
-          <a href="../../0.9/index.html">0.9</a>
+          <a href="/documentation/reference/0.9/index.html">0.9</a>
         </li>
       </ul>
     </li>
@@ -269,7 +272,7 @@
 <main role="main" class="main">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../../stable/index.html" class="home-link"></a>
+  <a href="../index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Debezium Documentation</a></li>
@@ -282,12 +285,12 @@
     <div class="page-versions">
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">1.8</button>
         <div class="version-menu">
-                <a class="version" href="/documentation/reference/connectors/vitess.html">Nightly</a>
-                <a class="version is-current" href="/documentation/reference/devel/connectors/vitess.html">1.8</a>
-                <a class="version" href="/documentation/reference/stable/connectors/vitess.html">1.7</a>
-                <a class="version" href="/documentation/reference/1.6/connectors/vitess.html">1.6</a>
-                <a class="version" href="/documentation/reference/1.5/connectors/vitess.html">1.5</a>
-                <a class="version" href="/documentation/reference/1.4/connectors/vitess.html">1.4</a>
+                <a class="version" href="/documentation/reference/nightly/index.html">nightly</a>
+                <a class="version is-current" href="/documentation/reference/1.8/index.html">1.8</a>
+                <a class="version" href="/documentation/reference/1.7/index.html">1.7</a>
+                <a class="version" href="/documentation/reference/1.6/index.html">1.6</a>
+                <a class="version" href="/documentation/reference/1.5/index.html">1.5</a>
+                <a class="version" href="/documentation/reference/1.4/index.html">1.4</a>
                 <a class="version is-missing" href="/documentation/reference/1.3/index.html">1.3</a>
                 <a class="version is-missing" href="/documentation/reference/1.2/index.html">1.2</a>
                 <a class="version is-missing" href="/documentation/reference/1.1/index.html">1.1</a>
@@ -304,12 +307,7 @@
 <div class="article-cell1">
 <article class="doc">
         
-    <div class="version-banner version-banner-development">
-    You are viewing documentation for the current development version of Debezium.
-    <br/>
-            If you want to view the latest stable version of this page, please go <a href=/documentation/reference/stable/index.html>here</a>.
-            
-</div>            <h1 class="page">Debezium connector for Vitess</h1>
+    <!-- This partial is a placeholder -->            <h1 class="page">Debezium connector for Vitess</h1>
         <div id="preamble">
 <div class="sectionbody">
 <div id="toc" class="toc">
@@ -320,6 +318,7 @@
 <ul class="sectlevel2">
 <li><a href="#vitess-streaming-changes">Streaming changes</a></li>
 <li><a href="#vitess-topic-names">Topics names</a></li>
+<li><a href="#vitess-transaction-metadata">Transaction metadata</a></li>
 </ul>
 </li>
 <li><a href="#vitess-events">Data change events</a>
@@ -365,7 +364,8 @@
 </ul>
 </div>
 <div class="paragraph">
-<p>Debezium&#8217;s Vitess connector captures row-level changes in the shards of a Vitess <a href="https://vitess.io/docs/concepts/keyspace/">keyspace</a>. Vitess version <a href="#limitations-with-earlier-vitess-versions">8.0.0</a>, 9.0.0 are supported.</p>
+<p>Debezium&#8217;s Vitess connector captures row-level changes in the shards of a Vitess <a href="https://vitess.io/docs/concepts/keyspace/">keyspace</a>.
+For information about the Vitess versions that are compatible with this connector, see the <a href="https://debezium.io/releases/">Debezium release overview</a>.</p>
 </div>
 <div class="paragraph">
 <p>The connector does not support snapshot feature at the moment. The first time it connects to a Vitess cluster, it starts from the current VGTID location of the keyspace and continuously captures row-level changes that insert, update, and delete database content and that were committed to a Vitess keyspace. The connector generates data change event records and streams them to Kafka topics. For each table, the default behavior is that the connector streams all generated events to a separate Kafka topic for that table. Applications and services consume data change event records from that topic.</p>
@@ -458,6 +458,122 @@
 <p><code>fulfillment.commerce.orders</code></p>
 </li>
 </ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="vitess-transaction-metadata"><a class="anchor" href="#vitess-transaction-metadata"></a>Transaction metadata</h3>
+<div class="paragraph">
+<p>Debezium can generate events that represent transaction boundaries and that enrich data change event messages.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Limits on when Debezium receives transaction metadata</div>
+<div class="paragraph">
+<p>Debezium registers and receives metadata only for transactions that occur after you deploy the connector.
+Metadata for transactions that occur before you deploy the connector is not available.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Debezium generates transaction boundary events for the <code>BEGIN</code> and <code>END</code> delimiters in every transaction.
+Transaction boundary events contain the following fields:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>status</code></dt>
+<dd>
+<p><code>BEGIN</code> or <code>END</code>.</p>
+</dd>
+<dt class="hdlist1"><code>id</code></dt>
+<dd>
+<p>String representation of the unique transaction identifier.</p>
+</dd>
+<dt class="hdlist1"><code>event_count</code> (for <code>END</code> events)</dt>
+<dd>
+<p>Total number of events emitted by the transaction.</p>
+</dd>
+<dt class="hdlist1"><code>data_collections</code> (for <code>END</code> events)</dt>
+<dd>
+<p>An array of pairs of <code>data_collection</code> and <code>event_count</code> elements.
+that indicates the number of events that the connector emits for changes that originate from a data collection.</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "status": "BEGIN",
+  "id": "[{\"keyspace\":\"test_unsharded_keyspace\",\"shard\":\"0\",\"gtid\":\"MySQL56/e03ece6c-4c04-11ec-8e20-0242ac110004:1-37\"}]",
+  "event_count": null,
+  "data_collections": null
+}
+
+{
+  "status": "END",
+  "id": "[{\"keyspace\":\"test_unsharded_keyspace\",\"shard\":\"0\",\"gtid\":\"MySQL56/e03ece6c-4c04-11ec-8e20-0242ac110004:1-37\"}]",
+  "event_count": 1,
+  "data_collections": [
+    {
+      "data_collection": "test_unsharded_keyspace.my_seq",
+      "event_count": 1
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Unless overridden via the <a href="#vitess-property-transaction-topic"><code>transaction.topic</code></a> option,
+the connector emits transaction events to the <a href="#vitess-property-database-server-name"><code><em>&lt;database.server.name&gt;</em></code></a><code>.transaction</code> topic.</p>
+</div>
+<div class="paragraph">
+<div class="title">Change data event enrichment</div>
+<p>When transaction metadata is enabled the data message <code>Envelope</code> is enriched with a new <code>transaction</code> field.
+This field provides information about every event in the form of a composite of fields:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>id</code> - string representation of unique transaction identifier</p>
+</li>
+<li>
+<p><code>total_order</code> - absolute position of the event among all events generated by the transaction</p>
+</li>
+<li>
+<p><code>data_collection_order</code> - the per-data collection position of the event among all events that were emitted by the transaction</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Following is an example of a message:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "before": null,
+  "after": {
+    "pk": "2",
+    "aa": "1"
+  },
+  "source": {
+...
+  },
+  "op": "c",
+  "ts_ms": 1637988245467,
+  "transaction": {
+    "id": "[{\"keyspace\":\"test_unsharded_keyspace\",\"shard\":\"0\",\"gtid\":\"MySQL56/e03ece6c-4c04-11ec-8e20-0242ac110004:1-68\"}]",
+    "total_order": 1,
+    "data_collection_order": 1
+  }
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -880,13 +996,13 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
             "email": "annek@noanswer.org"
         },
         "source": { <i class="conum" data-value="8"></i><b>(8)</b>
-            "version": "1.8.0.Alpha1",
+            "version": "1.8.0.Final",
             "connector": "vitess",
             "name": "my_sharded_connector",
             "ts_ms": 1559033904863,
             "snapshot": true,
-            "db": "Vitess_server",
-            "schema": "commerce",
+            "db": "",
+            "keyspace": "commerce",
             "table": "customers",
             "vgtid": "[{\"keyspace\":\"commerce\",\"shard\":\"80-\",\"gtid\":\"MariaDB/0-54610504-47\"},{\"keyspace\":\"commerce\",\"shard\":\"-80\",\"gtid\":\"MariaDB/0-1592148-45\"}]"
         },
@@ -1045,13 +1161,13 @@ In the <code>source</code> object, <code>ts_ms</code> indicates the time that th
             "email": "annek@noanswer.org"
         },
         "source": { <i class="conum" data-value="3"></i><b>(3)</b>
-            "version": "1.8.0.Alpha1",
+            "version": "1.8.0.Final",
             "connector": "vitess",
             "name": "my_sharded_connector",
             "ts_ms": 1559033904863,
             "snapshot": null,
-            "db": "Vitess_server",
-            "schema": "commerce",
+            "db": "",
+            "keyspace": "commerce",
             "table": "customers",
             "vgtid": "[{\"keyspace\":\"commerce\",\"shard\":\"80-\",\"gtid\":\"MariaDB/0-54610504-47\"},{\"keyspace\":\"commerce\",\"shard\":\"-80\",\"gtid\":\"MariaDB/0-1592148-46\"}]"
         },
@@ -1166,13 +1282,13 @@ In the <code>source</code> object, <code>ts_ms</code> indicates the time that th
         },
         "after": null, <i class="conum" data-value="2"></i><b>(2)</b>
         "source": { <i class="conum" data-value="3"></i><b>(3)</b>
-            "version": "1.8.0.Alpha1",
+            "version": "1.8.0.Final",
             "connector": "vitess",
             "name": "my_sharded_connector",
             "ts_ms": 1559033904863,
             "snapshot": null,
-            "db": "Vitess_server",
-            "schema": "commerce",
+            "db": "",
+            "keyspace": "commerce",
             "table": "customers",
             "vgtid": "[{\"keyspace\":\"commerce\",\"shard\":\"80-\",\"gtid\":\"MariaDB/0-54610504-47\"},{\"keyspace\":\"commerce\",\"shard\":\"-80\",\"gtid\":\"MariaDB/0-1592148-47\"}]"
         },
@@ -1706,7 +1822,7 @@ GEOMETRYCOLLECTION</code></p>
 <h2 id="vitess-deploying-a-connector"><a class="anchor" href="#vitess-deploying-a-connector"></a>Deployment</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>With <a href="https://zookeeper.apache.org">Zookeeper</a>, <a href="http://kafka.apache.org/">Kafka</a>, and <a href="https://kafka.apache.org/documentation.html#connect">Kafka Connect</a> installed, the remaining tasks to deploy a Debezium Vitess connector are to download the <a href="https://repo1.maven.org/maven2/io/debezium/debezium-connector-vitess/1.8.0.Alpha1/debezium-connector-vitess-1.8.0.Alpha1-plugin.tar.gz">connector&#8217;s plug-in archive</a>, extract the JAR files into your Kafka Connect environment, and add the directory with the JAR files to <a href="https://kafka.apache.org/documentation/#connectconfigs">Kafka Connect&#8217;s <code>plugin.path</code></a>. You then need to restart your Kafka Connect process to pick up the new JAR files.</p>
+<p>With <a href="https://zookeeper.apache.org">Zookeeper</a>, <a href="http://kafka.apache.org/">Kafka</a>, and <a href="https://kafka.apache.org/documentation.html#connect">Kafka Connect</a> installed, the remaining tasks to deploy a Debezium Vitess connector are to download the <a href="https://repo1.maven.org/maven2/io/debezium/debezium-connector-vitess/1.8.0.Final/debezium-connector-vitess-1.8.0.Final-plugin.tar.gz">connector&#8217;s plug-in archive</a>, extract the JAR files into your Kafka Connect environment, and add the directory with the JAR files to <a href="https://kafka.apache.org/documentation/#connectconfigs">Kafka Connect&#8217;s <code>plugin.path</code></a>. You then need to restart your Kafka Connect process to pick up the new JAR files.</p>
 </div>
 <div class="paragraph">
 <p>If you are working with immutable containers, see <a href="https://hub.docker.com/r/debezium/">Debezium&#8217;s Container images</a> for Zookeeper, Kafka and Kafka Connect with the Vitess connector already installed and ready to run. You can also <a href="../operations/openshift.html" class="page">run Debezium on Kubernetes and OpenShift</a>.</p>
@@ -2099,6 +2215,34 @@ The values will incoporate any differences between the clocks on the machines wh
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="vitess-property-gtid"></a><a href="#vitess-property-gtid"><code>vitess.gtid</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>current</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An optional GTID position for a shard to stream from. This has to be set together with <code>vitess.shard</code>. If not configured, the connector streams changes from the latest position for the given shard.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="vitess-property-stop-on-reshard"></a><a href="#vitess-property-stop-on-reshard"><code>vitess.stop_on_reshard</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Controls Vitess flag stop_on_reshard.<br>
+<br>
+<code>true</code> - the stream will be stopped after a reshard operation. <br>
+<br>
+<code>false</code> - the stream will be automatically migrated for the new shards after a reshard operation.<br>
+<br>
+If set to <code>true</code>, you should also consider setting <code>vitess.gtid</code> in the configuration.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="vitess-property-database-user"></a><a href="#vitess-property-database-user"><code>vitess.database.user</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -2117,48 +2261,6 @@ The values will incoporate any differences between the clocks on the machines wh
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>An optional password of the Vitess database server (VTGate). If not configured, unauthenticated VTGate gRPC is used.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="vitess-property-vtctld-host"></a><a href="#vitess-property-vtctld-host"><code>vitess.vtctld.host</code></a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>IP address or hostname of the VTCtld server.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="vitess-property-vtctld-port"></a><a href="#vitess-property-vtctld-port"><code>vitess.vtctld.port</code></a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>15999</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Integer port number of the VTCtld server.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="vitess-property-vtctld-user"></a><a href="#vitess-property-vtctld-user"><code>vitess.vtctld.user</code></a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><em>n/a</em></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>An optional username of the VTCtld server. If not configured, unauthenticated VTCtld gRPC is used.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="vitess-property-vtctld-password"></a><a href="#vitess-property-vtctld-password"><code>vitess.vtctld.password</code></a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><em>n/a</em></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>An optional password of the VTCtld server. If not configured, unauthenticated VTCtld gRPC is used.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2365,6 +2467,39 @@ The operations include: <code>c</code> for inserts/create, <code>u</code> for up
 By default, no operations are skipped.</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="vitess-property-provide-transaction-metadata"></a><a href="#vitess-property-provide-transaction-metadata"><code>provide.transaction.metadata</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Determines whether the connector generates events with transaction boundaries and enriches change event envelopes with transaction metadata. Specify <code>true</code> if you want the connector to do this. See <a href="#vitess-transaction-metadata">Transaction metadata</a> for details.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="vitess-property-transaction-topic"></a><a href="#vitess-property-transaction-topic"><code>transaction.topic</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>${database.server.name}.transaction</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Controls the name of the topic to which the connector sends transaction metadata messages. The placeholder <code>${database.server.name}</code> can be used for referring to the connector&#8217;s logical name; defaults to <code>${database.server.name}.transaction</code>, for example <code>dbserver1.transaction</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="vitess-property-keepalive-interval-ms"></a><a href="#vitess-property-keepalive-interval-ms"><code>vitess.keepalive.interval.ms</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>Long.MAX_VALUE</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Control the interval between periodic gPRC keepalive pings for VStream. Defaults to <code>Long.MAX_VALUE</code> (disabled).</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 <div id="vitess-pass-through-properties" class="paragraph">
@@ -2486,7 +2621,7 @@ E.g. <code>"3"</code> will be emitted as the value instead of <code>"L"</code> i
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2021 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/3efeb05c74918b0d9f0f5d22089fc8ee3acaafae">3efeb05c</a></span>)
+            <div class="copyright">Copyright &copy; 2021 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/9a5fb9752f03326fc2373de8f4a71a3cbc14dc10">9a5fb975</a></span>)
             
         </div>
     </footer>

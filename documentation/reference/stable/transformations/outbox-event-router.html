@@ -4,7 +4,7 @@
         <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Outbox Event Router :: Debezium Documentation</title>
-    <link rel="canonical" href="https://www.debezium.io/documentation/reference/stable/transformations/outbox-event-router.html">
+    <link rel="canonical" href="https://debezium.io/documentation/reference/stable/transformations/outbox-event-router.html">
     <meta name="generator" content="Antora 3.0.0-alpha.9">
 <link rel="stylesheet" href="../../../debezium-antora/css/site.css">
 <link rel="stylesheet" href="../../../debezium-antora/css/debezium-antora.css">
@@ -46,7 +46,7 @@
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="../index.html">Debezium 1.7 Documentation</a></h3>
+    <h3 class="title"><a href="../index.html">Debezium 1.8 Documentation</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
@@ -142,6 +142,9 @@
     <a class="nav-link" href="outbox-event-router.html">Outbox Event Router</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mongodb-outbox-event-router.html">MongoDB Outbox Event Router</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="filtering.html">Message Filtering</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -217,47 +220,47 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">Debezium Documentation</span>
-    <span class="version">1.7</span>
+    <span class="version">1.8</span>
   </div>
   <ul class="components">
     <li class="component is-current">
       <span class="title">Debezium Documentation</span>
       <ul class="versions">
         <li class="version">
-          <a href="../../index.html">Nightly</a>
-        </li>
-        <li class="version">
-          <a href="../../devel/index.html">1.8</a>
+          <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version is-current">
-          <a href="../index.html">1.7</a>
+          <a href="/documentation/reference/1.8/index.html">1.8</a>
         </li>
         <li class="version">
-          <a href="../../1.6/index.html">1.6</a>
+          <a href="/documentation/reference/1.7/index.html">1.7</a>
         </li>
         <li class="version">
-          <a href="../../1.5/index.html">1.5</a>
+          <a href="/documentation/reference/1.6/index.html">1.6</a>
         </li>
         <li class="version">
-          <a href="../../1.4/index.html">1.4</a>
+          <a href="/documentation/reference/1.5/index.html">1.5</a>
         </li>
         <li class="version">
-          <a href="../../1.3/index.html">1.3</a>
+          <a href="/documentation/reference/1.4/index.html">1.4</a>
         </li>
         <li class="version">
-          <a href="../../1.2/index.html">1.2</a>
+          <a href="/documentation/reference/1.3/index.html">1.3</a>
         </li>
         <li class="version">
-          <a href="../../1.1/index.html">1.1</a>
+          <a href="/documentation/reference/1.2/index.html">1.2</a>
         </li>
         <li class="version">
-          <a href="../../1.0/index.html">1.0</a>
+          <a href="/documentation/reference/1.1/index.html">1.1</a>
         </li>
         <li class="version">
-          <a href="../../0.10/index.html">0.10</a>
+          <a href="/documentation/reference/1.0/index.html">1.0</a>
         </li>
         <li class="version">
-          <a href="../../0.9/index.html">0.9</a>
+          <a href="/documentation/reference/0.10/index.html">0.10</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/0.9/index.html">0.9</a>
         </li>
       </ul>
     </li>
@@ -280,25 +283,25 @@
     <div class="page-versions-container">
     Version:
     <div class="page-versions">
-        <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">1.7</button>
+        <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">1.8</button>
         <div class="version-menu">
-                <a class="version" href="/documentation/reference/transformations/outbox-event-router.html">Nightly</a>
-                <a class="version" href="/documentation/reference/devel/transformations/outbox-event-router.html">1.8</a>
-                <a class="version is-current" href="/documentation/reference/stable/transformations/outbox-event-router.html">1.7</a>
-                <a class="version" href="/documentation/reference/1.6/transformations/outbox-event-router.html">1.6</a>
-                <a class="version" href="/documentation/reference/1.5/configuration/outbox-event-router.html">1.5</a>
-                <a class="version" href="/documentation/reference/1.4/configuration/outbox-event-router.html">1.4</a>
-                <a class="version" href="/documentation/reference/1.3/configuration/outbox-event-router.html">1.3</a>
-                <a class="version" href="/documentation/reference/1.2/configuration/outbox-event-router.html">1.2</a>
-                <a class="version" href="/documentation/reference/1.1/configuration/outbox-event-router.html">1.1</a>
-                <a class="version" href="/documentation/reference/1.0/configuration/outbox-event-router.html">1.0</a>
-                <a class="version" href="/documentation/reference/0.10/configuration/outbox-event-router.html">0.10</a>
-                <a class="version" href="/documentation/reference/0.9/configuration/outbox-event-router.html">0.9</a>
+                <a class="version" href="/documentation/reference/nightly/index.html">nightly</a>
+                <a class="version is-current" href="/documentation/reference/1.8/index.html">1.8</a>
+                <a class="version" href="/documentation/reference/1.7/index.html">1.7</a>
+                <a class="version" href="/documentation/reference/1.6/index.html">1.6</a>
+                <a class="version" href="/documentation/reference/1.5/index.html">1.5</a>
+                <a class="version" href="/documentation/reference/1.4/index.html">1.4</a>
+                <a class="version" href="/documentation/reference/1.3/index.html">1.3</a>
+                <a class="version" href="/documentation/reference/1.2/index.html">1.2</a>
+                <a class="version" href="/documentation/reference/1.1/index.html">1.1</a>
+                <a class="version" href="/documentation/reference/1.0/index.html">1.0</a>
+                <a class="version" href="/documentation/reference/0.10/index.html">0.10</a>
+                <a class="version" href="/documentation/reference/0.9/index.html">0.9</a>
         </div>
         |
     </div>
     </div>
-  <div class="edit-this-page"><a href="https://github.com/debezium/debezium/edit/1.7/documentation/modules/ROOT/pages/transformations/outbox-event-router.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/debezium/debezium/edit/1.8/documentation/modules/ROOT/pages/transformations/outbox-event-router.adoc">Edit this Page</a></div>
   </div>
 <div class="article-grid">
 <div class="article-cell1">
@@ -316,6 +319,7 @@
 <li><a href="#options-for-applying-the-transformation-selectively">Options for applying the transformation selectively</a></li>
 <li><a href="#avro-as-payload-format">Using Avro as the payload format</a></li>
 <li><a href="#emitting-messages-with-additional-fields">Emitting messages with additional fields</a></li>
+<li><a href="#expanding-escaped-json-string-as-json">Expanding escaped JSON String as JSON</a></li>
 <li><a href="#outbox-event-router-configuration-options">Configuration options</a></li>
 <li><a href="#_distributed_tracing">Distributed tracing</a></li>
 </ul>
@@ -347,7 +351,7 @@ For more information, see <a href="#options-for-applying-the-transformation-sele
 <p>See <a href="https://debezium.io/blog/2019/02/19/reliable-microservices-data-exchange-with-the-outbox-pattern/">Reliable Microservices Data Exchange With the Outbox Pattern</a> to learn about why the outbox pattern is useful and how it works.</p>
 </div>
 <div class="paragraph">
-<p>For an example that you can run, see the  <a href="https://github.com/debezium/debezium-examples/tree/master/outbox">outbox pattern demo</a>, which is in the Debezium examples repository. It includes an example of how to configure a Debezium connector to run the outbox event router SMT.</p>
+<p>For an example that you can run, see the  <a href="https://github.com/debezium/debezium-examples/tree/main/outbox">outbox pattern demo</a>, which is in the Debezium examples repository. It includes an example of how to configure a Debezium connector to run the outbox event router SMT.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -357,7 +361,8 @@ For more information, see <a href="#options-for-applying-the-transformation-sele
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The outbox event router SMT does <strong>not</strong> support the MongoDB connector.</p>
+<p>This SMT does <strong>not</strong> support the MongoDB connector;
+please use the <a href="mongodb-outbox-event-router.html" class="page">MongoDB outbox event router</a> SMT with that connector.</p>
 </div>
 </td>
 </tr>
@@ -401,7 +406,7 @@ For more information, see <a href="#options-for-applying-the-transformation-sele
     "type": "OrderCreated"
   },
   "source": {
-    "version": "1.7.0.Final",
+    "version": "1.8.0.Final",
     "connector": "postgresql",
     "name": "dbserver1-bare",
     "db": "orderdb",
@@ -625,6 +630,51 @@ transforms.outbox.table.fields.additional.placement=type:envelope:eventType</cod
 </div>
 </div>
 <div class="sect1">
+<h2 id="expanding-escaped-json-string-as-json"><a class="anchor" href="#expanding-escaped-json-string-as-json"></a>Expanding escaped JSON String as JSON</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You may have noticed that the Debezium outbox message contains the <code>payload</code> represented as a String.
+So when this string, is actually JSON, it appears as escaped in the result Kafka message like shown below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript"># Kafka Topic: outbox.event.order
+# Kafka Message key: "1"
+# Kafka Message Headers: "id=4d47e190-0402-4048-bc2c-89dd54343cdc"
+# Kafka Message Timestamp: 1556890294484
+{
+  "{\"id\": 1, \"lineItems\": [{\"id\": 1, \"item\": \"Debezium in Action\", \"status\": \"ENTERED\", \"quantity\": 2, \"totalPrice\": 39.98}, {\"id\": 2, \"item\": \"Debezium for Dummies\", \"status\": \"ENTERED\", \"quantity\": 1, \"totalPrice\": 29.99}], \"orderDate\": \"2019-01-31T12:13:01\", \"customerId\": 123}"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The outbox event router allows you to expand this message content to "real" JSON with the companion schema
+being deduced from the JSON document itself. That way the result in Kafka message looks like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript"># Kafka Topic: outbox.event.order
+# Kafka Message key: "1"
+# Kafka Message Headers: "id=4d47e190-0402-4048-bc2c-89dd54343cdc"
+# Kafka Message Timestamp: 1556890294484
+{
+  "id": 1, "lineItems": [{"id": 1, "item": "Debezium in Action", "status": "ENTERED", "quantity": 2, "totalPrice": 39.98}, {"id": 2, "item": "Debezium for Dummies", "status": "ENTERED", "quantity": 1, "totalPrice": 29.99}], "orderDate": "2019-01-31T12:13:01", "customerId": 123
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To enable this transformation, you have to set the <a href="#outbox-event-router-property-table-expand-json-payload"><code>table.expand.json.payload</code></a> to true like below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">transforms=outbox,...
+transforms.outbox.type=io.debezium.transforms.outbox.EventRouter
+transforms.outbox.table.expand.json.payload=true</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="outbox-event-router-configuration-options"><a class="anchor" href="#outbox-event-router-configuration-options"></a>Configuration options</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -649,6 +699,37 @@ transforms.outbox.table.fields.additional.placement=type:envelope:eventType</cod
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="outbox-event-router-property-table-op-invalid-behavior"></a><a href="#outbox-event-router-property-table-op-invalid-behavior"><code>table.op.invalid.behavior</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>warn</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Table</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Determines the behavior of the SMT when there is an <code>UPDATE</code> operation on the outbox table. Possible settings are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>warn</code> - The SMT logs a warning and continues to the next outbox table record.</p>
+</li>
+<li>
+<p><code>error</code> - The SMT logs an error and continues to the next outbox table record.</p>
+</li>
+<li>
+<p><code>fatal</code> - The SMT logs an error and the connector stops processing.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>All changes in an outbox table are expected to be <code>INSERT</code> operations. That is, an outbox table functions as a queue; updates to records in an outbox table are not allowed.
+The SMT automatically filters out <code>DELETE</code> operations on an outbox table.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="outbox-event-router-property-table-field-event-id"></a><a href="#outbox-event-router-property-table-field-event-id"><code>table.field.event.id</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -658,7 +739,8 @@ transforms.outbox.table.fields.additional.placement=type:envelope:eventType</cod
 <p>Table</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Specifies the outbox table column that contains the unique event ID.</p>
+<p>Specifies the outbox table column that contains the unique event ID.
+This ID will be stored in the emitted event&#8217;s headers under the <code>id</code> key.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -712,7 +794,24 @@ transforms.outbox.table.fields.additional.placement=type:envelope:eventType</cod
 <p>Table</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Specifies the outbox table column that contains the payload ID.</p>
+<p>Specifies the outbox table column that contains the payload ID.
+This ID will be used as the emitted event&#8217;s key.<br>
+<br>
+This option is deprecated, use <a href="#outbox-event-router-property-table-field-event-key">table.field.event.key</a> instead.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="outbox-event-router-property-table-expand-json-payload"></a><a href="#outbox-event-router-property-table-expand-json-payload"><code>table.expand.json.payload</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Table</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specifies whether the JSON expansion of a String payload should be done. If no content found or in case of parsing error, the content is kept "as is".</p>
 </div></div></td>
 </tr>
 <tr>
@@ -827,7 +926,8 @@ To change the topic name, you can:<br></p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="outbox-event-router-property-debezium-op-invalid-behavior"></a><a href="#outbox-event-router-property-debezium-op-invalid-behavior"><code>debezium.op.invalid.behavior</code></a></p>
+<p><a id="outbox-event-router-property-debezium-op-invalid-behavior"></a><a href="#outbox-event-router-property-debezium-op-invalid-behavior"><code>debezium.op.invalid.behavior</code></a><br>
+<em>Deprecated</em></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>warn</code></p>
@@ -854,6 +954,9 @@ To change the topic name, you can:<br></p>
 <div class="paragraph">
 <p>All changes in an outbox table are expected to be <code>INSERT</code> operations. That is, an outbox table functions as a queue; updates to records in an outbox table are not allowed.
 The SMT automatically filters out <code>DELETE</code> operations on an outbox table.</p>
+</div>
+<div class="paragraph">
+<p><em>Use <a href="#outbox-event-router-property-table-op-invalid-behavior"><code>table.op.invalid.behavior</code></a> instead</em>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -919,7 +1022,7 @@ See <a href="/documentation/reference/integrations/tracing">tracing documentatio
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2021 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/d2e07afac52e6bbf2a0dcb51f93720cf2ed7622b">d2e07afa</a></span>)
+            <div class="copyright">Copyright &copy; 2021 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/9a5fb9752f03326fc2373de8f4a71a3cbc14dc10">9a5fb975</a></span>)
             
         </div>
     </footer>
