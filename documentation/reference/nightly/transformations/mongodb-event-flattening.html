@@ -120,6 +120,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/vitess.html">Vitess</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/spanner.html">Spanner</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -137,6 +140,9 @@
   </li>
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="mongodb-event-flattening.html">MongoDB New Document State Extraction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="event-changes.html">Event Changes</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="outbox-event-router.html">Outbox Event Router</a>
@@ -202,6 +208,9 @@
     <a class="nav-link" href="../operations/monitoring.html">Monitoring</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../operations/kubernetes.html">Running on Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../operations/openshift.html">Running on Openshift</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -228,6 +237,18 @@
       <ul class="versions">
         <li class="version is-current">
           <a href="/documentation/reference/nightly/index.html">nightly</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.2/index.html">2.2</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.1/index.html">2.1</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.0/index.html">2.0</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/1.9/index.html">1.9</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/1.8/index.html">1.8</a>
@@ -286,6 +307,10 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
                 <a class="version is-current" href="/documentation/reference/nightly/index.html">nightly</a>
+                <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
+                <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
+                <a class="version" href="/documentation/reference/2.0/index.html">2.0</a>
+                <a class="version" href="/documentation/reference/1.9/index.html">1.9</a>
                 <a class="version" href="/documentation/reference/1.8/index.html">1.8</a>
                 <a class="version" href="/documentation/reference/1.7/index.html">1.7</a>
                 <a class="version" href="/documentation/reference/1.6/index.html">1.6</a>
@@ -324,28 +349,13 @@
 <li><a href="#_nested_structure_flattening">Nested structure flattening</a></li>
 <li><a href="#_mongodb_unset_handling">MongoDB <code>$unset</code> handling</a></li>
 <li><a href="#_determine_original_operation">Determine original operation</a></li>
-<li><a href="#_adding_source_metadata_fields">Adding source metadata fields</a></li>
+<li><a href="#_adding_metadata_fields">Adding metadata fields</a></li>
 </ul>
 </li>
 <li><a href="#options-for-applying-the-transformation-selectively">Options for applying the transformation selectively</a></li>
 <li><a href="#mongodb-extract-new-record-state-configuration-options">Configuration options</a></li>
 <li><a href="#_known_limitations">Known limitations</a></li>
 </ul>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>This single message transformation (SMT) is under active development right now, so the emitted message structure or other details may still change as development progresses.
-Please see below for a descriptions of known limitations of this transformation.</p>
-</div>
-</td>
-</tr>
-</table>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -431,8 +441,13 @@ which then can be consumed by connectors such as the JDBC sink connector.</p>
 transforms.unwrap.type=io.debezium.connector.mongodb.transforms.ExtractNewDocumentState
 transforms.unwrap.drop.tombstones=false
 transforms.unwrap.delete.handling.mode=drop
-transforms.unwrap.operation.header=true</code></pre>
+transforms.unwrap.add.headers=op</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<div class="title">Customizing the configuration</div>
+<p>The connector might emit many types of event messages (for example, heartbeat messages, tombstone messages, or metadata messages about transactions).
+To apply the transformation to a subset of events, you can define <a href="#options-for-applying-the-transformation-selectively">an SMT predicate statement that selectively applies the transformation</a> to specific events only.</p>
 </div>
 <div class="sect2">
 <h3 id="_array_encoding"><a class="anchor" href="#_array_encoding"></a>Array encoding</h3>
@@ -609,11 +624,12 @@ transforms.unwrap.add.headers=op</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_adding_source_metadata_fields"><a class="anchor" href="#_adding_source_metadata_fields"></a>Adding source metadata fields</h3>
+<h3 id="_adding_metadata_fields"><a class="anchor" href="#_adding_metadata_fields"></a>Adding metadata fields</h3>
 <div class="paragraph">
-<p>The SMT can optionally add metadata fields from the original change event&#8217;s <code>source</code> structure to the final flattened record (prefixed with "__").
+<p>The SMT can optionally add metadata fields from the original change event&#8217;s to the final flattened record (prefixed with "__").
 This ability to add metadata to the event record makes it possible to include content such as the name of the collection associated with the change event, or such connector-specific fields as the replica set name.
-For more information about the MongoDB source structure, see <a href="../connectors/mongodb.html" class="page">the documentation</a> for the MongoDB connector.</p>
+Currently, only fields from change event sub-structures <code>source</code>, <code>transaction</code> and <code>updateDescription</code> can be added.
+For more information about the MongoDB change event structure, see <a href="../connectors/mongodb.html" class="page">the documentation</a> for the MongoDB connector.</p>
 </div>
 <div class="paragraph">
 <p>For example, you might specify the following configuration to add a replica set name (<code>rs</code>) and the collection name for a change event to the final flattened event record:</p>
@@ -647,7 +663,7 @@ transforms.unwrap.add.fields=rs,collection</pre>
 Because the structure of these other messages differs from the structure of the change event messages that the SMT is designed to process, it&#8217;s best to configure the connector to selectively apply the SMT, so that it processes only the intended data change messages.</p>
 </div>
 <div class="paragraph">
-<p>For more information about how to apply the SMT selectively, see <a href="applying-transformations-selectively.html#applying-transformation-selectively" class="page">Configure an SMT predicate for the transformation</a>.</p>
+<p>For more information about how to apply the SMT selectively, see <a href="applying-transformations-selectively.html#applying-transformations-selectively" class="page">Configure an SMT predicate for the transformation</a>.</p>
 </div>
 </div>
 </div>
@@ -769,18 +785,6 @@ The fields will be prefixed with <code>__</code> or <code>__&lt;struct&gt;__</co
 Please use a comma separated list without spaces.</p>
 </div></div></td>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="mongodb-extract-new-record-state-sanitize-field-names"></a><a href="#mongodb-extract-new-record-state-sanitize-field-names"><code>sanitize.field.names</code></a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>false</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Whether field names will be sanitized to adhere to Avro naming requirements.
-See <a href="../configuration/avro.html#avro-naming" class="page">Avro naming</a> for more details.</p>
-</div></div></td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -809,7 +813,7 @@ Specifically, all fields of documents within one collection with the same name m
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2021 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/a20ed7a573126b642f90a38e5294b8578bb40c42">a20ed7a5</a></span>)
+            <div class="copyright">Copyright &copy; 2022 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/5ff4df141738a2e0b90378a5543930412e197b81">5ff4df14</a></span>)
             
         </div>
     </footer>

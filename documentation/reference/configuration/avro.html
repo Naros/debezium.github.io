@@ -120,6 +120,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/vitess.html">Vitess</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/spanner.html">Spanner</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -137,6 +140,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/mongodb-event-flattening.html">MongoDB New Document State Extraction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/event-changes.html">Event Changes</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/outbox-event-router.html">Outbox Event Router</a>
@@ -202,6 +208,9 @@
     <a class="nav-link" href="../operations/monitoring.html">Monitoring</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../operations/kubernetes.html">Running on Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../operations/openshift.html">Running on Openshift</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -228,6 +237,18 @@
       <ul class="versions">
         <li class="version is-current">
           <a href="/documentation/reference/nightly/index.html">nightly</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.2/index.html">2.2</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.1/index.html">2.1</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.0/index.html">2.0</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/1.9/index.html">1.9</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/1.8/index.html">1.8</a>
@@ -286,6 +307,10 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
                 <a class="version is-current" href="/documentation/reference/nightly/index.html">nightly</a>
+                <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
+                <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
+                <a class="version" href="/documentation/reference/2.0/index.html">2.0</a>
+                <a class="version" href="/documentation/reference/1.9/index.html">1.9</a>
                 <a class="version" href="/documentation/reference/1.8/index.html">1.8</a>
                 <a class="version" href="/documentation/reference/1.7/index.html">1.7</a>
                 <a class="version" href="/documentation/reference/1.6/index.html">1.6</a>
@@ -318,10 +343,19 @@
 <div id="toc" class="toc">
 <div id="toctitle" class="title">Table of Contents</div>
 <ul class="sectlevel1">
+<li><a href="#apicurio-registry">Apicurio API and Schema Registry</a>
+<ul class="sectlevel2">
 <li><a href="#about-the-registry">About the Apicurio API and Schema Registry</a></li>
-<li><a href="#overview-of-deploying-a-debezium-connector-that-uses-avro-serialization">Deployment overview</a></li>
-<li><a href="#deploying-with-debezium-containers">Deploying with Debezium containers</a></li>
-<li><a href="#confluent-schema-registry">Confluent Schema Registry</a></li>
+<li><a href="#overview-of-deploying-a-debezium-connector-that-uses-avro-serialization">Apicurio Registry deployment overview</a></li>
+<li><a href="#deploying-with-debezium-containers">Deploying Apicurio Registry with Debezium containers</a></li>
+</ul>
+</li>
+<li><a href="#confluent-schema-registry">Confluent Schema Registry</a>
+<ul class="sectlevel2">
+<li><a href="#overview-of-deploying-confluent-schema-registry">Confluent Schema Registry deployment overview</a></li>
+<li><a href="#deploying-confluent-schema-registry-with-debezium-containers">Deploying Confluent Schema Registry with Debezium containers</a></li>
+</ul>
+</li>
 <li><a href="#avro-naming">Naming</a></li>
 <li><a href="#_getting_more_information">Getting More Information</a></li>
 </ul>
@@ -379,8 +413,10 @@ Available options include the Apicurio API and Schema Registry as well as the Co
 </div>
 </div>
 <div class="sect1">
-<h2 id="about-the-registry"><a class="anchor" href="#about-the-registry"></a>About the Apicurio API and Schema Registry</h2>
+<h2 id="apicurio-registry"><a class="anchor" href="#apicurio-registry"></a>Apicurio API and Schema Registry</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="about-the-registry"><a class="anchor" href="#about-the-registry"></a>About the Apicurio API and Schema Registry</h3>
 <div class="paragraph">
 <p>The <a href="https://github.com/Apicurio/apicurio-registry">Apicurio Registry</a> open-source project provides several components that work with Avro:</p>
 </div>
@@ -448,10 +484,8 @@ Messages do not contain the schema information themselves, but only a schema ID.
 </table>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="overview-of-deploying-a-debezium-connector-that-uses-avro-serialization"><a class="anchor" href="#overview-of-deploying-a-debezium-connector-that-uses-avro-serialization"></a>Deployment overview</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="overview-of-deploying-a-debezium-connector-that-uses-avro-serialization"><a class="anchor" href="#overview-of-deploying-a-debezium-connector-that-uses-avro-serialization"></a>Apicurio Registry deployment overview</h3>
 <div class="paragraph">
 <p>To deploy a Debezium connector that uses Avro serialization, you must complete three main tasks:</p>
 </div>
@@ -461,7 +495,7 @@ Messages do not contain the schema information themselves, but only a schema ID.
 <p>Deploy an <a href="https://github.com/Apicurio/apicurio-registry">Apicurio API and Schema Registry</a> instance.</p>
 </li>
 <li>
-<p>Install the Avro converter from <a href="https://repo1.maven.org/maven2/io/apicurio/apicurio-registry-distro-connect-converter/2.0.2.Final/apicurio-registry-distro-connect-converter-2.0.2.Final-converter.tar.gz">the installation package</a> into a plug-in directory. This is not needed when using the <a href="https://hub.docker.com/r/debezium/connect">Debezium Connect container image</a>, see details in <a href="#deploying-with-debezium-containers">Deploying with Debezium containers</a>.</p>
+<p>Install the Avro converter from the <a href="https://repo1.maven.org/maven2/io/apicurio/apicurio-registry-distro-connect-converter/2.4.1.Final/apicurio-registry-distro-connect-converter-2.4.1.Final.tar.gz">installation package</a> into a plug-in directory. If you are using the <a href="https://quay.io/repository/debezium/connect">Debezium Connect container image</a>, it&#8217;s not necessary to install the package. For more information, see  <a href="#deploying-with-debezium-containers">Deploying Apicurio Registry with Debezium containers</a>.</p>
 </li>
 <li>
 <p>Configure a Debezium connector instance to use Avro serialization by setting configuration properties as follows:</p>
@@ -474,7 +508,8 @@ key.converter.apicurio.registry.find-latest=true
 value.converter=io.apicurio.registry.utils.converter.AvroConverter
 value.converter.apicurio.registry.url=http://apicurio:8080/apis/registry/v2
 value.converter.apicurio.registry.auto-register=true
-value.converter.apicurio.registry.find-latest=true</code></pre>
+value.converter.apicurio.registry.find-latest=true
+schema.name.adjustment.mode=avro</code></pre>
 </div>
 </div>
 </li>
@@ -484,10 +519,8 @@ value.converter.apicurio.registry.find-latest=true</code></pre>
 <p>Internally, Kafka Connect always uses JSON key/value converters for storing configuration and offsets.</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="deploying-with-debezium-containers"><a class="anchor" href="#deploying-with-debezium-containers"></a>Deploying with Debezium containers</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="deploying-with-debezium-containers"><a class="anchor" href="#deploying-with-debezium-containers"></a>Deploying Apicurio Registry with Debezium containers</h3>
 <div class="paragraph">
 <p>In your environment, you might want to use a provided Debezium container image to deploy Debezium connectors that use Avro serialization. Follow the procedure here to do that. In this procedure, you enable Apicurio converters on the Debezium Kafka Connect container image, and configure the Debezium connector to use the Avro converter.</p>
 </div>
@@ -513,7 +546,7 @@ value.converter.apicurio.registry.find-latest=true</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-none hljs">docker run -it --rm --name apicurio \
-    -p 8080:8080 apicurio/apicurio-registry-mem:2.0.2.Final</code></pre>
+    -p 8080:8080 apicurio/apicurio-registry-mem:2.4.1.Final</code></pre>
 </div>
 </div>
 </li>
@@ -540,7 +573,8 @@ value.converter.apicurio.registry.find-latest=true</code></pre>
     -e CONNECT_VALUE_CONVERTER_APICURIO_REGISTRY_URL=http://apicurio:8080/apis/registry/v2 \
     -e CONNECT_VALUE_CONVERTER_APICURIO_REGISTRY_AUTO-REGISTER=true \
     -e CONNECT_VALUE_CONVERTER_APICURIO_REGISTRY_FIND-LATEST=true \
-    -p 8083:8083 debezium/connect:1.8</code></pre>
+    -e CONNECT_SCHEMA_NAME_ADJUSTMENT_MODE=avro \
+    -p 8083:8083 debezium/connect:2.2</code></pre>
 </div>
 </div>
 </li>
@@ -548,12 +582,58 @@ value.converter.apicurio.registry.find-latest=true</code></pre>
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="confluent-schema-registry"><a class="anchor" href="#confluent-schema-registry"></a>Confluent Schema Registry</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There is an alternative <a href="https://github.com/confluentinc/schema-registry">schema registry</a> implementation provided by Confluent.
-The configuration is slightly different.</p>
+<p>There is an alternative <a href="https://github.com/confluentinc/schema-registry">schema registry</a> implementation provided by Confluent.</p>
+</div>
+<div class="sect2">
+<h3 id="overview-of-deploying-confluent-schema-registry"><a class="anchor" href="#overview-of-deploying-confluent-schema-registry"></a>Confluent Schema Registry deployment overview</h3>
+<div class="paragraph">
+<p>For information about installing the standalone Confluent Schema Registry, see the  <a href="https://docs.confluent.io/platform/current/installation/installing_cp/overview.html">Confluent Platform deployment documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>As an alternative, you can <a href="https://docs.confluent.io/platform/current/installation/docker/installation.html">install</a> the standalone Confluent Schema Registry as a container.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deploying-confluent-schema-registry-with-debezium-containers"><a class="anchor" href="#deploying-confluent-schema-registry-with-debezium-containers"></a>Deploying Confluent Schema Registry with Debezium containers</h3>
+<div class="paragraph">
+<p>Beginning with Debezium 2.0.0, Confluent Schema Registry support is not included in the Debezium containers.
+To enable the Confluent Schema Registry for a Debezium container, install the following Confluent Avro converter JAR files into the Connect plugin directory:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>kafka-connect-avro-converter</code></p>
+</li>
+<li>
+<p><code>kafka-connect-avro-data</code></p>
+</li>
+<li>
+<p><code>kafka-avro-serializer</code></p>
+</li>
+<li>
+<p><code>kafka-schema-serializer</code></p>
+</li>
+<li>
+<p><code>kafka-schema-registry-client</code></p>
+</li>
+<li>
+<p><code>common-config</code></p>
+</li>
+<li>
+<p><code>common-utils</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can download the preceding files from the <a href="https://packages.confluent.io/maven/">Confluent Maven repository</a>.</p>
+</div>
+<div class="paragraph">
+<p>The configuration is slightly different.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -597,7 +677,7 @@ value.converter.schema.registry.url=http://localhost:8081</code></pre>
     -e VALUE_CONVERTER=io.confluent.connect.avro.AvroConverter \
     -e CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL=http://schema-registry:8081 \
     -e CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL=http://schema-registry:8081 \
-    -p 8083:8083 debezium/connect:1.8</code></pre>
+    -p 8083:8083 debezium/connect:2.2</code></pre>
 </div>
 </div>
 </li>
@@ -610,7 +690,7 @@ value.converter.schema.registry.url=http://localhost:8081</code></pre>
     --link kafka:kafka \
     --link mysql:mysql \
     --link schema-registry:schema-registry \
-    debezium/connect:1.8 \
+    debezium/connect:2.2 \
     /kafka/bin/kafka-console-consumer.sh \
       --bootstrap-server kafka:9092 \
       --property print.key=true \
@@ -621,6 +701,7 @@ value.converter.schema.registry.url=http://localhost:8081</code></pre>
 </div>
 </li>
 </ol>
+</div>
 </div>
 </div>
 </div>
@@ -643,8 +724,8 @@ value.converter.schema.registry.url=http://localhost:8081</code></pre>
 <div class="paragraph">
 <p>Debezium uses the column&#8217;s name as the basis for the corresponding Avro field.
 This can lead to problems during serialization if the column name does not also adhere to the Avro naming rules.
-Each Debezium connector provides a configuration property, <code>sanitize.field.names</code> that you can set to <code>true</code> if you have columns that do not adhere to Avro rules for names.
-Setting <code>sanitize.field.names</code> to <code>true</code> allows serialization of non-conformant fields without having to actually modify your schema.</p>
+Each Debezium connector provides a configuration property, <code>field.name.adjustment.mode</code> that you can set to <code>avro</code> if you have columns that do not adhere to Avro rules for names.
+Setting <code>field.name.adjustment.mode</code> to <code>avro</code> allows serialization of non-conformant fields without having to actually modify your schema.</p>
 </div>
 </div>
 </div>
@@ -670,7 +751,7 @@ see <a href="https://github.com/debezium/debezium-examples/tree/main/tutorial#us
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2021 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/a20ed7a573126b642f90a38e5294b8578bb40c42">a20ed7a5</a></span>)
+            <div class="copyright">Copyright &copy; 2022 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/5ff4df141738a2e0b90378a5543930412e197b81">5ff4df14</a></span>)
             
         </div>
     </footer>

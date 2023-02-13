@@ -120,6 +120,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="connectors/vitess.html">Vitess</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="connectors/spanner.html">Spanner</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -137,6 +140,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="transformations/mongodb-event-flattening.html">MongoDB New Document State Extraction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="transformations/event-changes.html">Event Changes</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="transformations/outbox-event-router.html">Outbox Event Router</a>
@@ -202,6 +208,9 @@
     <a class="nav-link" href="operations/monitoring.html">Monitoring</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="operations/kubernetes.html">Running on Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="operations/openshift.html">Running on Openshift</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -228,6 +237,18 @@
       <ul class="versions">
         <li class="version is-current">
           <a href="/documentation/reference/nightly/index.html">nightly</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.2/index.html">2.2</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.1/index.html">2.1</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.0/index.html">2.0</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/1.9/index.html">1.9</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/1.8/index.html">1.8</a>
@@ -286,6 +307,10 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
                 <a class="version is-current" href="/documentation/reference/nightly/index.html">nightly</a>
+                <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
+                <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
+                <a class="version" href="/documentation/reference/2.0/index.html">2.0</a>
+                <a class="version" href="/documentation/reference/1.9/index.html">1.9</a>
                 <a class="version" href="/documentation/reference/1.8/index.html">1.8</a>
                 <a class="version" href="/documentation/reference/1.7/index.html">1.7</a>
                 <a class="version" href="/documentation/reference/1.6/index.html">1.6</a>
@@ -355,7 +380,7 @@ Kafka Connect is a framework and runtime for implementing and operating:</p>
 </div>
 <div class="paragraph">
 <p>By default, changes from one database table are written to a Kafka topic whose name corresponds to the table name.
-If needed, you can adjust the destination topic name by configuring Debezium&#8217;s <a href="transformations/topic-routing.html" class="page">topic routing transformation</a>. For example, you can:</p>
+If needed, you can adjust the destination topic name by configuring Debezium&#8217;s <a href="transformations/topic-routing.html#topic-routing" class="page">topic routing transformation</a>. For example, you can:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -369,7 +394,7 @@ If needed, you can adjust the destination topic name by configuring Debezium&#82
 </div>
 <div class="paragraph">
 <p>After change event records are in Apache Kafka, different connectors in the Kafka Connect eco-system can stream the records to other systems and databases such as Elasticsearch, data warehouses and analytics systems, or caches such as Infinispan.
-Depending on the chosen sink connector, you might need to configure Debezium&#8217;s <a href="transformations/event-flattening.html" class="page">new record state extraction</a> transformation. This Kafka Connect SMT propagates the <code>after</code> structure from Debezium&#8217;s change event to the sink connector. This is in place of the verbose change event record that is propagated by default.</p>
+Depending on the chosen sink connector, you might need to configure Debezium&#8217;s <a href="transformations/event-flattening.html#new-record-state-extraction" class="page">new record state extraction</a> transformation. This Kafka Connect SMT propagates the <code>after</code> structure from Debezium&#8217;s change event to the sink connector. This is in place of the verbose change event record that is propagated by default.</p>
 </div>
 </div>
 </div>
@@ -415,7 +440,7 @@ You can find <a href="https://github.com/debezium/debezium-examples/tree/main/ki
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2021 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/a20ed7a573126b642f90a38e5294b8578bb40c42">a20ed7a5</a></span>)
+            <div class="copyright">Copyright &copy; 2022 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/5ff4df141738a2e0b90378a5543930412e197b81">5ff4df14</a></span>)
             
         </div>
     </footer>

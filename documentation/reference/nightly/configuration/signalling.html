@@ -120,6 +120,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/vitess.html">Vitess</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/spanner.html">Spanner</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -137,6 +140,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/mongodb-event-flattening.html">MongoDB New Document State Extraction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/event-changes.html">Event Changes</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/outbox-event-router.html">Outbox Event Router</a>
@@ -202,6 +208,9 @@
     <a class="nav-link" href="../operations/monitoring.html">Monitoring</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../operations/kubernetes.html">Running on Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../operations/openshift.html">Running on Openshift</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -228,6 +237,18 @@
       <ul class="versions">
         <li class="version is-current">
           <a href="/documentation/reference/nightly/index.html">nightly</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.2/index.html">2.2</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.1/index.html">2.1</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.0/index.html">2.0</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/1.9/index.html">1.9</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/1.8/index.html">1.8</a>
@@ -286,6 +307,10 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
                 <a class="version is-current" href="/documentation/reference/nightly/index.html">nightly</a>
+                <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
+                <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
+                <a class="version" href="/documentation/reference/2.0/index.html">2.0</a>
+                <a class="version" href="/documentation/reference/1.9/index.html">1.9</a>
                 <a class="version" href="/documentation/reference/1.8/index.html">1.8</a>
                 <a class="version" href="/documentation/reference/1.7/index.html">1.7</a>
                 <a class="version" href="/documentation/reference/1.6/index.html">1.6</a>
@@ -329,24 +354,11 @@
 <ul class="sectlevel2">
 <li><a href="#debezium-signaling-logging">Logging signals</a></li>
 <li><a href="#debezium-signaling-ad-hoc-snapshots">Ad hoc snapshot signals</a></li>
+<li><a href="#debezium-signaling-stop-ad-hoc-snapshots">Ad hoc snapshot stop signals</a></li>
 <li><a href="#debezium-signaling-incremental-snapshots">Incremental snapshots</a></li>
 </ul>
 </li>
 </ul>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>This feature is currently in incubating state, i.e. exact semantics, configuration options etc. may change in future revisions, based on the feedback we receive. Please let us know if you encounter any problems while using this extension.</p>
-</div>
-</td>
-</tr>
-</table>
 </div>
 </div>
 </div>
@@ -368,7 +380,7 @@ When Debezium detects that a new <a href="#debezium-signaling-example-of-a-loggi
 <p>Db2</p>
 </li>
 <li>
-<p>MongoDB</p>
+<p>MongoDB (Technology Preview)</p>
 </li>
 <li>
 <p>MySQL</p>
@@ -441,12 +453,6 @@ For more information about setting the <code>signal.data.collection</code> prope
 </dd>
 </dl>
 </div>
-</li>
-<li>
-<p>Add the signaling table to the list of tables to monitor.<br>
-  In the configuration for the Debezium connector, add the name of the data collection that you created in Step 1 to the <code>table.include.list</code> property.<br>
-<br>
-For more information about the <code>table.include.list</code> property, see the table of configuration properties for your connector.</p>
 </li>
 </ol>
 </div>
@@ -540,7 +546,7 @@ If you use a different naming convention, ensure that the values in each field a
 <div class="title">Procedure</div>
 <ul>
 <li>
-<p>Submit a SQL query to the source database to create a table that is consistent with the <a href="#debezium-signaling-required-structure-of-a-signaling-data-collection">required structure</a>, as shown in the following example:<br>
+<p>Submit a SQL query to the source database to create a table that is consistent with the <a href="#debezium-signaling-description-of-required-structure-of-a-signaling-data-collection">required structure</a>, as shown in the following example:<br>
 <br>
 <code>CREATE TABLE <em>&lt;tableName&gt;</em> (id VARCHAR(<em>&lt;varcharValue&gt;</em>) PRIMARY KEY, type VARCHAR(<em>&lt;varcharValue&gt;</em>) NOT NULL, data VARCHAR(<em>&lt;varcharValue&gt;</em>) NULL);</code><br></p>
 </li>
@@ -585,6 +591,15 @@ If the size of an ID exceeds the available space, the connector cannot process t
 </li>
 <li>
 <p><a href="#debezium-signaling-ad-hoc-snapshots">Trigger ad hoc snapshots</a>.</p>
+</li>
+<li>
+<p><a href="#debezium-signaling-stop-ad-hoc-snapshots">Stop execution of an ad hoc snapshot</a>.</p>
+</li>
+<li>
+<p><a href="#debezium-signaling-pause-incremental-snapshots">Pause incremental snapshots</a>.</p>
+</li>
+<li>
+<p><a href="#debezium-signaling-resume-incremental-snapshots">Resume incremenal snapshots</a>.</p>
 </li>
 </ul>
 </div>
@@ -707,7 +722,7 @@ You can initiate ad hoc snapshots at any time.</p>
 <p><a href="../connectors/db2.html#db2-ad-hoc-snapshots" class="page">Db2 connector ad hoc snapshots</a></p>
 </li>
 <li>
-<p><a href="../connectors/mongodb.html#mongodb-ad-hoc-snapshot" class="page">MongoDB connector ad hoc snapshots</a></p>
+<p><a href="../connectors/mongodb.html#mongodb-ad-hoc-snapshots" class="page">MongoDB connector ad hoc snapshots</a></p>
 </li>
 <li>
 <p><a href="../connectors/mysql.html#mysql-ad-hoc-snapshots" class="page">MySQL connector ad hoc snapshots</a></p>
@@ -722,6 +737,72 @@ You can initiate ad hoc snapshots at any time.</p>
 <p><a href="../connectors/sqlserver.html#sqlserver-ad-hoc-snapshots" class="page">SQL Server connector ad hoc snapshots</a></p>
 </li>
 </ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="debezium-signaling-stop-ad-hoc-snapshots"><a class="anchor" href="#debezium-signaling-stop-ad-hoc-snapshots"></a>Ad hoc snapshot stop signals</h3>
+<div class="paragraph">
+<p>You can request a connector to stop an in-progress ad hoc snapshot by creating a signal table entry with the <code>stop-snapshot</code> signal type.
+After processing the signal, the connector will stop the current in-progress snapshot operation.</p>
+</div>
+<div class="paragraph">
+<p>You can stop ad hoc snapshots for the following Debezium connectors:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Db2</p>
+</li>
+<li>
+<p>MongoDB</p>
+</li>
+<li>
+<p>MySQL</p>
+</li>
+<li>
+<p>Oracle</p>
+</li>
+<li>
+<p>PostgreSQL</p>
+</li>
+<li>
+<p>SQL Server</p>
+</li>
+</ul>
+</div>
+<table id="debezium-signaling-example-of-a-stop-ad-hoc-signal-record" class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 4. Example of a stop ad hoc snapshot signal record</caption>
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Column</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>d139b9b7-7777-4547-917d-e1775ea61d41</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>stop-snapshot</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"type":"INCREMENTAL", "data-collections": ["public.MyFirstTable"]}</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>You must specify the <code>type</code> of the signal.
+The <code>data-collections</code> field is optional.
+Leave the <code>data-collections</code> field blank to request the connector to stop all activity in the current snapshot.
+If you want the incremental snapshot to proceed, but you want to exclude specific collections from the snapshot, provide a comma-separated list of the names of the collections or regular expressions to exclude.
+After the connector processes the signal, the incremental snapshot proceeds, but it excludes data from the collections that you specify.</p>
 </div>
 </div>
 <div class="sect2">
@@ -747,6 +828,124 @@ The connector uses a watermarking method to track the progress of the snapshot.<
 <p>You can initiate an incremental snapshot at any time.</p>
 </li>
 </ul>
+</div>
+<div class="sect3">
+<h4 id="debezium-signaling-pause-incremental-snapshots"><a class="anchor" href="#debezium-signaling-pause-incremental-snapshots"></a>Incremental snapshot pause signals</h4>
+<div class="paragraph">
+<p>You can request a connector to pause an in-progress incremental snapshot by creating a signal table entry with the <code>pause-snapshot</code> signal type.
+After processing the signal, the connector will stop pause current in-progress snapshot operation.
+Therefor it&#8217;s not possible to specify the data collection as the snapshot processing will be paused in position where it is in time of processing of the signal.</p>
+</div>
+<div class="paragraph">
+<p>You can pause incremental snapshots for the following Debezium connectors:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Db2</p>
+</li>
+<li>
+<p>MongoDB</p>
+</li>
+<li>
+<p>MySQL</p>
+</li>
+<li>
+<p>Oracle</p>
+</li>
+<li>
+<p>PostgreSQL</p>
+</li>
+<li>
+<p>SQL Server</p>
+</li>
+</ul>
+</div>
+<table id="debezium-signaling-example-of-a-pause-incremental-signal-record" class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 5. Example of a pause incremental snapshot signal record</caption>
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Column</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>d139b9b7-7777-4547-917d-e1775ea61d41</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pause-snapshot</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>You must specify the <code>type</code> of the signal.
+The <code>data</code> field is ignored.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="debezium-signaling-resume-incremental-snapshots"><a class="anchor" href="#debezium-signaling-resume-incremental-snapshots"></a>Incremental snapshot resume signals</h4>
+<div class="paragraph">
+<p>You can request a connector to resume a paused incremental snapshot by creating a signal table entry with the <code>resume-snapshot</code> signal type.
+After processing the signal, the connector will resume previously paused snapshot operation.</p>
+</div>
+<div class="paragraph">
+<p>You can resume incremental snapshots for the following Debezium connectors:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Db2</p>
+</li>
+<li>
+<p>MongoDB</p>
+</li>
+<li>
+<p>MySQL</p>
+</li>
+<li>
+<p>Oracle</p>
+</li>
+<li>
+<p>PostgreSQL</p>
+</li>
+<li>
+<p>SQL Server</p>
+</li>
+</ul>
+</div>
+<table id="debezium-signaling-example-of-a-resume-incremental-signal-record" class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 6. Example of a resume incremental snapshot signal record</caption>
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Column</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>d139b9b7-7777-4547-917d-e1775ea61d41</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>resume-snapshot</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>You must specify the <code>type</code> of the signal.
+The <code>data</code> field is ignored.</p>
 </div>
 <div class="paragraph">
 <p>For more information about incremental snapshots, see the <em>Snapshots</em> topic in the documentation for your connector.</p>
@@ -777,6 +976,7 @@ The connector uses a watermarking method to track the progress of the snapshot.<
 </div>
 </div>
 </div>
+</div>
 </article>
 </div>
 <div class="article-cell2">
@@ -785,7 +985,7 @@ The connector uses a watermarking method to track the progress of the snapshot.<
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2021 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/a20ed7a573126b642f90a38e5294b8578bb40c42">a20ed7a5</a></span>)
+            <div class="copyright">Copyright &copy; 2022 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/5ff4df141738a2e0b90378a5543930412e197b81">5ff4df14</a></span>)
             
         </div>
     </footer>

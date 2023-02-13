@@ -120,6 +120,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="vitess.html">Vitess</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="spanner.html">Spanner</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -137,6 +140,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/mongodb-event-flattening.html">MongoDB New Document State Extraction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/event-changes.html">Event Changes</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/outbox-event-router.html">Outbox Event Router</a>
@@ -202,6 +208,9 @@
     <a class="nav-link" href="../operations/monitoring.html">Monitoring</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../operations/kubernetes.html">Running on Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../operations/openshift.html">Running on Openshift</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -228,6 +237,18 @@
       <ul class="versions">
         <li class="version is-current">
           <a href="/documentation/reference/nightly/index.html">nightly</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.2/index.html">2.2</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.1/index.html">2.1</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.0/index.html">2.0</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/1.9/index.html">1.9</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/1.8/index.html">1.8</a>
@@ -286,6 +307,10 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
                 <a class="version is-current" href="/documentation/reference/nightly/index.html">nightly</a>
+                <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
+                <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
+                <a class="version" href="/documentation/reference/2.0/index.html">2.0</a>
+                <a class="version" href="/documentation/reference/1.9/index.html">1.9</a>
                 <a class="version" href="/documentation/reference/1.8/index.html">1.8</a>
                 <a class="version" href="/documentation/reference/1.7/index.html">1.7</a>
                 <a class="version" href="/documentation/reference/1.6/index.html">1.6</a>
@@ -337,6 +362,7 @@
 <ul class="sectlevel2">
 <li><a href="#sqlserver-snapshots">Snapshots</a></li>
 <li><a href="#_reading_the_change_data_tables">Reading the change data tables</a></li>
+<li><a href="#_no_maximum_lsn_recorded_in_the_database">No maximum LSN recorded in the database</a></li>
 <li><a href="#_limitations">Limitations</a></li>
 <li><a href="#sqlserver-topic-names">Topic names</a></li>
 <li><a href="#about-the-debezium-sqlserver-connector-schema-change-topic">Schema change topic</a></li>
@@ -496,21 +522,6 @@ From this baseline state, the connector captures subsequent changes as they occu
 </div>
 <div class="sect3">
 <h4 id="sqlserver-ad-hoc-snapshots"><a class="anchor" href="#sqlserver-ad-hoc-snapshots"></a>Ad hoc snapshots</h4>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>This feature is currently in incubating state, i.e. exact semantics, configuration options etc. may change in future revisions, based on the feedback we receive.
-Please let us know if you encounter any problems while using this extension.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
 <p>By default, a connector runs an initial snapshot operation only after it starts for the first time.
 Following this initial snapshot, under normal circumstances, the connector does not repeat the snapshot process.
@@ -545,7 +556,8 @@ If a previously existing topic was removed, Debezium can create a topic automati
 </div>
 <div class="paragraph">
 <p>Ad hoc snapshot signals specify the tables to include in the snapshot.
-The snapshot can capture the entire contents of the database, or capture only a subset of the tables in the database.</p>
+The snapshot can capture the entire contents of the database, or capture only a subset of the tables in the database.
+Also, the snapshot can capture a subset of the contents of the table(s) in the database.</p>
 </div>
 <div class="paragraph">
 <p>You specify the tables to capture by sending an <code>execute-snapshot</code> message to the signaling table.
@@ -576,8 +588,14 @@ Currently, you can request only <code>incremental</code> snapshots.</p></td>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data-collections</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>N/A</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An array that contains the fully-qualified names of the table to be snapshotted.<br>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An array that contains regular expressions matching the fully-qualified names of the table to be snapshotted.<br>
 The format of the names is the same as for the <code>signal.data.collection</code> configuration option.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>additional-condition</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>N/A</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An optional string, which specifies a condition based on the column(s) of the table(s), to capture a
+subset of the contents of the table(s).</p></td>
 </tr>
 </tbody>
 </table>
@@ -590,26 +608,11 @@ Based on the number of entries in the table, and the configured chunk size, Debe
 </div>
 <div class="paragraph">
 <p>Currently, the <code>execute-snapshot</code> action type triggers <a href="../configuration/signalling.html#debezium-signaling-incremental-snapshots" class="page">incremental snapshots</a> only.
-For more information, see <a href="#{link-sqlserver-connector}.adoc#sqlserver-incremental-snapshots" class="page unresolved">Incremental snapshots</a>.</p>
+For more information, see <a href="#sqlserver-incremental-snapshots">Incremental snapshots</a>.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="sqlserver-incremental-snapshots"><a class="anchor" href="#sqlserver-incremental-snapshots"></a>Incremental snapshots</h4>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>This feature is currently in incubating state. The exact semantics, configuration options, and so forth is subject to change in future revisions, based on the feedback we receive.
-Please let us know if you encounter any problems while using this extension.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
 <p>To provide flexibility in managing snapshots, Debezium includes a supplementary snapshot mechanism, known as <em>incremental snapshotting</em>.
 Incremental snapshots rely on the Debezium mechanism for <a href="../configuration/signalling.html#sending-signals-to-a-debezium-connector" class="page">sending signals to a Debezium connector</a>.
@@ -684,23 +687,57 @@ Debezium emits these remaining <code>READ</code> events to the table&#8217;s Kaf
 <div class="paragraph">
 <p>The connector repeats the process for each snapshot chunk.</p>
 </div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<div class="title">Triggering an incremental snapshot</div>
+<p>The Debezium connector for SQL Server does not support schema changes while an incremental snapshot is running.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sqlserver-triggering-an-incremental-snapshot"><a class="anchor" href="#sqlserver-triggering-an-incremental-snapshot"></a>Triggering an incremental snapshot</h4>
+<div class="paragraph">
 <p>Currently, the only way to initiate an incremental snapshot is to send an <a href="../configuration/signalling.html#debezium-signaling-ad-hoc-snapshots" class="page">ad hoc snapshot signal</a> to the signaling table on the source database.
-You submit signals to the table as SQL <code>INSERT</code> queries.
-After Debezium detects the change in the signaling table, it reads the signal, and runs the requested snapshot operation.</p>
+You submit a signal to the signaling table as SQL <code>INSERT</code> queries.</p>
+</div>
+<div class="paragraph">
+<p>After Debezium detects the change in the signaling table, it reads the signal, and runs the requested snapshot operation.</p>
 </div>
 <div class="paragraph">
 <p>The query that you submit specifies the tables to include in the snapshot, and, optionally, specifies the kind of snapshot operation.
 Currently, the only valid option for snapshots operations is the default value, <code>incremental</code>.</p>
 </div>
 <div class="paragraph">
-<p>To specify the tables to include in the snapshot, provide a <code>data-collections</code> array that lists the tables, for example,<br>
+<p>To specify the tables to include in the snapshot, provide a <code>data-collections</code> array that lists the tables or an array of regular expressions used to match tables, for example,<br>
 <code>{"data-collections": ["public.MyFirstTable", "public.MySecondTable"]}</code><br></p>
 </div>
 <div class="paragraph">
 <p>The <code>data-collections</code> array for an incremental snapshot signal has no default value.
 If the <code>data-collections</code> array is empty, Debezium detects that no action is required and does not perform a snapshot.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If the name of a table that you want to include in a snapshot contains a dot (<code>.</code>) in the name of the database, schema, or table, to add the table to the <code>data-collections</code> array, you must escape each part of the name in double quotes.<br>
+<br>
+For example, to include a table that exists in the <code><strong>public</strong></code> schema and that has the name <code><strong>My.Table</strong></code>, use the following format: <code><strong>"public"."My.Table"</strong></code>.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="ulist">
 <div class="title">Prerequisites</div>
@@ -710,7 +747,7 @@ If the <code>data-collections</code> array is empty, Debezium detects that no ac
 <div class="ulist">
 <ul>
 <li>
-<p>A signaling data collection exists on the source database and the connector is configured to capture it.</p>
+<p>A signaling data collection exists on the source database.</p>
 </li>
 <li>
 <p>The signaling data collection is specified in the <a href="#sqlserver-property-signal-data-collection"><code>signal.data.collection</code></a> property.</p>
@@ -727,7 +764,7 @@ If the <code>data-collections</code> array is empty, Debezium detects that no ac
 <p>Send a SQL query to add the ad hoc incremental snapshot request to the signaling table:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO _&lt;signalTable&gt;_ (id, type, data) VALUES (_'&lt;id&gt;'_, _'&lt;snapshotType&gt;'_, '{"data-collections": ["_&lt;tableName&gt;_","_&lt;tableName&gt;_"],"type":"_&lt;snapshotType&gt;_"}');</code></pre>
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO <em>&lt;signalTable&gt;</em> (id, type, data) VALUES (<em>'&lt;id&gt;'</em>, <em>'&lt;snapshotType&gt;'</em>, '{"data-collections": ["<em>&lt;tableName&gt;</em>","<em>&lt;tableName&gt;</em>"],"type":"<em>&lt;snapshotType&gt;</em>","additional-condition":"<em>&lt;additional-condition&gt;</em>"}');</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -735,33 +772,42 @@ If the <code>data-collections</code> array is empty, Debezium detects that no ac
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO myschema.debezium_signal (id, type, data) VALUES('ad-hoc-1', 'execute-snapshot', '{"data-collections": ["schema1.table1", "schema2.table2"],"type":"incremental"}');</code></pre>
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO myschema.debezium_signal (id, type, data) <i class="conum" data-value="1"></i><b>(1)</b>
+values ('ad-hoc-1',   <i class="conum" data-value="2"></i><b>(2)</b>
+    'execute-snapshot',  <i class="conum" data-value="3"></i><b>(3)</b>
+    '{"data-collections": ["schema1.table1", "schema2.table2"], <i class="conum" data-value="4"></i><b>(4)</b>
+    "type":"incremental"}, <i class="conum" data-value="5"></i><b>(5)</b>
+    "additional-condition":"color=blue"}'); <i class="conum" data-value="6"></i><b>(6)</b></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The values of the <code>id</code>,<code>type</code>, and <code>data</code> parameters in the command correspond to the <a href="../configuration/signalling.html#debezium-signaling-required-structure-of-a-signaling-data-collection" class="page">fields of the signaling table</a>.</p>
+<p>The values of the <code>id</code>,<code>type</code>, and <code>data</code> parameters in the command correspond to the <a href="../configuration/signalling.html#debezium-signaling-description-of-required-structure-of-a-signaling-data-collection" class="page">fields of the signaling table</a>.</p>
 </div>
 <div class="paragraph">
-<p>The following table describes the these parameters:</p>
+<p>The following table describes the parameters in the example:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 2. Descriptions of fields in a SQL command for sending an incremental snapshot signal to the signaling table</caption>
 <colgroup>
-<col style="width: 20%;">
-<col style="width: 80%;">
+<col style="width: 4%;">
+<col style="width: 11%;">
+<col style="width: 85%;">
 </colgroup>
 <thead>
 <tr>
+<th class="tableblock halign-left valign-top">Item</th>
 <th class="tableblock halign-left valign-top">Value</th>
 <th class="tableblock halign-left valign-top">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>myschema.debezium_signal</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the fully-qualified name of the signaling table on the source database</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the fully-qualified name of the signaling table on the source database.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>ad-hoc-1</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The <code>id</code> parameter specifies an arbitrary string that is assigned as the <code>id</code> identifier for the signal request.<br>
 Use this string to identify logging messages to entries in the signaling table.
@@ -769,25 +815,95 @@ Debezium does not use this string.
 Rather, during the snapshot, Debezium generates its own <code>id</code> string as a watermarking signal.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>execute-snapshot</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Specifies <code>type</code> parameter specifies the operation that the signal is intended to trigger.<br></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data-collections</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A required component of the <code>data</code> field of a signal that specifies an array of table names to include in the snapshot.<br>
-The array lists tables by their fully-qualified names, using the same format as you use to specify the name of the connector&#8217;s signaling table in the <a href="#sqlserver-property-signal-data-collection"><code>signal.data.collection</code></a> configuration property.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A required component of the <code>data</code> field of a signal that specifies an array of table names or regular expressions to match table names to include in the snapshot.<br>
+The array lists regular expressions which match tables by their fully-qualified names, using the same format as you use to specify the name of the connector&#8217;s signaling table in the <a href="#sqlserver-property-signal-data-collection"><code>signal.data.collection</code></a> configuration property.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>incremental</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">An optional <code>type</code> component of the <code>data</code> field of a signal that specifies the kind of snapshot operation to run.<br>
 Currently, the only valid option is the default value, <code>incremental</code>.<br>
-Specifying a <code>type</code> value in the SQL query that you submit to the signaling table is optional.<br>
 If you do not specify a value, the connector runs an incremental snapshot.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>additional-condition</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An optional string, which specifies a condition based on the column(s) of the table(s), to capture a
+subset of the contents of the tables.
+For more information about the <code>additional-condition</code> parameter, see <a href="#sqlserver-incremental-snapshots-additional-condition">Ad hoc incremental snapshots with <code>additional-condition</code></a>.</p></td>
 </tr>
 </tbody>
 </table>
 </li>
 </ol>
+</div>
+<div id="sqlserver-incremental-snapshots-additional-condition" class="paragraph">
+<div class="title">Ad hoc incremental snapshots with <code>additional-condition</code></div>
+<p>If you want a snapshot to include only a subset of the content in a table, you can modify the signal request by appending an <code>additional-condition</code> parameter to the snapshot signal.</p>
+</div>
+<div class="paragraph">
+<p>The SQL query for a typical snapshot takes the following form:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT * FROM <em>&lt;tableName&gt;</em> ....</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By adding an <code>additional-condition</code> parameter, you append a <code>WHERE</code> condition to the SQL query, as in the following example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT * FROM <em>&lt;tableName&gt;</em> WHERE <em>&lt;additional-condition&gt;</em> ....</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following example shows a SQL query to send an ad hoc incremental snapshot request with an additional condition to the signaling table:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO <em>&lt;signalTable&gt;</em> (id, type, data) VALUES (<em>'&lt;id&gt;'</em>, <em>'&lt;snapshotType&gt;'</em>, '{"data-collections": ["<em>&lt;tableName&gt;</em>","<em>&lt;tableName&gt;</em>"],"type":"<em>&lt;snapshotType&gt;</em>","additional-condition":"<em>&lt;additional-condition&gt;</em>"}');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example, suppose you have a <code>products</code> table that contains the following columns:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>id</code> (primary key)</p>
+</li>
+<li>
+<p><code>color</code></p>
+</li>
+<li>
+<p><code>quantity</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you want an incremental snapshot of the <code>products</code> table to include only the data items where <code>color=blue</code>, you can use the following SQL statement to trigger the snapshot:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO myschema.debezium_signal (id, type, data) VALUES('ad-hoc-1', 'execute-snapshot', '{"data-collections": ["schema1.products"],"type":"incremental", "additional-condition":"color=blue"}');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>additional-condition</code> parameter also enables you to pass conditions that are based on more than on column.
+For example, using the <code>products</code> table from the previous example, you can submit a query that triggers an incremental snapshot that includes the data of only those items for which <code>color=blue</code> and <code>quantity&gt;10</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO myschema.debezium_signal (id, type, data) VALUES('ad-hoc-1', 'execute-snapshot', '{"data-collections": ["schema1.products"],"type":"incremental", "additional-condition":"color=blue AND quantity&gt;10"}');</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>The following example, shows the JSON for an incremental snapshot event that is captured by a connector.</p>
@@ -841,19 +957,113 @@ The value for snapshot events is <code>r</code>, signifying a <code>READ</code> 
 </tr>
 </tbody>
 </table>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>The Debezium connector for SQL Server does not support schema changes while an incremental snapshot is running.</p>
 </div>
-</td>
+<div class="sect3">
+<h4 id="sqlserver-stopping-an-incremental-snapshot"><a class="anchor" href="#sqlserver-stopping-an-incremental-snapshot"></a>Stopping an incremental snapshot</h4>
+<div class="paragraph">
+<p>You can also stop an incremental snapshot by sending a signal to the table on the source database.
+You submit a stop snapshot signal to the table by sending a SQL <code>INSERT</code> query.
+After Debezium detects the change in the signaling table, it reads the signal, and stops the incremental snapshot operation if it&#8217;s in progress.</p>
+</div>
+<div class="paragraph">
+<p>The query that you submit specifies the snapshot operation of <code>incremental</code>, and, optionally, the tables of the current running snapshot to be removed.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p><a href="../configuration/signalling.html#debezium-signaling-enabling-signaling" class="page">Signaling is enabled</a>.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>A signaling data collection exists on the source database.</p>
+</li>
+<li>
+<p>The signaling data collection is specified in the <a href="#sqlserver-property-signal-data-collection"><code>signal.data.collection</code></a> property.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Send a SQL query to stop the ad hoc incremental snapshot to the signaling table:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO <em>&lt;signalTable&gt;</em> (id, type, data) values (<em>'&lt;id&gt;'</em>, 'stop-snapshot', '{"data-collections": ["<em>&lt;tableName&gt;</em>","<em>&lt;tableName&gt;</em>"],"type":"incremental"}');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example,</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO myschema.debezium_signal (id, type, data) <i class="conum" data-value="1"></i><b>(1)</b>
+values ('ad-hoc-1',   <i class="conum" data-value="2"></i><b>(2)</b>
+    'stop-snapshot',  <i class="conum" data-value="3"></i><b>(3)</b>
+    '{"data-collections": ["schema1.table1", "schema2.table2"], <i class="conum" data-value="4"></i><b>(4)</b>
+    "type":"incremental"}'); <i class="conum" data-value="5"></i><b>(5)</b></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The values of the <code>id</code>, <code>type</code>, and <code>data</code> parameters in the signal command correspond to the <a href="../configuration/signalling.html#debezium-signaling-description-of-required-structure-of-a-signaling-data-collection" class="page">fields of the signaling table</a>.</p>
+</div>
+<div class="paragraph">
+<p>The following table describes the parameters in the example:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 3. Descriptions of fields in a SQL command for sending a stop incremental snapshot signal to the signaling table</caption>
+<colgroup>
+<col style="width: 4%;">
+<col style="width: 11%;">
+<col style="width: 85%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Item</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>myschema.debezium_signal</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the fully-qualified name of the signaling table on the source database.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ad-hoc-1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>id</code> parameter specifies an arbitrary string that is assigned as the <code>id</code> identifier for the signal request.<br>
+Use this string to identify logging messages to entries in the signaling table.
+Debezium does not use this string.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>stop-snapshot</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies <code>type</code> parameter specifies the operation that the signal is intended to trigger.<br></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data-collections</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An optional component of the <code>data</code> field of a signal that specifies an array of table names or regular expressions to match table names to remove from the snapshot.<br>
+The array lists regular expressions which match tables by their fully-qualified names, using the same format as you use to specify the name of the connector&#8217;s signaling table in the <a href="#sqlserver-property-signal-data-collection"><code>signal.data.collection</code></a> configuration property.
+If this component of the <code>data</code> field is omitted, the signal stops the entire incremental snapshot that is in progress.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>incremental</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A required component of the <code>data</code> field of a signal that specifies the kind of snapshot operation that is to be stopped.<br>
+Currently, the only valid option is <code>incremental</code>.<br>
+If you do not specify a <code>type</code> value, the signal fails to stop the incremental snapshot.</p></td>
+</tr>
+</tbody>
 </table>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -861,7 +1071,7 @@ The value for snapshot events is <code>r</code>, signifying a <code>READ</code> 
 <h3 id="_reading_the_change_data_tables"><a class="anchor" href="#_reading_the_change_data_tables"></a>Reading the change data tables</h3>
 <div class="paragraph">
 <p>When the connector first starts, it takes a structural snapshot of the structure of the captured tables
-and persists this information to its internal database history topic.
+and persists this information to its internal database schema history topic.
 The connector then identifies a change table for each source table, and completes the following steps.</p>
 </div>
 <div class="olist arabic">
@@ -889,6 +1099,51 @@ This sorting order ensures that the changes are replayed by Debezium in the same
 </div>
 </div>
 <div class="sect2">
+<h3 id="_no_maximum_lsn_recorded_in_the_database"><a class="anchor" href="#_no_maximum_lsn_recorded_in_the_database"></a>No maximum LSN recorded in the database</h3>
+<div class="paragraph">
+<p>There may be situations when no maximum LSN is recorded in the database because:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>SQL Server Agent is not running</p>
+</li>
+<li>
+<p>No changes are recorded in the change table yet</p>
+</li>
+<li>
+<p>Database has low activity and the cdc clean up job periodically clears entries from the cdc tables</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Out of these possibilities, since a running SQL Server Agent is a prerequisite, No 1. is a real problem (while No 2. and 3. are normal).</p>
+</div>
+<div class="paragraph">
+<p>In order to mitigate this issue and differentiate between No 1. and the others, a check for the status of the SQL Server Agent is done through the following query <code>"SELECT CASE WHEN dss.[status]=4 THEN 1 ELSE 0 END AS isRunning FROM [#db].sys.dm_server_services dss WHERE dss.[servicename] LIKE N&#8217;SQL Server Agent (%';"</code>.
+If the SQL Server Agent is not running, an ERROR is written in the log: "No maximum LSN recorded in the database; SQL Server Agent is not running".</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The SQL Server Agent running status query requires <code>VIEW SERVER STATE</code> server permission.
+If you don&#8217;t want to grant this permission to the configured user, you can choose to configure your own query through the <code>database.sqlserver.agent.status.query</code> property.
+You can define a function which returns true or 1 if SQL Server Agent is running (false or 0 otherwise) and safely use High-Level permissions without granting them as explained
+here <a href="https://dba.stackexchange.com/questions/62230/what-minimum-permissions-do-i-need-to-provide-to-a-user-so-that-it-can-check-the/103275#103275">What minimum permissions do I need to provide to a user so that it can check the status of SQL Server Agent Service?</a>
+or here <a href="https://sqlquantumleap.com/2018/02/15/safely-and-easily-use-high-level-permissions-without-granting-them-to-anyone-server-level/">Safely and Easily Use High-Level Permissions Without Granting Them to Anyone: Server-level</a>.
+The configuration of the query property would look like: <code>database.sqlserver.agent.status.query=SELECT [#db].func_is_sql_server_agent_running()</code> - you need to use <code>[#db]</code> as placeholder for the database name.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_limitations"><a class="anchor" href="#_limitations"></a>Limitations</h3>
 <div class="paragraph">
 <p>SQL Server specifically requires the base object to be a table in order to create a change capture instance.
@@ -900,16 +1155,16 @@ As consequence, capturing changes from indexed views (aka. materialized views) i
 <div class="paragraph">
 <p>By default, the SQL Server connector writes events for all <code>INSERT</code>, <code>UPDATE</code>, and <code>DELETE</code> operations that occur in a table to a single Apache Kafka topic that is specific to that table.
 The connector uses the following convention to name change event topics:
-<code><em>&lt;serverName&gt;</em>.<em>&lt;schemaName&gt;</em>.<em>&lt;tableName&gt;</em></code></p>
+<code><em>&lt;topicPrefix&gt;</em>.<em>&lt;schemaName&gt;</em>.<em>&lt;tableName&gt;</em></code></p>
 </div>
 <div class="paragraph">
 <p>The following list provides definitions for the components of the default name:</p>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1"><em>serverName</em></dt>
+<dt class="hdlist1"><em>topicPrefix</em></dt>
 <dd>
-<p>The logical name of the server, as specified by the <a href="#sqlserver-property-database-server-name"><code>database.server.name</code></a> configuration property.</p>
+<p>The logical name of the server, as specified by the <a href="#sqlserver-property-topic-prefix"><code>topic.prefix</code></a> configuration property.</p>
 </dd>
 <dt class="hdlist1"><em>schemaName</em></dt>
 <dd>
@@ -928,21 +1183,21 @@ the connector would stream change event records to the following Kafka topics:</
 <div class="ulist">
 <ul>
 <li>
-<p><code>fulfillment.dbo.products</code></p>
+<p><code>fulfillment.testDB.dbo.products</code></p>
 </li>
 <li>
-<p><code>fulfillment.dbo.products_on_hand</code></p>
+<p><code>fulfillment.testDB.dbo.products_on_hand</code></p>
 </li>
 <li>
-<p><code>fulfillment.dbo.customers</code></p>
+<p><code>fulfillment.testDB.dbo.customers</code></p>
 </li>
 <li>
-<p><code>fulfillment.dbo.orders</code></p>
+<p><code>fulfillment.testDB.dbo.orders</code></p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The connector applies similar naming conventions to label its internal database history topics, <a href="#about-the-debezium-sqlserver-connector-schema-change-topic">schema change topics</a>, and <a href="#sqlserver-transaction-metadata">transaction metadata topics</a>.</p>
+<p>The connector applies similar naming conventions to label its internal database schema history topics, <a href="#about-the-debezium-sqlserver-connector-schema-change-topic">schema change topics</a>, and <a href="#sqlserver-transaction-metadata">transaction metadata topics</a>.</p>
 </div>
 <div class="paragraph">
 <p>If the default topic name do not meet your requirements, you can configure custom topic names.
@@ -954,7 +1209,7 @@ For more information about using the logical topic routing SMT to customize topi
 <h3 id="about-the-debezium-sqlserver-connector-schema-change-topic"><a class="anchor" href="#about-the-debezium-sqlserver-connector-schema-change-topic"></a>Schema change topic</h3>
 <div class="paragraph">
 <p>For each table for which CDC is enabled, the Debezium SQL Server connector stores a history of the schema change events that are applied to captured tables in the database.
-The connector writes schema change events to a Kafka topic named <code><em>&lt;serverName&gt;</em></code>, where <code><em>serverName</em></code> is the logical server name that is specified in the <a href="#sqlserver-property-database-server-name"><code>database.server.name</code></a> configuration property.</p>
+The connector writes schema change events to a Kafka topic named <code><em>&lt;topicPrefix&gt;</em></code>, where <code><em>topicPrefix</em></code> is the logical server name that is specified in the <a href="#sqlserver-property-topic-prefix"><code>topic.prefix</code></a> configuration property.</p>
 </div>
 <div class="paragraph">
 <p>Messages that the connector sends to the schema change topic contain a payload, and, optionally, also contain the schema of the change event message.
@@ -983,8 +1238,8 @@ Because the structured representation presents data in JSON or Avro format, cons
 </td>
 <td class="content">
 <div class="paragraph">
-<p>When the connector is configured to capture a table, it stores the history of the table&#8217;s schema changes not only in the schema change topic, but also in an internal database history topic.
-The internal database history topic is for connector use only and it is not intended for direct use by consuming applications.
+<p>When the connector is configured to capture a table, it stores the history of the table&#8217;s schema changes not only in the schema change topic, but also in an internal database schema history topic.
+The internal database schema history topic is for connector use only and it is not intended for direct use by consuming applications.
 Ensure that applications that require notifications about schema changes consume that information only from the schema change topic.</p>
 </div>
 </td>
@@ -1034,10 +1289,10 @@ The message contains a logical representation of the table schema.</p>
   },
   "payload": {
     "source": {
-      "version": "1.8.0.Final",
+      "version": "2.2.0.Alpha1",
       "connector": "sqlserver",
       "name": "server1",
-      "ts_ms": 1588252618953,
+      "ts_ms": 0,
       "snapshot": "true",
       "db": "testDB",
       "schema": "dbo",
@@ -1046,19 +1301,20 @@ The message contains a logical representation of the table schema.</p>
       "commit_lsn": "00000025:00000d98:00a2",
       "event_serial_no": null
     },
-    "databaseName": "testDB", <i class="conum" data-value="1"></i><b>(1)</b>
+    "ts_ms": 1588252618953, <i class="conum" data-value="1"></i><b>(1)</b>
+    "databaseName": "testDB", <i class="conum" data-value="2"></i><b>(2)</b>
     "schemaName": "dbo",
-    "ddl": null, <i class="conum" data-value="2"></i><b>(2)</b>
-    "tableChanges": [ <i class="conum" data-value="3"></i><b>(3)</b>
+    "ddl": null, <i class="conum" data-value="3"></i><b>(3)</b>
+    "tableChanges": [ <i class="conum" data-value="4"></i><b>(4)</b>
       {
-        "type": "CREATE", <i class="conum" data-value="4"></i><b>(4)</b>
-        "id": "\"testDB\".\"dbo\".\"customers\"", <i class="conum" data-value="5"></i><b>(5)</b>
-        "table": { <i class="conum" data-value="6"></i><b>(6)</b>
+        "type": "CREATE", <i class="conum" data-value="5"></i><b>(5)</b>
+        "id": "\"testDB\".\"dbo\".\"customers\"", <i class="conum" data-value="6"></i><b>(6)</b>
+        "table": { <i class="conum" data-value="7"></i><b>(7)</b>
           "defaultCharsetName": null,
-          "primaryKeyColumnNames": [ <i class="conum" data-value="7"></i><b>(7)</b>
+          "primaryKeyColumnNames": [ <i class="conum" data-value="8"></i><b>(8)</b>
             "id"
           ],
-          "columns": [ <i class="conum" data-value="8"></i><b>(8)</b>
+          "columns": [ <i class="conum" data-value="9"></i><b>(9)</b>
             {
               "name": "id",
               "jdbcType": 4,
@@ -1115,6 +1371,11 @@ The message contains a logical representation of the table schema.</p>
               "autoIncremented": false,
               "generated": false
             }
+          ],
+          "attributes": [ <i class="conum" data-value="10"></i><b>(10)</b>
+            {
+              "customAttribute": "attributeValue"
+            }
           ]
         }
       }
@@ -1124,7 +1385,7 @@ The message contains a logical representation of the table schema.</p>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 3. Descriptions of fields in messages emitted to the schema change topic</caption>
+<caption class="title">Table 4. Descriptions of fields in messages emitted to the schema change topic</caption>
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 40%;">
@@ -1140,24 +1401,30 @@ The message contains a logical representation of the table schema.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ts_ms</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional field that displays the time at which the connector processed the event. The time is based on the system clock in the JVM running the Kafka Connect task.</p>
+<p class="tableblock">In the source object, ts_ms indicates the time that the change was made in the database. By comparing the value for payload.source.ts_ms with the value for payload.ts_ms, you can determine the lag between the source database update and Debezium.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>databaseName</code><br>
 <code>schemaName</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Identifies the database and the schema that contain the change.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>ddl</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Always <code>null</code> for the SQL Server connector.
 For other connectors, this field contains the DDL responsible for the schema change.
 This DDL is not available to SQL Server connectors.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tableChanges</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">An array of one or more items that contain the schema changes generated by a DDL command.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>type</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Describes the kind of change. The value is one of the following:</p>
@@ -1177,24 +1444,29 @@ This DDL is not available to SQL Server connectors.</p></td>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Full identifier of the table that was created, altered, or dropped.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>table</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Represents table metadata after the applied change.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>primaryKeyColumnNames</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">List of columns that compose the table&#8217;s primary key.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">9</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>columns</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Metadata for each column in the changed table.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>attributes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Custom attribute metadata for each table change.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1254,7 +1526,7 @@ In the following example, the <code>payload</code> field contains the key:</p>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 4. Overview of change event basic content</caption>
+<caption class="title">Table 5. Overview of change event basic content</caption>
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 20%;">
@@ -1348,7 +1620,7 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
             }
         ],
         "optional": false, <i class="conum" data-value="3"></i><b>(3)</b>
-        "name": "server1.dbo.customers.Key" <i class="conum" data-value="4"></i><b>(4)</b>
+        "name": "server1.testDB.dbo.customers.Key" <i class="conum" data-value="4"></i><b>(4)</b>
     },
     "payload": { <i class="conum" data-value="5"></i><b>(5)</b>
         "id": 1004
@@ -1357,7 +1629,7 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 5. Description of change event key</caption>
+<caption class="title">Table 6. Description of change event key</caption>
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 20%;">
@@ -1388,7 +1660,7 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>server1.dbo.customers.Key</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>server1.dbo.testDB.customers.Key</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Name of the schema that defines the structure of the key&#8217;s payload. This schema describes the structure of the primary key for the table that was changed. Key schema names have the format <em>connector-name</em>.<em>database-schema-name</em>.<em>table-name</em>.<code>Key</code>. In this example:<br></p>
 </div>
@@ -1499,7 +1771,7 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
           }
         ],
         "optional": true,
-        "name": "server1.dbo.customers.Value", <i class="conum" data-value="2"></i><b>(2)</b>
+        "name": "server1.dbo.testDB.customers.Value", <i class="conum" data-value="2"></i><b>(2)</b>
         "field": "before"
       },
       {
@@ -1527,7 +1799,7 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
           }
         ],
         "optional": true,
-        "name": "server1.dbo.customers.Value",
+        "name": "server1.dbo.testDB.customers.Value",
         "field": "after"
       },
       {
@@ -1606,7 +1878,7 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
       }
     ],
     "optional": false,
-    "name": "server1.dbo.customers.Envelope" <i class="conum" data-value="4"></i><b>(4)</b>
+    "name": "server1.dbo.testDB.customers.Envelope" <i class="conum" data-value="4"></i><b>(4)</b>
   },
   "payload": { <i class="conum" data-value="5"></i><b>(5)</b>
     "before": null, <i class="conum" data-value="6"></i><b>(6)</b>
@@ -1617,7 +1889,7 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
       "email": "john.doe@example.org"
     },
     "source": { <i class="conum" data-value="8"></i><b>(8)</b>
-      "version": "1.8.0.Final",
+      "version": "2.2.0.Alpha1",
       "connector": "sqlserver",
       "name": "server1",
       "ts_ms": 1559729468470,
@@ -1636,7 +1908,7 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 6. Descriptions of <em>create</em> event value fields</caption>
+<caption class="title">Table 7. Descriptions of <em>create</em> event value fields</caption>
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 20%;">
@@ -1661,9 +1933,10 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>In the <code>schema</code> section, each <code>name</code> field specifies the schema for a field in the value&#8217;s payload.<br>
 <br>
-<code>server1.dbo.customers.Value</code> is the schema for the payload&#8217;s <code>before</code> and <code>after</code> fields. This schema is specific to the <code>customers</code> table.<br>
+<code>server1.dbo.testDB.customers.Value</code> is the schema for the payload&#8217;s <code>before</code> and <code>after</code> fields. This schema is specific to the <code>customers</code> table.<br>
 <br>
- Names of schemas for <code>before</code> and <code>after</code> fields are of the form <code><em>logicalName</em>.<em>database-schemaName</em>.<em>tableName</em>.Value</code>, which ensures that the schema name is unique in the database. This means that when using the <a href="../configuration/avro.html" class="page">Avro converter</a>, the resulting Avro schema for each table in each logical source has its own evolution and history.</p>
+ Names of schemas for <code>before</code> and <code>after</code> fields are of the form <code><em>logicalName</em>.<em>database-schemaName</em>.<em>tableName</em>.Value</code>, which ensures that the schema name is unique in the database.
+ This means that when using the <a href="../configuration/avro.html#avro-serialization" class="page">Avro converter</a>, the resulting Avro schema for each table in each logical source has its own evolution and history.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1677,7 +1950,7 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
 <td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>server1.dbo.customers.Envelope</code> is the schema for the overall structure of the payload, where <code>server1</code> is the connector name, <code>dbo</code> is the database schema name, and <code>customers</code> is the table.</p>
+<p><code>server1.dbo.testDB.customers.Envelope</code> is the schema for the overall structure of the payload, where <code>server1</code> is the connector name, <code>dbo</code> is the database schema name, and <code>customers</code> is the table.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1686,7 +1959,7 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
 <td class="tableblock halign-left valign-top"><p class="tableblock">The value&#8217;s actual data. This is the information that the change event is providing.<br>
 <br>
 It may appear that the JSON representations of the events are much larger than the rows they describe. This is because the JSON representation must include the schema and the payload portions of the message.
-However, by using the <a href="../configuration/avro.html" class="page">Avro converter</a>, you can significantly decrease the size of the messages that the connector streams to Kafka topics.</p></td>
+However, by using the <a href="../configuration/avro.html#avro-serialization" class="page">Avro converter</a>, you can significantly decrease the size of the messages that the connector streams to Kafka topics.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
@@ -1790,7 +2063,7 @@ By comparing the value for <code>payload.source.ts_ms</code> with the value for 
       "email": "noreply@example.org"
     },
     "source": { <i class="conum" data-value="3"></i><b>(3)</b>
-      "version": "1.8.0.Final",
+      "version": "2.2.0.Alpha1",
       "connector": "sqlserver",
       "name": "server1",
       "ts_ms": 1559729995937,
@@ -1809,7 +2082,7 @@ By comparing the value for <code>payload.source.ts_ms</code> with the value for 
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 7. Descriptions of <em>update</em> event value fields</caption>
+<caption class="title">Table 8. Descriptions of <em>update</em> event value fields</caption>
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 20%;">
@@ -1933,7 +2206,7 @@ By comparing the value for <code>payload.source.ts_ms</code> with the value for 
     },
     "after": null, <i class="conum" data-value="2"></i><b>(2)</b>
     "source": { <i class="conum" data-value="3"></i><b>(3)</b>
-      "version": "1.8.0.Final",
+      "version": "2.2.0.Alpha1",
       "connector": "sqlserver",
       "name": "server1",
       "ts_ms": 1559730445243,
@@ -1952,7 +2225,7 @@ By comparing the value for <code>payload.source.ts_ms</code> with the value for 
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 8. Descriptions of <em>delete</em> event value fields</caption>
+<caption class="title">Table 9. Descriptions of <em>delete</em> event value fields</caption>
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 20%;">
@@ -2068,19 +2341,24 @@ Transaction boundary events contain the following fields:</p>
 <dl>
 <dt class="hdlist1"><code>status</code></dt>
 <dd>
-<p><code>BEGIN</code> or <code>END</code></p>
+<p><code>BEGIN</code> or <code>END</code>.</p>
 </dd>
 <dt class="hdlist1"><code>id</code></dt>
 <dd>
-<p>String representation of unique transaction identifier.</p>
+<p>String representation of the unique transaction identifier.</p>
+</dd>
+<dt class="hdlist1"><code>ts_ms</code></dt>
+<dd>
+<p>The time of a transaction boundary event (<code>BEGIN</code> or <code>END</code> event) at the data source.
+If the data source does not provide Debezium with the event time, then the field instead represents the time at which Debezium processes the event.</p>
 </dd>
 <dt class="hdlist1"><code>event_count</code> (for <code>END</code> events)</dt>
 <dd>
-<p>Total number of events emitted by the transaction.</p>
+<p>Total number of events emmitted by the transaction.</p>
 </dd>
 <dt class="hdlist1"><code>data_collections</code> (for <code>END</code> events)</dt>
 <dd>
-<p>An array of pairs of <code>data_collection</code> and <code>event_count</code> that provides the number of events emitted by changes originating from given data collection.</p>
+<p>An array of pairs of <code>data_collection</code> and <code>event_count</code> elements that indicates the number of events that the connector emits for changes that originate from a data collection.</p>
 </dd>
 </dl>
 </div>
@@ -2109,6 +2387,7 @@ This can lead to the delayed delivery of <code>END</code> marker in case of a lo
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
   "status": "BEGIN",
   "id": "00000025:00000d08:0025",
+  "ts_ms": 1486500577125,
   "event_count": null,
   "data_collections": null
 }
@@ -2116,14 +2395,15 @@ This can lead to the delayed delivery of <code>END</code> marker in case of a lo
 {
   "status": "END",
   "id": "00000025:00000d08:0025",
+  "ts_ms": 1486500577691,
   "event_count": 2,
   "data_collections": [
     {
-      "data_collection": "testDB.dbo.tablea",
+      "data_collection": "testDB.dbo.testDB.tablea",
       "event_count": 1
     },
     {
-      "data_collection": "testDB.dbo.tableb",
+      "data_collection": "testDB.dbo.testDB.tableb",
       "event_count": 1
     }
   ]
@@ -2131,8 +2411,8 @@ This can lead to the delayed delivery of <code>END</code> marker in case of a lo
 </div>
 </div>
 <div class="paragraph">
-<p>Unless overridden via the <a href="#sqlserver-property-transaction-topic"><code>transaction.topic</code></a> option,
-transaction events are written to the topic named <code><em>database.server.name</em>.transaction</code>.</p>
+<p>Unless overridden via the <a href="#sqlserver-property-topic-transaction"><code>topic.transaction</code></a> option,
+transaction events are written to the topic named <a href="#sqlserver-property-topic-prefix"><code><em>&lt;topic.prefix&gt;</em></code></a><code>.transaction</code>.</p>
 </div>
 <div class="sect3">
 <h4 id="_change_data_event_enrichment"><a class="anchor" href="#_change_data_event_enrichment"></a>Change data event enrichment</h4>
@@ -2205,13 +2485,16 @@ In the event, the connector maps the fields for each SQL Server data type to bot
 </dd>
 </dl>
 </div>
+<div class="paragraph">
+<p>If the default data type conversions do not meet your needs, you can <a href="../development/converters.html#custom-converters" class="page">create a custom converter</a> for the connector.</p>
+</div>
 <div class="sect3">
 <h4 id="sql-server-basic-values"><a class="anchor" href="#sql-server-basic-values"></a>Basic types</h4>
 <div class="paragraph">
 <p>The following table shows how the connector maps basic SQL Server data types.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 9. Data type mappings used by the SQL Server connector</caption>
+<caption class="title">Table 10. Data type mappings used by the SQL Server connector</caption>
 <colgroup>
 <col style="width: 30%;">
 <col style="width: 25%;">
@@ -2650,7 +2933,7 @@ So for instance the <code>DATETIME2</code> value "2018-06-20 15:13:16.945104" is
 <dt class="hdlist1">decimal.handling.mode=precise</dt>
 <dd>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 10. Mappings when <code>decimal.handing.mode=precise</code></caption>
+<caption class="title">Table 11. Mappings when <code>decimal.handling.mode=precise</code></caption>
 <colgroup>
 <col style="width: 30%;">
 <col style="width: 15%;">
@@ -2718,7 +3001,7 @@ The <code>scale</code> schema parameter contains an integer that represents how 
 <dt class="hdlist1">decimal.handling.mode=double</dt>
 <dd>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 11. Mappings when <code>decimal.handing.mode=double</code></caption>
+<caption class="title">Table 12. Mappings when <code>decimal.handling.mode=double</code></caption>
 <colgroup>
 <col style="width: 30%;">
 <col style="width: 30%;">
@@ -2782,7 +3065,7 @@ The <code>scale</code> schema parameter contains an integer that represents how 
 <dt class="hdlist1">decimal.handling.mode=string</dt>
 <dd>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 12. Mappings when <code>decimal.handing.mode=string</code></caption>
+<caption class="title">Table 13. Mappings when <code>decimal.handling.mode=string</code></caption>
 <colgroup>
 <col style="width: 30%;">
 <col style="width: 30%;">
@@ -2855,6 +3138,21 @@ The <code>scale</code> schema parameter contains an integer that represents how 
 <div class="paragraph">
 <p>For Debezium to capture change events from SQL Server tables, a SQL Server administrator with the necessary privileges must first run a query to enable CDC on the database.
 The administrator must then enable CDC for each table that you want Debezium to capture.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>By default, JDBC connections to Microsoft SQL Server are protected by SSL encryption.
+If SSL is not enabled for a SQL Server database, or if you want to connect to the database without using SSL, you can disable SSL by setting the value of  the <code>database.encrypt</code> property in connector configuration to <code>false</code>.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>After CDC is applied, it captures all of the <code>INSERT</code>, <code>UPDATE</code>, and <code>DELETE</code> operations that are committed to the tables for which CDD is enabled.
@@ -3046,7 +3344,7 @@ Members of the <code>db_owner</code> database role can view information for all 
 <p>Queries should not return empty results.</p>
 </div>
 <div class="paragraph">
-<p>The following example runs the stored precedure <code>sys.sp_cdc_help_change_data_capture</code> on the database <code>MyDB</code>:</p>
+<p>The following example runs the stored procedure <code>sys.sp_cdc_help_change_data_capture</code> on the database <code>MyDB</code>:</p>
 </div>
 <div class="listingblock">
 <div class="title">Example: Querying a table for CDC configuration information</div>
@@ -3069,8 +3367,7 @@ If the result is empty, verify that the user has privileges to access both the c
 <h3 id="sqlserver-on-azure"><a class="anchor" href="#sqlserver-on-azure"></a>SQL Server on Azure</h3>
 <div class="paragraph">
 <p>The Debezium SQL Server connector can be used with SQL Server on Azure.
-Refer to <a href="https://docs.microsoft.com/en-us/samples/azure-samples/azure-sql-db-change-stream-debezium/azure-sql-db-change-stream-debezium/">this example</a> for configuring CDC for SQL Server on Azure and using it with Debezium.
-Note this configuration has not been tested by the Debezium team.</p>
+Refer to <a href="https://docs.microsoft.com/en-us/samples/azure-samples/azure-sql-db-change-stream-debezium/azure-sql-db-change-stream-debezium/">this example</a> for configuring CDC for SQL Server on Azure and using it with Debezium.</p>
 </div>
 </div>
 <div class="sect2">
@@ -3236,7 +3533,7 @@ If the <code>continuous</code> parameter is set to <code>1</code>, the job pause
 <div class="title">Procedure</div>
 <ol class="arabic">
 <li>
-<p>Download the Debezium <a href="https://repo1.maven.org/maven2/io/debezium/debezium-connector-sqlserver/1.8.0.Final/debezium-connector-sqlserver-1.8.0.Final-plugin.tar.gz">SQL Server connector plug-in archive</a></p>
+<p>Download the Debezium <a href="https://repo1.maven.org/maven2/io/debezium/debezium-connector-sqlserver/2.2.0.Alpha1/debezium-connector-sqlserver-2.2.0.Alpha1-plugin.tar.gz">SQL Server connector plug-in archive</a></p>
 </li>
 <li>
 <p>Extract the files into your Kafka Connect environment.</p>
@@ -3253,7 +3550,7 @@ If the <code>continuous</code> parameter is set to <code>1</code>, the job pause
 </ol>
 </div>
 <div class="paragraph">
-<p>If you are working with immutable containers, see <a href="https://hub.docker.com/r/debezium/">Debezium&#8217;s container images</a> for Åpache ZooKeeper, Apache Kafka, and Kafka Connect.
+<p>If you are working with immutable containers, see <a href="https://quay.io/organization/debezium">Debezium&#8217;s container images</a> for Åpache ZooKeeper, Apache Kafka, and Kafka Connect.
 You can pull the official <a href="https://hub.docker.com/_/microsoft-mssql-server">container images for Microsoft SQL Server on Linux</a> from Docker Hub.</p>
 </div>
 <div class="paragraph">
@@ -3279,11 +3576,13 @@ Optionally, you can ignore, mask, or truncate columns that contain sensitive dat
         "database.port": "1433", <i class="conum" data-value="4"></i><b>(4)</b>
         "database.user": "sa", <i class="conum" data-value="5"></i><b>(5)</b>
         "database.password": "Password!", <i class="conum" data-value="6"></i><b>(6)</b>
-        "database.dbname": "testDB", <i class="conum" data-value="7"></i><b>(7)</b>
-        "database.server.name": "fullfillment", <i class="conum" data-value="8"></i><b>(8)</b>
+        "database.names": "testDB1,testDB2", <i class="conum" data-value="7"></i><b>(7)</b>
+        "topic.prefix": "fullfillment", <i class="conum" data-value="8"></i><b>(8)</b>
         "table.include.list": "dbo.customers", <i class="conum" data-value="9"></i><b>(9)</b>
-        "database.history.kafka.bootstrap.servers": "kafka:9092", <i class="conum" data-value="10"></i><b>(10)</b>
-        "database.history.kafka.topic": "dbhistory.fullfillment" <i class="conum" data-value="11"></i><b>(11)</b>
+        "schema.history.internal.kafka.bootstrap.servers": "kafka:9092", <i class="conum" data-value="10"></i><b>(10)</b>
+        "schema.history.internal.kafka.topic": "schemahistory.fullfillment" <i class="conum" data-value="11"></i><b>(11)</b>
+        "database.ssl.truststore": "path/to/trust-store" <i class="conum" data-value="12"></i><b>(12)</b>
+        "database.ssl.truststore.password": "password-for-trust-store" <i class="conum" data-value="13"></i><b>(13)</b>
     }
 }</code></pre>
 </div>
@@ -3320,7 +3619,7 @@ Optionally, you can ignore, mask, or truncate columns that contain sensitive dat
 </tr>
 <tr>
 <td><i class="conum" data-value="8"></i><b>8</b></td>
-<td>The logical name of the SQL Server instance/cluster, which forms a namespace and is used in all the names of the Kafka topics to which the connector writes, the Kafka Connect schema names, and the namespaces of the corresponding Avro schema when the Avro converter is used.</td>
+<td>The topic prefix for the SQL Server instance/cluster, which forms a namespace and is used in all the names of the Kafka topics to which the connector writes, the Kafka Connect schema names, and the namespaces of the corresponding Avro schema when the <a href="../configuration/avro.html#avro-serialization" class="page">Avro converter</a> is used.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="9"></i><b>9</b></td>
@@ -3328,11 +3627,21 @@ Optionally, you can ignore, mask, or truncate columns that contain sensitive dat
 </tr>
 <tr>
 <td><i class="conum" data-value="10"></i><b>10</b></td>
-<td>The list of Kafka brokers that this connector will use to write and recover DDL statements to the database history topic.</td>
+<td>The list of Kafka brokers that this connector will use to write and recover DDL statements to the database schema history topic.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="11"></i><b>11</b></td>
-<td>The name of the database history topic where the connector will write and recover DDL statements. This topic is for internal use only and should not be used by consumers.</td>
+<td>The name of the database schema history topic where the connector will write and recover DDL statements. This topic is for internal use only and should not be used by consumers.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="12"></i><b>12</b></td>
+<td>The path to the SSL truststore that stores the server&#8217;s signer certificates.
+This property is required unless database encryption is disabled (<code>database.encrypt=false</code>).</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="13"></i><b>13</b></td>
+<td>The SSL truststore password.
+This property is required unless database encryption is disabled (<code>database.encrypt=false</code>).</td>
 </tr>
 </table>
 </div>
@@ -3408,11 +3717,11 @@ Many properties have default values.</p>
 <p><a href="#sqlserver-advanced-connector-configuration-properties">Advanced connector configuration properties</a></p>
 </li>
 <li>
-<p><a href="#debezium-sqlserver-connector-database-history-configuration-properties">Database history connector configuration properties</a> that control how Debezium processes events that it reads from the database history topic.</p>
+<p><a href="#debezium-sqlserver-connector-database-history-configuration-properties">Database schema history connector configuration properties</a> that control how Debezium processes events that it reads from the database schema history topic.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#sqlserver-pass-through-database-history-properties-for-configuring-producer-and-consumer-clients">Pass-through database history properties</a></p>
+<p><a href="#sqlserver-pass-through-database-history-properties-for-configuring-producer-and-consumer-clients">Pass-through database schema history properties</a></p>
 </li>
 </ul>
 </div>
@@ -3471,7 +3780,8 @@ Many properties have default values.</p>
 <p><code>1</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The maximum number of tasks that should be created for this connector. The SQL Server connector always uses a single task and therefore does not use this value, so the default is always acceptable.</p>
+<p>Specifies the maximum number of tasks that the connector can use to capture data from the database instance.
+If the <a href="#sqlserver-property-database-names"><code>database.names</code></a> list contains more than one element, you can increase the value of this property to a number less than or equal to the number of elements in the list.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3521,14 +3831,13 @@ Can be omitted when using Kerberos authentication, which can be configured using
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="sqlserver-property-database-dbname"></a><a href="#sqlserver-property-database-dbname"><code>database.dbname</code></a></p>
+<p><a id="sqlserver-property-database-instance"></a> <a href="#sqlserver-property-database-instance"><code>database.instance</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>No default</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The name of the SQL Server database from which to stream the changes
-Must not be used with <code>database.names</code>.</p>
+<p>Specifies the instance name of the <a href="https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/database-engine-instances-sql-server?view=sql-server-latest#instances">SQL Server named instance</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3539,35 +3848,72 @@ Must not be used with <code>database.names</code>.</p>
 <p>No default</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The comma-separated list of the SQL Server database names from which to stream the changes.
-Currently, only one database name is supported. Must not be used with <code>database.dbname</code>.</p>
-</div>
-<div class="paragraph">
-<p>This option is <strong>experimental</strong> and must not be used in production. Using it will make the behavior of the connector
-incompatible with the default configuration with no upgrade or downgrade path:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>The connector will use different keys for its committed offset messages.</p>
-</li>
-<li>
-<p>The SQL statements used in <code>snapshot.select.statement.overrides</code> will have to use the database name
-as part of the fully-qualified table name.</p>
-</li>
-</ul>
+<p>The comma-separated list of the SQL Server database names from which to stream the changes.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="sqlserver-property-database-server-name"></a><a href="#sqlserver-property-database-server-name"><code>database.server.name</code></a></p>
+<p><a id="sqlserver-property-topic-prefix"></a><a href="#sqlserver-property-topic-prefix"><code>topic.prefix</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>No default</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Logical name that identifies and provides a namespace for the SQL Server database server that you want Debezium to capture. The logical name should be unique across all other connectors, since it is used as a prefix for all Kafka topic names emanating from this connector.
-Only alphanumeric characters, hyphens, dots and underscores must be used.</p>
+<p>Topic prefix that provides a namespace for the SQL Server database server that you want Debezium to capture.
+The prefix should be unique across all other connectors, since it is used as the prefix for all Kafka topic names that receive records from this connector.
+Only alphanumeric characters, hyphens, dots and underscores must be used in the database server logical name.<br>
+<br></p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Do not change the value of this property.
+If you change the name value, after a restart, instead of continuing to emit events to the original topics, the connector emits subsequent events to topics whose names are based on the new value.
+The connector is also unable to recover its database schema history topic.</p>
+</div>
+</td>
+</tr>
+</table>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="sqlserver-property-schema-include-list"></a><a href="#sqlserver-property-schema-include-list"><code>schema.include.list</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>No default</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An optional, comma-separated list of regular expressions that match names of schemas for which you <strong>want</strong> to capture changes.
+Any schema name not included in <code>schema.include.list</code> is excluded from having its changes captured.
+By default, the connector captures changes for all non-system schemas.<br></p>
+</div>
+<div class="paragraph">
+<p>To match the name of a schema, Debezium applies the regular expression that you specify as an <em>anchored</em> regular expression.
+That is, the specified expression is matched against the entire name string of the schema; it does not match substrings that might be present in a schema name.<br>
+If you include this property in the configuration, do not also set the <code>schema.exclude.list</code> property.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="sqlserver-property-schema-exclude-list"></a><a href="#sqlserver-property-schema-exclude-list"><code>schema.exclude.list</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>No default</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An optional, comma-separated list of regular expressions that match names of schemas for which you <strong>do not</strong> want to capture changes.
+Any schema whose name is not included in <code>schema.exclude.list</code> has its changes captured, with the exception of system schemas.<br></p>
+</div>
+<div class="paragraph">
+<p>To match the name of a schema, Debezium applies the regular expression that you specify as an <em>anchored</em> regular expression.
+That is, the specified expression is matched against the entire name string of the schema; it does not match substrings that might be present in a schema name.<br>
+If you include this property in the configuration, do not set the <code>schema.include.list</code> property.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3578,9 +3924,15 @@ Only alphanumeric characters, hyphens, dots and underscores must be used.</p>
 <p>No default</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>An optional comma-separated list of regular expressions that match fully-qualified table identifiers for tables that you want Debezium to capture; any table that is not included in <code>table.include.list</code> is excluded from capture. Each identifier is of the form <em>schemaName</em>.<em>tableName</em>.
+<p>An optional comma-separated list of regular expressions that match fully-qualified table identifiers for tables that you want Debezium to capture.
 By default, the connector captures all non-system tables for the designated schemas.
-Must not be used with <code>table.exclude.list</code>.</p>
+When this property is set, the connector captures changes only from the specified tables.
+Each identifier is of the form <em>schemaName</em>.<em>tableName</em>.<br></p>
+</div>
+<div class="paragraph">
+<p>To match the name of a table, Debezium applies the regular expression that you specify as an <em>anchored</em> regular expression.
+That is, the specified expression is matched against the entire name string of the table; it does not match substrings that might be present in a table name.<br>
+If you include this property in the configuration, do not also set the <code>table.exclude.list</code> property.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3591,8 +3943,14 @@ Must not be used with <code>table.exclude.list</code>.</p>
 <p>No default</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>An optional comma-separated list of regular expressions that match fully-qualified table identifiers for the tables that you want to exclude from being captured; Debezium captures all tables that are not included in <code>table.exclude.list</code>.
-Each identifier is of the form <em>schemaName</em>.<em>tableName</em>. Must not be used with <code>table.include.list</code>.</p>
+<p>An optional comma-separated list of regular expressions that match fully-qualified table identifiers for the tables that you want to exclude from being captured.
+Debezium captures all tables that are not included in <code>table.exclude.list</code>.
+Each identifier is of the form <em>schemaName</em>.<em>tableName</em>.<br></p>
+</div>
+<div class="paragraph">
+<p>To match the name of a table, Debezium applies the regular expression that you specify as an <em>anchored</em> regular expression.
+That is, the specified expression is matched against the entire name string of the table; it does not match substrings that might be present in a table name.<br>
+If you include this property in the configuration, do not also set the <code>table.include.list</code> property.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3605,8 +3963,12 @@ Each identifier is of the form <em>schemaName</em>.<em>tableName</em>. Must not 
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>An optional comma-separated list of regular expressions that match the fully-qualified names of columns that should be included in the change event message values.
 Fully-qualified names for columns are of the form <em>schemaName</em>.<em>tableName</em>.<em>columnName</em>.
-Note that primary key columns are always included in the event&#8217;s key, even if not included in the value.
-Do not also set the <code>column.exclude.list</code> property.</p>
+Note that primary key columns are always included in the event&#8217;s key, even if not included in the value.<br></p>
+</div>
+<div class="paragraph">
+<p>To match the name of a column, Debezium applies the regular expression that you specify as an <em>anchored</em> regular expression.
+That is, the specified expression is matched against the entire name string of the column; it does not match substrings that might be present in a column name.<br>
+If you include this property in the configuration, do not also set the <code>column.exclude.list</code> property.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3619,8 +3981,12 @@ Do not also set the <code>column.exclude.list</code> property.</p>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>An optional comma-separated list of regular expressions that match the fully-qualified names of columns that should be excluded from change event message values.
 Fully-qualified names for columns are of the form <em>schemaName</em>.<em>tableName</em>.<em>columnName</em>.
-Note that primary key columns are always included in the event&#8217;s key, also if excluded from the value.
-Do not also set the <code>column.include.list</code> property.</p>
+Note that primary key columns are always included in the event&#8217;s key, also if excluded from the value.<br></p>
+</div>
+<div class="paragraph">
+<p>To match the name of a column, Debezium applies the regular expression that you specify as an <em>anchored</em> regular expression.
+That is, the specified expression is matched against the entire name string of the column; it does not match substrings that might be present in a column name.<br>
+If you include this property in the configuration, do not also set the <code>column.include.list</code> property.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3633,7 +3999,9 @@ Do not also set the <code>column.include.list</code> property.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>An optional, comma-separated list of regular expressions that match the fully-qualified names of character-based columns.
-Fully-qualified names for columns are of the form <em>`&lt;schemaName&gt;</em>.<em>&lt;tableName&gt;</em>._&lt;columnName&gt;`.
+Fully-qualified names for columns are of the form <em>`&lt;schemaName&gt;</em>.<em>&lt;tableName&gt;</em>.<em>&lt;columnName&gt;`.<br>
+To match the name of a column Debezium applies the regular expression that you specify as an _anchored</em> regular expression.
+That is, the specified expression is matched against the entire name string of the column; the expression does not match substrings that might be present in a column name.
 In the resulting change event record, the values for the specified columns are replaced with pseudonyms.<br></p>
 </div>
 <div class="paragraph">
@@ -3693,7 +4061,7 @@ Hashing strategy version 2 should be used to ensure fidelity if the value is bei
 <p><code>true</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Boolean value that specifies whether the connector should publish changes in the database schema to a Kafka topic with the same name as the database server ID. Each schema change is recorded with a key that contains the database name and a value that is a JSON structure that describes the schema update. This is independent of how the connector internally records database history. The default is <code>true</code>.</p>
+<p>Boolean value that specifies whether the connector should publish changes in the database schema to a Kafka topic with the same name as the database server ID. Each schema change is recorded with a key that contains the database name and a value that is a JSON structure that describes the schema update. This is independent of how the connector internally records database schema history. The default is <code>true</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3715,24 +4083,46 @@ After a source record is deleted, emitting a tombstone event (the default behavi
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="sqlserver-property-column-truncate-to-length-chars"></a><a href="#sqlserver-property-column-truncate-to-length-chars"><code>column.truncate.to._length_.chars</code></a></p>
+<p><a id="sqlserver-property-column-truncate-to-length-chars"></a><a href="#sqlserver-property-column-truncate-to-length-chars"><code>column.truncate.to.<em>length</em>.chars</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><em>n/a</em></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>An optional comma-separated list of regular expressions that match the fully-qualified names of character-based columns whose values should be truncated in the change event message values if the field values are longer than the specified number of characters. Multiple properties with different lengths can be used in a single configuration, although in each the length must be a positive integer. Fully-qualified names for columns are of the form <em>schemaName</em>.<em>tableName</em>.<em>columnName</em>.</p>
+<p>An optional, comma-separated list of regular expressions that match the fully-qualified names of character-based columns.
+Set this property if you want to truncate the data in a set of columns when it exceeds the number of characters specified by the <em>length</em> in the property name.
+Set <code>length</code> to a positive integer value, for example, <code>column.truncate.to.20.chars</code>.</p>
+</div>
+<div class="paragraph">
+<p>The fully-qualified name of a column observes the following format: <code><em>&lt;schemaName&gt;</em>.<em>&lt;tableName&gt;</em>.<em>&lt;columnName&gt;</em></code>.
+To match the name of a column, Debezium applies the regular expression that you specify as an <em>anchored</em> regular expression.
+That is, the specified expression is matched against the entire name string of the column; the expression does not match substrings that might be present in a column name.</p>
+</div>
+<div class="paragraph">
+<p>You can specify multiple properties with different lengths in a single configuration.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="sqlserver-property-column-mask-with-length-chars"></a><a href="#sqlserver-property-column-mask-with-length-chars"><code>column.mask.with._length_.chars</code></a></p>
+<p><a id="sqlserver-property-column-mask-with-length-chars"></a><a href="#sqlserver-property-column-mask-with-length-chars"><code>column.mask.with.<em>length</em>.chars</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><em>n/a</em></p>
+<p><em>n/a</em>
+Fully-qualified names for columns are of the form <em>schemaName</em>.<em>tableName</em>.<em>columnName</em>.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>An optional comma-separated list of regular expressions that match the fully-qualified names of character-based columns whose values should be replaced in the change event message values with a field value consisting of the specified number of asterisk (<code>*</code>) characters. Multiple properties with different lengths can be used in a single configuration, although in each the length must be a positive integer or zero. Fully-qualified names for columns are of the form <em>schemaName</em>.<em>tableName</em>.<em>columnName</em>.</p>
+<p>An optional, comma-separated list of regular expressions that match the fully-qualified names of character-based columns.
+Set this property if you want the connector to mask the values for a set of columns, for example, if they contain sensitive data.
+Set <code><em>length</em></code> to a positive integer to replace data in the specified columns with the number of asterisk (<code>*</code>) characters specified by the <em>length</em> in the property name.
+Set <em>length</em> to <code>0</code> (zero) to replace data in the specified columns with an empty string.</p>
+</div>
+<div class="paragraph">
+<p>The fully-qualified name of a column observes the following format: <em>schemaName</em>.<em>tableName</em>.<em>columnName</em>.
+To match the name of a column, Debezium applies the regular expression that you specify as an <em>anchored</em> regular expression.
+That is, the specified expression is matched against the entire name string of the column; the expression does not match substrings that might be present in a column name.</p>
+</div>
+<div class="paragraph">
+<p>You can specify multiple properties with different lengths in a single configuration.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3743,25 +4133,67 @@ After a source record is deleted, emitting a tombstone event (the default behavi
 <p><em>n/a</em></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>An optional comma-separated list of regular expressions that match the fully-qualified names of columns whose original type and length should be added as a parameter to the corresponding field schemas in the emitted change messages.
-The schema parameters <code>__debezium.source.column.type</code>, <code>__debezium.source.column.length</code> and <code>__debezium.source.column.scale</code> is used to propagate the original type name and length (for variable-width types), respectively.
-Useful to properly size corresponding columns in sink databases.
-Fully-qualified names for columns are of the form <em>schemaName</em>.<em>tableName</em>.<em>columnName</em>.</p>
+<p>An optional, comma-separated list of regular expressions that match the fully-qualified names of columns for which you want the connector to emit extra parameters that represent column metadata.
+When this property is set, the connector adds the following fields to the schema of event records:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>__debezium.source.column.type</code><br></p>
+</li>
+<li>
+<p><code>__debezium.source.column.length</code><br></p>
+</li>
+<li>
+<p><code>__debezium.source.column.scale</code><br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These parameters propagate a column&#8217;s original type name and length (for variable-width types), respectively.<br>
+Enabling the connector to emit this extra data can assist in properly sizing specific numeric or character-based columns in sink databases.</p>
+</div>
+<div class="paragraph">
+<p>The fully-qualified name of a column observes the following format: <em>schemaName</em>.<em>tableName</em>.<em>columnName</em>.<br>
+To match the name of a column, Debezium applies the regular expression that you specify as an <em>anchored</em> regular expression.
+That is, the specified expression is matched against the entire name string of the column; the expression does not match substrings that might be present in a column name.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="sqlserver-property-datatype-propagate-source-type"></a><a href="#sqlserver-property-datatype-propagate-source-type"><code>datatype.propagate.source.type+</code></a></p>
+<p><a id="sqlserver-property-datatype-propagate-source-type"></a><a href="#sqlserver-property-datatype-propagate-source-type"><code>datatype.propagate.source.type</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><em>n/a</em></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>An optional comma-separated list of regular expressions that match the database-specific data type name of columns whose original type and length should be added as a parameter to the corresponding field schemas in the emitted change messages.
-The schema parameters <code>__debezium.source.column.type</code>, <code>__debezium.source.column.length</code> and <code>__debezium.source.column.scale</code> will be used to propagate the original type name and length (for variable-width types), respectively.
-Useful to properly size corresponding columns in sink databases.
-Fully-qualified data type names are of the form <em>schemaName</em>.<em>tableName</em>.<em>typeName</em>.
-See <a href="#sqlserver-data-types">SQL Server data types</a> for the list of SQL Server-specific data type names.</p>
+<p>An optional, comma-separated list of regular expressions that specify the fully-qualified names of data types that are defined for columns in a database.
+When this property is set, for columns with matching data types, the connector emits event records that include the following extra fields in their schema:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>__debezium.source.column.type</code><br></p>
+</li>
+<li>
+<p><code>__debezium.source.column.length</code><br></p>
+</li>
+<li>
+<p><code>__debezium.source.column.scale</code><br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These parameters propagate a column&#8217;s original type name and length (for variable-width types), respectively.<br>
+Enabling the connector to emit this extra data can assist in properly sizing specific numeric or character-based columns in sink databases.</p>
+</div>
+<div class="paragraph">
+<p>The fully-qualified name of a column observes the following format: <em>schemaName</em>.<em>tableName</em>.<em>typeName</em>.<br>
+To match the name of a data type, Debezium applies the regular expression that you specify as an <em>anchored</em> regular expression.
+That is, the specified expression is matched against the entire name string of the data type; the expression does not match substrings that might be present in a type name.</p>
+</div>
+<div class="paragraph">
+<p>For the list of SQL Server-specific data type names, see the <a href="#sqlserver-data-types">SQL Server data type mappings</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3781,7 +4213,7 @@ In place of the default, or to specify a key for tables that lack a primary key,
 To establish a custom message key for a table, list the table, followed by the columns to use as the message key.
 Each list entry takes the following format:<br>
 <br>
-<code><em>&lt;fully-qualified_tableName&gt;</em>:_&lt;keyColumn&gt;_,<em>&lt;keyColumn&gt;</em></code><br>
+<code><em>&lt;fully-qualified_tableName&gt;</em>:<em>&lt;keyColumn&gt;</em>,<em>&lt;keyColumn&gt;</em></code><br>
 <br>
 To base a table key on multiple column names, insert commas between the column names.</p>
 </div>
@@ -3813,7 +4245,58 @@ However, it&#8217;s best to use the minimum number that are required to specify 
 <p>bytes</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Specifies how binary (<code>binary</code>, <code>varbinary</code>) columns should be represented in change events, including: <code>bytes</code> represents binary data as byte array (default), <code>base64</code> represents binary data as base64-encoded String, <code>hex</code> represents binary data as hex-encoded (base16) String</p>
+<p>Specifies how binary (<code>binary</code>, <code>varbinary</code>) columns should be represented in change events, including: <code>bytes</code> represents binary data as byte array (default), <code>base64</code> represents binary data as base64-encoded String, <code>base64-url-safe</code> represents binary data as base64-url-safe-encoded String, <code>hex</code> represents binary data as hex-encoded (base16) String</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="sqlserver-property-schema-name-adjustment-mode"></a><a href="#sqlserver-property-schema-name-adjustment-mode"><code>schema.name.adjustment.mode</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>none</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specifies how schema names should be adjusted for compatibility with the message converter used by the connector. Possible settings: <br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>none</code> does not apply any adjustment.<br></p>
+</li>
+<li>
+<p><code>avro</code> replaces the characters that cannot be used in the Avro type name with underscore.<br></p>
+</li>
+<li>
+<p><code>avro_unicode</code> replaces the underscore or characters that cannot be used in the Avro type name with corresponding unicode like _uxxxx. Note: _ is an escape sequence like backslash in Java<br></p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="sqlserver-property-field-name-adjustment-mode"></a><a href="#sqlserver-property-field-name-adjustment-mode"><code>field.name.adjustment.mode</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>none</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specifies how field names should be adjusted for compatibility with the message converter used by the connector. Possible settings: <br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>none</code> does not apply any adjustment.<br></p>
+</li>
+<li>
+<p><code>avro</code> replaces the characters that cannot be used in the Avro type name with underscore.<br></p>
+</li>
+<li>
+<p><code>avro_unicode</code> replaces the underscore or characters that cannot be used in the Avro type name with corresponding unicode like _uxxxx. Note: _ is an escape sequence like backslash in Java<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>See <a href="../configuration/avro.html#avro-naming" class="page">Avro naming</a> for more details.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -3838,6 +4321,49 @@ However, it&#8217;s best to use the minimum number that are required to specify 
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="sqlserver-property-converters"></a><a href="#sqlserver-property-converters"><code>converters</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>No default</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enumerates a comma-separated list of the symbolic names of the <a href="../development/converters.html#custom-converters" class="page">custom converter</a> instances that the connector can use.
+For example,<br></p>
+</div>
+<div class="paragraph">
+<p><code>isbn</code></p>
+</div>
+<div class="paragraph">
+<p>You must set the <code>converters</code> property to enable the connector to use a custom converter.</p>
+</div>
+<div class="paragraph">
+<p>For each converter that you configure for a connector, you must also add a <code>.type</code> property, which specifies the fully-qualifed name of the class that implements the converter interface.
+The <code>.type</code> property uses the following format:<br></p>
+</div>
+<div class="paragraph">
+<p><code><em>&lt;converterSymbolicName&gt;</em>.type</code><br></p>
+</div>
+<div class="paragraph">
+<p>For example,<br></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>isbn.type: io.debezium.test.IsbnConverter</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to further control the behavior of a configured converter, you can add one or more configuration parameters to pass values to the converter.
+To associate any additional configuration parameter with a converter, prefix the parameter names with the symbolic name of the converter.
+For example,<br></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>isbn.schema.name: io.debezium.sqlserver.type.Isbn</pre>
+</div>
+</div></div></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="sqlserver-property-snapshot-mode"></a><a href="#sqlserver-property-snapshot-mode"><code>snapshot.mode</code></a></p>
@@ -3874,10 +4400,12 @@ The following values are supported:</p>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>An optional, comma-separated list of regular expressions that match the fully-qualified names (<code><em>&lt;dbName&gt;</em>.<em>&lt;schemaName&gt;</em>.<em>&lt;tableName&gt;</em></code>) of the tables to include in a snapshot.
 The specified items must be named in the connector&#8217;s <a href="#sqlserver-property-table-include-list"><code>table.include.list</code></a> property.
-This property takes effect only if the connector&#8217;s <code>snapshot.mode</code> property is set to a value other than <code>never</code>.<br></p>
+This property takes effect only if the connector&#8217;s <a href="#sqlserver-property-snapshot-mode"><code>snapshot.mode</code></a> property is set to a value other than <code>never</code>.<br>
+This property does not affect the behavior of incremental snapshots.<br></p>
 </div>
 <div class="paragraph">
-<p>This property does not affect the behavior of incremental snapshots.</p>
+<p>To match the name of a table, Debezium applies the regular expression that you specify as an <em>anchored</em> regular expression.
+That is, the specified expression is matched against the entire name string of the table; it does not match substrings that might be present in a table name.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3944,7 +4472,7 @@ For <code>read_uncommitted</code> there are no data consistency guarantees at al
 <p><a id="sqlserver-property-poll-interval-ms"></a><a href="#sqlserver-property-poll-interval-ms"><code>poll.interval.ms</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>1000</code></p>
+<p><code>500</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Positive integer value that specifies the number of milliseconds the connector should wait during each iteration for new change events to appear. Defaults to 1000 milliseconds, or 1 second.</p>
@@ -3958,7 +4486,27 @@ For <code>read_uncommitted</code> there are no data consistency guarantees at al
 <p><code>8192</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Positive integer value that specifies the maximum size of the blocking queue into which change events read from the database log are placed before they are written to Kafka. This queue can provide backpressure to the CDC table reader when, for example, writes to Kafka are slower or if Kafka is not available. Events that appear in the queue are not included in the offsets periodically recorded by this connector. Defaults to 8192, and should always be larger than the maximum batch size specified in the <code>max.batch.size</code> property.</p>
+<p>Positive integer value that specifies the maximum number of records that the blocking queue can hold.
+When Debezium reads events streamed from the database, it places the events in the blocking queue before it writes them to Kafka.
+The blocking queue can provide backpressure for reading change events from the database
+in cases where the connector ingests messages faster than it can write them to Kafka, or when Kafka becomes unavailable.
+Events that are held in the queue are disregarded when the connector periodically records offsets.
+Always set the value of <code>max.queue.size</code> to be larger than the value of <a href="#sqlserver-property-max-batch-size"><code>max.batch.size</code></a>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="sqlserver-property-max-queue-size-in-bytes"></a><a href="#sqlserver-property-max-queue-size-in-bytes"><code>max.queue.size.in.bytes</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>0</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A long integer value that specifies the maximum volume of the blocking queue in bytes.
+By default, volume limits are not specified for the blocking queue.
+To specify the number of bytes that the queue can consume, set this property to a positive long value.<br>
+If <a href="#sqlserver-property-max-queue-size"><code>max.queue.size</code></a> is also set, writing to the queue is blocked when the size of the queue reaches the limit specified by either property.
+For example, if you set <code>max.queue.size=1000</code>, and <code>max.queue.size.in.bytes=5000</code>, writing to the queue is blocked after the queue contains 1000 records, or after the volume of the records in the queue reaches 5000 bytes.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3969,7 +4517,7 @@ For <code>read_uncommitted</code> there are no data consistency guarantees at al
 <p><code>2048</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Positive integer value that specifies the maximum size of each batch of events that should be processed during each iteration of this connector. Defaults to 2048.</p>
+<p>Positive integer value that specifies the maximum size of each batch of events that should be processed during each iteration of this connector.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3989,18 +4537,6 @@ which in turn means that no offset updates are committed to Kafka.
 This may result in more change events to be re-sent after a connector restart.
 Set this parameter to <code>0</code> to not send heartbeat messages at all.<br>
 Disabled by default.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="sqlserver-property-heartbeat-topics-prefix"></a><a href="#sqlserver-property-heartbeat-topics-prefix"><code>heartbeat.topics.prefix</code></a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>__debezium-heartbeat</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Controls the naming of the topic to which heartbeat messages are sent.<br>
-The topic is named according to the pattern <code>&lt;heartbeat.topics.prefix&gt;.&lt;server.name&gt;</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4109,18 +4645,6 @@ Note that this setting is not recommended and is planned for removal in a future
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="sqlserver-property-sanitize-field-names"></a><a href="#sqlserver-property-sanitize-field-names"><code>sanitize.field.names</code></a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>true</code> when connector configuration explicitly specifies the <code>key.converter</code> or <code>value.converter</code> parameters to use Avro, otherwise defaults to <code>false</code>.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Whether field names are sanitized to adhere to Avro naming requirements.
-See <a href="../configuration/avro.html#avro-naming" class="page">Avro naming</a> for more details.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="sqlserver-property-provide-transaction-metadata"></a><a href="#sqlserver-property-provide-transaction-metadata"><code>provide.transaction.metadata</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -4128,20 +4652,6 @@ See <a href="../configuration/avro.html#avro-naming" class="page">Avro naming</a
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>When set to <code>true</code> Debezium generates events with transaction boundaries and enriches data events envelope with transaction metadata.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="sqlserver-property-transaction-topic"></a><a href="#sqlserver-property-transaction-topic"><code>transaction.topic</code></a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>${database.server.name}.transaction</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Controls the name of the topic to which the connector sends transaction metadata messages. The placeholder <code>${database.server.name}</code> can be used for referring to the connector&#8217;s logical name; defaults to <code>${database.server.name}.transaction</code>, for example <code>dbserver1.transaction</code>.</p>
-</div>
-<div class="paragraph">
-<p>For more information, see <a href="#sqlserver-transaction-metadata">Transaction Metadata</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4160,12 +4670,12 @@ See <a href="../configuration/avro.html#avro-naming" class="page">Avro naming</a
 <p><a id="sqlserver-property-skipped-operations"></a><a href="#sqlserver-property-skipped-operations"><code>skipped.operations</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>No default</p>
+<p><code>t</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>comma-separated list of operation types that will be skipped during streaming.
-The operations include: <code>c</code> for inserts/create, <code>u</code> for updates, and <code>d</code> for deletes.
-By default, no operations are skipped.</p>
+<p>A comma-separated list of operation types that will be skipped during streaming.
+The operations include: <code>c</code> for inserts/create, <code>u</code> for updates, <code>d</code> for deletes, <code>t</code> for truncates, and <code>none</code> to not skip any operations.
+By default, truncate operations are skipped (not emitted by this connector).</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4176,7 +4686,7 @@ By default, no operations are skipped.</p>
 <p>No default value</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Fully-qualified name of the data collection that is used to send <a href="#configuration/signalling.adocdebezium-signaling-enabling-signaling" class="page unresolved">signals</a> to the connector.<br>
+<p>Fully-qualified name of the data collection that is used to send <a href="../configuration/signalling.html#debezium-signaling-enabling-signaling" class="page">signals</a> to the connector.<br>
 Use the following format to specify the collection name:<br>
 <code><em>&lt;databaseName&gt;</em>.<em>&lt;schemaName&gt;</em>.<em>&lt;tableName&gt;</em></code></p>
 </div></div></td>
@@ -4232,19 +4742,85 @@ When set to a value greater than zero, the connector uses the n-th LSN specified
 <p>Uses OPTION(RECOMPILE) query option to all SELECT statements used during an incremental snapshot. This can help to solve parameter sniffing issues that may occur but can cause increased CPU load on the source database, depending on the frequency of query execution.</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="sqlserver-property-topic-naming-strategy"></a><a href="#sqlserver-property-topic-naming-strategy"><code>topic.naming.strategy</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>io.debezium.schema.SchemaTopicNamingStrategy</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The name of the TopicNamingStrategy class that should be used to determine the topic name for data change, schema change, transaction, heartbeat event etc., defaults to <code>SchemaTopicNamingStrategy</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="sqlserver-property-topic-delimiter"></a><a href="#sqlserver-property-topic-delimiter"><code>topic.delimiter</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>.</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specify the delimiter for topic name, defaults to <code>.</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="sqlserver-property-topic-cache-size"></a><a href="#sqlserver-property-topic-cache-size"><code>topic.cache.size</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>10000</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The size used for holding the topic names in bounded concurrent hash map. This cache will help to determine the topic name corresponding to a given data collection.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="sqlserver-property-topic-heartbeat-prefix"></a><a href="#sqlserver-property-topic-heartbeat-prefix"><code>topic.heartbeat.prefix</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>__debezium-heartbeat</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Controls the name of the topic to which the connector sends heartbeat messages. The topic name has this pattern:<br>
+<br>
+<em>topic.heartbeat.prefix</em>.<em>topic.prefix</em><br>
+<br>
+For example, if the topic prefix is <code>fulfillment</code>, the default topic name is <code>__debezium-heartbeat.fulfillment</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="sqlserver-property-topic-transaction"></a><a href="#sqlserver-property-topic-transaction"><code>topic.transaction</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>transaction</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Controls the name of the topic to which the connector sends transaction metadata messages. The topic name has this pattern:<br>
+<br>
+<em>topic.prefix</em>.<em>topic.transaction</em><br>
+<br>
+For example, if the topic prefix is <code>fulfillment</code>, the default topic name is <code>fulfillment.transaction</code>.</p>
+</div>
+<div class="paragraph">
+<p>For more information, see <a href="#sqlserver-transaction-metadata">Transaction Metadata</a>.</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="debezium-sqlserver-connector-database-history-configuration-properties"><a class="anchor" href="#debezium-sqlserver-connector-database-history-configuration-properties"></a>Debezium connector database history configuration properties</h4>
+<h4 id="debezium-sqlserver-connector-database-history-configuration-properties"><a class="anchor" href="#debezium-sqlserver-connector-database-history-configuration-properties"></a>Debezium SQL Server connector database schema history configuration properties</h4>
 <div class="paragraph">
-<p>Debezium provides a set of <code>database.history.*</code> properties that control how the connector interacts with the schema history topic.</p>
+<p>Debezium provides a set of <code>schema.history.internal.*</code> properties that control how the connector interacts with the schema history topic.</p>
 </div>
 <div class="paragraph">
-<p>The following table describes the <code>database.history</code> properties for configuring the Debezium connector.</p>
+<p>The following table describes the <code>schema.history.internal</code> properties for configuring the Debezium connector.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 13. Connector database history configuration properties</caption>
+<caption class="title">Table 14. Connector database schema history configuration properties</caption>
 <colgroup>
 <col style="width: 33%;">
 <col style="width: 17%;">
@@ -4260,25 +4836,29 @@ When set to a value greater than zero, the connector uses the n-th LSN specified
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="sqlserver-property-database-history-kafka-topic"></a><a href="#sqlserver-property-database-history-kafka-topic"><code>database.history.kafka.topic</code></a></p>
+<p><a id="sqlserver-property-database-history-kafka-topic"></a><a href="#sqlserver-property-database-history-kafka-topic"><code>schema.history.internal.kafka.topic</code></a></p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>No default</p>
+</div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The full name of the Kafka topic where the connector stores the database schema history.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="sqlserver-property-database-history-kafka-bootstrap-servers"></a><a href="#sqlserver-property-database-history-kafka-bootstrap-servers"><code>database.history.kafka.bootstrap.servers</code></a></p>
+<p><a id="sqlserver-property-database-history-kafka-bootstrap-servers"></a><a href="#sqlserver-property-database-history-kafka-bootstrap-servers"><code>schema.history.internal.kafka.bootstrap.servers</code></a></p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>No default</p>
+</div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>A list of host/port pairs that the connector uses for establishing an initial connection to the Kafka cluster. This connection is used for retrieving the database schema history previously stored by the connector, and for writing each DDL statement read from the source database. Each pair should point to the same Kafka cluster used by the Kafka Connect process.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="sqlserver-property-database-history-kafka-recovery-poll-interval-ms"></a><a href="#sqlserver-property-database-history-kafka-recovery-poll-interval-ms"><code>database.history.kafka.recovery.poll.interval.ms</code></a></p>
+<p><a id="sqlserver-property-database-history-kafka-recovery-poll-interval-ms"></a><a href="#sqlserver-property-database-history-kafka-recovery-poll-interval-ms"><code>schema.history.internal.kafka.recovery.poll.interval.ms</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>100</code></p>
@@ -4289,18 +4869,40 @@ When set to a value greater than zero, the connector uses the n-th LSN specified
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="sqlserver-property-database-history-kafka-recovery-attempts"></a><a href="#sqlserver-property-database-history-kafka-recovery-attempts"><code>database.history.kafka.recovery.attempts</code></a></p>
+<p><a id="sqlserver-property-database-history-kafka-query-timeout-ms"></a><a href="#sqlserver-property-database-history-kafka-query-timeout-ms"><code>schema.history.internal.kafka.query.timeout.ms</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>4</code></p>
+<p><code>3000</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The maximum number of times that the connector should try to read persisted history data before the connector recovery fails with an error. The maximum amount of time to wait after receiving no data is <code>recovery.attempts</code> x <code>recovery.poll.interval.ms</code>.</p>
+<p>An integer value that specifies the maximum number of milliseconds the connector should wait while fetching cluster information using Kafka admin client.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="sqlserver-property-database-history-skip-unparseable-ddl"></a><a href="#sqlserver-property-database-history-skip-unparseable-ddl"><code>database.history.skip.unparseable.ddl</code></a></p>
+<p><a id="sqlserver-property-database-history-kafka-create-timeout-ms"></a><a href="#sqlserver-property-database-history-kafka-create-timeout-ms"><code>schema.history.internal.kafka.create.timeout.ms</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>30000</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An integer value that specifies the maximum number of milliseconds the connector should wait while create kafka history topic using Kafka admin client.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="sqlserver-property-database-history-kafka-recovery-attempts"></a><a href="#sqlserver-property-database-history-kafka-recovery-attempts"><code>schema.history.internal.kafka.recovery.attempts</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>100</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The maximum number of times that the connector should try to read persisted history data before the connector recovery fails with an error. The maximum amount of time to wait after receiving no data is <code>recovery.attempts</code> × <code>recovery.poll.interval.ms</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="sqlserver-property-database-history-skip-unparseable-ddl"></a><a href="#sqlserver-property-database-history-skip-unparseable-ddl"><code>schema.history.internal.skip.unparseable.ddl</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>false</code></p>
@@ -4313,27 +4915,7 @@ Skipping should be used only with care as it can lead to data loss or mangling w
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="sqlserver-property-database-history-store-only-monitored-tables-ddl"></a><a href="#sqlserver-property-database-history-store-only-monitored-tables-ddl"><code>database.history.store.only.monitored.tables.ddl</code></a><br></p>
-</div>
-<div class="paragraph">
-<p><em>Deprecated and scheduled for removal in a future release; use <a href="#sqlserver-property-database-history-store-only-captured-tables-ddl"><code>database.history.store.only.captured.tables.ddl</code></a> instead.</em></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>false</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>A Boolean value that specifies whether the connector should record all DDL statements<br></p>
-</div>
-<div class="paragraph">
-<p><code>true</code> records only those DDL statements that are relevant to tables whose changes are being captured by Debezium. Set to <code>true</code> with care because missing data might become necessary if you change which tables have their changes captured.<br></p>
-</div>
-<div class="paragraph">
-<p>The safe default is <code>false</code>.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="sqlserver-property-database-history-store-only-captured-tables-ddl"></a><a href="#sqlserver-property-database-history-store-only-captured-tables-ddl"><code>database.history.store.only.captured.tables.ddl</code></a></p>
+<p><a id="sqlserver-property-database-history-store-only-captured-tables-ddl"></a><a href="#sqlserver-property-database-history-store-only-captured-tables-ddl"><code>schema.history.internal.store.only.captured.tables.ddl</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>false</code></p>
@@ -4351,28 +4933,28 @@ Skipping should be used only with care as it can lead to data loss or mangling w
 </tbody>
 </table>
 <div id="sqlserver-pass-through-database-history-properties-for-configuring-producer-and-consumer-clients" class="paragraph">
-<div class="title">Pass-through database history properties for configuring producer and consumer clients</div>
+<div class="title">Pass-through database schema history properties for configuring producer and consumer clients</div>
 <p><br>
-Debezium relies on a Kafka producer to write schema changes to database history topics.
-Similarly, it relies on a Kafka consumer to read from database history topics when a connector starts.
-You define the configuration for the Kafka producer and consumer clients by assigning values to a set of pass-through configuration properties that begin with the <code>database.history.producer.*</code> and <code>database.history.consumer.*</code> prefixes.
-The pass-through producer and consumer database history properties control a range of behaviors, such as how these clients secure connections with the Kafka broker, as shown in the following example:</p>
+Debezium relies on a Kafka producer to write schema changes to database schema history topics.
+Similarly, it relies on a Kafka consumer to read from database schema history topics when a connector starts.
+You define the configuration for the Kafka producer and consumer clients by assigning values to a set of pass-through configuration properties that begin with the <code>schema.history.internal.producer.*</code> and <code>schema.history.internal.consumer.*</code> prefixes.
+The pass-through producer and consumer database schema history properties control a range of behaviors, such as how these clients secure connections with the Kafka broker, as shown in the following example:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">database.history.producer.security.protocol=SSL
-database.history.producer.ssl.keystore.location=/var/private/ssl/kafka.server.keystore.jks
-database.history.producer.ssl.keystore.password=test1234
-database.history.producer.ssl.truststore.location=/var/private/ssl/kafka.server.truststore.jks
-database.history.producer.ssl.truststore.password=test1234
-database.history.producer.ssl.key.password=test1234
+<pre class="highlightjs highlight"><code class="language-none hljs">schema.history.internal.producer.security.protocol=SSL
+schema.history.internal.producer.ssl.keystore.location=/var/private/ssl/kafka.server.keystore.jks
+schema.history.internal.producer.ssl.keystore.password=test1234
+schema.history.internal.producer.ssl.truststore.location=/var/private/ssl/kafka.server.truststore.jks
+schema.history.internal.producer.ssl.truststore.password=test1234
+schema.history.internal.producer.ssl.key.password=test1234
 
-database.history.consumer.security.protocol=SSL
-database.history.consumer.ssl.keystore.location=/var/private/ssl/kafka.server.keystore.jks
-database.history.consumer.ssl.keystore.password=test1234
-database.history.consumer.ssl.truststore.location=/var/private/ssl/kafka.server.truststore.jks
-database.history.consumer.ssl.truststore.password=test1234
-database.history.consumer.ssl.key.password=test1234</code></pre>
+schema.history.internal.consumer.security.protocol=SSL
+schema.history.internal.consumer.ssl.keystore.location=/var/private/ssl/kafka.server.keystore.jks
+schema.history.internal.consumer.ssl.keystore.password=test1234
+schema.history.internal.consumer.ssl.truststore.location=/var/private/ssl/kafka.server.truststore.jks
+schema.history.internal.consumer.ssl.truststore.password=test1234
+schema.history.internal.consumer.ssl.key.password=test1234</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4383,14 +4965,14 @@ database.history.consumer.ssl.key.password=test1234</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="debezium-sqlserver-connector-pass-through-database-driver-configuration-properties"><a class="anchor" href="#debezium-sqlserver-connector-pass-through-database-driver-configuration-properties"></a>Debezium connector pass-through database driver configuration properties</h4>
+<h4 id="debezium-sqlserver-connector-pass-through-database-driver-configuration-properties"><a class="anchor" href="#debezium-sqlserver-connector-pass-through-database-driver-configuration-properties"></a>Debezium SQL Server connector pass-through database driver configuration properties</h4>
 <div class="paragraph">
 <p>The Debezium connector provides for pass-through configuration of the database driver.
-Pass-through database properties begin with the prefix <code>database.*</code>.
-For example, the connector passes properties such as <code>database.foobar=false</code> to the JDBC URL.</p>
+Pass-through database properties begin with the prefix <code>driver.*</code>.
+For example, the connector passes properties such as <code>driver.foobar=false</code> to the JDBC URL.</p>
 </div>
 <div class="paragraph">
-<p>As is the case with the <a href="#sqlserver-pass-through-database-history-properties-for-configuring-producer-and-consumer-clients">pass-through properties for database history clients</a>, Debezium strips the prefixes from the properties before it passes them to the database driver.</p>
+<p>As is the case with the <a href="#sqlserver-pass-through-database-history-properties-for-configuring-producer-and-consumer-clients">pass-through properties for database schema history clients</a>, Debezium strips the prefixes from the properties before it passes them to the database driver.</p>
 </div>
 </div>
 </div>
@@ -4468,6 +5050,21 @@ For example, if CDC is enabled on a table, SQL Server does not allow you to chan
 If you do not create a new capture table after a change to the column designation, change event records that the connector emits do not correctly indicate whether the column is optional.
 That is, columns that were previously defined as optional (or <code>NULL</code>) continue to be, despite now being defined as <code>NOT NULL</code>.
 Similarly, columns that had been defined as required (<code>NOT NULL</code>), retain that designation, although they are now defined as <code>NULL</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>After you rename a table using <code>sp_rename</code> function, it will continue to emit changes under the old source table name until the connector is restarted.
+Upon restart of the connector, it will emit changes under the new source table name.</p>
 </div>
 </td>
 </tr>
@@ -4671,12 +5268,12 @@ The connector provides the following metrics:</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>For information about how to expose the preceding metrics through JMX, see the <a href="../operations/monitoring.html" class="page">Debezium monitoring documentation</a>.</p>
+<p>For information about how to expose the preceding metrics through JMX, see the <a href="../operations/monitoring.html#monitoring-debezium" class="page">Debezium monitoring documentation</a>.</p>
 </div>
 <div class="sect2">
 <h3 id="sqlserver-snapshot-metrics"><a class="anchor" href="#sqlserver-snapshot-metrics"></a>Snapshot metrics</h3>
 <div class="paragraph">
-<p>The <strong>MBean</strong> is <code>debezium.sql_server:type=connector-metrics,context=snapshot,server=<em>&lt;sqlserver.server.name&gt;</em></code>.</p>
+<p>The <strong>MBean</strong> is <code>debezium.sql_server:type=connector-metrics,server=<em>&lt;sqlserver.server.name&gt;</em>,task=<em>&lt;task.id&gt;</em>,context=snapshot</code>.</p>
 </div>
 <div class="paragraph">
 <p>Snapshot metrics are not exposed unless a snapshot operation is active, or if a snapshot has occurred since the last connector start.</p>
@@ -4810,6 +5407,17 @@ The connector provides the following metrics:</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-snaps-metric-snapshotpaused_sqlserver"></a><a href="#connectors-snaps-metric-snapshotpaused_sqlserver"><code>SnapshotPaused</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>boolean</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Whether the snapshot was paused.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="connectors-snaps-metric-snapshotaborted_sqlserver"></a><a href="#connectors-snaps-metric-snapshotaborted_sqlserver"><code>SnapshotAborted</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -4838,7 +5446,18 @@ The connector provides the following metrics:</p>
 <p><code>long</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The total number of seconds that the snapshot has taken so far, even if not complete.</p>
+<p>The total number of seconds that the snapshot has taken so far, even if not complete. Includes also time when snapshot was paused.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-snaps-metric-snapshotpauseddurationinseconds_sqlserver"></a><a href="#connectors-snaps-metric-snapshotpauseddurationinseconds_sqlserver"><code>SnapshotPausedDurationInSeconds</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>long</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The total number of seconds that the snapshot was paused. If the snapshot was paused several times, the paused time adds up.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4862,7 +5481,7 @@ Updates every 10,000 rows scanned and upon completing a table.</p>
 <p><code>long</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The maximum buffer of the queue in bytes. It will be enabled if <code>max.queue.size.in.bytes</code> is passed with a positive long value.</p>
+<p>The maximum buffer of the queue in bytes. This metric is available if <a href="#sqlserver-property-max-queue-size-in-bytes"><code>max.queue.size.in.bytes</code></a> is set to a positive long value.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4873,7 +5492,7 @@ Updates every 10,000 rows scanned and upon completing a table.</p>
 <p><code>long</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The current data of records in the queue in bytes.</p>
+<p>The current volume, in bytes, of records in the queue.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -4956,7 +5575,7 @@ Updates every 10,000 rows scanned and upon completing a table.</p>
 <div class="sect2">
 <h3 id="sqlserver-streaming-metrics"><a class="anchor" href="#sqlserver-streaming-metrics"></a>Streaming metrics</h3>
 <div class="paragraph">
-<p>The <strong>MBean</strong> is <code>debezium.sql_server:type=connector-metrics,context=streaming,server=<em>&lt;sqlserver.server.name&gt;</em></code>.</p>
+<p>The <strong>MBean</strong> is <code>debezium.sql_server:type=connector-metrics,server=<em>&lt;sqlserver.server.name&gt;</em>,task=<em>&lt;task.id&gt;</em>,context=streaming</code>.</p>
 </div>
 <div class="paragraph">
 <p>The following table lists the streaming metrics that are available.</p>
@@ -5149,7 +5768,7 @@ The values will incoporate any differences between the clocks on the machines wh
 <p><code>long</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The maximum buffer of the queue in bytes.</p>
+<p>The maximum buffer of the queue in bytes. This metric is available if <a href="#sqlserver-property-max-queue-size-in-bytes"><code>max.queue.size.in.bytes</code></a> is set to a positive long value.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5160,7 +5779,7 @@ The values will incoporate any differences between the clocks on the machines wh
 <p><code>long</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The current data of records in the queue in bytes.</p>
+<p>The current volume, in bytes, of records in the queue.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -5196,7 +5815,7 @@ The values will incoporate any differences between the clocks on the machines wh
 <p><code>string</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>One of <code>STOPPED</code>, <code>RECOVERING</code> (recovering history from the storage), <code>RUNNING</code> describing the state of the database history.</p>
+<p>One of <code>STOPPED</code>, <code>RECOVERING</code> (recovering history from the storage), <code>RUNNING</code> describing the state of the database schema history.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5289,7 +5908,7 @@ The values will incoporate any differences between the clocks on the machines wh
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2021 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/a20ed7a573126b642f90a38e5294b8578bb40c42">a20ed7a5</a></span>)
+            <div class="copyright">Copyright &copy; 2022 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/5ff4df141738a2e0b90378a5543930412e197b81">5ff4df14</a></span>)
             
         </div>
     </footer>

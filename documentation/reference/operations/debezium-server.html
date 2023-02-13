@@ -120,6 +120,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/vitess.html">Vitess</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/spanner.html">Spanner</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -137,6 +140,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/mongodb-event-flattening.html">MongoDB New Document State Extraction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/event-changes.html">Event Changes</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/outbox-event-router.html">Outbox Event Router</a>
@@ -202,6 +208,9 @@
     <a class="nav-link" href="monitoring.html">Monitoring</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="kubernetes.html">Running on Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="openshift.html">Running on Openshift</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -228,6 +237,18 @@
       <ul class="versions">
         <li class="version is-current">
           <a href="/documentation/reference/nightly/index.html">nightly</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.2/index.html">2.2</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.1/index.html">2.1</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.0/index.html">2.0</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/1.9/index.html">1.9</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/1.8/index.html">1.8</a>
@@ -286,6 +307,10 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
                 <a class="version is-current" href="/documentation/reference/nightly/index.html">nightly</a>
+                <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
+                <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
+                <a class="version" href="/documentation/reference/2.0/index.html">2.0</a>
+                <a class="version" href="/documentation/reference/1.9/index.html">1.9</a>
                 <a class="version" href="/documentation/reference/1.8/index.html">1.8</a>
                 <a class="version" href="/documentation/reference/1.7/index.html">1.7</a>
                 <a class="version" href="/documentation/reference/1.6/index.html">1.6</a>
@@ -324,17 +349,27 @@
 <li><a href="#debezium-source-configuration-properties">Source configuration</a></li>
 <li><a href="#debezium-format-configuration-options">Format configuration</a></li>
 <li><a href="#debezium-transformations-configuration-options">Transformation configuration</a></li>
-<li><a href="#debezium-additional-configuration-options">Additional configuration</a></li>
+<li><a href="#debezium-predicates-configuration-options">Predicates configuration</a></li>
+<li><a href="#debezium-additional-configuration-options">Additional configuration</a>
+<ul class="sectlevel3">
+<li><a href="#_enabling_message_filtering">Enabling message filtering</a></li>
+</ul>
+</li>
 <li><a href="#_sink_configuration">Sink configuration</a>
 <ul class="sectlevel3">
 <li><a href="#_amazon_kinesis">Amazon Kinesis</a></li>
 <li><a href="#_google_cloud_pubsub">Google Cloud Pub/Sub</a></li>
+<li><a href="#_pubsub_lite">Pub/Sub Lite</a></li>
+<li><a href="#_http_client">HTTP Client</a></li>
 <li><a href="#_apache_pulsar">Apache Pulsar</a></li>
 <li><a href="#_azure_event_hubs">Azure Event Hubs</a></li>
 <li><a href="#_redis_stream">Redis (Stream)</a></li>
 <li><a href="#_nats_streaming">NATS Streaming</a></li>
+<li><a href="#_nats_jetstream">NATS JetStream</a></li>
 <li><a href="#_apache_kafka">Apache Kafka</a></li>
 <li><a href="#_pravega">Pravega</a></li>
+<li><a href="#_infinispan">Infinispan</a></li>
+<li><a href="#_apache_rocketmq">Apache RocketMQ</a></li>
 </ul>
 </li>
 </ul>
@@ -343,6 +378,13 @@
 <ul class="sectlevel2">
 <li><a href="#_implementation_of_a_new_sink">Implementation of a new sink</a></li>
 <li><a href="#_customization_of_an_existing_sink">Customization of an existing sink</a></li>
+</ul>
+</li>
+<li><a href="#_cassandra_connector">Cassandra connector</a>
+<ul class="sectlevel2">
+<li><a href="#_running_debezium_server_with_cassandra_connector">Running Debezium Server with Cassandra connector</a></li>
+<li><a href="#_sample_of_basic_application_properties_for_running_cassandra_connector_with_redis_sink">Sample of basic <code>application.properties</code> for running Cassandra connector with Redis sink</a></li>
+<li><a href="#_transformation_for_operation_code">Transformation for Operation Code</a></li>
 </ul>
 </li>
 </ul>
@@ -366,7 +408,7 @@ Also please reach out if you have requirements for specific sinks to be supporte
 </table>
 </div>
 <div class="paragraph">
-<p>Debezium provides a ready-to-use application that streams change events from a source database to messaging infrastructure like Amazon Kinesis, Google Cloud Pub/Sub, Apache Pulsar or Redis (Stream).
+<p>Debezium provides a ready-to-use application that streams change events from a source database to messaging infrastructure like Amazon Kinesis, Google Cloud Pub/Sub, Apache Pulsar, Redis (Stream), or NATS JetStream.
 For streaming change events to Apache Kafka, it is recommended to deploy the Debezium connectors via Kafka Connect.</p>
 </div>
 </div>
@@ -380,7 +422,7 @@ For streaming change events to Apache Kafka, it is recommended to deploy the Deb
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://repo1.maven.org/maven2/io/debezium/debezium-server-dist/1.8.0.Final/debezium-server-dist-1.8.0.Final.tar.gz">Debezium Server distribution</a></p>
+<p><a href="https://repo1.maven.org/maven2/io/debezium/debezium-server-dist/2.2.0.Alpha1/debezium-server-dist-2.2.0.Alpha1.tar.gz">Debezium Server distribution</a></p>
 </li>
 </ul>
 </div>
@@ -394,7 +436,7 @@ For streaming change events to Apache Kafka, it is recommended to deploy the Deb
 |-- conf
 |-- CONTRIBUTE.md
 |-- COPYRIGHT.txt
-|-- debezium-server-1.8.0.Final-runner.jar
+|-- debezium-server-2.2.0.Alpha1-runner.jar
 |-- lib
 |-- LICENSE-3rd-PARTIES.txt
 |-- LICENSE.txt
@@ -404,6 +446,21 @@ For streaming change events to Apache Kafka, it is recommended to deploy the Deb
 </div>
 <div class="paragraph">
 <p>The server is started using <code>run.sh</code> script, dependencies are stored in the <code>lib</code> directory, and the directory <code>conf</code> contains configuration files.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In case of using the Oracle connector you will have to add to the <code>lib</code> directory the ORACLE JDBC driver (if using XStream also the XStream API files),
+explained here: <a href="../connectors/oracle.html#obtaining-oracle-jdbc-driver-and-xstreams-api-files" class="page">Obtaining the Oracle JDBC driver and XStream API files</a></p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -432,6 +489,9 @@ There are multiple sections configured:</p>
 <li>
 <p><code>debezium.transforms</code> is for the configuration of message transformations</p>
 </li>
+<li>
+<p><code>debezium.predicates</code> is for the configuration of message transformation predicates</p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
@@ -449,7 +509,7 @@ debezium.source.database.port=5432
 debezium.source.database.user=postgres
 debezium.source.database.password=postgres
 debezium.source.database.dbname=postgres
-debezium.source.database.server.name=tutorial
+debezium.source.topic.prefix=tutorial
 debezium.source.schema.include.list=inventory</pre>
 </div>
 </div>
@@ -538,7 +598,7 @@ debezium.source.schema.include.list=inventory</pre>
 2020-05-15 11:33:12,838 INFO  [io.deb.con.com.BaseSourceTask] (pool-3-thread-1)    database.hostname = localhost
 2020-05-15 11:33:12,838 INFO  [io.deb.con.com.BaseSourceTask] (pool-3-thread-1)    database.password = ********
 2020-05-15 11:33:12,839 INFO  [io.deb.con.com.BaseSourceTask] (pool-3-thread-1)    name = kinesis
-2020-05-15 11:33:12,839 INFO  [io.deb.con.com.BaseSourceTask] (pool-3-thread-1)    database.server.name = tutorial
+2020-05-15 11:33:12,839 INFO  [io.deb.con.com.BaseSourceTask] (pool-3-thread-1)    topic.prefix = tutorial
 2020-05-15 11:33:12,839 INFO  [io.deb.con.com.BaseSourceTask] (pool-3-thread-1)    database.port = 5432
 2020-05-15 11:33:12,839 INFO  [io.deb.con.com.BaseSourceTask] (pool-3-thread-1)    schema.include.list = inventory
 2020-05-15 11:33:12,908 INFO  [io.quarkus] (main) debezium-server 1.2.0-SNAPSHOT (powered by Quarkus 1.4.1.Final) started in 1.198s. Listening on: http://0.0.0.0:8080
@@ -557,18 +617,14 @@ debezium.source.schema.include.list=inventory</pre>
 <col style="width: 10%;">
 <col style="width: 55%;">
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Property</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Default</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Description</p>
-</div></div></td>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="debezium-source-connector-class"></a><a href="#debezium-source-connector-class"><code>debezium.source.connector.class</code></a></p>
@@ -580,11 +636,23 @@ debezium.source.schema.include.list=inventory</pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-source-offset-storage"></a><a href="#debezium-source-offset-storage"><code>debezium.source.offset.storage</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>org.apache.kafka.connect.storage.FileOffsetBackingStore</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Class to use for storing and retrieving offsets for non-Kafka deployments.
+To use Redis to store offsets, use <code>io.debezium.storage.redis.offset.RedisOffsetBackingStore</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="debezium-source-offset-storage-file-filename"></a><a href="#debezium-source-offset-storage-file-filename"><code>debezium.source.offset.storage.file.filename</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The file in which connector offsets are stored for non-Kafka deployments.</p>
+<p>If using a file offset store (default), the file in which connector offsets are stored for non-Kafka deployments.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -598,34 +666,341 @@ debezium.source.schema.include.list=inventory</pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="debezium-source-database-history-class"></a><a href="#debezium-source-database-history-class"><code>debezium.source.database.history</code></a></p>
+<p><a id="debezium-source-offset-redis-address"></a><a href="#debezium-source-offset-redis-address"><code>debezium.source.offset.storage.redis.address</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>(Optional) If using Redis to store offsets, an address, formatted as <code>host:port</code>, at which the Redis target streams are provided. If not supplied, will attempt to read <code>debezium.sink.redis.address</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-source-offset-redis-user"></a><a href="#debezium-source-offset-redis-user"><code>debezium.source.offset.storage.redis.user</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>(Optional) If using Redis to store offsets, a user name used to communicate with Redis. If the <code>redis.address</code> configuration is not supplied, and the <code>redis.address</code> is taken from the Redis sink, will attempt to load the value from <code>debezium.sink.redis.user</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-source-offset-redis-password"></a><a href="#debezium-source-offset-redis-password"><code>debezium.source.offset.storage.redis.password</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>(Optional)  If using Redis to store offsets, a password (of respective user) used to communicate with Redis. A password must be set if a user is set. If the <code>redis.address</code> configuration is not supplied, and the <code>redis.address</code> is taken from the Redis sink, will attempt to load the value from <code>debezium.sink.redis.password</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-source-offset-redis-ssl-enabled"></a><a href="#debezium-source-offset-redis-ssl-enabled"><code>debezium.source.offset.storage.redis.ssl.enabled</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>(Optional)  If using Redis to store offsets, whether or not to use SSL to communicate with Redis. If the <code>redis.address</code> configuration is not supplied, and the <code>redis.address</code> is taken from the Redis sink, will attempt to load the value from <code>debezium.sink.redis.ssl.enabled</code>. Default is 'false'</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-source-offset-redis-key"></a><a href="#debezium-source-offset-redis-key"><code>debezium.source.offset.storage.redis.key</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>(Optional)  If using Redis to store offsets, define the hash key in redis. If the <code>redis.key</code> configuration is not supplied, and the default value is <code>metadata:debezium:offsets</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-source-offset-redis-wait-enabled"></a><a href="#redis-wait-enabled"><code>debezium.source.offset.storage.redis.wait.enabled</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>io.debezium.relational.history.KafkaDatabaseHistory</code></p>
+<p><code>false</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Some of the connectors (e.g MySQL, SQL Server, Db2, Oracle) monitors the database schema evolution over the time and stores the data in database history.
+<p>If using Redis to store offsets, enables wait for replica. In case Redis is configured with a replica shard, this allows to verify that the data has been written to the replica.
+For more information see Redis <a href="https://redis.io/commands/wait/">WAIT</a> command.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-source-offset-redis-wait-timeout-ms"></a><a href="#redis-wait-timeout-ms"><code>debezium.source.offset.storage.redis.wait.timeout.ms</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>1000</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>If using Redis to store offsets, defines the timeout in milliseconds when waiting for replica. Must have a positive value.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-source-offset-redis-wait-retry-enabled"></a><a href="#redis-wait-retry-enabled"><code>debezium.source.offset.storage.redis.wait.retry.enabled</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>If using Redis to store offsets, enables retry on wait for replica failure.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-source-offset-redis-wait-retry-delay"></a><a href="#redis-wait-retry-delay"><code>debezium.source.offset.storage.redis.wait.retry.delay.ms</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>1000</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>If using Redis to store offsets, defines the delay of retry on wait for replica failure.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-source-database-history-class"></a><a href="#debezium-source-database-history-class"><code>debezium.source.schema.history.internal</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>io.debezium.storage.kafka.history.KafkaSchemaHistory</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Some of the connectors (e.g MySQL, SQL Server, Db2, Oracle) track the database schema evolution over time and stores this data in a database schema history.
 This is by default based on Kafka.
 There are also other options available</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>io.debezium.relational.history.FileDatabaseHistory</code> for non-Kafka deployments</p>
+<p><code>io.debezium.storage.file.history.FileSchemaHistory</code> for non-Kafka deployments</p>
 </li>
 <li>
-<p><code>io.debezium.relational.history.MemoryDatabaseHistory</code> volatile store for test environments</p>
+<p><code>io.debezium.relational.history.MemorySchemaHistory</code> volatile store for test environments</p>
+</li>
+<li>
+<p><code>io.debezium.storage.redis.history.RedisSchemaHistory</code> for Redis deploments</p>
+</li>
+<li>
+<p><code>io.debezium.storage.redis.history.RocketMqSchemaHistory</code> for RocketMQ deploments</p>
 </li>
 </ul>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="debezium-source-database-history-file-filename"></a><a href="#debezium-source-database-history-file-filename"><code>debezium.source.database.history.file.filename</code></a></p>
+<p><a id="debezium-source-database-history-file-filename"></a><a href="#debezium-source-database-history-file-filename"><code>debezium.source.schema.history.internal.file.filename</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The name and location of the file to which <code>FileDatabaseHistory</code> persists its data.</p>
+<p>The name and location of the file to which <code>FileSchemaHistory</code> persists its data.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-source-database-history-redis-address"></a><a href="#debezium-source-database-history-redis-address"><code>debezium.source.schema.history.internal.redis.address</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The Redis host:port to connect to if using <code>RedisSchemaHistory</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-source-database-history-redis-user"></a><a href="#debezium-source-database-history-redis-user"><code>debezium.source.schema.history.internal.redis.user</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The Redis user to use if using <code>RedisSchemaHistory</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-source-database-history-redis-password"></a><a href="#debezium-source-database-history-redis-password"><code>debezium.source.schema.history.internal.redis.password</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The Redis password to use if using <code>RedisSchemaHistory</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-source-database-history-redis-ssl-enabled"></a><a href="#debezium-source-database-history-redis-ssl-enabled"><code>debezium.source.schema.history.internal.redis.ssl.enabled</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Use SSL connection if using <code>RedisSchemaHistory</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-source-database-history-redis-key"></a><a href="#debezium-source-database-history-redis-key"><code>debezium.source.schema.history.internal.redis.key</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The Redis key to use for storage if using <code>RedisSchemaHistory</code>. Default: metadata:debezium:schema_history</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-source-database-history-redis-retry-initial-delay-ms"></a><a href="#debezium-source-database-history-redis-retry-initial-delay-ms"><code>debezium.source.schema.history.internal.redis.retry.initial.delay.ms</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The initial delay in case of a connection retry to Redis if using <code>RedisSchemaHistory</code>. Default: 300 (ms)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-source-database-history-redis-retry-max-delay-ms"></a><a href="#debezium-source-database-history-redis-retry-max-delay-ms"><code>debezium.source.schema.history.internal.redis.retry.max.delay.ms</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The maximum delay in case of a connection retry to Redis if using <code>RedisSchemaHistory</code>. Default: 10000 (ms)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-source-database-history-redis-connection-timeout-ms"></a><a href="#debezium-source-database-history-redis-connection-timeout-ms"><code>debezium.source.schema.history.internal.redis.connection.timeout.ms</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Connection timeout of Redis client if using <code>RedisSchemaHistory</code>. Default: 2000 (ms)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-source-database-history-redis-socket-timeout-ms"></a><a href="#debezium-source-database-history-redis-socket-timeout-ms"><code>debezium.source.schema.history.internal.redis.socket.timeout.ms</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Socket timeout of Redis client if using <code>RedisSchemaHistory</code>. Default: 2000 (ms)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-source-database-history-redis-wait-enabled"></a><a href="#redis-wait-enabled"><code>debezium.source.schema.history.internal.redis.wait.enabled</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>If using Redis to store schema history, enables wait for replica. In case Redis is configured with a replica shard, this allows to verify that the data has been written to the replica.
+For more information see Redis <a href="https://redis.io/commands/wait/">WAIT</a> command.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-source-database-history-redis-wait-timeout-ms"></a><a href="#redis-wait-timeout-ms"><code>debezium.source.schema.history.internal.redis.wait.timeout.ms</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>1000</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>If using Redis to store schema history, defines the timeout in milliseconds when waiting for replica. Must have a positive value.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-source-database-history-redis-wait-retry-enabled"></a><a href="#redis-wait-retry-enabled"><code>debezium.source.schema.history.internal.redis.wait.retry.enabled</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>If using Redis to store schema history, enables retry on wait for replica failure.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-source-database-history-redis-wait-retry-delay"></a><a href="#redis-wait-retry-delay"><code>debezium.source.schema.history.internal.redis.wait.retry.delay.ms</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>1000</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>If using Redis to store schema history, defines the delay of retry on wait for replica failure.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="schema-history-internal-rocketmq-topic"></a><a href="#schema-history-internal-rocketmq-topic"><code>debezium.source.schema.history.internal.rocketmq.topic</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The name of the rocketmq topic for the database schema history.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="schema-history-internal-rocketmq-namesrvAddr"></a><a href="#schema-history-internal-rocketmq-namesrvAddr"><code>debezium.source.schema.history.internal.rocketmq.name.srv.addr</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>localhost:9876</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>RocketMq service discovery NameServer address configuration.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="schema-history-internal-rocketmq-acl-enabled"></a><a href="#schema-history-internal-rocketmq-acl-enabled"><code>debezium.source.schema.history.internal.rocketmq.acl.enabled</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>RocketMq access control enable configuration, default is 'false'.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="schema-history-internal-rocketmq-access-key"></a><a href="#schema-history-internal-rocketmq-access-key"><code>debezium.source.schema.history.internal.rocketmq.access.key</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>RocketMq access key. If <code>debezium.source.schema.history.internal.rocketmq.acl.enabled</code> is true, the value cannot be
+empty.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="schema-history-internal-rocketmq-secret-key"></a><a href="#schema-history-internal-rocketmq-secret-key"><code>debezium.source.schema.history.internal.rocketmq.secret.key</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>RocketMq secret key. If <code>debezium.source.schema.history.internal.rocketmq.acl.enabled</code> is true, the value cannot be
+empty.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="schema-history-internal-rocketmq-recovery-attempts"></a><a href="#schema-history-internal-rocketmq-recovery-attempts"><code>debezium.source.schema.history.internal.rocketmq.recovery.attempts</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>60</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The maximum number of attempts to recover database schema history.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="schema-history-internal-rocketmq-recovery-poll-interval-ms"></a><a href="#schema-history-internal-rocketmq-recovery-poll-interval-ms"><code>debezium.source.schema.history.internal.rocketmq.recovery.poll.interval.ms</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>1000</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The number of milliseconds to wait while polling for persisted
+data during recovery.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="schema-history-internal-rocketmq-store-record-timeout-ms"></a><a href="#schema-history-internal-rocketmq-store-record-timeout-ms"><code>debezium.source.schema.history.internal.rocketmq.store.record.timeout.ms</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>60000</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Timeout for sending messages to RocketMq.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -643,18 +1018,14 @@ By default the output is in JSON format but an arbitrary implementation of Kafka
 <col style="width: 10%;">
 <col style="width: 55%;">
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Property</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Default</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Description</p>
-</div></div></td>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="debezium-format-key"></a><a href="#debezium-format-key"><code>debezium.format.key</code></a></p>
@@ -663,7 +1034,7 @@ By default the output is in JSON format but an arbitrary implementation of Kafka
 <p><code>json</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The name of the output format for key, one of <code>json</code>/<code>avro</code>/<code>protobuf</code>.</p>
+<p>The name of the output format for key, one of <code>json</code>/<code>jsonbytearray</code>/<code>avro</code>/<code>protobuf</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -683,7 +1054,7 @@ By default the output is in JSON format but an arbitrary implementation of Kafka
 <p><code>json</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The name of the output format for value, one of <code>json</code>/<code>avro</code>/<code>protobuf</code>.</p>
+<p>The name of the output format for value, one of <code>json</code>/<code>jsonbytearray</code>/<code>avro</code>/<code>protobuf</code>/<code>cloudevents</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -693,6 +1064,26 @@ By default the output is in JSON format but an arbitrary implementation of Kafka
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Configuration properties passed to the value converter.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-format-header"></a><a href="#debezium-format-header"><code>debezium.format.header</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>json</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The name of the output format for value, one of <code>json</code>/<code>jsonbytearray</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="debezium-format-header-props"></a><a href="#debezium-format-header-props"><code>debezium.format.header.*</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Configuration properties passed to the header converter.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -711,18 +1102,16 @@ The configuration will need to contain the list of transformations, implementati
 <col style="width: 10%;">
 <col style="width: 55%;">
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Property</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Default</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Description</p>
-</div></div></td>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description
+
+[id="debezium-transforms"]</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>debezium.transforms</code></p>
@@ -734,7 +1123,7 @@ The configuration will need to contain the list of transformations, implementati
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>debezium.transforms.&lt;name&gt;.class</code></p>
+<p><code>debezium.transforms.&lt;name&gt;.type</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -748,6 +1137,79 @@ The configuration will need to contain the list of transformations, implementati
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Configuration properties passed to the transformation with name <code>&lt;name&gt;</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>debezium.transforms.&lt;name&gt;.predicate</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The name of the predicate to be applied to the transformation with name <code>&lt;name&gt;</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>debezium.transforms.&lt;name&gt;.negate</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>false</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Determines if the result of the predicate to the transformation with name <code>&lt;name&gt;</code> will be negated.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="debezium-predicates-configuration-options"><a class="anchor" href="#debezium-predicates-configuration-options"></a>Predicates configuration</h3>
+<div class="paragraph">
+<p>A Predicate can be associated with a transformation in order to make the transformation optional.
+The server supports <a href="https://cwiki.apache.org/confluence/display/KAFKA/KIP-585%3A+Filter+and+Conditional+SMTs">Filter and Conditional SMTs</a> defined by Kafka Connect.
+The configuration will need to contain the list of predicates, implementation class for each predicate and configuration options for each of the predicates.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 35%;">
+<col style="width: 10%;">
+<col style="width: 55%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description
+
+[id="debezium-predicates"]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>debezium.predicates</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The comma separated list of symbolic names of predicates.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>debezium.predicates.&lt;name&gt;.type</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The name of Java class implementing the predicate with name <code>&lt;name&gt;</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>debezium.predicates.&lt;name&gt;.*</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Configuration properties passed to the predicate with name <code>&lt;name&gt;</code>.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -766,18 +1228,16 @@ The most frequent used are:</p>
 <col style="width: 10%;">
 <col style="width: 55%;">
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Property</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Default</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Description</p>
-</div></div></td>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description
+
+[id="debezium-quarkus-http-port"]</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>quarkus.http.port</code></p>
@@ -816,6 +1276,16 @@ The most frequent used are:</p>
 <div class="paragraph">
 <p>JSON logging can be disabled by setting <code>quarkus.log.console.json=false</code> in the <em>conf/application.properties</em> file, as demonstrated in the <em>conf/application.properties.example</em> file.</p>
 </div>
+<div class="sect3">
+<h4 id="_enabling_message_filtering"><a class="anchor" href="#_enabling_message_filtering"></a>Enabling message filtering</h4>
+<div class="paragraph">
+<p>Debezium server provide filter STM capability, see <a href="../transformations/filtering.html" class="page">Message Filtering</a> for more details.
+However, for security reasons it&#8217;s not enabled by default and has to be explicitly enabled when Debezium server is started.
+To enable it, set environment variable <code>ENABLE_DEBEZIUM_SCRIPTING</code> to <code>true</code>.
+This will add <code>debezium-scripting</code> jar file and <a href="https://jcp.org/en/jsr/detail?id=223">JSR 223</a> implementations (currently Groovy and graalvm.js) jar files into the server class path.
+These jar files are contained in <code>opt_lib</code> directory of the Debezium server distribution.</p>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_sink_configuration"><a class="anchor" href="#_sink_configuration"></a>Sink configuration</h3>
@@ -837,18 +1307,14 @@ Kinesis exposes a set of REST APIs and provides a (not-only) Java SDK that is us
 <col style="width: 10%;">
 <col style="width: 55%;">
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Property</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Default</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Description</p>
-</div></div></td>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="kinesis-type"></a><a href="#kinesis-type"><code>debezium.sink.type</code></a></p>
@@ -915,18 +1381,14 @@ When the alternative implementations are not available then the default ones are
 <col style="width: 10%;">
 <col style="width: 55%;">
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Interface</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>CDI classifier</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Description</p>
-</div></div></td>
+<th class="tableblock halign-left valign-top">Interface</th>
+<th class="tableblock halign-left valign-top">CDI classifier</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="kinesis-ext-client"></a><a href="#kinesis-ext-client"><code>software.amazon.awssdk.services.kinesis.KinesisClient</code></a></p>
@@ -964,18 +1426,14 @@ Pub/Sub exposes a set of REST APIs and provides a (not-only) Java SDK that is us
 <col style="width: 10%;">
 <col style="width: 55%;">
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Property</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Default</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Description</p>
-</div></div></td>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="pubsub-type"></a><a href="#pubsub-type"><code>debezium.sink.type</code></a></p>
@@ -1164,6 +1622,17 @@ i.e. after this value is reached, the wait time will not increase further by the
 <p>The max timeout for individual publish requests to Cloud Pub/Sub.</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="address"></a><a href="#address"><code>debezium.sink.pubsub.address</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The address of the pubsub emulator.
+Only to be used in a dev or test environment with the <a href="https://cloud.google.com/pubsub/docs/emulator">pubsub emulator</a>.
+Unless this value is set, debezium-server will connect to a cloud pubsub instance running in a gcp project, which is the desired behavior in a production environment.</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 <div class="sect4">
@@ -1178,18 +1647,14 @@ When the alternative implementations are not available then the default ones are
 <col style="width: 10%;">
 <col style="width: 55%;">
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Interface</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>CDI classifier</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Description</p>
-</div></div></td>
+<th class="tableblock halign-left valign-top">Interface</th>
+<th class="tableblock halign-left valign-top">CDI classifier</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="pubsub-pub-builder"></a><a href="#pubsub-pub-builder"><code>io.debezium.server.pubsub.PubSubChangeConsumer.PublisherBuilder</code></a></p>
@@ -1213,6 +1678,199 @@ When the alternative implementations are not available then the default ones are
 </tbody>
 </table>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_pubsub_lite"><a class="anchor" href="#_pubsub_lite"></a>Pub/Sub Lite</h4>
+<div class="paragraph">
+<p>Google Cloud Pub/Sub Lite is a cost-effective alternative to Google Cloud Pub/Sub.
+Pub/Sub exposes a set of REST APIs and provides a (not-only) Java SDK that is used to implement the sink.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 35%;">
+<col style="width: 10%;">
+<col style="width: 55%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="pubsublite-type"></a><a href="#pubsublite-type"><code>debezium.sink.type</code> </a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Must be set to <code>pubsublite</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="pubsublite-project-id"></a><a href="#pubsublite-project-id"><code>debezium.sink.pubsublite.project.id</code> </a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>system-wide default project id</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A project name  or project id in which the target topics are created.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="pubsublite-region"></a><a href="#pubsublite-region"><code>debezium.sink.pubsublite.region</code> </a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Region where the topics are being created. Example <code>us-east1-b</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="pubsublite-ordering"></a><a href="#pubsublite-ordering"><code>debezium.sink.pubsublite.ordering.enabled</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>true</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Pub/Sub Lite can optionally use a message key to guarantee the delivery of the messages in with the same key to the <a href="https://cloud.google.com/pubsub/lite/docs/publishing#using_ordering_keys-">same partition</a>.
+This feature can be disabled.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="pubsublite-null-key"></a><a href="#pubsublite-null-key"><code>debezium.sink.pubsublite.null.key</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>default</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Tables without primary key sends messages with <code>null</code> key.
+This is not supported by Pub/Sub Lite so a surrogate key must be used.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="sect4">
+<h5 id="_injection_points_3"><a class="anchor" href="#_injection_points_3"></a>Injection points</h5>
+<div class="paragraph">
+<p>The Pub/Sub Lite sink behaviour can be modified by a custom logic providing alternative implementations for specific functionalities.
+When the alternative implementations are not available then the default ones are used.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 35%;">
+<col style="width: 10%;">
+<col style="width: 55%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Interface</th>
+<th class="tableblock halign-left valign-top">CDI classifier</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="pubsublite-pub-builder"></a><a href="#pubsublite-pub-builder"><code>io.debezium.server.pubsub.PubSubLiteChangeConsumer.PublisherBuilder</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>@CustomConsumerBuilder</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A class that provides custom configured instance of a <code>Publisher</code> used to send messages to a dedicated topic.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="pubsublite-ext-stream-name-mapper"></a><a href="#pubsublite-ext-stream-name-mapper"><code>io.debezium.server.StreamNameMapper</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Custom implementation maps the planned destination (topic) name into a physical Pub/Sub Lite topic name. By default the same name is used.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_http_client"><a class="anchor" href="#_http_client"></a>HTTP Client</h4>
+<div class="paragraph">
+<p>The HTTP Client will stream changes to any HTTP Server for additional processing with the original design goal to have
+Debezium act as a <a href="https://knative.dev/docs/eventing/sources/">Knative Event Source</a>.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 35%;">
+<col style="width: 10%;">
+<col style="width: 55%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="httpclient-type"></a><a href="#httpclient-type"><code>debezium.sink.type</code> </a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Must be set to <code>http</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="httpclient-url"></a><a href="#httpclient-url"><code>debezium.sink.http.url</code> </a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The HTTP Server URL to stream events to. This can also be set by defining the <code>K_SINK</code> environment variable, which is used by the Knative source framework.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="httpclient-timeout"></a><a href="#httpclient-timeout"><code>debezium.sink.http.timeout.ms</code> </a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>60000</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The number of seconds to wait for a response from the server before timing out. (default of 60s)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="httpclient-retries"></a><a href="#httpclient-retries"><code>debezium.sink.http.retries</code> </a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>5</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The number retries before exception is thrown (default 5 times).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="httpclient-retry-interval"></a><a href="#httpclient-retry-interval"><code>debezium.sink.http.retry.interval.ms</code> </a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>1000</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The number of milliseconds to wait before another attempt to send record is made after failure (default of 1s).</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect3">
 <h4 id="_apache_pulsar"><a class="anchor" href="#_apache_pulsar"></a>Apache Pulsar</h4>
@@ -1277,10 +1935,32 @@ The <code>topic</code> is set by Debezium.</p>
 This is not supported by Pulsar so a surrogate key must be used.</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="pulsar-tenant"></a><a href="#pulsar-tenant"><code>debezium.sink.pusar.tenant</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>public</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The target tenant used to deliver the message.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="pulsar-namespace"></a><a href="#pulsar-namespace"><code>debezium.sink.pusar.namespace</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>default</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The target namespace used to deliver the message.</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 <div class="sect4">
-<h5 id="_injection_points_3"><a class="anchor" href="#_injection_points_3"></a>Injection points</h5>
+<h5 id="_injection_points_4"><a class="anchor" href="#_injection_points_4"></a>Injection points</h5>
 <div class="paragraph">
 <p>The Pulsar sink behaviour can be modified by a custom logic providing alternative implementations for specific functionalities.
 When the alternative implementations are not available then the default ones are used.</p>
@@ -1291,18 +1971,14 @@ When the alternative implementations are not available then the default ones are
 <col style="width: 10%;">
 <col style="width: 55%;">
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Interface</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>CDI classifier</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Description</p>
-</div></div></td>
+<th class="tableblock halign-left valign-top">Interface</th>
+<th class="tableblock halign-left valign-top">CDI classifier</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="pulsar-ext-stream-name-mapper"></a><a href="#pulsar-ext-stream-name-mapper"><code>io.debezium.server.StreamNameMapper</code></a></p>
@@ -1392,7 +2068,7 @@ When the alternative implementations are not available then the default ones are
 </tbody>
 </table>
 <div class="sect4">
-<h5 id="_injection_points_4"><a class="anchor" href="#_injection_points_4"></a>Injection points</h5>
+<h5 id="_injection_points_5"><a class="anchor" href="#_injection_points_5"></a>Injection points</h5>
 <div class="paragraph">
 <p>The default sink behaviour can be modified by a custom logic providing alternative implementations for specific functionalities.
 When the alternative implementations are not available then the default ones are used.</p>
@@ -1403,18 +2079,14 @@ When the alternative implementations are not available then the default ones are
 <col style="width: 10%;">
 <col style="width: 55%;">
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Interface</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>CDI classifier</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Description</p>
-</div></div></td>
+<th class="tableblock halign-left valign-top">Interface</th>
+<th class="tableblock halign-left valign-top">CDI classifier</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="eventhubs-ext-client"></a><a href="#eventhubs-ext-client"><code>com.azure.messaging.eventhubs.EventHubProducerClient</code></a></p>
@@ -1442,18 +2114,14 @@ The Stream is a data type which models a <em>log data structure</em> in a more a
 <col style="width: 10%;">
 <col style="width: 55%;">
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Property</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Default</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Description</p>
-</div></div></td>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="redis-type"></a><a href="#redis-type"><code>debezium.sink.type</code></a></p>
@@ -1492,6 +2160,15 @@ The Stream is a data type which models a <em>log data structure</em> in a more a
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="redis-ssl-enabled"></a><a href="#redis-ssl-enabled"><code>debezium.sink.redis.ssl.enabled</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>(Optional) Use SSL to communicate with Redis. Default 'false'</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="redis-null-key"></a><a href="#redis-null-key"><code>debezium.sink.redis.null.key</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -1514,10 +2191,187 @@ So this string will be used as key for records without primary key.</p>
 So this string will be used as value for records without a payload.</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="redis-batch-size"></a><a href="#redis-batch-size"><code>debezium.sink.redis.batch.size</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>500</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Number of change records to insert in a single batch write (Pipelined transaction).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="redis-retry-initial-delay-ms"></a><a href="#redis-retry-initial-delay-ms"><code>debezium.sink.redis.retry.initial.delay.ms</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>300</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Initial retry delay when encountering Redis connection or OOM issues.
+This value will be doubled upon every retry but won&#8217;t exceed <code>debezium.sink.redis.retry.max.delay.ms</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="redis-retry-max-delay-ms"></a><a href="#redis-retry-max-delay-ms"><code>debezium.sink.redis.retry.max.delay.ms</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>10000</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Max delay when encountering Redis connection or OOM issues.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="redis-connection-timeout-ms"></a><a href="#redis-connection-timeout-ms"><code>debezium.sink.redis.connection.timeout.ms</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>2000</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Connection timeout for Redis client.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="redis-socket-timeout-ms"></a><a href="#redis-socket-timeout-ms"><code>debezium.sink.redis.socket.timeout.ms</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>2000</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Socket timeout for Redis client.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="redis-wait-enabled"></a><a href="#redis-wait-enabled"><code>debezium.sink.redis.wait.enabled</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enables wait for replica. In case Redis is configured with a replica shard, this allows to verify that the data has been written to the replica.
+For more information see Redis <a href="https://redis.io/commands/wait/">WAIT</a> command.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="redis-wait-timeout-ms"></a><a href="#redis-wait-timeout-ms"><code>debezium.sink.redis.wait.timeout.ms</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>1000</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Timeout in milliseconds when waiting for replica. Must have a positive value.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="redis-wait-retry-enabled"></a><a href="#redis-wait-retry-enabled"><code>debezium.sink.redis.wait.retry.enabled</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enables retry on wait for replica failure.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="redis-wait-retry-delay"></a><a href="#redis-wait-retry-delay"><code>debezium.sink.redis.wait.retry.delay.ms</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>1000</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Delay of retry on wait for replica failure.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="redis-message-format"></a><a href="#redis-message-format"><code>debezium.sink.redis.message.format</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>compact</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The format of the message sent to the Redis stream. Possible values are <code>extended</code>(newer format) and <code>compact</code>(the until now, old format).
+Read more about the message format <a href="#p-redis-message-format">below</a>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="redis-memory-threshold-percentage"></a><a href="#redis-memory-threshold-percentage"><code>debezium.sink.redis.memory.threshold.percentage</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>85</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The sink will stop consuming records if the <code>used_memory</code> percentage (out of Redis configured <code>maxmemory</code>) is higher or equal to this threshold.
+If the configured value is <code>0</code> then this threshold is disabled.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="redis-memory-limit-mb"></a><a href="#redis-memory-limit-mb"><code>debezium.sink.redis.memory.limit.mb</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>0</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>If Redis <code>maxmemory</code> is not available or <code>0</code>, the <code><a href="#redis-memory-threshold-percentage">debezium.sink.redis.memory.threshold.percentage</a></code>
+will apply to this value (if this value is positive).
+By default it is <code>0</code> (disabled).</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 <div class="sect4">
-<h5 id="_injection_points_5"><a class="anchor" href="#_injection_points_5"></a>Injection points</h5>
+<h5 id="p-redis-message-format"><a class="anchor" href="#p-redis-message-format"></a>Message Format</h5>
+<div class="paragraph">
+<p>We have seen <a href="#redis-message-format">above</a> the <code>debezium.sink.redis.message.format</code> property which configures the message format in two ways which look like this in Redis:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the <code>extended</code> format, using two pairs {1), 2)}={"key", "message key"} and {3), 4)}={"value", "message value"}:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>1) 1) "1639304527499-0"
+   2) 1) "key"
+      2) "{\"schema\": {\"type\": \"struct\", \"fields\": [{\"type\": \"int32\", \"optional\": false, \"field\": \"empno\"}], \"optional\": false, \"name\": \"redislabs.dbo.emp.Key\"}, \"payload\": {\"empno\": 11}}"
+      3) "value"
+      4) "{\"schema\": {\"type\": \"struct\", \"fields\": [{\"type\": \"struct\", \"fields\": [{\"type\": \"int32\", \"optional\": false, \"field\": \"empno\"}, {\"type\": \"string\", \"optional\": true, \"field\": \"fname\"}, {\"type\": \"string\", \"optional\": true, \"field\": \"lname\"}, {\"type\": \"string\", \"optional\": true, \"field\": \"job\"}, {\"type\": \"int32\", \"optional\": true, \"field\": \"mgr\"}, {\"type\": \"int64\", \"optional\": true, \"name\": \"io.debezium.time.Timestamp\", \"version\": 1, \"field\": \"hiredate\"}, {\"type\": \"bytes\", \"optional\": true, \"name\": \"org.apache.kafka.connect.data.Decimal\", \"version\": 1, \"parameters\": {\"scale\": \"4\", \"connect.decimal.precision\": \"19\"}, \"field\": \"sal\"}, {\"type\": \"bytes\", \"optional\": true, \"name\": \"org.apache.kafka.connect.data.Decimal\", \"version\": 1, \"parameters\": {\"scale\": \"4\", \"connect.decimal.precision\": \"19\"}, \"field\": \"comm\"}, {\"type\": \"int32\", \"optional\": true, \"field\": \"dept\"}], \"optional\": true, \"name\": \"redislabs.dbo.emp.Value\", \"field\": \"before\"}, {\"type\": \"struct\", \"fields\": [{\"type\": \"int32\", \"optional\": false, \"field\": \"empno\"}, {\"type\": \"string\", \"optional\": true, \"field\": \"fname\"}, {\"type\": \"string\", \"optional\": true, \"field\": \"lname\"}, {\"type\": \"string\", \"optional\": true, \"field\": \"job\"}, {\"type\": \"int32\", \"optional\": true, \"field\": \"mgr\"}, {\"type\": \"int64\", \"optional\": true, \"name\": \"io.debezium.time.Timestamp\", \"version\": 1, \"field\": \"hiredate\"}, {\"type\": \"bytes\", \"optional\": true, \"name\": \"org.apache.kafka.connect.data.Decimal\", \"version\": 1, \"parameters\": {\"scale\": \"4\", \"connect.decimal.precision\": \"19\"}, \"field\": \"sal\"}, {\"type\": \"bytes\", \"optional\": true, \"name\": \"org.apache.kafka.connect.data.Decimal\", \"version\": 1, \"parameters\": {\"scale\": \"4\", \"connect.decimal.precision\": \"19\"}, \"field\": \"comm\"}, {\"type\": \"int32\", \"optional\": true, \"field\": \"dept\"}], \"optional\": true, \"name\": \"redislabs.dbo.emp.Value\", \"field\": \"after\"}, {\"type\": \"struct\", \"fields\": [{\"type\": \"string\", \"optional\": false, \"field\": \"version\"}, {\"type\": \"string\", \"optional\": false, \"field\": \"connector\"}, {\"type\": \"string\", \"optional\": false, \"field\": \"name\"}, {\"type\": \"int64\", \"optional\": false, \"field\": \"ts_ms\"}, {\"type\": \"string\", \"optional\": true, \"name\": \"io.debezium.data.Enum\", \"version\": 1, \"parameters\": {\"allowed\": \"true,last,false\"}, \"default\": \"false\", \"field\": \"snapshot\"}, {\"type\": \"string\", \"optional\": false, \"field\": \"db\"}, {\"type\": \"string\", \"optional\": true, \"field\": \"sequence\"}, {\"type\": \"string\", \"optional\": false, \"field\": \"schema\"}, {\"type\": \"string\", \"optional\": false, \"field\": \"table\"}, {\"type\": \"string\", \"optional\": true, \"field\": \"change_lsn\"}, {\"type\": \"string\", \"optional\": true, \"field\": \"commit_lsn\"}, {\"type\": \"int64\", \"optional\": true, \"field\": \"event_serial_no\"}], \"optional\": false, \"name\": \"io.debezium.connector.sqlserver.Source\", \"field\": \"source\"}, {\"type\": \"string\", \"optional\": false, \"field\": \"op\"}, {\"type\": \"int64\", \"optional\": true, \"field\": \"ts_ms\"}, {\"type\": \"struct\", \"fields\": [{\"type\": \"string\", \"optional\": false, \"field\": \"id\"}, {\"type\": \"int64\", \"optional\": false, \"field\": \"total_order\"}, {\"type\": \"int64\", \"optional\": false, \"field\": \"data_collection_order\"}], \"optional\": true, \"field\": \"transaction\"}], \"optional\": false, \"name\": \"redislabs.dbo.emp.Envelope\"}, \"payload\": {\"before\": {\"empno\": 11, \"fname\": \"Yossi\", \"lname\": \"Mague\", \"job\": \"PFE\", \"mgr\": 1, \"hiredate\": 1562630400000, \"sal\": \"dzWUAA==\", \"comm\": \"AYag\", \"dept\": 3}, \"after\": null, \"source\": {\"version\": \"1.6.0.Final\", \"connector\": \"sqlserver\", \"name\": \"redislabs\", \"ts_ms\": 1637859764960, \"snapshot\": \"false\", \"db\": \"RedisConnect\", \"sequence\": null, \"schema\": \"dbo\", \"table\": \"emp\", \"change_lsn\": \"0000003a:00002f50:0002\", \"commit_lsn\": \"0000003a:00002f50:0005\", \"event_serial_no\": 1}, \"op\": \"d\", \"ts_ms\": 1637859769370, \"transaction\": null}}"</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>and the <code>compact</code> format, using only one pair {1), 2)}={"message key", "message value"}:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>1) 1) "1639304527499-0"
+   2) 1) "{\"schema\": {\"type\": \"struct\", \"fields\": [{\"type\": \"int32\", \"optional\": false, \"field\": \"empno\"}], \"optional\": false, \"name\": \"redislabs.dbo.emp.Key\"}, \"payload\": {\"empno\": 11}}"
+      2) "{\"schema\": {\"type\": \"struct\", \"fields\": [{\"type\": \"struct\", \"fields\": [{\"type\": \"int32\", \"optional\": false, \"field\": \"empno\"}, {\"type\": \"string\", \"optional\": true, \"field\": \"fname\"}, {\"type\": \"string\", \"optional\": true, \"field\": \"lname\"}, {\"type\": \"string\", \"optional\": true, \"field\": \"job\"}, {\"type\": \"int32\", \"optional\": true, \"field\": \"mgr\"}, {\"type\": \"int64\", \"optional\": true, \"name\": \"io.debezium.time.Timestamp\", \"version\": 1, \"field\": \"hiredate\"}, {\"type\": \"bytes\", \"optional\": true, \"name\": \"org.apache.kafka.connect.data.Decimal\", \"version\": 1, \"parameters\": {\"scale\": \"4\", \"connect.decimal.precision\": \"19\"}, \"field\": \"sal\"}, {\"type\": \"bytes\", \"optional\": true, \"name\": \"org.apache.kafka.connect.data.Decimal\", \"version\": 1, \"parameters\": {\"scale\": \"4\", \"connect.decimal.precision\": \"19\"}, \"field\": \"comm\"}, {\"type\": \"int32\", \"optional\": true, \"field\": \"dept\"}], \"optional\": true, \"name\": \"redislabs.dbo.emp.Value\", \"field\": \"before\"}, {\"type\": \"struct\", \"fields\": [{\"type\": \"int32\", \"optional\": false, \"field\": \"empno\"}, {\"type\": \"string\", \"optional\": true, \"field\": \"fname\"}, {\"type\": \"string\", \"optional\": true, \"field\": \"lname\"}, {\"type\": \"string\", \"optional\": true, \"field\": \"job\"}, {\"type\": \"int32\", \"optional\": true, \"field\": \"mgr\"}, {\"type\": \"int64\", \"optional\": true, \"name\": \"io.debezium.time.Timestamp\", \"version\": 1, \"field\": \"hiredate\"}, {\"type\": \"bytes\", \"optional\": true, \"name\": \"org.apache.kafka.connect.data.Decimal\", \"version\": 1, \"parameters\": {\"scale\": \"4\", \"connect.decimal.precision\": \"19\"}, \"field\": \"sal\"}, {\"type\": \"bytes\", \"optional\": true, \"name\": \"org.apache.kafka.connect.data.Decimal\", \"version\": 1, \"parameters\": {\"scale\": \"4\", \"connect.decimal.precision\": \"19\"}, \"field\": \"comm\"}, {\"type\": \"int32\", \"optional\": true, \"field\": \"dept\"}], \"optional\": true, \"name\": \"redislabs.dbo.emp.Value\", \"field\": \"after\"}, {\"type\": \"struct\", \"fields\": [{\"type\": \"string\", \"optional\": false, \"field\": \"version\"}, {\"type\": \"string\", \"optional\": false, \"field\": \"connector\"}, {\"type\": \"string\", \"optional\": false, \"field\": \"name\"}, {\"type\": \"int64\", \"optional\": false, \"field\": \"ts_ms\"}, {\"type\": \"string\", \"optional\": true, \"name\": \"io.debezium.data.Enum\", \"version\": 1, \"parameters\": {\"allowed\": \"true,last,false\"}, \"default\": \"false\", \"field\": \"snapshot\"}, {\"type\": \"string\", \"optional\": false, \"field\": \"db\"}, {\"type\": \"string\", \"optional\": true, \"field\": \"sequence\"}, {\"type\": \"string\", \"optional\": false, \"field\": \"schema\"}, {\"type\": \"string\", \"optional\": false, \"field\": \"table\"}, {\"type\": \"string\", \"optional\": true, \"field\": \"change_lsn\"}, {\"type\": \"string\", \"optional\": true, \"field\": \"commit_lsn\"}, {\"type\": \"int64\", \"optional\": true, \"field\": \"event_serial_no\"}], \"optional\": false, \"name\": \"io.debezium.connector.sqlserver.Source\", \"field\": \"source\"}, {\"type\": \"string\", \"optional\": false, \"field\": \"op\"}, {\"type\": \"int64\", \"optional\": true, \"field\": \"ts_ms\"}, {\"type\": \"struct\", \"fields\": [{\"type\": \"string\", \"optional\": false, \"field\": \"id\"}, {\"type\": \"int64\", \"optional\": false, \"field\": \"total_order\"}, {\"type\": \"int64\", \"optional\": false, \"field\": \"data_collection_order\"}], \"optional\": true, \"field\": \"transaction\"}], \"optional\": false, \"name\": \"redislabs.dbo.emp.Envelope\"}, \"payload\": {\"before\": {\"empno\": 11, \"fname\": \"Yossi\", \"lname\": \"Mague\", \"job\": \"PFE\", \"mgr\": 1, \"hiredate\": 1562630400000, \"sal\": \"dzWUAA==\", \"comm\": \"AYag\", \"dept\": 3}, \"after\": null, \"source\": {\"version\": \"1.6.0.Final\", \"connector\": \"sqlserver\", \"name\": \"redislabs\", \"ts_ms\": 1637859764960, \"snapshot\": \"false\", \"db\": \"RedisConnect\", \"sequence\": null, \"schema\": \"dbo\", \"table\": \"emp\", \"change_lsn\": \"0000003a:00002f50:0002\", \"commit_lsn\": \"0000003a:00002f50:0005\", \"event_serial_no\": 1}, \"op\": \"d\", \"ts_ms\": 1637859769370, \"transaction\": null}}"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can read more about Redis Streams <a href="https://redis.io/docs/data-types/streams/">here</a>.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_injection_points_6"><a class="anchor" href="#_injection_points_6"></a>Injection points</h5>
 <div class="paragraph">
 <p>The Redis sink behavior can be modified by a custom logic providing alternative implementations for specific functionalities.
 When the alternative implementations are not available then the default ones are used.</p>
@@ -1528,29 +2382,14 @@ When the alternative implementations are not available then the default ones are
 <col style="width: 10%;">
 <col style="width: 55%;">
 </colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Interface</th>
+<th class="tableblock halign-left valign-top">CDI classifier</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
 <tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Interface</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>CDI classifier</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Description</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="redis-client"></a><a href="#redis-client"><code>redis.clients.jedis.Jedis</code></a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>@CustomConsumerBuilder</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Custom configured instance of a <code>Jedis</code> used to send messages to target streams.</p>
-</div></div></td>
-</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="redis-ext-stream-name-mapper"></a><a href="#redis-ext-stream-name-mapper"><code>io.debezium.server.StreamNameMapper</code></a></p>
@@ -1576,18 +2415,14 @@ By default the same name is used.</p>
 <col style="width: 10%;">
 <col style="width: 55%;">
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Property</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Default</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Description</p>
-</div></div></td>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="nats-streaming-type"></a><a href="#nats-streaming-type"><code>debezium.sink.type</code></a></p>
@@ -1627,7 +2462,7 @@ By default the same name is used.</p>
 </tbody>
 </table>
 <div class="sect4">
-<h5 id="_injection_points_6"><a class="anchor" href="#_injection_points_6"></a>Injection points</h5>
+<h5 id="_injection_points_7"><a class="anchor" href="#_injection_points_7"></a>Injection points</h5>
 <div class="paragraph">
 <p>The NATS Streaming sink behavior can be modified by a custom logic providing alternative implementations for specific functionalities.
 When the alternative implementations are not available then the default ones are used.</p>
@@ -1638,18 +2473,14 @@ When the alternative implementations are not available then the default ones are
 <col style="width: 10%;">
 <col style="width: 55%;">
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Interface</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>CDI classifier</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Description</p>
-</div></div></td>
+<th class="tableblock halign-left valign-top">Interface</th>
+<th class="tableblock halign-left valign-top">CDI classifier</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="streaming_connection"></a><a href="#streaming_connection"><code>io.nats.streaming.StreamingConnection</code></a></p>
@@ -1668,6 +2499,124 @@ When the alternative implementations are not available then the default ones are
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Custom implementation maps the planned destination (topic) name into a physical NATS Streaming subject name.
+By default the same name is used.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_nats_jetstream"><a class="anchor" href="#_nats_jetstream"></a>NATS JetStream</h4>
+<div class="paragraph">
+<p>NATS has a built-in distributed persistence system called <a href="https://docs.nats.io/nats-concepts/jetstream">JetStream</a> which enables new functionalities and higher qualities of service on top of the base 'Core NATS' functionalities and qualities of service.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 35%;">
+<col style="width: 10%;">
+<col style="width: 55%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="nats-jetstream-type"></a><a href="#nats-jetstream-type"><code>debezium.sink.type</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Must be set to <code>nats-jetstream</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="nats-jetstream-url"></a><a href="#nats-jetstream-url"><code>debezium.sink.nats-jetstream.url</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>URL (or comma separated list of URLs) to a node or nodes in the cluster formatted as <code>nats://host:port</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="nats-jetstream-create-stream"></a><a href="#nats-jetstream-create-stream"><code>debezium.sink.nats-jetstream.create-stream</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>If true, a basic stream will be created.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="nats-jetstream-subjects"></a><a href="#nats-jetstream-subjects"><code>debezium.sink.nats-jetstream.subjects</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>*.*.*</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A comma separated list of subjects, messaging channel names. Can contain wildcards like test.inventory.*</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="nats-jetstream-storage"></a><a href="#nats-jetstream-storage"><code>debezium.sink.nats-jetstream.storage</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>memory</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Controls how the messages are saved in the stream. Can be memory or file.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>If you need a more configurable stream, it can be created with nats cli. More about streams at: <a href="https://docs.nats.io/nats-concepts/jetstream/streams" class="bare">https://docs.nats.io/nats-concepts/jetstream/streams</a></p>
+</div>
+<div class="sect4">
+<h5 id="_injection_points_8"><a class="anchor" href="#_injection_points_8"></a>Injection points</h5>
+<div class="paragraph">
+<p>The NATS JetStream sink behavior can be modified by a custom logic providing alternative implementations for specific functionalities.
+When the alternative implementations are not available then the default ones are used.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 35%;">
+<col style="width: 10%;">
+<col style="width: 55%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Interface</th>
+<th class="tableblock halign-left valign-top">CDI classifier</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="jetstream_connection"></a><a href="#streaming_connection"><code>io.nats.client.JetStream</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>@CustomConsumerBuilder</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Custom configured instance of a <code>JetStream</code> used to publish messages to target subjects.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="jetstream-ext-stream-name-mapper"></a><a href="#nats-streaming-ext-stream-name-mapper"><code>io.debezium.server.StreamNameMapper</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Custom implementation maps the planned destination (topic) name into a physical NATS JetStream subject name.
 By default the same name is used.</p>
 </div></div></td>
 </tr>
@@ -1782,7 +2731,7 @@ At least <code>bootstrap.servers</code>, <code>key.serializer</code> and <code>v
 </tbody>
 </table>
 <div class="sect4">
-<h5 id="_injection_points_7"><a class="anchor" href="#_injection_points_7"></a>Injection points</h5>
+<h5 id="_injection_points_9"><a class="anchor" href="#_injection_points_9"></a>Injection points</h5>
 <div class="paragraph">
 <p>Pravega sink behavior can be modified by custom logic providing alternative implementations for specific functionalities.
 When the alternative implementations are not available then the default ones are used.</p>
@@ -1793,18 +2742,14 @@ When the alternative implementations are not available then the default ones are
 <col style="width: 10%;">
 <col style="width: 55%;">
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Interface</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>CDI classifier</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Description</p>
-</div></div></td>
+<th class="tableblock halign-left valign-top">Interface</th>
+<th class="tableblock halign-left valign-top">CDI classifier</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="pravega-ext-stream-name-mapper"></a><a href="#pravega-ext-stream-name-mapper"><code>io.debezium.server.StreamNameMapper</code></a></p>
@@ -1813,6 +2758,260 @@ When the alternative implementations are not available then the default ones are
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Custom implementation maps the planned destination (stream) name into a physical Pravega stream name.
 By default the same name is used.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_infinispan"><a class="anchor" href="#_infinispan"></a>Infinispan</h4>
+<div class="paragraph">
+<p><a href="https://infinispan.org/">Infinispan</a> is open-source in-memory data grid that offers rich set of caches types as well as cache stores.
+Due to very fast data access, Infinispan can be used, besides others, as a data source for various data processing and analytical tools.</p>
+</div>
+<div class="paragraph">
+<p>The Infinispan sink expects that the destination cache is already defined and created within the Infinispan cluster.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 35%;">
+<col style="width: 10%;">
+<col style="width: 55%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="infinispan-type"></a><a href="#infinispan-type"><code>debezium.sink.type</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Must be set to <code>infinispan</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="infisnipan-server-host"></a><a href="#infisnipan-server-host"><code>debezium.sink.infinispan.server.host</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The host name of one of the servers of the Infinispan cluster (can be also a comma-separated list of servers).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="infisnipan-server-port"></a><a href="#infisnipan-server-port"><code>debezium.sink.infinispan.server.port</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>11222</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The port of the Infinispan server.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="infisnipan-cache"></a><a href="#infisnipan-cache"><code>debezium.sink.infinispan.cache</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The name of the (exiting) cache where the records will be stored.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="infisnipan-user"></a><a href="#infisnipan-user"><code>debezium.sink.infinispan.user</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>(Optional) The user name used for connecting to Infinispan cluster.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="infisnipan-password"></a><a href="#infisnipan-password"><code>debezium.sink.infinispan.password</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>(Optional) The password used for connecting to Infinispan cluster.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="sect4">
+<h5 id="_injection_points_10"><a class="anchor" href="#_injection_points_10"></a>Injection points</h5>
+<div class="paragraph">
+<p>The Infinispan sink behaviour can be modified by a custom logic providing alternative implementations for specific functionalities.
+When the alternative implementations are not available then the default ones are used.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 35%;">
+<col style="width: 10%;">
+<col style="width: 55%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Interface</th>
+<th class="tableblock halign-left valign-top">CDI classifier</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="infinispan-ext-hotrod-cache"></a><a href="#infinispan-ext-hotrod-cache"><code>org.infinispan.client.hotrod.RemoteCache</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>@CustomConsumerBuilder</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Custom instance of <a href="https://docs.jboss.org/infinispan/14.0/apidocs/org/infinispan/client/hotrod/RemoteCache.html">Hot Rod cache</a> which will be used for connecting and sending events to the Infinspan cluster.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_apache_rocketmq"><a class="anchor" href="#_apache_rocketmq"></a>Apache RocketMQ</h4>
+<div class="paragraph">
+<p><a href="https://rocketmq.apache.org/">Apache RocketMQ</a> is a distributed messaging and streaming platform with low latency, high
+performance and reliability, trillion-level capacity and flexible scalability.Debezium server supports publishing
+captured change events to a configured RocketMQ.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 35%;">
+<col style="width: 10%;">
+<col style="width: 55%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="rocketmq-type"></a><a href="#rocketmq-type"><code>debezium.sink.type</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Must be set to <code>rocketmq</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="rocketmq-namesrv-addr"></a><a href="#rocketmq-namesrv-addr"><code>debezium.sink.rocketmq.producer.name.srv.addr</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Name server address of Apache RocketMQ .</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="rocketmq-producer-group"></a><a href="#rocketmq-producer-group"><code>debezium.sink.rocketmq.producer.group</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Producer group of Apache RocketMQ.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="rocketmq-max-message-size"></a><a href="#rocketmq-max-message-size"><code>debezium.sink.rocketmq.producer.max.message.size</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>4M, Suggest less than 4 MB.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>(Optional)Maximum number of bytes of sent message body.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="rocketmq-send-timeout"></a><a href="#rocketmq-send-timeout"><code>debezium.sink.rocketmq.producer.send.msg.timeout</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>3000ms</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>(Optional) The send message timeout duration is the waiting time for local synchronous invocation of clients. Set a
+proper value based on the actual application to avoid long thread blocking time.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="rocketmq-acl-enabled"></a><a href="#rocketmq-acl-enabled"><code>debezium.sink.rocketmq.producer.acl.enabled</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>false</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>(Optional) The configuration is used to enable access authorization.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="rocketmq-access-key"></a><a href="#rocketmq-access-key"><code>debezium.sink.rocketmq.producer.access.key</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>(Optional) The access key used for connecting to Apache RocketMQ cluster .</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="rocketmq-secret-key"></a><a href="#rocketmq-secret-key"><code>debezium.sink.rocketmq.producer.secret.key</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>(Optional) The access secret used for connecting to Apache RocketMQ cluster .</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="sect4">
+<h5 id="_injection_points_11"><a class="anchor" href="#_injection_points_11"></a>Injection points</h5>
+<div class="paragraph">
+<p>The rocketmq sink behaviour can be modified by a custom logic providing alternative implementations for specific
+functionalities.
+When the alternative implementations are not available then the default ones are used.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 35%;">
+<col style="width: 10%;">
+<col style="width: 55%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Interface</th>
+<th class="tableblock halign-left valign-top">CDI classifier</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="rocketmq-producer"></a><a href="#rocketmq-producer"><code>org.apache.rocketmq.client.producer.DefaultMQProducer</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>@CustomConsumerBuilder</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Custom configured instance of a RocketMQ used to publish messages to target topic.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1866,6 +3065,69 @@ Typical examples are fine tuning of the target client setup, the destination nam
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_cassandra_connector"><a class="anchor" href="#_cassandra_connector"></a>Cassandra connector</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_running_debezium_server_with_cassandra_connector"><a class="anchor" href="#_running_debezium_server_with_cassandra_connector"></a>Running Debezium Server with Cassandra connector</h3>
+<div class="paragraph">
+<p>Running with java 11+ requires setting the following java options at startup trough the JDK_JAVA_OPTIONS environment variable or equivalent:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">JDK_JAVA_OPTIONS="--add-exports java.base/jdk.internal.misc=ALL-UNNAMED --add-exports java.base/jdk.internal.ref=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED --add-exports java.management.rmi/com.sun.jmx.remote.internal.rmi=ALL-UNNAMED --add-exports java.rmi/sun.rmi.registry=ALL-UNNAMED --add-exports java.rmi/sun.rmi.server=ALL-UNNAMED --add-exports java.sql/java.sql=ALL-UNNAMED  --add-opens java.base/java.lang.module=ALL-UNNAMED --add-opens java.base/jdk.internal.loader=ALL-UNNAMED --add-opens java.base/jdk.internal.ref=ALL-UNNAMED --add-opens java.base/jdk.internal.reflect=ALL-UNNAMED --add-opens java.base/jdk.internal.math=ALL-UNNAMED --add-opens java.base/jdk.internal.module=ALL-UNNAMED --add-opens java.base/jdk.internal.util.jar=ALL-UNNAMED --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED"</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sample_of_basic_application_properties_for_running_cassandra_connector_with_redis_sink"><a class="anchor" href="#_sample_of_basic_application_properties_for_running_cassandra_connector_with_redis_sink"></a>Sample of basic <code>application.properties</code> for running Cassandra connector with Redis sink</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs"># Sink
+debezium.sink.type=redis
+debezium.sink.redis.address=localhost:6379
+
+# Connector
+debezium.source.connector.class=io.debezium.connector.cassandra.Cassandra4Connector
+## node.id must be unique per each connector running on each Cassandra node
+debezium.source.cassandra.node.id=sample_node_01
+debezium.source.cassandra.hosts=127.0.0.1
+debezium.source.cassandra.port=9042
+debezium.source.cassandra.config=/opt/cassandra/conf/cassandra.yaml
+debezium.source.commit.log.relocation.dir=cassandra/relocdir
+debezium.source.offset.storage=io.debezium.server.redis.RedisOffsetBackingStore
+debezium.source.topic.prefix=sample_prefix
+## internal Cassandra http port
+debezium.source.http.port=8040</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_transformation_for_operation_code"><a class="anchor" href="#_transformation_for_operation_code"></a>Transformation for Operation Code</h3>
+<div class="paragraph">
+<p>By default, Cassandra connector has it&#8217;s own Operation Codes which are not entirely compatible with Debezium Operation Codes.
+If needed, a specific transform can be defined in Debezium Server&#8217;s <code>application.properties</code> to enable the conversion:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">debezium.transforms=EnvelopeTransformation
+debezium.transforms.EnvelopeTransformation.type=io.debezium.connector.cassandra.transforms.EnvelopeTransformation</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will convert Operation Codes as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">INSERT "i"          -&gt; CREATE "c"
+UPDATE "u"          -&gt; UPDATE "u"
+DELETE "d"          -&gt; DELETE "d"
+RANGE_TOMBSTONE "r" -&gt; TRUNCATE "t"</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </article>
 </div>
 <div class="article-cell2">
@@ -1874,7 +3136,7 @@ Typical examples are fine tuning of the target client setup, the destination nam
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2021 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/a20ed7a573126b642f90a38e5294b8578bb40c42">a20ed7a5</a></span>)
+            <div class="copyright">Copyright &copy; 2022 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/5ff4df141738a2e0b90378a5543930412e197b81">5ff4df14</a></span>)
             
         </div>
     </footer>

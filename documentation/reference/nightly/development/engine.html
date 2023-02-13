@@ -120,6 +120,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/vitess.html">Vitess</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/spanner.html">Spanner</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -137,6 +140,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/mongodb-event-flattening.html">MongoDB New Document State Extraction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/event-changes.html">Event Changes</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/outbox-event-router.html">Outbox Event Router</a>
@@ -202,6 +208,9 @@
     <a class="nav-link" href="../operations/monitoring.html">Monitoring</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../operations/kubernetes.html">Running on Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../operations/openshift.html">Running on Openshift</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -228,6 +237,18 @@
       <ul class="versions">
         <li class="version is-current">
           <a href="/documentation/reference/nightly/index.html">nightly</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.2/index.html">2.2</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.1/index.html">2.1</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.0/index.html">2.0</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/1.9/index.html">1.9</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/1.8/index.html">1.8</a>
@@ -286,6 +307,10 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
                 <a class="version is-current" href="/documentation/reference/nightly/index.html">nightly</a>
+                <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
+                <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
+                <a class="version" href="/documentation/reference/2.0/index.html">2.0</a>
+                <a class="version" href="/documentation/reference/1.9/index.html">1.9</a>
                 <a class="version" href="/documentation/reference/1.8/index.html">1.8</a>
                 <a class="version" href="/documentation/reference/1.7/index.html">1.7</a>
                 <a class="version" href="/documentation/reference/1.6/index.html">1.6</a>
@@ -322,10 +347,11 @@
 <li><a href="#_in_the_code">In the Code</a></li>
 <li><a href="#engine-output-message-formats">Output Message Formats</a></li>
 <li><a href="#engine-message-transformations">Message transformations</a></li>
+<li><a href="#engine-message-transformations-predicates">Message Transformation Predicates</a></li>
 <li><a href="#advanced-consuming">Advanced Record Consuming</a></li>
 <li><a href="#engine-properties">Engine Properties</a>
 <ul class="sectlevel2">
-<li><a href="#database-history-properties">Database history properties</a></li>
+<li><a href="#database-history-properties">Database schema history properties</a></li>
 </ul>
 </li>
 <li><a href="#_handling_failures">Handling Failures</a></li>
@@ -443,11 +469,11 @@ props.setProperty("database.port", "3306");
 props.setProperty("database.user", "mysqluser");
 props.setProperty("database.password", "mysqlpw");
 props.setProperty("database.server.id", "85744");
-props.setProperty("database.server.name", "my-app-connector");
-props.setProperty("database.history",
-      "io.debezium.relational.history.FileDatabaseHistory");
-props.setProperty("database.history.file.filename",
-      "/path/to/storage/dbhistory.dat");
+props.setProperty("topic.prefix", "my-app-connector");
+props.setProperty("schema.history.internal",
+      "io.debezium.storage.file.history.FileSchemaHistory");
+props.setProperty("schema.history.internal.file.filename",
+      "/path/to/storage/schemahistory.dat");
 
 // Create the engine with this configuration ...
 try (DebeziumEngine&lt;ChangeEvent&lt;String, String&gt;&gt; engine = DebeziumEngine.create(Json.class)
@@ -502,11 +528,11 @@ These fields can be tailored as needed for your application.</p>
     props.setProperty("database.user", "mysqluser")
     props.setProperty("database.password", "mysqlpw")
     props.setProperty("database.server.id", "85744")
-    props.setProperty("database.server.name", "my-app-connector")
-    props.setProperty("database.history",
-          "io.debezium.relational.history.FileDatabaseHistory")
-    props.setProperty("database.history.file.filename",
-          "/path/to/storage/dbhistory.dat")</code></pre>
+    props.setProperty("topic.prefix", "my-app-connector")
+    props.setProperty("schema.history.internal",
+          "io.debezium.storage.file.history.FileSchemaHistory")
+    props.setProperty("schema.history.internal.file.filename",
+          "/path/to/storage/schemahistory.dat")</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -550,7 +576,7 @@ Our example uses a server name of "products", presumably because the database co
 <p>When the <code>MySqlConnector</code> class runs, it reads the MySQL server&#8217;s binlog, which includes all data changes and schema changes made to the databases hosted by the server.
 Since all changes to data are structured in terms of the owning table&#8217;s schema at the time the change was recorded, the connector needs to track all of the schema changes so that it can properly decode the change events.
 The connector records the schema information so that, should the connector be restarted and resume reading from the last recorded offset, it knows exactly what the database schemas looked like at that offset.
-How the connector records the database schema history is defined in the last two fields of our configuration, namely that our connector should use the <code>FileDatabaseHistory</code> class to store database schema history changes in the <code>/path/to/storage/dbhistory.dat</code> file on the local file system (again, this file can be named anything and stored anywhere).</p>
+How the connector records the database schema history is defined in the last two fields of our configuration, namely that our connector should use the <code>FileSchemaHistory</code> class to store database schema history changes in the <code>/path/to/storage/schemahistory.dat</code> file on the local file system (again, this file can be named anything and stored anywhere).</p>
 </div>
 <div class="paragraph">
 <p>Finally the immutable configuration is built using the <code>build()</code> method.
@@ -648,7 +674,10 @@ Allowed values are:</p>
 <p><code>Json.class</code> - the output value is a pair of key and value encoded as <code>JSON</code> strings</p>
 </li>
 <li>
-<p><code>Avro.class</code> - the output value is a pair of key and value encoded as Avro serialized records</p>
+<p><code>JsonByteArray.class</code> - the output value is a pair of key and value formatted as <code>JSON</code> and encoded as UTF-8 byte arrays</p>
+</li>
+<li>
+<p><code>Avro.class</code> - the output value is a pair of key and value encoded as Avro serialized records (see <a href="../configuration/avro.html" class="page">Avro Serialization</a> for more details)</p>
 </li>
 <li>
 <p><code>CloudEvents.class</code> - the output value is a pair of key and value encoded as <a href="../integrations/cloudevents.html" class="page">Cloud Events</a> messages</p>
@@ -656,7 +685,21 @@ Allowed values are:</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Internally, the engine uses the apropriate Kafka Connect converter implementation to which the conversion is delegated.
+<p>The header format can also be specified when calling <code>DebeziumEngine#create()</code>.
+Allowed values are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Json.class</code> - the header values are encoded as <code>JSON</code> strings</p>
+</li>
+<li>
+<p><code>JsonByteArray.class</code> - the header values are formatted as <code>JSON</code> and encoded as UTF-8 byte arrays</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Internally, the engine uses the appropriate Kafka Connect converter implementation to which the conversion is delegated.
 The converter can be parametrized using engine properties to modify its behaviour.</p>
 </div>
 <div class="paragraph">
@@ -721,6 +764,55 @@ props.setProperty("transforms.filter.type", "io.debezium.embedded.ExampleFilterT
 </li>
 <li>
 <p>Implementation of the <code>filter</code> transformation is <code>io.debezium.embedded.ExampleFilterTransform</code></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="engine-message-transformations-predicates"><a class="anchor" href="#engine-message-transformations-predicates"></a>Message Transformation Predicates</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Predicates can be applied to transformations to make the transformations optional.</p>
+</div>
+<div class="paragraph">
+<p>An example of the configuration is</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">final Properties props = new Properties();
+...
+props.setProperty("transforms", "filter");                                                 // (1)
+props.setProperty("predicates", "headerExists");                                           // (2)
+props.setProperty("predicates.headerExists.type", "org.apache.kafka.connect.transforms.predicates.HasHeaderKey"); //(3)
+props.setProperty("predicates.headerExists.name", "header.name");                          // (4)
+props.setProperty("transforms.filter.type", "io.debezium.embedded.ExampleFilterTransform");// (5)
+props.setProperty("transforms.filter.predicate", "headerExists");                          // (6)
+props.setProperty("transforms.filter.negate", "true");                                     // (7)</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>One transformation is defined - <code>filter</code></p>
+</li>
+<li>
+<p>One predicate is defined - <code>headerExists</code></p>
+</li>
+<li>
+<p>Implementation of the <code>headerExists</code> predicate is <code>org.apache.kafka.connect.transforms.predicates.HasHeaderKey</code></p>
+</li>
+<li>
+<p>The <code>headerExists</code> predicate has one configuration option - <code>name</code></p>
+</li>
+<li>
+<p>Implementation of the <code>filter</code> transformation is <code>io.debezium.embedded.ExampleFilterTransform</code></p>
+</li>
+<li>
+<p>The <code>filter</code> transformation requires the predicate <code>headerExists</code></p>
+</li>
+<li>
+<p>The <code>filter</code> transformation expects the value of the predicate to be negated, making the predicate determine if the header does not exist</p>
 </li>
 </ol>
 </div>
@@ -933,32 +1025,43 @@ The default is a periodic commity policy based upon time intervals.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>internal.key.converter</code></p>
+<p><code>errors.max.retries</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>&lt;&#8230;&#8203;&gt;.JsonConverter</code></p>
+<p><code>-1</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The Converter class that should be used to serialize and deserialize key data for offsets. The default is JSON converter.</p>
+<p>The maximum number of retries on connection errors before failing (-1 = no limit, 0 = disabled, &gt; 0 = num of retries).</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>internal.value.converter</code></p>
+<p><code>errors.retry.delay.initial.ms</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>&lt;&#8230;&#8203;&gt;.JsonConverter</code></p>
+<p><code>300</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The Converter class that should be used to serialize and deserialize value data for offsets. The default is JSON converter.</p>
+<p>Initial delay (in ms) for retries when encountering connection errors. This value will be doubled upon every retry but won&#8217;t exceed <code>errors.retry.delay.max.ms</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>errors.retry.delay.max.ms</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>10000</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Max delay (in ms) between retries when encountering connection errors.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="database-history-properties"><a class="anchor" href="#database-history-properties"></a>Database history properties</h3>
+<h3 id="database-history-properties"><a class="anchor" href="#database-history-properties"></a>Database schema history properties</h3>
 <div class="paragraph">
-<p>Some of the connectors also requires additional set of properties that configures database history:</p>
+<p>Some of the connectors also requires additional set of properties that configures database schema history:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -977,9 +1080,9 @@ The default is a periodic commity policy based upon time intervals.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Without proper configuration of the database history the connectors will refuse to start.
+<p>Without proper configuration of the database schema history the connectors will refuse to start.
 The default configuration expects a Kafka cluster to be available.
-For other deployments, a file-based database history storage implementation is available.</p>
+For other deployments, a file-based database schema history storage implementation is available.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -997,51 +1100,51 @@ For other deployments, a file-based database history storage implementation is a
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>database.history</code></p>
+<p><code>schema.history.internal</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>&lt;&#8230;&#8203;&gt;.KafkaDatabaseHistory</code></p>
+<p><code>&lt;&#8230;&#8203;&gt;.KafkaSchemaHistory</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The name of the Java class that is responsible for persistence of the database history.<br>
-It must implement <code>&lt;&#8230;&#8203;&gt;.DatabaseHistory</code> interface.</p>
+<p>The name of the Java class that is responsible for persistence of the database schema history.<br>
+It must implement <code>&lt;&#8230;&#8203;&gt;.SchemaHistory</code> interface.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>database.history.file.filename</code></p>
+<p><code>schema.history.internal.file.filename</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>""</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Path to a file where the database history is stored.<br>
-Required when <code>database.history</code> is set to the <code>&lt;&#8230;&#8203;&gt;.FileDatabaseHistory</code>.</p>
+<p>Path to a file where the database schema history is stored.<br>
+Required when <code>schema.history.internal</code> is set to the <code>&lt;&#8230;&#8203;&gt;.FileSchemaHistory</code>.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>database.history.kafka.topic</code></p>
+<p><code>schema.history.internal.kafka.topic</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>""</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The Kafka topic where the database history is stored.<br>
-Required when <code>database.history</code> is set to the <code>&lt;&#8230;&#8203;&gt;.KafkaDatabaseHistory</code>.</p>
+<p>The Kafka topic where the database schema history is stored.<br>
+Required when <code>schema.history.internal</code> is set to the <code>&lt;&#8230;&#8203;&gt;.KafkaSchemaHistory</code>.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>database.history.kafka.bootstrap.servers</code></p>
+<p><code>schema.history.internal.kafka.bootstrap.servers</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>""</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The initial list of Kafka cluster servers to connect to.
-The cluster provides the topic to store the database history.<br>
-Required when <code>database.history</code> is set to the <code>&lt;&#8230;&#8203;&gt;.KafkaDatabaseHistory</code>.</p>
+The cluster provides the topic to store the database schema history.<br>
+Required when <code>schema.history.internal</code> is set to the <code>&lt;&#8230;&#8203;&gt;.KafkaSchemaHistory</code>.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1083,7 +1186,7 @@ If applications need more rigorous exactly-once behavior, then they should use t
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2021 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/a20ed7a573126b642f90a38e5294b8578bb40c42">a20ed7a5</a></span>)
+            <div class="copyright">Copyright &copy; 2022 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/5ff4df141738a2e0b90378a5543930412e197b81">5ff4df14</a></span>)
             
         </div>
     </footer>

@@ -120,6 +120,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/vitess.html">Vitess</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/spanner.html">Spanner</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -137,6 +140,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="mongodb-event-flattening.html">MongoDB New Document State Extraction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="event-changes.html">Event Changes</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="outbox-event-router.html">Outbox Event Router</a>
@@ -202,6 +208,9 @@
     <a class="nav-link" href="../operations/monitoring.html">Monitoring</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../operations/kubernetes.html">Running on Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../operations/openshift.html">Running on Openshift</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -228,6 +237,18 @@
       <ul class="versions">
         <li class="version is-current">
           <a href="/documentation/reference/nightly/index.html">nightly</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.2/index.html">2.2</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.1/index.html">2.1</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.0/index.html">2.0</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/1.9/index.html">1.9</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/1.8/index.html">1.8</a>
@@ -286,6 +307,10 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
                 <a class="version is-current" href="/documentation/reference/nightly/index.html">nightly</a>
+                <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
+                <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
+                <a class="version" href="/documentation/reference/2.0/index.html">2.0</a>
+                <a class="version" href="/documentation/reference/1.9/index.html">1.9</a>
                 <a class="version" href="/documentation/reference/1.8/index.html">1.8</a>
                 <a class="version" href="/documentation/reference/1.7/index.html">1.7</a>
                 <a class="version" href="/documentation/reference/1.6/index.html">1.6</a>
@@ -366,9 +391,10 @@ For example:</p>
 </div>
 <div class="paragraph">
 <p>Debezium does not come with any implementations of the JSR 223 API.
-To use an expression language with Debezium, you must download the JSR 223 script engine implementation for the language, and add to your Debezium connector plug-in directories, along any other JAR files used by the language implementation.
+To use an expression language with Debezium, you must download the JSR 223 script engine implementation for the language.
 For example, for Groovy 3, you can download its JSR 223 implementation from <a href="https://groovy-lang.org/" class="bare">https://groovy-lang.org/</a>.
-The JSR 223 implementation for GraalVM JavaScript is available at <a href="https://github.com/graalvm/graaljs" class="bare">https://github.com/graalvm/graaljs</a>.</p>
+The JSR223 implementation for GraalVM JavaScript is available at <a href="https://github.com/graalvm/graaljs" class="bare">https://github.com/graalvm/graaljs</a>.
+After you obtain the script engine files, you add them to your Debezium connector plug-in directories, along any other JAR files used by the language implementation.</p>
 </div>
 </div>
 </div>
@@ -377,21 +403,12 @@ The JSR 223 implementation for GraalVM JavaScript is available at <a href="https
 <div class="sectionbody">
 <div class="paragraph">
 <p>For security reasons, the content-based routing SMT is not included with the Debezium connector archives.
-Instead, it is provided in a separate artifact, <code>debezium-scripting-1.8.0.Final.tar.gz</code>.
-To use the content-based routing SMT with a Debezium connector plug-in, you must explicitly add the SMT artifact to your Kafka Connect environment.</p>
+Instead, it is provided in a separate artifact, <code>debezium-scripting-2.2.0.Alpha1.tar.gz</code>.</p>
 </div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-After the routing SMT is present in a Kafka Connect instance, any user who is allowed to add a connector to the instance can run scripting expressions.
-To ensure that scripting expressions can be run only by authorized users, be sure to secure the Kafka Connect instance and its configuration interface before you add the routing SMT.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>To use the content-based routing SMT with a Debezium connector plug-in, you must explicitly add the SMT artifact to your Kafka Connect environment.
+IMPORTANT: After the routing SMT is present in a Kafka Connect instance, any user who is allowed to add a connector to the instance can run scripting expressions.
+To ensure that scripting expressions can be run only by authorized users, be sure to secure the Kafka Connect instance and its configuration interface before you add the routing SMT.</p>
 </div>
 <div class="paragraph">
 <p>With <a href="https://zookeeper.apache.org">Zookeeper</a>, <a href="http://kafka.apache.org/">Kafka</a>, <a href="https://kafka.apache.org/documentation.html#connect">Kafka Connect</a>, and one or more Debezium connectors installed, the remaining tasks to install the filter SMT are:</p>
@@ -399,7 +416,7 @@ To ensure that scripting expressions can be run only by authorized users, be sur
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Download the <a href="https://repo1.maven.org/maven2/io/debezium/debezium-scripting/1.8.0.Final/debezium-scripting-1.8.0.Final.tar.gz">scripting SMT archive</a></p>
+<p>Download the <a href="https://repo1.maven.org/maven2/io/debezium/debezium-scripting/2.2.0.Alpha1/debezium-scripting-2.2.0.Alpha1.tar.gz">scripting SMT archive</a></p>
 </li>
 <li>
 <p>Extract the contents of the archive into the Debezium plug-in directories of your Kafka Connect environment.</p>
@@ -475,6 +492,12 @@ transforms.route.topic.expression=value.op == 'u' ? 'updates' : null
 </div>
 <div class="paragraph">
 <p>Records that do not match the pattern are routed to the default topic.</p>
+</div>
+<div class="paragraph">
+<div class="title">Customizing the configuration</div>
+<p>The preceding example shows a simple SMT configuration that is designed to process only DML events, which contain an <code>op</code> field.
+Other types of messages that a connector might emit (heartbeat messages, tombstone messages, or metadata messages about transactions or schema changes) do not contain this field.
+To avoid processing failures, you can define <a href="#options-for-applying-the-transformation-selectively">an SMT predicate statement that selectively applies the transformation</a> to specific events only.</p>
 </div>
 </div>
 </div>
@@ -605,10 +628,10 @@ You can use one of the following methods to configure the connector to apply the
 <div class="ulist">
 <ul>
 <li>
-<p><a href="applying-transformations-selectively.html#applying-transformation-selectively" class="page">Configure an SMT predicate for the transformation</a>.</p>
+<p><a href="applying-transformations-selectively.html#applying-transformations-selectively" class="page">Configure an SMT predicate for the transformation</a>.</p>
 </li>
 <li>
-<p>Use the <a href="filtering.html#filter-topic-regex" class="page">topic.regex</a> configuration option for the SMT.</p>
+<p>Use the <a href="#content-based-router-topic-regex">topic.regex</a> configuration option for the SMT.</p>
 </li>
 </ul>
 </div>
@@ -638,11 +661,12 @@ the following expression reroutes all update (<code>u</code>) records to the <co
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The Debezium MongoDB connector emits the <code>after</code> and <code>patch</code> fields as serialized JSON documents rather than as structures.
-To use the ContentBasedRouting SMT with the MongoDB connector, you must first unwind the fields by applying the <a href="mongodb-event-flattening.html" class="page"><code>ExtractNewDocumentState</code></a> SMT.</p>
+<p>The Debezium MongoDB connector emits the <code>after</code> and <code>patch</code> fields as serialized JSON documents rather than as structures.<br>
+To use the ContentBasedRouting SMT with the MongoDB connector, you must first unwind the array fields in the JSON into separate documents.<br>
+You can do this by applying the <a href="mongodb-event-flattening.html#new-record-state-extraction" class="page">MongoDB <code>ExtractNewDocumentState</code></a> SMT.</p>
 </div>
 <div class="paragraph">
-<p>You could also take the approach of using a JSON parser within the expression.
+<p>You could also take the approach of using a JSON parser within an expression to generate separate output documents for each array item.<br>
 For example, if you use Groovy as the expression language, add the <code>groovy-json</code> artifact to the classpath, and then add an expression such as <code>(new groovy.json.JsonSlurper()).parseText(value.after).last_name == 'Kretchmar'</code>.</p>
 </div>
 </td>
@@ -759,7 +783,7 @@ If the name of the topic does not match the value in <code>topic.regex</code>, t
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2021 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/a20ed7a573126b642f90a38e5294b8578bb40c42">a20ed7a5</a></span>)
+            <div class="copyright">Copyright &copy; 2022 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/5ff4df141738a2e0b90378a5543930412e197b81">5ff4df14</a></span>)
             
         </div>
     </footer>
