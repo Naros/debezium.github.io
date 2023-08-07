@@ -87,6 +87,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../configuration/signalling.html">Sending Signals to Debezium</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../configuration/notification.html">Receive notifications from Debezium</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -123,6 +126,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="spanner.html">Spanner</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jdbc.html">Jdbc</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -158,6 +164,15 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/applying-transformations-selectively.html">Using SMT Predicates to Selectively Apply Transformations</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/compute-partition.html">Compute Partition [Deprecated]</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/partition-routing.html">Partition Routing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/header-to-value.html">HeaderToValue</a>
   </li>
 </ul>
   </li>
@@ -239,6 +254,12 @@
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version">
+          <a href="/documentation/reference/2.4/index.html">2.4</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.3/index.html">2.3</a>
+        </li>
+        <li class="version">
           <a href="/documentation/reference/2.2/index.html">2.2</a>
         </li>
         <li class="version">
@@ -307,6 +328,8 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
                 <a class="version is-current" href="/documentation/reference/nightly/index.html">nightly</a>
+                <a class="version" href="/documentation/reference/2.4/index.html">2.4</a>
+                <a class="version" href="/documentation/reference/2.3/index.html">2.3</a>
                 <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
                 <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
                 <a class="version" href="/documentation/reference/2.0/index.html">2.0</a>
@@ -365,13 +388,16 @@
 <p><a href="db2.html" class="page">Db2</a></p>
 </li>
 <li>
-<p><a href="cassandra.html" class="page">Cassandra</a> (Incubating)</p>
+<p><a href="cassandra.html" class="page">Cassandra</a></p>
 </li>
 <li>
 <p><a href="vitess.html" class="page">Vitess</a> (Incubating)</p>
 </li>
 <li>
 <p><a href="spanner.html" class="page">Spanner</a> (Incubating)</p>
+</li>
+<li>
+<p><a href="jdbc.html" class="page">JDBC</a> (Incubating)</p>
 </li>
 </ul>
 </div>
@@ -397,7 +423,7 @@
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2022 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/5ff4df141738a2e0b90378a5543930412e197b81">5ff4df14</a></span>)
+            <div class="copyright">Copyright &copy; 2023 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/230c056577672b69f2f2d65968cf64d159c5d42b">230c0565</a></span>)
             
         </div>
     </footer>

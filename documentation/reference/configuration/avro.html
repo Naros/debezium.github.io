@@ -87,6 +87,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="signalling.html">Sending Signals to Debezium</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="notification.html">Receive notifications from Debezium</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -123,6 +126,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/spanner.html">Spanner</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/jdbc.html">Jdbc</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -158,6 +164,15 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/applying-transformations-selectively.html">Using SMT Predicates to Selectively Apply Transformations</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/compute-partition.html">Compute Partition [Deprecated]</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/partition-routing.html">Partition Routing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/header-to-value.html">HeaderToValue</a>
   </li>
 </ul>
   </li>
@@ -239,6 +254,12 @@
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version">
+          <a href="/documentation/reference/2.4/index.html">2.4</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.3/index.html">2.3</a>
+        </li>
+        <li class="version">
           <a href="/documentation/reference/2.2/index.html">2.2</a>
         </li>
         <li class="version">
@@ -307,6 +328,8 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
                 <a class="version is-current" href="/documentation/reference/nightly/index.html">nightly</a>
+                <a class="version" href="/documentation/reference/2.4/index.html">2.4</a>
+                <a class="version" href="/documentation/reference/2.3/index.html">2.3</a>
                 <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
                 <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
                 <a class="version" href="/documentation/reference/2.0/index.html">2.0</a>
@@ -495,7 +518,7 @@ Messages do not contain the schema information themselves, but only a schema ID.
 <p>Deploy an <a href="https://github.com/Apicurio/apicurio-registry">Apicurio API and Schema Registry</a> instance.</p>
 </li>
 <li>
-<p>Install the Avro converter from the <a href="https://repo1.maven.org/maven2/io/apicurio/apicurio-registry-distro-connect-converter/2.4.1.Final/apicurio-registry-distro-connect-converter-2.4.1.Final.tar.gz">installation package</a> into a plug-in directory. If you are using the <a href="https://quay.io/repository/debezium/connect">Debezium Connect container image</a>, it&#8217;s not necessary to install the package. For more information, see  <a href="#deploying-with-debezium-containers">Deploying Apicurio Registry with Debezium containers</a>.</p>
+<p>Install the Avro converter from the <a href="https://repo1.maven.org/maven2/io/apicurio/apicurio-registry-distro-connect-converter/2.4.3.Final/apicurio-registry-distro-connect-converter-2.4.3.Final.tar.gz">installation package</a> into a plug-in directory. If you are using the <a href="https://quay.io/repository/debezium/connect">Debezium Connect container image</a>, it&#8217;s not necessary to install the package. For more information, see  <a href="#deploying-with-debezium-containers">Deploying Apicurio Registry with Debezium containers</a>.</p>
 </li>
 <li>
 <p>Configure a Debezium connector instance to use Avro serialization by setting configuration properties as follows:</p>
@@ -546,7 +569,7 @@ schema.name.adjustment.mode=avro</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-none hljs">docker run -it --rm --name apicurio \
-    -p 8080:8080 apicurio/apicurio-registry-mem:2.4.1.Final</code></pre>
+    -p 8080:8080 apicurio/apicurio-registry-mem:2.4.3.Final</code></pre>
 </div>
 </div>
 </li>
@@ -574,7 +597,7 @@ schema.name.adjustment.mode=avro</code></pre>
     -e CONNECT_VALUE_CONVERTER_APICURIO_REGISTRY_AUTO-REGISTER=true \
     -e CONNECT_VALUE_CONVERTER_APICURIO_REGISTRY_FIND-LATEST=true \
     -e CONNECT_SCHEMA_NAME_ADJUSTMENT_MODE=avro \
-    -p 8083:8083 debezium/connect:2.2</code></pre>
+    -p 8083:8083 quay.io/debezium/connect:2.2</code></pre>
 </div>
 </div>
 </li>
@@ -677,7 +700,7 @@ value.converter.schema.registry.url=http://localhost:8081</code></pre>
     -e VALUE_CONVERTER=io.confluent.connect.avro.AvroConverter \
     -e CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL=http://schema-registry:8081 \
     -e CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL=http://schema-registry:8081 \
-    -p 8083:8083 debezium/connect:2.2</code></pre>
+    -p 8083:8083 quay.io/debezium/connect:2.2</code></pre>
 </div>
 </div>
 </li>
@@ -690,7 +713,7 @@ value.converter.schema.registry.url=http://localhost:8081</code></pre>
     --link kafka:kafka \
     --link mysql:mysql \
     --link schema-registry:schema-registry \
-    debezium/connect:2.2 \
+    quay.io/debezium/connect:2.2 \
     /kafka/bin/kafka-console-consumer.sh \
       --bootstrap-server kafka:9092 \
       --property print.key=true \
@@ -751,7 +774,7 @@ see <a href="https://github.com/debezium/debezium-examples/tree/main/tutorial#us
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2022 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/5ff4df141738a2e0b90378a5543930412e197b81">5ff4df14</a></span>)
+            <div class="copyright">Copyright &copy; 2023 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/230c056577672b69f2f2d65968cf64d159c5d42b">230c0565</a></span>)
             
         </div>
     </footer>

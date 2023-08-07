@@ -87,6 +87,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../configuration/signalling.html">Sending Signals to Debezium</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../configuration/notification.html">Receive notifications from Debezium</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -123,6 +126,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="spanner.html">Spanner</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jdbc.html">Jdbc</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -158,6 +164,15 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/applying-transformations-selectively.html">Using SMT Predicates to Selectively Apply Transformations</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/compute-partition.html">Compute Partition [Deprecated]</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/partition-routing.html">Partition Routing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/header-to-value.html">HeaderToValue</a>
   </li>
 </ul>
   </li>
@@ -239,6 +254,12 @@
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version">
+          <a href="/documentation/reference/2.4/index.html">2.4</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.3/index.html">2.3</a>
+        </li>
+        <li class="version">
           <a href="/documentation/reference/2.2/index.html">2.2</a>
         </li>
         <li class="version">
@@ -307,6 +328,8 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
                 <a class="version is-current" href="/documentation/reference/nightly/index.html">nightly</a>
+                <a class="version" href="/documentation/reference/2.4/index.html">2.4</a>
+                <a class="version" href="/documentation/reference/2.3/index.html">2.3</a>
                 <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
                 <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
                 <a class="version" href="/documentation/reference/2.0/index.html">2.0</a>
@@ -393,6 +416,8 @@
 <li><a href="#postgresql-host-replication-permissions">Configuring PostgreSQL to allow replication with the Debezium connector host</a></li>
 <li><a href="#supported-postgresql-topologies">Supported PostgreSQL topologies</a></li>
 <li><a href="#postgresql-wal-disk-space">WAL disk space consumption</a></li>
+<li><a href="#postgresql-deploying-multiple-connectors">Setting up multiple connectors for same database server</a></li>
+<li><a href="#upgrading-postgresql">Upgrading PostgreSQL</a></li>
 </ul>
 </li>
 <li><a href="#postgresql-deployment">Deployment</a>
@@ -489,7 +514,7 @@ For information about the PostgreSQL versions that are compatible with the conne
 </ul>
 </div>
 <div class="paragraph">
-<p><a href="#postgresql-when-things-go-wrong"> Behavior when things go wrong</a> describes what the connector does when there is a problem.</p>
+<p><a href="#postgresql-when-things-go-wrong">Behavior when things go wrong</a> describes how the connector responds if there is a problem.</p>
 </div>
 </td>
 </tr>
@@ -533,7 +558,11 @@ For more information about PostgreSQL logical replication security, see the <a h
 <div class="sect2">
 <h3 id="postgresql-snapshots"><a class="anchor" href="#postgresql-snapshots"></a>Snapshots</h3>
 <div class="paragraph">
-<p>Most PostgreSQL servers are configured to not retain the complete history of the database in the WAL segments. This means that the PostgreSQL connector would be unable to see the entire history of the database by reading only the WAL. Consequently, the first time that the connector starts, it performs an initial <em>consistent snapshot</em> of the database. The default behavior for performing a snapshot consists of the following steps. You can change this behavior by setting the <a href="#postgresql-property-snapshot-mode"><code>snapshot.mode</code> connector configuration property</a> to a value other than <code>initial</code>.</p>
+<p>Most PostgreSQL servers are configured to not retain the complete history of the database in the WAL segments.
+This means that the PostgreSQL connector would be unable to see the entire history of the database by reading only the WAL.
+Consequently, the first time that the connector starts, it performs an initial <em>consistent snapshot</em> of the database.
+The default behavior for performing a snapshot consists of the following steps.
+You can change this behavior by setting the <a href="#postgresql-property-snapshot-mode"><code>snapshot.mode</code> connector configuration property</a> to a value other than <code>initial</code>.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -594,6 +623,14 @@ For more information about PostgreSQL logical replication security, see the <a h
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The connector never performs snapshots. When a connector is configured this way, its behavior when it starts is as follows. If there is a previously stored LSN in the Kafka offsets topic, the connector continues streaming changes from that position. If no LSN has been stored, the connector starts streaming changes from the point in time when the PostgreSQL logical replication slot was created on the server. The <code>never</code> snapshot mode is useful only when you know all data of interest is still reflected in the WAL.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>initial</code> (default)</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The connector performs a database snapshot when no Kafka offsets topic exists. After the database snapshot completes the Kafka offsets topic is written. If there is a previously stored LSN in the Kafka offsets topic, the connector continues streaming changes from that position.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -699,6 +736,11 @@ The format of the names is the same as for the <code>signal.data.collection</cod
 <td class="tableblock halign-left valign-top"><p class="tableblock">An optional string, which specifies a condition based on the column(s) of the table(s), to capture a
 subset of the contents of the table(s).</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>surrogate-key</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>N/A</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An optional string that specifies the column name that the connector uses as the primary key of a table during the snapshot process.</p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
@@ -724,7 +766,7 @@ Incremental snapshots are based on the <a href="https://github.com/debezium/debe
 <p>In an incremental snapshot, instead of capturing the full state of a database all at once, as in an initial snapshot, Debezium captures each table in phases, in a series of configurable chunks.
 You can specify the tables that you want the snapshot to capture and the <a href="#postgresql-property-incremental-snapshot-chunk-size">size of each chunk</a>.
 The chunk size determines the number of rows that the snapshot collects during each fetch operation on the database.
-The default chunk size for incremental snapshots is 1 KB.</p>
+The default chunk size for incremental snapshots is 1024 rows.</p>
 </div>
 <div class="paragraph">
 <p>As an incremental snapshot proceeds, Debezium uses watermarks to track its progress, maintaining a record of each table row that it captures.
@@ -808,8 +850,10 @@ If a schema change is performed <em>before</em> the incremental snapshot start b
 <div class="sect3">
 <h4 id="postgresql-triggering-an-incremental-snapshot"><a class="anchor" href="#postgresql-triggering-an-incremental-snapshot"></a>Triggering an incremental snapshot</h4>
 <div class="paragraph">
-<p>Currently, the only way to initiate an incremental snapshot is to send an <a href="../configuration/signalling.html#debezium-signaling-ad-hoc-snapshots" class="page">ad hoc snapshot signal</a> to the signaling table on the source database.
-You submit a signal to the signaling table as SQL <code>INSERT</code> queries.</p>
+<p>Currently, the only way to initiate an incremental snapshot is to send an <a href="../configuration/signalling.html#debezium-signaling-ad-hoc-snapshots" class="page">ad hoc snapshot signal</a> to the signaling table on the source database.</p>
+</div>
+<div class="paragraph">
+<p>You submit a signal to the signaling table as SQL <code>INSERT</code> queries.</p>
 </div>
 <div class="paragraph">
 <p>After Debezium detects the change in the signaling table, it reads the signal, and runs the requested snapshot operation.</p>
@@ -819,8 +863,10 @@ You submit a signal to the signaling table as SQL <code>INSERT</code> queries.</
 Currently, the only valid option for snapshots operations is the default value, <code>incremental</code>.</p>
 </div>
 <div class="paragraph">
-<p>To specify the tables to include in the snapshot, provide a <code>data-collections</code> array that lists the tables or an array of regular expressions used to match tables, for example,<br>
-<code>{"data-collections": ["public.MyFirstTable", "public.MySecondTable"]}</code><br></p>
+<p>To specify the tables to include in the snapshot, provide a <code>data-collections</code> array that lists the tables or an array of regular expressions used to match tables, for example,<br></p>
+</div>
+<div class="paragraph">
+<p><code>{"data-collections": ["public.MyFirstTable", "public.MySecondTable"]}</code><br></p>
 </div>
 <div class="paragraph">
 <p>The <code>data-collections</code> array for an incremental snapshot signal has no default value.
@@ -846,7 +892,7 @@ For example, to include a table that exists in the <code><strong>public</strong>
 <div class="title">Prerequisites</div>
 <ul>
 <li>
-<p><a href="../configuration/signalling.html#debezium-signaling-enabling-signaling" class="page">Signaling is enabled</a>.<br></p>
+<p><a href="../configuration/signalling.html#debezium-signaling-enabling-source-signaling-channel" class="page">Signaling is enabled</a>.<br></p>
 <div class="ulist">
 <ul>
 <li>
@@ -861,7 +907,7 @@ For example, to include a table that exists in the <code><strong>public</strong>
 </ul>
 </div>
 <div class="olist arabic">
-<div class="title">Procedure</div>
+<div class="title">Using a source signaling channel to trigger an incremental snapshot</div>
 <ol class="arabic">
 <li>
 <p>Send a SQL query to add the ad hoc incremental snapshot request to the signaling table:</p>
@@ -892,9 +938,9 @@ values ('ad-hoc-1',   <i class="conum" data-value="2"></i><b>(2)</b>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 3. Descriptions of fields in a SQL command for sending an incremental snapshot signal to the signaling table</caption>
 <colgroup>
-<col style="width: 4%;">
-<col style="width: 11%;">
-<col style="width: 85%;">
+<col style="width: 11.1111%;">
+<col style="width: 22.2222%;">
+<col style="width: 66.6667%;">
 </colgroup>
 <thead>
 <tr>
@@ -920,7 +966,7 @@ Rather, during the snapshot, Debezium generates its own <code>id</code> string a
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>execute-snapshot</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies <code>type</code> parameter specifies the operation that the signal is intended to trigger.<br></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>type</code> parameter specifies the operation that the signal is intended to trigger.<br></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
@@ -1000,7 +1046,7 @@ For more information about the <code>additional-condition</code> parameter, see 
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>additional-condition</code> parameter also enables you to pass conditions that are based on more than on column.
+<p>The <code>additional-condition</code> parameter also enables you to pass conditions that are based on more than one column.
 For example, using the <code>products</code> table from the previous example, you can submit a query that triggers an incremental snapshot that includes the data of only those items for which <code>color=blue</code> and <code>quantity&gt;10</code>:</p>
 </div>
 <div class="listingblock">
@@ -1060,13 +1106,112 @@ The value for snapshot events is <code>r</code>, signifying a <code>READ</code> 
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<div class="title">Procedure using kafka signaling channel</div>
+<p>You can send a message to the <a href="../configuration/signalling.html#debezium-signaling-enabling-kafka-signaling-channel" class="page">configured Kafka topic</a> to request the connector to run an ad hoc incremental snapshot.</p>
+</div>
+<div class="paragraph">
+<p>The key of the Kafka message must match the value of the <code>topic.prefix</code> connector configuration option.</p>
+</div>
+<div class="paragraph">
+<p>The value of the message is a JSON object with <code>type</code> and <code>data</code> fields.</p>
+</div>
+<div class="paragraph">
+<p>The signal type is <code>execute-snapshot</code>, and the <code>data</code> field must have the following fields:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 4. Execute snapshot data fields</caption>
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>incremental</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The type of the snapshot to be executed.
+Currently Debezium supports only the <code>incremental</code> type. <br>
+See the next section for more details.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data-collections</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>N/A</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An array of comma-separated regular expressions that match the fully-qualified names of tables to include in the snapshot.<br>
+Specify the names by using the same format as is required for the <a href="#postgresql-property-signal-data-collection">signal.data.collection</a> configuration option.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>additional-condition</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>N/A</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An optional string that specifies a condition that the connector evaluates to designate a subset of columns to include in a snapshot.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>An example of the execute-snapshot Kafka message:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Key = `test_connector`
+
+Value = `{"type":"execute-snapshot","data": {"data-collections": ["schema1.table1", "schema1.table2"], "type": "INCREMENTAL"}}`</pre>
+</div>
+</div>
+<div class="sect9">
+<h10 id="_ad_hoc_incremental_snapshots_with_additional_condition"><a class="anchor" href="#_ad_hoc_incremental_snapshots_with_additional_condition"></a>Ad hoc incremental snapshots with additional-condition</h10>
+<div class="paragraph">
+<p>Debezium uses the <code>additional-condition</code> field to select a subset of a table&#8217;s content.</p>
+</div>
+<div class="paragraph">
+<p>Typically, when Debezium runs a snapshot, it runs a SQL query such as:</p>
+</div>
+<div class="paragraph">
+<p><code>SELECT * FROM <em>&lt;tableName&gt;</em> &#8230;&#8203;.</code></p>
+</div>
+<div class="paragraph">
+<p>When the snapshot request includes an <code>additional-condition</code>, the <code>additional-condition</code> is appended to the SQL query, for example:</p>
+</div>
+<div class="paragraph">
+<p><code>SELECT * FROM <em>&lt;tableName&gt;</em> WHERE <em>&lt;additional-condition&gt;</em> &#8230;&#8203;.</code></p>
+</div>
+<div class="paragraph">
+<p>For example, given a <code>products</code> table with the columns <code>id</code> (primary key), <code>color</code>, and <code>brand</code>, if you want a snapshot to include only content for which <code>color='blue'</code>, when you request the snapshot, you could append an <code>additional-condition</code> statement to filter the content:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Key = `test_connector`
+
+Value = `{"type":"execute-snapshot","data": {"data-collections": ["schema1.products"], "type": "INCREMENTAL", "additional-condition":"color='blue'"}}`</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can use the <code>additional-condition</code> statement to pass conditions based on multiple columns.
+For example, using the same <code>products</code> table as in the previous example, if you want a snapshot to include only the content from the <code>products</code> table for which <code>color='blue'</code>, and <code>brand='MyBrand'</code>, you could send the following request:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Key = `test_connector`
+
+Value = `{"type":"execute-snapshot","data": {"data-collections": ["schema1.products"], "type": "INCREMENTAL", "additional-condition":"color='blue' AND brand='MyBrand'"}}`</pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="postgresql-stopping-an-incremental-snapshot"><a class="anchor" href="#postgresql-stopping-an-incremental-snapshot"></a>Stopping an incremental snapshot</h4>
 <div class="paragraph">
 <p>You can also stop an incremental snapshot by sending a signal to the table on the source database.
-You submit a stop snapshot signal to the table by sending a SQL <code>INSERT</code> query.
-After Debezium detects the change in the signaling table, it reads the signal, and stops the incremental snapshot operation if it&#8217;s in progress.</p>
+You submit a stop snapshot signal to the table by sending a SQL <code>INSERT</code> query.</p>
+</div>
+<div class="paragraph">
+<p>After Debezium detects the change in the signaling table, it reads the signal, and stops the incremental snapshot operation if it&#8217;s in progress.</p>
 </div>
 <div class="paragraph">
 <p>The query that you submit specifies the snapshot operation of <code>incremental</code>, and, optionally, the tables of the current running snapshot to be removed.</p>
@@ -1075,7 +1220,7 @@ After Debezium detects the change in the signaling table, it reads the signal, a
 <div class="title">Prerequisites</div>
 <ul>
 <li>
-<p><a href="../configuration/signalling.html#debezium-signaling-enabling-signaling" class="page">Signaling is enabled</a>.<br></p>
+<p><a href="../configuration/signalling.html#debezium-signaling-enabling-source-signaling-channel" class="page">Signaling is enabled</a>.<br></p>
 <div class="ulist">
 <ul>
 <li>
@@ -1090,7 +1235,7 @@ After Debezium detects the change in the signaling table, it reads the signal, a
 </ul>
 </div>
 <div class="olist arabic">
-<div class="title">Procedure</div>
+<div class="title">Using a source signaling channel to stop an incremental snapshot</div>
 <ol class="arabic">
 <li>
 <p>Send a SQL query to stop the ad hoc incremental snapshot to the signaling table:</p>
@@ -1118,11 +1263,11 @@ values ('ad-hoc-1',   <i class="conum" data-value="2"></i><b>(2)</b>
 <p>The following table describes the parameters in the example:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 4. Descriptions of fields in a SQL command for sending a stop incremental snapshot signal to the signaling table</caption>
+<caption class="title">Table 5. Descriptions of fields in a SQL command for sending a stop incremental snapshot signal to the signaling table</caption>
 <colgroup>
-<col style="width: 4%;">
-<col style="width: 11%;">
-<col style="width: 85%;">
+<col style="width: 11.1111%;">
+<col style="width: 22.2222%;">
+<col style="width: 66.6667%;">
 </colgroup>
 <thead>
 <tr>
@@ -1167,6 +1312,59 @@ If you do not specify a <code>type</code> value, the signal fails to stop the in
 </table>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<div class="title">Using the Kafka signaling channel to stop an incremental snapshot</div>
+<p>You can send a signal message to the <a href="../configuration/signalling.html#debezium-signaling-enabling-kafka-signaling-channel" class="page">configured Kafka signaling topic</a> to stop an ad hoc incremental snapshot.</p>
+</div>
+<div class="paragraph">
+<p>The key of the Kafka message must match the value of the <code>topic.prefix</code> connector configuration option.</p>
+</div>
+<div class="paragraph">
+<p>The value of the message is a JSON object with <code>type</code> and <code>data</code> fields.</p>
+</div>
+<div class="paragraph">
+<p>The signal type is <code>stop-snapshot</code>, and the <code>data</code> field must have the following fields:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 6. Execute snapshot data fields</caption>
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>incremental</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The type of the snapshot to be executed.
+Currently Debezium supports only the <code>incremental</code> type. <br>
+See the next section for more details.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data-collections</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>N/A</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An optional array of comma-separated regular expressions that match the fully-qualified names of the tables to include in the snapshot.<br>
+Specify the names by using the same format as is required for the <a href="#postgresql-property-signal-data-collection">signal.data.collection</a> configuration option.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The following example shows a typical <code>stop-snapshot</code> Kafka message:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Key = `test_connector`
+
+Value = `{"type":"stop-snapshot","data": {"data-collections": ["schema1.table1", "schema1.table2"], "type": "INCREMENTAL"}}`</pre>
+</div>
 </div>
 </div>
 </div>
@@ -1332,7 +1530,7 @@ without the need for additional plug-ins.
 This is particularly valuable for environments where installation of plug-ins is not supported or not allowed.</p>
 </div>
 <div class="paragraph">
-<p>See <a href="#setting-up-postgresql">Setting up PostgreSQL</a> for more details.</p>
+<p>For more information, see <a href="#setting-up-postgresql">Setting up PostgreSQL</a>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1571,7 +1769,7 @@ This field provides information about every event in the form of a composite of 
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 5. Overview of change event basic content</caption>
+<caption class="title">Table 7. Overview of change event basic content</caption>
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 20%;">
@@ -1692,7 +1890,7 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 6. Description of change event key</caption>
+<caption class="title">Table 8. Description of change event key</caption>
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 20%;">
@@ -1982,7 +2180,7 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
             "email": "annek@noanswer.org"
         },
         "source": { <i class="conum" data-value="8"></i><b>(8)</b>
-            "version": "2.2.0.Alpha1",
+            "version": "2.4.0.Alpha1",
             "connector": "postgresql",
             "name": "PostgreSQL_server",
             "ts_ms": 1559033904863,
@@ -2002,7 +2200,7 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 7. Descriptions of <em>create</em> event value fields</caption>
+<caption class="title">Table 9. Descriptions of <em>create</em> event value fields</caption>
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 20%;">
@@ -2181,7 +2379,7 @@ In the <code>source</code> object, <code>ts_ms</code> indicates the time that th
             "email": "annek@noanswer.org"
         },
         "source": { <i class="conum" data-value="3"></i><b>(3)</b>
-            "version": "2.2.0.Alpha1",
+            "version": "2.4.0.Alpha1",
             "connector": "postgresql",
             "name": "PostgreSQL_server",
             "ts_ms": 1559033904863,
@@ -2200,7 +2398,7 @@ In the <code>source</code> object, <code>ts_ms</code> indicates the time that th
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 8. Descriptions of <em>update</em> event value fields</caption>
+<caption class="title">Table 10. Descriptions of <em>update</em> event value fields</caption>
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 20%;">
@@ -2326,7 +2524,7 @@ as a primary key change. For a primary key change, in place of sending an <code>
         },
         "after": null, <i class="conum" data-value="2"></i><b>(2)</b>
         "source": { <i class="conum" data-value="3"></i><b>(3)</b>
-            "version": "2.2.0.Alpha1",
+            "version": "2.4.0.Alpha1",
             "connector": "postgresql",
             "name": "PostgreSQL_server",
             "ts_ms": 1559033904863,
@@ -2345,7 +2543,7 @@ as a primary key change. For a primary key change, in place of sending an <code>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 9. Descriptions of <em>delete</em> event value fields</caption>
+<caption class="title">Table 11. Descriptions of <em>delete</em> event value fields</caption>
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 20%;">
@@ -2461,7 +2659,7 @@ The message key is <code>null</code> in this case, the message value looks like 
     "schema": { ... },
     "payload": {
         "source": { <i class="conum" data-value="1"></i><b>(1)</b>
-            "version": "2.2.0.Alpha1",
+            "version": "2.4.0.Alpha1",
             "connector": "postgresql",
             "name": "PostgreSQL_server",
             "ts_ms": 1559033904863,
@@ -2480,7 +2678,7 @@ The message key is <code>null</code> in this case, the message value looks like 
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 10. Descriptions of <em>truncate</em> event value fields</caption>
+<caption class="title">Table 12. Descriptions of <em>truncate</em> event value fields</caption>
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 20%;">
@@ -2586,7 +2784,7 @@ The message value looks like this for transactional messages:</p>
     "schema": { ... },
     "payload": {
         "source": { <i class="conum" data-value="1"></i><b>(1)</b>
-            "version": "2.2.0.Alpha1",
+            "version": "2.4.0.Alpha1",
             "connector": "postgresql",
             "name": "PostgreSQL_server",
             "ts_ms": 1559033904863,
@@ -2618,7 +2816,7 @@ The message value looks like this for non-transactional messages:</p>
     "schema": { ... },
     "payload": {
         "source": { <i class="conum" data-value="1"></i><b>(1)</b>
-            "version": "2.2.0.Alpha1",
+            "version": "2.4.0.Alpha1",
             "connector": "postgresql",
             "name": "PostgreSQL_server",
             "ts_ms": 1559033904863,
@@ -2639,7 +2837,7 @@ The message value looks like this for non-transactional messages:</p>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 11. Descriptions of <em>message</em> event value fields</caption>
+<caption class="title">Table 13. Descriptions of <em>message</em> event value fields</caption>
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 20%;">
@@ -2760,7 +2958,7 @@ For transactional <em>message</em> events, the <code>ts_ms</code> attribute of t
 <p>The following table describes how the connector maps basic types.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 12. Mappings for PostgreSQL basic data types</caption>
+<caption class="title">Table 14. Mappings for PostgreSQL basic data types</caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 20%;">
@@ -2987,7 +3185,8 @@ The string representation of the interval value that follows the pattern <code>P
 <br>
 Either the raw bytes (the default), a base64-encoded string, or a base64-url-safe-encoded String, or a hex-encoded string, based on the connector&#8217;s <a href="#postgresql-property-binary-handling-mode">binary handling mode</a> setting.<br>
 <br>
-Debezium only supports Postgres <code>bytea_output</code> configuration of value <code>hex</code>. See this <a href="https://www.postgresql.org/docs/current/datatype-binary.html">documentation on Postgres binary data types</a>.</p>
+Debezium only supports Postgres <code>bytea_output</code> configuration of value <code>hex</code>.
+For more information about PostgreSQL binary data types, see the <a href="https://www.postgresql.org/docs/current/datatype-binary.html">PostgreSQL documentation</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3194,7 +3393,7 @@ Contains the string representation of the PostgreSQL <code>ENUM</code> value. Th
 <p>When the <code>time.precision.mode</code> property is set to <code>adaptive</code>, the default, the connector determines the literal type and semantic type based on the column&#8217;s data type definition. This ensures that events <em>exactly</em> represent the values in the database.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 13. Mappings when <code>time.precision.mode</code> is <code>adaptive</code></caption>
+<caption class="title">Table 15. Mappings when <code>time.precision.mode</code> is <code>adaptive</code></caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 20%;">
@@ -3280,7 +3479,7 @@ Represents the number of microseconds since the epoch, and does not include time
 <p>When the <code>time.precision.mode</code> configuration property is set to <code>adaptive_time_microseconds</code>, the connector determines the literal type and semantic type for temporal types based on the column&#8217;s data type definition. This ensures that events <em>exactly</em> represent the values in the database, except all <code>TIME</code> fields are captured as microseconds.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 14. Mappings when <code>time.precision.mode</code> is <code>adaptive_time_microseconds</code></caption>
+<caption class="title">Table 16. Mappings when <code>time.precision.mode</code> is <code>adaptive_time_microseconds</code></caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 20%;">
@@ -3353,7 +3552,7 @@ Represents the number of microseconds past the epoch, and does not include timez
 <p>When the <code>time.precision.mode</code> configuration property is set to <code>connect</code>, the connector uses Kafka Connect logical types. This may be useful when consumers can handle only the built-in Kafka Connect logical types and are unable to handle variable-precision time values. However, since PostgreSQL supports microsecond precision, the events generated by a connector with the <code>connect</code> time precision mode <strong>results in a loss of precision</strong> when the database column has a <em>fractional second precision</em> value that is greater than 3.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 15. Mappings when <code>time.precision.mode</code> is <code>connect</code></caption>
+<caption class="title">Table 17. Mappings when <code>time.precision.mode</code> is <code>connect</code></caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 20%;">
@@ -3421,7 +3620,8 @@ Such columns are converted into an equivalent Kafka Connect value based on UTC. 
 <div class="paragraph">
 <p>PostgreSQL supports using <code>+/-infinite</code> values in <code>TIMESTAMP</code> columns.
 These special values are converted to timestamps with value <code>9223372036825200000</code> in case of positive infinity or <code>-9223372036832400000</code> in case of negative infinity.
-This behaviour mimics the standard behaviour of PostgreSQL JDBC driver - see <code>org.postgresql.PGStatement</code> interface for reference.</p>
+This behavior mimics the standard behavior of the PostgreSQL JDBC driver.
+For reference, see the <a href="https://jdbc.postgresql.org/documentation/publicapi/org/postgresql/PGStatement.html"><code>org.postgresql.PGStatement</code></a> interface.</p>
 </div>
 </div>
 <div class="sect2">
@@ -3433,7 +3633,7 @@ This behaviour mimics the standard behaviour of PostgreSQL JDBC driver - see <co
 <p>When the <code>decimal.handling.mode</code> property is set to <code>precise</code>, the connector uses the Kafka Connect <code>org.apache.kafka.connect.data.Decimal</code> logical type for all <code>DECIMAL</code>, <code>NUMERIC</code> and <code>MONEY</code> columns. This is the default mode.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 16. Mappings when <code>decimal.handling.mode</code> is <code>precise</code></caption>
+<caption class="title">Table 18. Mappings when <code>decimal.handling.mode</code> is <code>precise</code></caption>
 <colgroup>
 <col style="width: 28%;">
 <col style="width: 17%;">
@@ -3494,7 +3694,7 @@ The <code>scale</code> schema parameter is determined by the <a href="#postgresq
 When the <code>NUMERIC</code> or <code>DECIMAL</code> types are used without scale constraints, the values coming from the database have a different (variable) scale for each value. In this case, the connector uses <code>io.debezium.data.VariableScaleDecimal</code>, which contains both the value and the scale of the transferred value.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 17. Mappings of <code>DECIMAL</code> and <code>NUMERIC</code> types when there are no scale constraints</caption>
+<caption class="title">Table 19. Mappings of <code>DECIMAL</code> and <code>NUMERIC</code> types when there are no scale constraints</caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 20%;">
@@ -3540,7 +3740,7 @@ Contains a structure with two fields: <code>scale</code> of type <code>INT32</co
 <p>When the <code>decimal.handling.mode</code> property is set to <code>double</code>, the connector represents all <code>DECIMAL</code>, <code>NUMERIC</code> and <code>MONEY</code> values as Java double values and encodes them as shown in the following table.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 18. Mappings when <code>decimal.handling.mode</code> is <code>double</code></caption>
+<caption class="title">Table 20. Mappings when <code>decimal.handling.mode</code> is <code>double</code></caption>
 <colgroup>
 <col style="width: 30%;">
 <col style="width: 30%;">
@@ -3587,7 +3787,7 @@ Contains a structure with two fields: <code>scale</code> of type <code>INT32</co
 <p>The last possible setting for the <code>decimal.handling.mode</code> configuration property is <code>string</code>. In this case, the connector represents <code>DECIMAL</code>, <code>NUMERIC</code> and <code>MONEY</code> values as their formatted string representation, and encodes them as shown in the following table.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 19. Mappings when <code>decimal.handling.mode</code> is <code>string</code></caption>
+<caption class="title">Table 21. Mappings when <code>decimal.handling.mode</code> is <code>string</code></caption>
 <colgroup>
 <col style="width: 30%;">
 <col style="width: 30%;">
@@ -3643,7 +3843,7 @@ Contains a structure with two fields: <code>scale</code> of type <code>INT32</co
 <p>When the <code>dhstore.handling.mode</code> property is set to <code>json</code> (the default), the connector represents <code>HSTORE</code> values as string representations of JSON values and encodes them as shown in the following table. When the <code>hstore.handling.mode</code> property is set to <code>map</code>, the connector uses the <code>MAP</code> schema type for <code>HSTORE</code> values.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 20. Mappings for <code>HSTORE</code> data type</caption>
+<caption class="title">Table 22. Mappings for <code>HSTORE</code> data type</caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 20%;">
@@ -3715,7 +3915,7 @@ Example: output representation  using the JSON converter is <code>{"key" : "val"
 <p>PostgreSQL has data types that can store IPv4, IPv6, and MAC addresses. It is better to use these types instead of plain text types to store network addresses. Network address types offer input error checking and specialized operators and functions.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 21. Mappings for network address types</caption>
+<caption class="title">Table 23. Mappings for network address types</caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 20%;">
@@ -3790,7 +3990,7 @@ MAC addresses in EUI-64 format</p>
 <p>The PostgreSQL connector supports all <a href="http://postgis.net">PostGIS data types</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 22. Mappings of PostGIS data types</caption>
+<caption class="title">Table 24. Mappings of PostGIS data types</caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 20%;">
@@ -4068,7 +4268,7 @@ az postgres server restart --resource-group mygroup --name myserver</code></pre>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>See <a href="../postgres-plugins.html" class="page">Logical Decoding Output Plug-in Installation for PostgreSQL</a> for more detailed instructions for setting up and testing logical decoding plug-ins.</p>
+<p>For more detailed instructions about setting up and testing logical decoding plug-ins, see <a href="../postgres-plugins.html" class="page">Logical Decoding Output Plug-in Installation for PostgreSQL</a> .</p>
 </div>
 </td>
 </tr>
@@ -4136,7 +4336,7 @@ shared_preload_libraries = 'decoderbufs' <i class="conum" data-value="1"></i><b>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Instructs the server to load the <code>decoderbufs</code> logical decoding plug-ins at startup (the name of the plug-in is set in the <a href="https://github.com/debezium/postgres-decoderbufs/blob/v2.2.0.Alpha1/Makefile"><code>Protobuf</code></a> make file).</td>
+<td>Instructs the server to load the <code>decoderbufs</code> logical decoding plug-ins at startup (the name of the plug-in is set in the <a href="https://github.com/debezium/postgres-decoderbufs/blob/v2.4.0.Alpha1/Makefile"><code>Protobuf</code></a> make file).</td>
 </tr>
 </table>
 </div>
@@ -4426,6 +4626,159 @@ Again, regularly emitting events solves the problem.</p>
 </table>
 </div>
 </div>
+<div class="sect2">
+<h3 id="postgresql-deploying-multiple-connectors"><a class="anchor" href="#postgresql-deploying-multiple-connectors"></a>Setting up multiple connectors for same database server</h3>
+<div class="paragraph">
+<p>Debezium uses replication slots to stream changes from a database. These replication slots maintain the current position in form of a LSN (Log Sequence Number) which is pointer to a location in the WAL being consumed by the Debezium connector. This helps PostgreSQL keep the WAL available until it is processed by Debezium. A single replication slot can exist only for a single consumer or process - as different consumer might have different state and may need data from different position.</p>
+</div>
+<div class="paragraph">
+<p>Since a replication slot can only be used by a single connector, it is essential to create a unique replication slot for each Debezium connector. Although when a connector is not active, Postgres may allow other connector to consume the replication slot - which could be dangerous as it may lead to data loss as a slot will emit each change just once [<a href="https://www.postgresql.org/docs/10/logicaldecoding-explanation.html#LOGICALDECODING-REPLICATION-SLOTS">See More</a>].</p>
+</div>
+<div class="paragraph">
+<p>In addition to replication slot, Debezium uses publication to stream events when using the <code>pgoutput</code> plugin. Similar to replication slot, publication is at database level and is defined for a set of tables. Thus, you&#8217;ll need a unique publication for each connector, unless the connectors work on same set of tables. For more information about the options for enabling Debezium to create publications, see <a href="#postgresql-publication-autocreate-mode"><code>publication.autocreate.mode</code></a></p>
+</div>
+<div class="paragraph">
+<p>See <a href="#postgresql-property-slot-name"><code>slot.name</code></a> and <a href="#postgresql-property-publication-name"><code>publication.name</code></a> on how to set a unique replication slot name and publication name for each connector.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="upgrading-postgresql"><a class="anchor" href="#upgrading-postgresql"></a>Upgrading PostgreSQL</h3>
+<div class="paragraph">
+<p>When you upgrade the PostgreSQL database that Debezium uses, you must take specific steps to protect against data loss and to ensure that Debezium continues to operate.
+In general, Debezium is resilient to interruptions caused by network failures and other outages.
+For example, when a database server that a connector monitors stops or crashes, after the connector re-establishes communication with the PostgreSQL server, it continues to read from the last position recorded by the log sequence number (LSN) offset.
+The connector retrieves information about the last recorded offset from the Kafka Connect offsets topic, and queries the configured PostgreSQL replication slot for a log sequence number (LSN) with the same value.</p>
+</div>
+<div class="paragraph">
+<p>For the connector to start and to capture change events from a PostgreSQL database, a replication slot must be present.
+However, as part of the PostgreSQL upgrade process, replication slots are removed, and the original slots are not restored after the upgrade completes.
+As a result, when the connector restarts and requests the last known offset from the replication slot, PostgreSQL cannot return the information.</p>
+</div>
+<div class="paragraph">
+<p>You can create a new replication slot, but you must do more than create a new slot to guard against data loss.
+A new replication slot can provide the LSNs only for changes the occur after you create the slot; it cannot provide the offsets for events that occurred before the upgrade.
+When the connector restarts, it first requests the last known offset from the Kafka offsets topic.
+It then sends a request to the replication slot to return information for the offset retrieved from the offsets topic.
+But the new replication slot cannot provide the information that the connector needs to resume streaming from the expected position.
+The connector then skips any existing change events in the log, and only resumes streaming from the most recent position in the log.
+This can lead to silent data loss: the connector emits no records for the skipped events, and it does not provide any information to indicate that events were skipped.</p>
+</div>
+<div class="paragraph">
+<p>For guidance about how to perform a PostgreSQL database upgrade so that Debezium can continue to capture events while minimizing the risk of data loss, see the following procedure.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Temporarily stop applications that write to the database, or put them into a read-only mode.</p>
+</li>
+<li>
+<p>Back up the database.</p>
+</li>
+<li>
+<p>Temporarily disable write access to the database.</p>
+</li>
+<li>
+<p>Verify that any changes that occurred in the database before you blocked write operations are saved to the write-ahead log (WAL), and that the WAL LSN is reflected on the replication slot.</p>
+</li>
+<li>
+<p>Provide the connector with enough time to capture all event records that are written to the replication slot.<br>
+This step ensures that all change events that occurred before the downtime are accounted for, and that they are saved to Kafka.</p>
+</li>
+<li>
+<p>Verify that the connector has finished consuming entries from the replication slot by checking the value of the flushed LSN.</p>
+</li>
+<li>
+<p>Shut down the connector gracefully by stopping Kafka Connect.<br>
+Kafka Connect stops the connectors, flushes all event records to Kafka, and records the last offset received from each connector.<br></p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>As an alternative to stopping the entire Kafka Connect cluster, you can stop the connector by deleting it.
+Do not remove the offset topic, because it might be shared by other Kafka connectors.
+Later, after you restore write access to the database and you are ready to restart the connector, you must recreate the connector.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>As a PostgreSQL administrator, drop the replication slot on the primary database server.
+Do not use the <a href="#postgresql-property-slot-drop-on-stop"><code>slot.drop.on.stop</code></a> property to drop the replication slot.
+This property is for testing only.</p>
+</li>
+<li>
+<p>Stop the database.</p>
+</li>
+<li>
+<p>Perform the upgrade using an approved PostgreSQL upgrade procedure, such as <code>pg_upgrade</code>, or <code>pg_dump</code> and <code>pg_restore</code>.</p>
+</li>
+<li>
+<p>(Optional) Use a standard Kafka tool to remove the connector offsets from the offset storage topic.<br>
+For an example of how to remove connector offsets, see <a href="https://debezium.io/documentation/faq/#how_to_remove_committed_offsets_for_a_connector">how to remove connector offsets</a> in the Debezium community FAQ.</p>
+</li>
+<li>
+<p>Restart the database.</p>
+</li>
+<li>
+<p>As a PostgreSQL administrator, create a Debezium logical replication slot on the database.
+You must create the slot before enabling writes to the database.
+Otherwise, Debezium cannot capture the changes, resulting in data loss.</p>
+</li>
+<li>
+<p>Verify that the publication that defines the tables for Debezium to capture is still present after the upgrade.
+If the publication is not available, connect to the database as a PostgreSQL administrator to create a new publication.</p>
+</li>
+<li>
+<p>If it was necessary to create a new publication in the previous step, update the Debezium connector configuration to add the name of the new publication to the <a href="#postgresql-property-publication-name"><code>publication.name</code></a> property.</p>
+</li>
+<li>
+<p>In the connector configuration, rename the connector.</p>
+</li>
+<li>
+<p>In the connector configuration, set <a href="#postgresql-property-slot-name"><code>slot.name</code></a> to the name of the Debezium replication slot.</p>
+</li>
+<li>
+<p>Verify that the new replication slot is available.</p>
+</li>
+<li>
+<p>Restore write access to the database and restart any applications that write to the database.</p>
+</li>
+<li>
+<p>In the connector configuration, set the <a href="#postgresql-property-snapshot-mode"><code>snapshot.mode</code></a> property to <code>never</code>, and then restart the connector.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you were unable to verify that Debezium finished reading all database changes in Step 6, you can configure the connector to perform a new snapshot by setting <code>snapshot.mode=initial</code>.
+If necessary, you can confirm whether the connector read all changes from the replication slot by checking the contents of a database backup that was taken immediately before the upgrade.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+<div class="ulist">
+<div class="title">Additional resources</div>
+<ul>
+<li>
+<p><a href="#postgresql-server-configuration">Configuring replication slots for Debezium</a></p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -4449,7 +4802,7 @@ Again, regularly emitting events solves the problem.</p>
 <div class="title">Procedure</div>
 <ol class="arabic">
 <li>
-<p>Download the Debezium <a href="https://repo1.maven.org/maven2/io/debezium/debezium-connector-postgres/2.2.0.Alpha1/debezium-connector-postgres-2.2.0.Alpha1-plugin.tar.gz">PostgreSQL connector plug-in archive</a>.</p>
+<p>Download the Debezium <a href="https://repo1.maven.org/maven2/io/debezium/debezium-connector-postgres/2.4.0.Alpha1/debezium-connector-postgres-2.4.0.Alpha1-plugin.tar.gz">PostgreSQL connector plug-in archive</a>.</p>
 </li>
 <li>
 <p>Extract the files into your Kafka Connect environment.</p>
@@ -4611,7 +4964,7 @@ The service records the configuration and starts one connector task that perform
 <p>The following configuration properties are <em>required</em> unless a default value is available.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 23. Required connector configuration properties</caption>
+<caption class="title">Table 25. Required connector configuration properties</caption>
 <colgroup>
 <col style="width: 30%;">
 <col style="width: 25%;">
@@ -4912,6 +5265,20 @@ If you include this property in the configuration, do not set the <code>column.i
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="postgresql-property-skip-messages-without-change"></a><a href="#postgresql-property-skip-messages-without-change"><code>skip.messages.without.change</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specifies whether to skip publishing messages when there is no change in included columns. This would essentially filter messages if there is no change in columns included as per <code>column.include.list</code> or <code>column.exclude.list</code> properties.</p>
+</div>
+<div class="paragraph">
+<p>Note: Only works when REPLICA IDENTITY of the table is set to FULL</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="postgresql-property-time-precision-mode"></a><a href="#postgresql-property-time-precision-mode"><code>time.precision.mode</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -4922,9 +5289,11 @@ If you include this property in the configuration, do not set the <code>column.i
 <br>
 <code>adaptive</code> captures the time and timestamp values exactly as in the database using either millisecond, microsecond, or nanosecond precision values based on the database column&#8217;s type.<br>
 <br>
-<code>adaptive_time_microseconds</code> captures the date, datetime and timestamp values exactly as in the database using either millisecond, microsecond, or nanosecond precision values based on the database column&#8217;s type. An exception is <code>TIME</code> type fields, which are always captured as microseconds.<br>
+<code>adaptive_time_microseconds</code> captures the date, datetime and timestamp values exactly as in the database using either millisecond, microsecond, or nanosecond precision values based on the database column&#8217;s type.
+An exception is <code>TIME</code> type fields, which are always captured as microseconds.<br>
 <br>
-<code>connect</code> always represents time and timestamp values by using Kafka Connect&#8217;s built-in representations for <code>Time</code>, <code>Date</code>, and <code>Timestamp</code>, which use millisecond precision regardless of the database columns' precision. See <a href="#postgresql-temporal-values">temporal values</a>.</p>
+<code>connect</code> always represents time and timestamp values by using Kafka Connect&#8217;s built-in representations for <code>Time</code>, <code>Date</code>, and <code>Timestamp</code>, which use millisecond precision regardless of the database columns' precision.
+For more information, see <a href="#postgresql-temporal-types">temporal values</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4941,7 +5310,8 @@ If you include this property in the configuration, do not set the <code>column.i
 <br>
 <code>double</code> represents values by using <code>double</code> values, which might result in a loss of precision but which is easier to use.<br>
 <br>
-<code>string</code> encodes values as formatted strings, which are easy to consume but semantic information about the real type is lost. See <a href="#postgresql-decimal-types">Decimal types</a>.</p>
+<code>string</code> encodes values as formatted strings, which are easy to consume but semantic information about the real type is lost.
+For more information, see <a href="#postgresql-decimal-types">Decimal types</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4956,7 +5326,8 @@ If you include this property in the configuration, do not set the <code>column.i
 <br>
 <code>map</code> represents values by using <code>MAP</code>.<br>
 <br>
-<code>json</code> represents values by using <code>json string</code>. This setting encodes values as formatted strings such as <code>{"key" : "val"}</code>. See <a href="#postgresql-hstore-type">PostgreSQL <code>HSTORE</code> type</a>.</p>
+<code>json</code> represents values by using <code>json string</code>. This setting encodes values as formatted strings such as <code>{"key" : "val"}</code>.
+For more information, see <a href="#postgresql-hstore-type">PostgreSQL <code>HSTORE</code> type</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4971,7 +5342,9 @@ If you include this property in the configuration, do not set the <code>column.i
 <br>
 <code>numeric</code> represents intervals using approximate number of microseconds.<br>
 <br>
-<code>string</code> represents intervals exactly by using the string pattern representation <code>P&lt;years&gt;Y&lt;months&gt;M&lt;days&gt;DT&lt;hours&gt;H&lt;minutes&gt;M&lt;seconds&gt;S</code>. For example: <code>P1Y2M3DT4H5M6.78S</code>. See <a href="#postgresql-basic-types">PostgreSQL basic types</a>.</p>
+<code>string</code> represents intervals exactly by using the string pattern representation <code>P&lt;years&gt;Y&lt;months&gt;M&lt;days&gt;DT&lt;hours&gt;H&lt;minutes&gt;M&lt;seconds&gt;S</code>.
+For example: <code>P1Y2M3DT4H5M6.78S</code>.
+For more information, see <a href="#postgresql-basic-types">PostgreSQL basic types</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4979,18 +5352,23 @@ If you include this property in the configuration, do not set the <code>column.i
 <p><a id="postgresql-property-database-sslmode"></a><a href="#postgresql-property-database-sslmode"><code>database.sslmode</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>disable</code></p>
+<p><code>prefer</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Whether to use an encrypted connection to the PostgreSQL server. Options include:<br>
 <br>
 <code>disable</code> uses an unencrypted connection.<br>
 <br>
+<code>allow</code> attempts to use an unencrypted connection first and, failing that, a secure (encrypted) connection.<br>
+<br>
+<code>prefer</code> attempts to use a secure (encrypted) connection first and, failing that, an unencrypted connection.<br>
+<br>
 <code>require</code> uses a secure (encrypted) connection, and fails if one cannot be established.<br>
 <br>
 <code>verify-ca</code> behaves like <code>require</code> but also verifies the server TLS certificate against the configured Certificate Authority (CA) certificates, or fails if no valid matching CA certificates are found.<br>
 <br>
-<code>verify-full</code> behaves like <code>verify-ca</code> but also verifies that the server certificate matches the host to which the connector is trying to connect. See <a href="https://www.postgresql.org/docs/current/static/libpq-connect.html">the PostgreSQL documentation</a> for more information.</p>
+<code>verify-full</code> behaves like <code>verify-ca</code> but also verifies that the server certificate matches the host to which the connector is trying to connect.
+For more information, see <a href="https://www.postgresql.org/docs/current/static/libpq-connect.html">the PostgreSQL documentation</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5001,7 +5379,8 @@ If you include this property in the configuration, do not set the <code>column.i
 <p>No default</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The path to the file that contains the SSL certificate for the client. See <a href="https://www.postgresql.org/docs/current/static/libpq-connect.html">the PostgreSQL documentation</a> for more information.</p>
+<p>The path to the file that contains the SSL certificate for the client.
+For more information, see <a href="https://www.postgresql.org/docs/current/static/libpq-connect.html">the PostgreSQL documentation</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5012,7 +5391,8 @@ If you include this property in the configuration, do not set the <code>column.i
 <p>No default</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The path to the file that contains the SSL private key of the client. See <a href="https://www.postgresql.org/docs/current/static/libpq-connect.html">the PostgreSQL documentation</a> for more information.</p>
+<p>The path to the file that contains the SSL private key of the client.
+For more information, see <a href="https://www.postgresql.org/docs/current/static/libpq-connect.html">the PostgreSQL documentation</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5023,7 +5403,8 @@ If you include this property in the configuration, do not set the <code>column.i
 <p>No default</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The password to access the client private key from the file specified by <code>database.sslkey</code>. See <a href="https://www.postgresql.org/docs/current/static/libpq-connect.html">the PostgreSQL documentation</a> for more information.</p>
+<p>The password to access the client private key from the file specified by <code>database.sslkey</code>.
+For more information, see <a href="https://www.postgresql.org/docs/current/static/libpq-connect.html">the PostgreSQL documentation</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5034,7 +5415,8 @@ If you include this property in the configuration, do not set the <code>column.i
 <p>No default</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The path to the file that contains the root certificate(s) against which the server is validated. See <a href="https://www.postgresql.org/docs/current/static/libpq-connect.html">the PostgreSQL documentation</a> for more information.</p>
+<p>The path to the file that contains the root certificate(s) against which the server is validated.
+For more information, see <a href="https://www.postgresql.org/docs/current/static/libpq-connect.html">the PostgreSQL documentation</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5045,7 +5427,8 @@ If you include this property in the configuration, do not set the <code>column.i
 <p><code>true</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Enable TCP keep-alive probe to verify that the database connection is still alive. See <a href="https://www.postgresql.org/docs/current/static/libpq-connect.html">the PostgreSQL documentation</a> for more information.</p>
+<p>Enable TCP keep-alive probe to verify that the database connection is still alive.
+For more information, see <a href="https://www.postgresql.org/docs/current/static/libpq-connect.html">the PostgreSQL documentation</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5254,6 +5637,10 @@ For the <code>purchaseorders</code> tables in any schema, the columns <code>pk3<
 <div class="paragraph">
 <p>There is no limit to the number of columns that you use to create custom message keys.
 However, it&#8217;s best to use the minimum number that are required to specify a unique key.</p>
+</div>
+<div class="paragraph">
+<p>Note that having this property set and <code>REPLICA IDENTITY</code> set to <code>DEFAULT</code> on the tables, will cause the tombstone events to not be created properly if the key columns are not part of the primary key of the table.<br>
+Setting <code>REPLICA IDENTITY</code> to <code>FULL</code> is the only solution.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5282,6 +5669,37 @@ If no publication exists, the connector creates a new publication for tables tha
 For example: <code>CREATE PUBLICATION &lt;publication_name&gt; FOR TABLE &lt;tbl1, tbl2, tbl3&gt;</code>.
 If the publication exists, the connector updates the publication for tables that match the current filter configuration.
 For example: <code>ALTER PUBLICATION &lt;publication_name&gt; SET TABLE &lt;tbl1, tbl2, tbl3&gt;</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="postgresql-replica-autoset-type"></a><a href="#postgresql-replica-autoset-type"><code>replica.identity.autoset.values</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><em>empty string</em></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The setting determines the value for <a href="https://www.postgresql.org/docs/current/sql-altertable.html#SQL-ALTERTABLE-REPLICA-IDENTITY">replica identity</a> at table level.<br>
+<br>
+This option will overwrite the existing value in database.
+A comma-separated list of regular expressions that match fully-qualified tables and replica identity value to be used in the table.<br>
+<br>
+Each expression must match the pattern '&lt;fully-qualified table name&gt;:&lt;replica identity&gt;', where the table name could be defined as (<code>SCHEMA_NAME.TABLE_NAME</code>), and the replica identity values are:<br>
+<br>
+<code>DEFAULT</code> - Records the old values of the columns of the primary key, if any. This is the default for non-system tables.<br>
+<br>
+<code>INDEX index_name</code> - Records the old values of the columns covered by the named index, that must be unique, not partial, not deferrable, and include only columns marked NOT NULL. If this index is dropped, the behavior is the same as NOTHING.<br>
+<br>
+<code>FULL</code> - Records the old values of all columns in the row.<br>
+<br>
+<code>NOTHING</code> - Records no information about the old row. This is the default for system tables.<br>
+<br>
+For example,</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>schema1.*:FULL,schema2.table2:NOTHING,schema2.table3:INDEX idx_name</pre>
+</div>
 </div></div></td>
 </tr>
 <tr>
@@ -5351,7 +5769,7 @@ For example: <code>ALTER PUBLICATION &lt;publication_name&gt; SET TABLE &lt;tbl1
 </ul>
 </div>
 <div class="paragraph">
-<p>See <a href="../configuration/avro.html#avro-naming" class="page">Avro naming</a> for more details.</p>
+<p>For more information, see <a href="../configuration/avro.html#avro-naming" class="page">Avro naming</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5420,7 +5838,7 @@ That is, the specified expression is matched against the entire message prefix s
 <p>The following <em>advanced</em> configuration properties have defaults that work in most situations and therefore rarely need to be specified in the connector&#8217;s configuration.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 24. Advanced connector configuration properties</caption>
+<caption class="title">Table 26. Advanced connector configuration properties</caption>
 <colgroup>
 <col style="width: 30%;">
 <col style="width: 28%;">
@@ -5820,7 +6238,8 @@ become outdated if TOASTable columns are dropped from the table.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Specifies the constant that the connector provides to indicate that the original value is a toasted value that is not provided by the database.
-If the setting of <code>unavailable.value.placeholder</code> starts with the <code>hex:</code> prefix it is expected that the rest of the string represents hexadecimally encoded octets. See <a href="#postgresql-toasted-values">toasted values</a> for additional details.</p>
+If the setting of <code>unavailable.value.placeholder</code> starts with the <code>hex:</code> prefix it is expected that the rest of the string represents hexadecimally encoded octets.
+For more information, see <a href="#postgresql-toasted-values">toasted values</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5831,7 +6250,8 @@ If the setting of <code>unavailable.value.placeholder</code> starts with the <co
 <p><code>false</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Determines whether the connector generates events with transaction boundaries and enriches change event envelopes with transaction metadata. Specify <code>true</code> if you want the connector to do this. See <a href="#postgresql-transaction-metadata">Transaction metadata</a> for details.</p>
+<p>Determines whether the connector generates events with transaction boundaries and enriches change event envelopes with transaction metadata. Specify <code>true</code> if you want the connector to do this.
+For more information, see <a href="#postgresql-transaction-metadata">Transaction metadata</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5880,6 +6300,65 @@ By default, truncate operations are skipped.</p>
 <p>Fully-qualified name of the data collection that is used to send signals to the connector.<br>
 Use the following format to specify the collection name:<br>
 <code><em>&lt;schemaName&gt;</em>.<em>&lt;tableName&gt;</em></code><br></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="postgresql-property-signal-enabled-channels"></a><a href="#postgresql-property-signal-enabled-channels"><code>signal.enabled.channels</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>source</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of the signaling channel names that are enabled for the connector.
+By default, the following channels are available:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>source</code></p>
+</li>
+<li>
+<p><code>kafka</code></p>
+</li>
+<li>
+<p><code>file</code></p>
+</li>
+<li>
+<p><code>jmx</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Optionally, you can also implement a <a href="../configuration/signalling.html#debezium-signaling-enabling-custom-signaling-channel" class="page">custom signaling channel</a>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="postgresql-property-notification-enabled-channels"></a><a href="#postgresql-property-notification-enabled-channels"><code>notification.enabled.channels</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>No default</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of notification channel names that are enabled for the connector.
+By default, the following channels are available:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>sink</code></p>
+</li>
+<li>
+<p><code>log</code></p>
+</li>
+<li>
+<p><code>jmx</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Optionally, you can also implement a <a href="../configuration/notification.html#debezium-notification-custom-channel" class="page">custom notification channel</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5972,6 +6451,42 @@ For example, if the topic prefix is <code>fulfillment</code>, the default topic 
 For example, if the topic prefix is <code>fulfillment</code>, the default topic name is <code>fulfillment.transaction</code>.</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="postgresql-property-snapshot-max-threads"></a><a href="#postgresql-property-snapshot-max-threads"><code>snapshot.max.threads</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>1</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specifies the number of threads that the connector uses when performing an initial snapshot.
+To enable parallel initial snapshots, set the property to a value greater than 1.
+In a parallel initial snapshot, the connector processes multiple tables concurrently.
+This feature is incubating.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="postgresql-property-custom-metric-tags"></a><a href="#postgresql-property-custom-metric-tags"><code>custom.metric.tags</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>No default</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The custom metric tags will accept key-value pairs to customize the MBean object name which should be appended the end of regular name, each key would represent a tag for the MBean object name, and the corresponding value would be the value of that tag the key is. For example: <code>k1=v1,k2=v2</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="postgresql-property-errors-max-retires"></a><a href="#postgresql-property-errors-max-retires"><code>errors.max.retries</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>-1</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The maximum number of retries on retriable errors (e.g. connection errors) before failing (-1 = no limit, 0 = disabled, &gt; 0 = num of retries).</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 <div id="postgresql-pass-through-properties" class="paragraph">
@@ -5980,6 +6495,112 @@ For example, if the topic prefix is <code>fulfillment</code>, the default topic 
 </div>
 <div class="paragraph">
 <p>Be sure to consult the <a href="https://kafka.apache.org/documentation.html">Kafka documentation</a> for all of the configuration properties for Kafka producers and consumers. The PostgreSQL connector does use the <a href="https://kafka.apache.org/documentation.html#consumerconfigs">new consumer configuration properties</a>.</p>
+</div>
+<div class="sect3">
+<h4 id="debezium-postgresql-connector-kafka-signals-configuration-properties"><a class="anchor" href="#debezium-postgresql-connector-kafka-signals-configuration-properties"></a>Debezium connector Kafka signals configuration properties</h4>
+<div class="paragraph">
+<p>Debezium provides a set of <code>signal.*</code> properties that control how the connector interacts with the Kafka signals topic.</p>
+</div>
+<div class="paragraph">
+<p>The following table describes the Kafka <code>signal</code> properties.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 27. Kafka signals configuration properties</caption>
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 17%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="postgresql-property-signal-kafka-topic"></a><a href="#postgresql-property-signal-kafka-topic"><code>signal.kafka.topic</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>No default</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The name of the Kafka topic that the connector monitors for ad hoc signals.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="postgresql-property-signal-kafka-bootstrap-servers"></a><a href="#postgresql-property-signal-kafka-bootstrap-servers"><code>signal.kafka.bootstrap.servers</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>No default</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A list of host/port pairs that the connector uses for establishing an initial connection to the Kafka cluster.
+Each pair references the Kafka cluster that is used by the Debezium Kafka Connect process.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="postgresql-property-signal-kafka-poll-timeout-ms"></a><a href="#postgresql-property-signal-kafka-poll-timeout-ms"><code>signal.kafka.poll.timeout.ms</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>100</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An integer value that specifies the maximum number of milliseconds that the connector waits when polling signals.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="debezium-postgresql-connector-pass-through-signals-kafka-consumer-configuration-properties"><a class="anchor" href="#debezium-postgresql-connector-pass-through-signals-kafka-consumer-configuration-properties"></a>Debezium connector pass-through signals Kafka consumer client configuration properties</h4>
+<div class="paragraph">
+<p>The Debezium connector provides for pass-through configuration of the signals Kafka consumer.
+Pass-through signals properties begin with the prefix <code>signals.consumer.*</code>.
+For example, the connector passes properties such as <code>signal.consumer.security.protocol=SSL</code> to the Kafka consumer.</p>
+</div>
+<div class="paragraph">
+<p>As is the case with the <a href="#postgresql-pass-through-database-history-properties-for-configuring-producer-and-consumer-clients">pass-through properties for database schema history clients</a>, Debezium strips the prefixes from the properties before it passes them to the Kafka signals consumer.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="debezium-postgresql-connector-kafka-notifications-configuration-properties"><a class="anchor" href="#debezium-postgresql-connector-kafka-notifications-configuration-properties"></a>Debezium connector sink notifications configuration properties</h4>
+<div class="paragraph">
+<p>The following table describes the <code>notification</code> properties.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 28. Sink notification configuration properties</caption>
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 17%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="postgresql-property-notification-sink-topic-name"></a><a href="#postgresql-property-notification-sink-topic-name"><code>notification.sink.topic.name</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>No default</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The name of the topic that receives notifications from Debezium.
+This property is required when you configure the <a href="#postgresql-property-notification-enabled-channels"><code>notification.enabled.channels</code></a> property to include <code>sink</code> as one of the enabled notification channels.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -6006,7 +6627,7 @@ For example, if the topic prefix is <code>fulfillment</code>, the default topic 
 <div class="sect2">
 <h3 id="postgresql-snapshot-metrics"><a class="anchor" href="#postgresql-snapshot-metrics"></a>Snapshot metrics</h3>
 <div class="paragraph">
-<p>The <strong>MBean</strong> is <code>debezium.postgres:type=connector-metrics,context=snapshot,server=<em>&lt;postgresql.server.name&gt;</em></code>.</p>
+<p>The <strong>MBean</strong> is <code>debezium.postgres:type=connector-metrics,context=snapshot,server=<em>&lt;topic.prefix&gt;</em></code>.</p>
 </div>
 <div class="paragraph">
 <p>Snapshot metrics are not exposed unless a snapshot operation is active, or if a snapshot has occurred since the last connector start.</p>
@@ -6308,7 +6929,7 @@ Updates every 10,000 rows scanned and upon completing a table.</p>
 <div class="sect2">
 <h3 id="postgresql-streaming-metrics"><a class="anchor" href="#postgresql-streaming-metrics"></a>Streaming metrics</h3>
 <div class="paragraph">
-<p>The <strong>MBean</strong> is <code>debezium.postgres:type=connector-metrics,context=streaming,server=<em>&lt;postgresql.server.name&gt;</em></code>.</p>
+<p>The <strong>MBean</strong> is <code>debezium.postgres:type=connector-metrics,context=streaming,server=<em>&lt;topic.prefix&gt;</em></code>.</p>
 </div>
 <div class="paragraph">
 <p>The following table lists the streaming metrics that are available.</p>
@@ -6560,7 +7181,8 @@ The values will incoporate any differences between the clocks on the machines wh
 <p>When the connector is running, the PostgreSQL server that it is connected to could become unavailable for any number of reasons. If this happens, the connector fails with an error and stops. When the server is available again, restart the connector.</p>
 </div>
 <div class="paragraph">
-<p>The PostgreSQL connector externally stores the last processed offset in the form of a PostgreSQL LSN. After a connector restarts and connects to a server instance, the connector communicates with the server to continue streaming from that particular offset. This offset is available as long as the Debezium replication slot remains intact.  Never drop a replication slot on the primary server or you will lose data. See the next section for failure cases in which a slot has been removed.</p>
+<p>The PostgreSQL connector externally stores the last processed offset in the form of a PostgreSQL LSN. After a connector restarts and connects to a server instance, the connector communicates with the server to continue streaming from that particular offset. This offset is available as long as the Debezium replication slot remains intact.  Never drop a replication slot on the primary server or you will lose data.
+For information about failure cases in which a slot has been removed, see the next section.</p>
 </div>
 </div>
 <div class="sect2">
@@ -6664,7 +7286,7 @@ If the primary server goes down, a new primary must be promoted.</p>
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2022 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/5ff4df141738a2e0b90378a5543930412e197b81">5ff4df14</a></span>)
+            <div class="copyright">Copyright &copy; 2023 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/230c056577672b69f2f2d65968cf64d159c5d42b">230c0565</a></span>)
             
         </div>
     </footer>

@@ -87,6 +87,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../configuration/signalling.html">Sending Signals to Debezium</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../configuration/notification.html">Receive notifications from Debezium</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -123,6 +126,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/spanner.html">Spanner</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/jdbc.html">Jdbc</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -158,6 +164,15 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/applying-transformations-selectively.html">Using SMT Predicates to Selectively Apply Transformations</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/compute-partition.html">Compute Partition [Deprecated]</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/partition-routing.html">Partition Routing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/header-to-value.html">HeaderToValue</a>
   </li>
 </ul>
   </li>
@@ -239,6 +254,12 @@
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version">
+          <a href="/documentation/reference/2.4/index.html">2.4</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.3/index.html">2.3</a>
+        </li>
+        <li class="version">
           <a href="/documentation/reference/2.2/index.html">2.2</a>
         </li>
         <li class="version">
@@ -307,6 +328,8 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
                 <a class="version is-current" href="/documentation/reference/nightly/index.html">nightly</a>
+                <a class="version" href="/documentation/reference/2.4/index.html">2.4</a>
+                <a class="version" href="/documentation/reference/2.3/index.html">2.3</a>
                 <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
                 <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
                 <a class="version" href="/documentation/reference/2.0/index.html">2.0</a>
@@ -395,22 +418,22 @@ each connector provides additional metrics that you can use to monitor their act
 <div class="ulist">
 <ul>
 <li>
-<p><a href="../connectors/mysql.html#mysql-monitoring" class="page">MySQL connector metrics</a></p>
+<p><a href="../connectors/db2.html#db2-monitoring" class="page">Db2 connector metrics</a></p>
 </li>
 <li>
 <p><a href="../connectors/mongodb.html#mongodb-monitoring" class="page">MongoDB connector metrics</a></p>
+</li>
+<li>
+<p><a href="../connectors/mysql.html#mysql-monitoring" class="page">MySQL connector metrics</a></p>
+</li>
+<li>
+<p><a href="../connectors/oracle.html#oracle-monitoring" class="page">Oracle connector metrics</a></p>
 </li>
 <li>
 <p><a href="../connectors/postgresql.html#postgresql-monitoring" class="page">PostgreSQL connector metrics</a></p>
 </li>
 <li>
 <p><a href="../connectors/sqlserver.html#sqlserver-monitoring" class="page">SQL Server connector metrics</a></p>
-</li>
-<li>
-<p><a href="../connectors/db2.html#db2-monitoring" class="page">Db2 connector metrics</a></p>
-</li>
-<li>
-<p><a href="../connectors/oracle.html#oracle-monitoring" class="page">Oracle connector metrics</a></p>
 </li>
 <li>
 <p><a href="../connectors/cassandra.html#cassandra-monitoring" class="page">Cassandra connector metrics</a></p>
@@ -607,7 +630,7 @@ and maps the Docker host&#8217;s port 9010 to the container&#8217;s JMX port:</p
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-shell hljs" data-lang="shell">$ docker run -it --rm --name zookeeper -p 2181:2181 -p 2888:2888 -p 3888:3888 -p 9010:9010 -e JMXPORT=9010 -e JMXHOST=10.0.1.10 debezium/zookeeper:latest</code></pre>
+<pre class="highlightjs highlight nowrap"><code class="language-shell hljs" data-lang="shell">$ docker run -it --rm --name zookeeper -p 2181:2181 -p 2888:2888 -p 3888:3888 -p 9010:9010 -e JMXPORT=9010 -e JMXHOST=10.0.1.10 quay.io/debezium/zookeeper:latest</code></pre>
 </div>
 </div>
 </div>
@@ -668,7 +691,7 @@ and maps the Docker host&#8217;s port 9011 to the container&#8217;s JMX port:</p
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-shell hljs" data-lang="shell">$ docker run -it --rm --name kafka -p 9092:9092 -p 9011:9011 -e JMXPORT=9011 -e JMXHOST=10.0.1.10 --link zookeeper:zookeeper debezium/kafka:latest</code></pre>
+<pre class="highlightjs highlight nowrap"><code class="language-shell hljs" data-lang="shell">$ docker run -it --rm --name kafka -p 9092:9092 -p 9011:9011 -e JMXPORT=9011 -e JMXHOST=10.0.1.10 --link zookeeper:zookeeper quay.io/debezium/kafka:latest</code></pre>
 </div>
 </div>
 </div>
@@ -739,7 +762,7 @@ and maps the Docker host&#8217;s port 9012 to the container&#8217;s JMX port:</p
   --link zookeeper:zookeeper \
   --link kafka:kafka \
   --link mysql:mysql \
-  debezium/connect:latest</code></pre>
+  quay.io/debezium/connect:latest</code></pre>
 </div>
 </div>
 </div>
@@ -797,7 +820,7 @@ The part after the prefix is converted to lowercase and underscores are replaced
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2022 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/5ff4df141738a2e0b90378a5543930412e197b81">5ff4df14</a></span>)
+            <div class="copyright">Copyright &copy; 2023 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/230c056577672b69f2f2d65968cf64d159c5d42b">230c0565</a></span>)
             
         </div>
     </footer>

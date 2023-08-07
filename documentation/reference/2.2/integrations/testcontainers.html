@@ -123,6 +123,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/spanner.html">Spanner</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/jdbc.html">Jdbc</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -142,6 +145,9 @@
     <a class="nav-link" href="../transformations/mongodb-event-flattening.html">MongoDB New Document State Extraction</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/event-changes.html">Event Changes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/outbox-event-router.html">Outbox Event Router</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -155,6 +161,15 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/applying-transformations-selectively.html">Using SMT Predicates to Selectively Apply Transformations</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/compute-partition.html">Compute Partition [Deprecated]</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/partition-routing.html">Partition Routing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/header-to-value.html">HeaderToValue</a>
   </li>
 </ul>
   </li>
@@ -235,6 +250,12 @@
         <li class="version">
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
+        <li class="version">
+          <a href="/documentation/reference/2.4/index.html">2.4</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.3/index.html">2.3</a>
+        </li>
         <li class="version is-current">
           <a href="/documentation/reference/2.2/index.html">2.2</a>
         </li>
@@ -304,6 +325,8 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">2.2</button>
         <div class="version-menu">
                 <a class="version" href="/documentation/reference/nightly/index.html">nightly</a>
+                <a class="version" href="/documentation/reference/2.4/index.html">2.4</a>
+                <a class="version" href="/documentation/reference/2.3/index.html">2.3</a>
                 <a class="version is-current" href="/documentation/reference/2.2/index.html">2.2</a>
                 <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
                 <a class="version" href="/documentation/reference/2.0/index.html">2.0</a>
@@ -329,8 +352,8 @@
 <div class="article-cell1">
 <article class="doc">
         
-    <div class="version-banner version-banner-development">
-    You are viewing documentation for the current development version of Debezium.
+    <div class="version-banner version-banner-outdated">
+    You are viewing documentation for an outdated version of Debezium.
     <br/>
             If you want to view the latest stable version of this page, please go <a href=/documentation/reference/stable/index.html>here</a>.
             
@@ -403,7 +426,7 @@ allowing you to focus on the essential logic of your tests.</p>
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
   &lt;groupId&gt;io.debezium&lt;/groupId&gt;
   &lt;artifactId&gt;debezium-testing-testcontainers&lt;/artifactId&gt;
-  &lt;version&gt;2.2.0.Alpha1&lt;/version&gt;
+  &lt;version&gt;2.2.1.Final&lt;/version&gt;
   &lt;scope&gt;test&lt;/scope&gt;
 &lt;/dependency&gt;
 &lt;dependency&gt;
@@ -447,13 +470,13 @@ The existing Testcontainers support for <a href="https://www.testcontainers.org/
 
     public static PostgreSQLContainer&lt;?&gt; postgresContainer =
             new PostgreSQLContainer&lt;&gt;(
-                    DockerImageName.parse("debezium/postgres:11")
+                    DockerImageName.parse("quay.io/debezium/postgres:15")
                         .asCompatibleSubstituteFor("postgres"))
                 .withNetwork(network)
                 .withNetworkAliases("postgres"); <i class="conum" data-value="3"></i><b>(3)</b>
 
     public static DebeziumContainer debeziumContainer =
-            new DebeziumContainer("debezium/connect:2.2.0.Alpha1")
+            new DebeziumContainer("quay.io/debezium/connect:2.2.1.Final")
                 .withNetwork(network)
                 .withKafka(kafkaContainer)
                 .dependsOn(kafkaContainer); <i class="conum" data-value="4"></i><b>(4)</b>
@@ -479,11 +502,11 @@ The existing Testcontainers support for <a href="https://www.testcontainers.org/
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Set up a container for Postgres 11 (using Debezium&#8217;s Postgres container image)</td>
+<td>Set up a container for Postgres 15 (using Debezium&#8217;s Postgres container image)</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Set up a container for Kafka Connect with Debezium 2.2.0.Alpha1</td>
+<td>Set up a container for Kafka Connect with Debezium 2.2.1.Final</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
@@ -619,7 +642,7 @@ private List&lt;ConsumerRecord&lt;String, String&gt;&gt; drain(
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2022 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/b25e9f4e8863d877ab696a06bb1318bdbfaf7b1f">b25e9f4e</a></span>)
+            <div class="copyright">Copyright &copy; 2023 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/e8119be5d5941a36adb0b3cf7650dcd2483b8bb7">e8119be5</a></span>)
             
         </div>
     </footer>

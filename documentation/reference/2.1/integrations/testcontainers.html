@@ -41,7 +41,7 @@
     </div>
   </nav>
 </header><div class="body">
-<div class="nav-container" data-component="reference" data-version="stable">
+<div class="nav-container" data-component="reference" data-version="2.1">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -236,6 +236,12 @@
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version">
+          <a href="/documentation/reference/2.4/index.html">2.4</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.3/index.html">2.3</a>
+        </li>
+        <li class="version">
           <a href="/documentation/reference/2.2/index.html">2.2</a>
         </li>
         <li class="version is-current">
@@ -290,7 +296,7 @@
 <main role="main" class="main">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../index.html" class="home-link"></a>
+  <a href="../../stable/index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Debezium Documentation</a></li>
@@ -304,6 +310,8 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">2.1</button>
         <div class="version-menu">
                 <a class="version" href="/documentation/reference/nightly/index.html">nightly</a>
+                <a class="version" href="/documentation/reference/2.4/index.html">2.4</a>
+                <a class="version" href="/documentation/reference/2.3/index.html">2.3</a>
                 <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
                 <a class="version is-current" href="/documentation/reference/2.1/index.html">2.1</a>
                 <a class="version" href="/documentation/reference/2.0/index.html">2.0</a>
@@ -329,7 +337,12 @@
 <div class="article-cell1">
 <article class="doc">
         
-    <!-- This partial is a placeholder -->            <h1 class="page">Integration Testing with Testcontainers</h1>
+    <div class="version-banner version-banner-outdated">
+    You are viewing documentation for an outdated version of Debezium.
+    <br/>
+            If you want to view the latest stable version of this page, please go <a href=/documentation/reference/stable/index.html>here</a>.
+            
+</div>            <h1 class="page">Integration Testing with Testcontainers</h1>
         <div id="preamble">
 <div class="sectionbody">
 <div id="toc" class="toc">
@@ -398,7 +411,7 @@ allowing you to focus on the essential logic of your tests.</p>
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
   &lt;groupId&gt;io.debezium&lt;/groupId&gt;
   &lt;artifactId&gt;debezium-testing-testcontainers&lt;/artifactId&gt;
-  &lt;version&gt;2.1.2.Final&lt;/version&gt;
+  &lt;version&gt;2.1.4.Final&lt;/version&gt;
   &lt;scope&gt;test&lt;/scope&gt;
 &lt;/dependency&gt;
 &lt;dependency&gt;
@@ -446,7 +459,7 @@ The existing Testcontainers support for <a href="https://www.testcontainers.org/
                 .withNetworkAliases("postgres"); <i class="conum" data-value="3"></i><b>(3)</b>
 
     public static DebeziumContainer debeziumContainer =
-            new DebeziumContainer("debezium/connect:2.1.2.Final")
+            new DebeziumContainer("debezium/connect:2.1.4.Final")
                 .withNetwork(network)
                 .withKafka(kafkaContainer)
                 .dependsOn(kafkaContainer); <i class="conum" data-value="4"></i><b>(4)</b>
@@ -476,7 +489,7 @@ The existing Testcontainers support for <a href="https://www.testcontainers.org/
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Set up a container for Kafka Connect with Debezium 2.1.2.Final</td>
+<td>Set up a container for Kafka Connect with Debezium 2.1.4.Final</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
@@ -612,7 +625,7 @@ private List&lt;ConsumerRecord&lt;String, String&gt;&gt; drain(
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2022 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/af79598f665688e27a0f7e3d8e04c3f60b37f355">af79598f</a></span>)
+            <div class="copyright">Copyright &copy; 2023 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/3a384143abd860706ff65189bfff08e3bed49f1c">3a384143</a></span>)
             
         </div>
     </footer>

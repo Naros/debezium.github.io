@@ -123,6 +123,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/spanner.html">Spanner</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/jdbc.html">Jdbc</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -142,6 +145,9 @@
     <a class="nav-link" href="../transformations/mongodb-event-flattening.html">MongoDB New Document State Extraction</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/event-changes.html">Event Changes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/outbox-event-router.html">Outbox Event Router</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -155,6 +161,15 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/applying-transformations-selectively.html">Using SMT Predicates to Selectively Apply Transformations</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/compute-partition.html">Compute Partition [Deprecated]</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/partition-routing.html">Partition Routing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/header-to-value.html">HeaderToValue</a>
   </li>
 </ul>
   </li>
@@ -235,6 +250,12 @@
         <li class="version">
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
+        <li class="version">
+          <a href="/documentation/reference/2.4/index.html">2.4</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.3/index.html">2.3</a>
+        </li>
         <li class="version is-current">
           <a href="/documentation/reference/2.2/index.html">2.2</a>
         </li>
@@ -304,6 +325,8 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">2.2</button>
         <div class="version-menu">
                 <a class="version" href="/documentation/reference/nightly/index.html">nightly</a>
+                <a class="version" href="/documentation/reference/2.4/index.html">2.4</a>
+                <a class="version" href="/documentation/reference/2.3/index.html">2.3</a>
                 <a class="version is-current" href="/documentation/reference/2.2/index.html">2.2</a>
                 <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
                 <a class="version" href="/documentation/reference/2.0/index.html">2.0</a>
@@ -329,8 +352,8 @@
 <div class="article-cell1">
 <article class="doc">
         
-    <div class="version-banner version-banner-development">
-    You are viewing documentation for the current development version of Debezium.
+    <div class="version-banner version-banner-outdated">
+    You are viewing documentation for an outdated version of Debezium.
     <br/>
             If you want to view the latest stable version of this page, please go <a href=/documentation/reference/stable/index.html>here</a>.
             
@@ -367,6 +390,7 @@
 <li><a href="#_pravega">Pravega</a></li>
 <li><a href="#_infinispan">Infinispan</a></li>
 <li><a href="#_apache_rocketmq">Apache RocketMQ</a></li>
+<li><a href="#_rabbitmq_stream">RabbitMQ Stream</a></li>
 </ul>
 </li>
 </ul>
@@ -394,9 +418,6 @@
 </td>
 <td class="content">
 <div class="paragraph">
-<p>This feature is currently in incubating state, i.e. exact semantics, configuration options etc. may change in future revisions, based on the feedback we receive.</p>
-</div>
-<div class="paragraph">
 <p>Please let us know if you encounter any problems while using this feature.
 Also please reach out if you have requirements for specific sinks to be supported by Debezium Server or even would be interested in contributing the required implementation.</p>
 </div>
@@ -405,7 +426,7 @@ Also please reach out if you have requirements for specific sinks to be supporte
 </table>
 </div>
 <div class="paragraph">
-<p>Debezium provides a ready-to-use application that streams change events from a source database to messaging infrastructure like Amazon Kinesis, Google Cloud Pub/Sub, Apache Pulsar or Redis (Stream).
+<p>Debezium provides a ready-to-use application that streams change events from a source database to messaging infrastructure like Amazon Kinesis, Google Cloud Pub/Sub, Apache Pulsar, Redis (Stream), or NATS JetStream.
 For streaming change events to Apache Kafka, it is recommended to deploy the Debezium connectors via Kafka Connect.</p>
 </div>
 </div>
@@ -419,7 +440,7 @@ For streaming change events to Apache Kafka, it is recommended to deploy the Deb
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://repo1.maven.org/maven2/io/debezium/debezium-server-dist/2.2.0.Alpha1/debezium-server-dist-2.2.0.Alpha1.tar.gz">Debezium Server distribution</a></p>
+<p><a href="https://repo1.maven.org/maven2/io/debezium/debezium-server-dist/2.2.1.Final/debezium-server-dist-2.2.1.Final.tar.gz">Debezium Server distribution</a></p>
 </li>
 </ul>
 </div>
@@ -433,7 +454,7 @@ For streaming change events to Apache Kafka, it is recommended to deploy the Deb
 |-- conf
 |-- CONTRIBUTE.md
 |-- COPYRIGHT.txt
-|-- debezium-server-2.2.0.Alpha1-runner.jar
+|-- debezium-server-2.2.1.Final-runner.jar
 |-- lib
 |-- LICENSE-3rd-PARTIES.txt
 |-- LICENSE.txt
@@ -509,6 +530,29 @@ debezium.source.database.dbname=postgres
 debezium.source.topic.prefix=tutorial
 debezium.source.schema.include.list=inventory</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>In this configuration file example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The sink is setup for AWS Kinesis in region <code>eu-central-1</code></p>
+</li>
+<li>
+<p>The source connector is setup for PostgreSQL using the default Debezium <a href="https://github.com/debezium/postgres-decoderbufs">decoderbufs</a> plugin.
+If using PostgreSQL&#8217;s built-in <code>pgoutput</code> plugin, set <code>debezium.source.plugin.name=pgoutput</code></p>
+</li>
+<li>
+<p>The source connector is set to capture events from a schema named <code>inventory</code>.
+If you want to capture all changes in the database, remove this line.
+Otherwise, update this line to correspond to your preferred schema or tables.</p>
+</li>
+<li>
+<p>The source offset will be stored in a file named <code>offsets.dat</code> in the <code>data</code> directory.
+Note that you might need to create this directory to prevent an error on startup.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>When the server is started it generates a seqeunce of log messages like this:</p>
@@ -774,6 +818,9 @@ There are also other options available</p>
 <li>
 <p><code>io.debezium.storage.redis.history.RedisSchemaHistory</code> for Redis deploments</p>
 </li>
+<li>
+<p><code>io.debezium.storage.redis.history.RocketMqSchemaHistory</code> for RocketMQ deploments</p>
+</li>
 </ul>
 </div></div></td>
 </tr>
@@ -910,6 +957,91 @@ For more information see Redis <a href="https://redis.io/commands/wait/">WAIT</a
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>If using Redis to store schema history, defines the delay of retry on wait for replica failure.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="schema-history-internal-rocketmq-topic"></a><a href="#schema-history-internal-rocketmq-topic"><code>debezium.source.schema.history.internal.rocketmq.topic</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The name of the rocketmq topic for the database schema history.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="schema-history-internal-rocketmq-namesrvAddr"></a><a href="#schema-history-internal-rocketmq-namesrvAddr"><code>debezium.source.schema.history.internal.rocketmq.name.srv.addr</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>localhost:9876</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>RocketMQ service discovery NameServer address configuration.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="schema-history-internal-rocketmq-acl-enabled"></a><a href="#schema-history-internal-rocketmq-acl-enabled"><code>debezium.source.schema.history.internal.rocketmq.acl.enabled</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>RocketMQ access control enable configuration, default is 'false'.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="schema-history-internal-rocketmq-access-key"></a><a href="#schema-history-internal-rocketmq-access-key"><code>debezium.source.schema.history.internal.rocketmq.access.key</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>RocketMQ access key. If <code>debezium.source.schema.history.internal.rocketmq.acl.enabled</code> is true, the value cannot be
+empty.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="schema-history-internal-rocketmq-secret-key"></a><a href="#schema-history-internal-rocketmq-secret-key"><code>debezium.source.schema.history.internal.rocketmq.secret.key</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>RocketMQ secret key. If <code>debezium.source.schema.history.internal.rocketmq.acl.enabled</code> is true, the value cannot be
+empty.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="schema-history-internal-rocketmq-recovery-attempts"></a><a href="#schema-history-internal-rocketmq-recovery-attempts"><code>debezium.source.schema.history.internal.rocketmq.recovery.attempts</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>60</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The maximum number of attempts to recover database schema history.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="schema-history-internal-rocketmq-recovery-poll-interval-ms"></a><a href="#schema-history-internal-rocketmq-recovery-poll-interval-ms"><code>debezium.source.schema.history.internal.rocketmq.recovery.poll.interval.ms</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>1000</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The number of milliseconds to wait while polling for persisted
+data during recovery.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="schema-history-internal-rocketmq-store-record-timeout-ms"></a><a href="#schema-history-internal-rocketmq-store-record-timeout-ms"><code>debezium.source.schema.history.internal.rocketmq.store.record.timeout.ms</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>60000</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Timeout for sending messages to RocketMQ.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1127,7 +1259,7 @@ The configuration will need to contain the list of predicates, implementation cl
 <div class="sect2">
 <h3 id="debezium-additional-configuration-options"><a class="anchor" href="#debezium-additional-configuration-options"></a>Additional configuration</h3>
 <div class="paragraph">
-<p>Debezium Server runs on top Quarkus framework.
+<p>Debezium Server runs on top of the Quarkus framework.
 All configuration options exposed by Quarkus are available in Debezium Server too.
 The most frequent used are:</p>
 </div>
@@ -1155,7 +1287,7 @@ The most frequent used are:</p>
 <p>8080</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The port on which Debezim exposes Microprofile Health endpoint and other exposed status information.</p>
+<p>The port on which Debezium exposes Microprofile Health endpoint and other exposed status information.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1188,11 +1320,11 @@ The most frequent used are:</p>
 <div class="sect3">
 <h4 id="_enabling_message_filtering"><a class="anchor" href="#_enabling_message_filtering"></a>Enabling message filtering</h4>
 <div class="paragraph">
-<p>Debezium server provide filter STM capability, see <a href="../transformations/filtering.html" class="page">Message Filtering</a> for more details.
-However, for security reasons it&#8217;s not enabled by default and has to be explicitly enabled when Debezium server is started.
+<p>Debezium Server provides filter STM capability, see <a href="../transformations/filtering.html" class="page">Message Filtering</a> for more details.
+However, for security reasons it&#8217;s not enabled by default and has to be explicitly enabled when Debezium Server is started.
 To enable it, set environment variable <code>ENABLE_DEBEZIUM_SCRIPTING</code> to <code>true</code>.
 This will add <code>debezium-scripting</code> jar file and <a href="https://jcp.org/en/jsr/detail?id=223">JSR 223</a> implementations (currently Groovy and graalvm.js) jar files into the server class path.
-These jar files are contained in <code>opt_lib</code> directory of the Debezium server distribution.</p>
+These jar files are contained in <code>opt_lib</code> directory of the Debezium Server distribution.</p>
 </div>
 </div>
 </div>
@@ -1778,6 +1910,28 @@ Debezium act as a <a href="https://knative.dev/docs/eventing/sources/">Knative E
 <p>The number of milliseconds to wait before another attempt to send record is made after failure (default of 1s).</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="httpclient-headers-prefix"></a><a href="#httpclient-headers-prefix"><code>debezium.sink.http.headers.prefix</code> </a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>X-DEBEZIUM-</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Headers will be prefixed with this value (defaults to X-DEBEZIUM-).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="httpclient-headers-encode-base64"></a><a href="#httpclient-headers-encode-base64"><code>debezium.sink.http.headers.encode.base64</code> </a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>true</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Header values will be base64 encoded (defaults to true).</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -1812,6 +1966,19 @@ Pulsar exposes a REST APIs and a native endpoint provides a (not-only) Java clie
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="pulsar-timeout"></a><a href="#pulsar-timeout"><code>debezium.sink.pulsar.timeout</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>0</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Configures timeout in milliseconds for sending a batch of messages to Pulsar and waiting for the producer to flush and persist all of them.
+By default it is set to <code>0</code> which means no timeout.
+Make sure that <a href="https://pulsar.apache.org/api/client/2.10.1/org/apache/pulsar/client/api/ProducerBuilder.html#maxPendingMessages(int)"><code>maxPendingMessages</code></a> and <a href="https://pulsar.apache.org/api/client/2.10.1/org/apache/pulsar/client/api/ProducerBuilder.html#blockIfQueueFull(boolean)"><code>blockIfQueueFull</code></a> are configured properly on the producer.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="pulsar-client"></a><a href="#pulsar-client"><code>debezium.sink.pulsar.client.*</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
@@ -1842,6 +2009,28 @@ The <code>topic</code> is set by Debezium.</p>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Tables without primary key sends messages with <code>null</code> key.
 This is not supported by Pulsar so a surrogate key must be used.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="pulsar-tenant"></a><a href="#pulsar-tenant"><code>debezium.sink.pusar.tenant</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>public</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The target tenant used to deliver the message.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="pulsar-namespace"></a><a href="#pulsar-namespace"><code>debezium.sink.pusar.namespace</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>default</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The target namespace used to deliver the message.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2514,7 +2703,7 @@ By default the same name is used.</p>
 <div class="sect3">
 <h4 id="_apache_kafka"><a class="anchor" href="#_apache_kafka"></a>Apache Kafka</h4>
 <div class="paragraph">
-<p><a href="https://kafka.apache.org/">Apache Kafka</a> is a popular open-source platform for distributed event streaming. Debezium server supports publishing captured change events to a configured Kafka message broker.</p>
+<p><a href="https://kafka.apache.org/">Apache Kafka</a> is a popular open-source platform for distributed event streaming. Debezium Server supports publishing captured change events to a configured Kafka message broker.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -2771,7 +2960,7 @@ When the alternative implementations are not available then the default ones are
 <h4 id="_apache_rocketmq"><a class="anchor" href="#_apache_rocketmq"></a>Apache RocketMQ</h4>
 <div class="paragraph">
 <p><a href="https://rocketmq.apache.org/">Apache RocketMQ</a> is a distributed messaging and streaming platform with low latency, high
-performance and reliability, trillion-level capacity and flexible scalability.Debezium server supports publishing
+performance and reliability, trillion-level capacity and flexible scalability. Debezium server supports publishing
 captured change events to a configured RocketMQ.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -2872,7 +3061,7 @@ proper value based on the actual application to avoid long thread blocking time.
 <div class="sect4">
 <h5 id="_injection_points_11"><a class="anchor" href="#_injection_points_11"></a>Injection points</h5>
 <div class="paragraph">
-<p>The rocketmq sink behaviour can be modified by a custom logic providing alternative implementations for specific
+<p>The RocketMQ sink behaviour can be modified by a custom logic providing alternative implementations for specific
 functionalities.
 When the alternative implementations are not available then the default ones are used.</p>
 </div>
@@ -2899,6 +3088,134 @@ When the alternative implementations are not available then the default ones are
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Custom configured instance of a RocketMQ used to publish messages to target topic.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="rocketmq-ext-stream-name-mapper"></a><a href="#rocketmq-ext-stream-name-mapper"><code>io.debezium.server.StreamNameMapper</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Custom implementation maps the planned destination (stream) name into a RocketMQ topic name.
+By default the same name is used.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_rabbitmq_stream"><a class="anchor" href="#_rabbitmq_stream"></a>RabbitMQ Stream</h4>
+<div class="paragraph">
+<p><a href="https://www.rabbitmq.com/">RabbitMQ</a> is an open source message broker, supporting multiple messaging protocols and can be deployed in distributed and federated configurations to meet high-scale, high-availability requirements.
+RabbitMQ supports messages queues and streams.
+Debezium Server supports publishing captured change events to a configured RabbitMQ Stream.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 35%;">
+<col style="width: 10%;">
+<col style="width: 55%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="rabbitmq-type"></a><a href="#rabbitmq-type"><code>debezium.sink.type</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Must be set to <code>rabbitmq</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="rabbitmq-host"></a><a href="#rabbitmq-host"><code>debezium.sink.rabbitmq.connection.host</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>localhost</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Host of RabbitMQ server.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="rabbitmq-port"></a><a href="#rabbitmq-port"><code>debezium.sink.rabbitmq.connection.port</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>5672</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Port of RabbitMQ server.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="rabbitmq-connection"></a><a href="#rabbitmq-connection"><code>debezium.sink.rabbitmq.connection.*</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The RabbitMQ module supports pass-through configuration.
+The connection <a href="https://github.com/rabbitmq/rabbitmq-java-client/blob/main/src/main/java/com/rabbitmq/client/ConnectionFactoryConfigurator.java">configuration properties</a> are passed to the RabbitMQ client with the prefix removed.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="rabbitmq-ack-timeout"></a><a href="#rabbitmq-ack-timeout"><code>debezium.sink.rabbitmq.ackTimeout</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>30000</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Defines the maximum time in milliseconds to wait a confirm from the broker after publishing a message.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="rabbitmq-routing-key"></a><a href="#rabbitmq-routing-key"><code>debezium.sink.rabbitmq.routingKey</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>(Optional) Routing key to use when publishing messages.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="sect4">
+<h5 id="_injection_points_12"><a class="anchor" href="#_injection_points_12"></a>Injection points</h5>
+<div class="paragraph">
+<p>RabbitMQ sink behavior can be modified by custom logic providing alternative implementations for specific functionalities.
+When the alternative implementations are not available then the default ones are used.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 35%;">
+<col style="width: 10%;">
+<col style="width: 55%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Interface</th>
+<th class="tableblock halign-left valign-top">CDI classifier</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="rabbitmq-ext-stream-name-mapper"></a><a href="#rabbitmq-ext-stream-name-mapper"><code>io.debezium.server.StreamNameMapper</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Custom implementation maps the planned destination (stream) name into a RabbitMQ exchange name.
+By default the same name is used.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2937,7 +3254,7 @@ The name of the bean is used as the <code>debezium.sink.type</code> option.</p>
 The execution path must pass the messages into the target system and regularly commit the passed/processed messages.</p>
 </div>
 <div class="paragraph">
-<p>See the <a href="https://github.com/debezium/debezium/blob/main/debezium-server/debezium-server-kinesis/src/main/java/io/debezium/server/kinesis/KinesisChangeConsumer.java">Kinesis sink</a> implementation for further details.</p>
+<p>See the <a href="https://github.com/debezium/debezium-server/blob/main/debezium-server-kinesis/src/main/java/io/debezium/server/kinesis/KinesisChangeConsumer.java">Kinesis sink</a> implementation for further details.</p>
 </div>
 </div>
 <div class="sect2">
@@ -3023,7 +3340,7 @@ RANGE_TOMBSTONE "r" -&gt; TRUNCATE "t"</code></pre>
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2022 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/b25e9f4e8863d877ab696a06bb1318bdbfaf7b1f">b25e9f4e</a></span>)
+            <div class="copyright">Copyright &copy; 2023 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/e8119be5d5941a36adb0b3cf7650dcd2483b8bb7">e8119be5</a></span>)
             
         </div>
     </footer>
