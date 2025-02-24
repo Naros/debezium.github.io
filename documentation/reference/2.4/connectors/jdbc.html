@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Debezium connector for JDBC :: Debezium Documentation</title>
     <link rel="canonical" href="https://debezium.io/documentation/reference/stable/connectors/jdbc.html">
-    <meta name="generator" content="Antora 3.0.0-alpha.9">
+    <meta name="generator" content="Antora 3.1.7">
 <link rel="stylesheet" href="../../../debezium-antora/css/site.css">
 <link rel="stylesheet" href="../../../debezium-antora/css/debezium-antora.css">
 <link rel="stylesheet" href="../../../debezium-antora/css/highlightjs-dark.css">
@@ -160,6 +160,9 @@
     <a class="nav-link" href="../transformations/filtering.html">Message Filtering</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/schema-change-event-filter.html">Schema Change Event Filtering</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/content-based-routing.html">Content-Based Routing</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -173,6 +176,12 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/header-to-value.html">HeaderToValue</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/timezone-converter.html">Timezone Converter</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/timescaledb.html">TimescaleDB Integration</a>
   </li>
 </ul>
   </li>
@@ -202,7 +211,7 @@
     <a class="nav-link" href="../integrations/cloudevents.html">CloudEvents</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../integrations/tracing.html">OpenTracing</a>
+    <a class="nav-link" href="../integrations/tracing.html">OpenTelemetry</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../integrations/testcontainers.html">Integration Testing with Testcontainers</a>
@@ -253,6 +262,21 @@
         <li class="version">
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
+        <li class="version">
+          <a href="/documentation/reference/3.0/index.html">3.0</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.1/index.html">3.1</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.7/index.html">2.7</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.6/index.html">2.6</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.5/index.html">2.5</a>
+        </li>
         <li class="version is-current">
           <a href="/documentation/reference/2.4/index.html">2.4</a>
         </li>
@@ -270,39 +294,6 @@
         </li>
         <li class="version">
           <a href="/documentation/reference/1.9/index.html">1.9</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.8/index.html">1.8</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.7/index.html">1.7</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.6/index.html">1.6</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.5/index.html">1.5</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.4/index.html">1.4</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.3/index.html">1.3</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.2/index.html">1.2</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.1/index.html">1.1</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.0/index.html">1.0</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.10/index.html">0.10</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.9/index.html">0.9</a>
         </li>
       </ul>
     </li>
@@ -327,36 +318,47 @@
     <div class="page-versions">
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">2.4</button>
         <div class="version-menu">
-                <a class="version" href="/documentation/reference/nightly/index.html">nightly</a>
-                <a class="version is-current" href="/documentation/reference/2.4/index.html">2.4</a>
-                <a class="version" href="/documentation/reference/2.3/index.html">2.3</a>
-                <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
-                <a class="version is-missing" href="/documentation/reference/2.1/index.html">2.1</a>
-                <a class="version is-missing" href="/documentation/reference/2.0/index.html">2.0</a>
-                <a class="version is-missing" href="/documentation/reference/1.9/index.html">1.9</a>
-                <a class="version is-missing" href="/documentation/reference/1.8/index.html">1.8</a>
-                <a class="version is-missing" href="/documentation/reference/1.7/index.html">1.7</a>
-                <a class="version is-missing" href="/documentation/reference/1.6/index.html">1.6</a>
-                <a class="version is-missing" href="/documentation/reference/1.5/index.html">1.5</a>
-                <a class="version is-missing" href="/documentation/reference/1.4/index.html">1.4</a>
-                <a class="version is-missing" href="/documentation/reference/1.3/index.html">1.3</a>
-                <a class="version is-missing" href="/documentation/reference/1.2/index.html">1.2</a>
-                <a class="version is-missing" href="/documentation/reference/1.1/index.html">1.1</a>
-                <a class="version is-missing" href="/documentation/reference/1.0/index.html">1.0</a>
-                <a class="version is-missing" href="/documentation/reference/0.10/index.html">0.10</a>
-                <a class="version is-missing" href="/documentation/reference/0.9/index.html">0.9</a>
+                        <a class="version" href="/documentation//reference/connectors/jdbc.html" data-hash="true">nightly</a>
+                        <a class="version" href="/documentation//reference/stable/connectors/jdbc.html" data-hash="true">3.0</a>
+                        <a class="version" href="/documentation//reference/3.1/connectors/jdbc.html" data-hash="true">3.1</a>
+                        <a class="version" href="/documentation//reference/2.7/connectors/jdbc.html" data-hash="true">2.7</a>
+                        <a class="version" href="/documentation//reference/2.6/connectors/jdbc.html" data-hash="true">2.6</a>
+                        <a class="version" href="/documentation//reference/2.5/connectors/jdbc.html" data-hash="true">2.5</a>
+                        <a class="version is-current" href="/reference/2.4/connectors/jdbc.html" data-hash="true">2.4</a>
+                        <a class="version" href="/documentation//reference/2.3/connectors/jdbc.html" data-hash="true">2.3</a>
+                        <a class="version" href="/documentation//reference/2.2/connectors/jdbc.html" data-hash="true">2.2</a>
+                    <a class="version is-missing" href="#">2.1</a>
+                    <a class="version is-missing" href="#">2.0</a>
+                    <a class="version is-missing" href="#">1.9</a>
         </div>
         |
     </div>
     </div>
+    <script>
+        function updateAnchorsWithHash() {
+            const currentHash = window.location.hash;
+            if (currentHash) {
+                document.querySelectorAll('a[data-hash="true"]').forEach(link => {
+                    const baseHref = link.getAttribute('href').split('#')[0];
+                    link.setAttribute('href', baseHref + currentHash);
+                });
+            }
+        }
+
+        // Listen for hashchange and update anchors
+        window.addEventListener('hashchange', updateAnchorsWithHash);
+
+        // Update anchors on initial load
+        document.addEventListener('DOMContentLoaded', updateAnchorsWithHash);
+    </script>
   <div class="edit-this-page"><a href="https://github.com/debezium/debezium/edit/2.4/documentation/modules/ROOT/pages/connectors/jdbc.adoc">Edit this Page</a></div>
   </div>
 <div class="article-grid">
 <div class="article-cell1">
 <article class="doc">
         
-    <div class="version-banner version-banner-development">
-    You are viewing documentation for the current development version of Debezium.
+    <div class="version-banner version-banner-outdated">
+    You are viewing documentation for an outdated version of Debezium.
     <br/>
             If you want to view the latest stable version of this page, please go <a href=/documentation/reference/stable/index.html>here</a>.
             
@@ -425,7 +427,7 @@ The connector periodically polls the Kafka topics that it subscribes to, consume
 The connector supports idempotent write operations by using upsert semantics and basic schema evolution.</p>
 </div>
 <div class="paragraph">
-<p>The following features are supported:</p>
+<p>The Debezium JDBC connector provides the following features:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -463,11 +465,26 @@ The connector supports idempotent write operations by using upsert semantics and
 <div class="paragraph">
 <p>By default, Debezium source connectors produce complex, hierarchical change events.
 When Debezium connectors are used with other JDBC sink connector implementations, you might need to apply the <code>ExtractNewRecordState</code> single message transformation (SMT) to flatten the payload of change events, so that they can be consumed by the sink implementation.
-If you run the Debezium JDBC sink connector, it&#8217;s not necessary to deploy the SMT,  because the Debezium sink connector can consume native Debezium change events directly, without the use of a transformation.</p>
+If you run the Debezium JDBC sink connector, it&#8217;s not necessary to deploy the SMT, because the Debezium sink connector can consume native Debezium change events directly, without the use of a transformation.</p>
 </div>
 <div class="paragraph">
 <p>When the JDBC sink connector consumes a complex change event from a Debezium source connector, it extracts the values from the <code>after</code> section of the original <code>insert</code> or <code>update</code> event.
 When a delete event is consumed by the sink connector, no part of the event&#8217;s payload is consulted.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The Debezium JDBC sink connector is not designed to read from schema change topics.
+If your source connector is configured to capture schema changes, in the JDBC connector configuration, set the <a href="#jdbc-property-connection-topics"><code>topics</code></a> or <a href="#jdbc-property-connection-topics-regex"><code>topics.regex</code></a> properties so that the connector does not consume from schema change topics.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -606,23 +623,27 @@ To avoid this problem, apply the following settings in your environment:</p>
 By default, the JDBC sink connector does not enable delete mode.</p>
 </div>
 <div class="paragraph">
-<p>If you want to support removal of rows, explicitly enable it in the connector configuration by setting <code>delete.enabled=true</code> in the connector configuration.
-However, to use this mode you must set <a href="#jdbc-property-primary-key-fields"><code>primary.key.fields</code></a> to a value other than <code>none</code>.
+<p>If you want to the connector to remove rows, you must explicitly set <code>delete.enabled=true</code> in the connector configuration.
+To use this mode you must also set <a href="#jdbc-property-primary-key-fields"><code>primary.key.fields</code></a> to a value other than <code>none</code>.
 The preceding configuration is necessary, because deletes are executed based on the primary key mapping, so if a destination table has no primary key mapping, the connector is unable to delete rows.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="jdbc-idempotent-writes"><a class="anchor" href="#jdbc-idempotent-writes"></a>Idempotent writes</h3>
 <div class="paragraph">
-<p>The Debezium JDBC sink connector supports idempotent writes, allowing the same records to be replayed repeatedly and the final database state to remain consistent.
-In order to support idempotent writes, the JDBC sink connector must be explicitly configured with the <code>insert.mode</code> set to <code>upsert</code>.
-An <code>upsert</code> operation is applied as either an <code>update</code> or an <code>insert</code>, depending on whether the specified primary key already exists.
-If the primary key value already exists, the operation updates values in the row.
+<p>The Debezium JDBC sink connector can perform idempotent writes, enabling it to replay the same records repeatedly and not change the final database state.</p>
+</div>
+<div class="paragraph">
+<p>To enable the connector to perform idempotent writes, you must be explicitly set the <code>insert.mode</code> for the connector to <code>upsert</code>.
+An <code>upsert</code> operation is applied as either an <code>update</code> or an <code>insert</code>, depending on whether the specified primary key already exists.</p>
+</div>
+<div class="paragraph">
+<p>If the primary key value already exists, the operation updates values in the row.
 If the specified primary key value doesn&#8217;t exist, an <code>insert</code> adds a new row.</p>
 </div>
 <div class="paragraph">
 <p>Each database dialect handles idempotent writes differently, because there is no SQL standard for <em>upsert</em> operations.
-The following illustrates the upsert database-specific DML syntax that is used by the supported database  dialects:</p>
+The following table shows the <code>upsert</code> DML syntax for the database dialects that Debezium supports:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -662,7 +683,7 @@ The following illustrates the upsert database-specific DML syntax that is used b
 <div class="sect2">
 <h3 id="jdbc-schema-evolution"><a class="anchor" href="#jdbc-schema-evolution"></a>Schema evolution</h3>
 <div class="paragraph">
-<p>The Debezium JDBC sink connector supports the following schema evolution modes:</p>
+<p>You can use the following schema evolution modes with the Debezium JDBC sink connector:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -754,9 +775,9 @@ As a result, by default, the text case of table or column names in the destinati
 Similarly, if the destination database dialect is PostgreSQL and the event&#8217;s topic is <code>ORDERS</code>, the destination table will be created as <code>orders</code> because PostgreSQL defaults to lower-case names when the name is not quoted.</p>
 </div>
 <div class="paragraph">
-<p>By setting <code>quote.identifiers</code> to <code>true</code> in the connector configuration, you can explicitly set the case of the table and field names to preserve the case that is present in the Kafka event.
-So if the incoming event is for a topic called <code>orders</code> and the destination database dialect is Oracle, if quoting is enabled&#8201;&#8212;&#8201;that is, if <code>quote.identifiers</code> is set to <code>true</code>&#8201;&#8212;&#8201;the connector creates a table with the name <code>orders</code>, because the constructed SQL defines the name of the table as <code>"orders"</code>.
-When quoting is enabled, the behavior for creating column names works in the same manner.</p>
+<p>To explicitly preserve the case of the table and field names that are present in a Kafka event, in the connector configuration, set the value of the <code>quote.identifiers</code> property to <code>true</code>.
+When this options is set, when an incoming event is for a topic called <code>orders</code>, and the destination database dialect is Oracle, the connector creates a table with the name <code>orders</code>, because the constructed SQL defines the name of the table as <code>"orders"</code>.
+Enabling quoting results in the same behavior when the connector creates column names.</p>
 </div>
 </div>
 </div>
@@ -1079,9 +1100,9 @@ To enforce propagation, one of the following properties must be set in the sourc
 </div>
 </div>
 <div class="paragraph">
-<p>In the preceding example, if no schema parameters are set, the Debezium JDBC sink connector would map this field to a column type of <code>Types.SMALLINT</code>.
+<p>In the preceding example, if no schema parameters are set, the Debezium JDBC sink connector maps this field to a column type of <code>Types.SMALLINT</code>.
 <code>Types.SMALLINT</code> can have different logical database types, depending on the database dialect.
-For MySQL, the example would convert to a <code>TINYINT</code> column type with no specified length.
+For MySQL, the column type in the example converts to a <code>TINYINT</code> column type with no specified length.
 If column or data type propagation is enabled for the source connector, the Debezium JDBC sink connector uses the mapping information to refine the data type mapping process and create a column with the type <code>TINYINT(1)</code>.</p>
 </div>
 <div class="admonitionblock note">
@@ -1115,7 +1136,7 @@ If you find a mapping could be improved, please let us know.</p>
 <p><a href="https://zookeeper.apache.org/">Apache ZooKeeper</a>, <a href="http://kafka.apache.org/">Apache Kafka</a>, and <a href="https://kafka.apache.org/documentation.html#connect">Kafka Connect</a> are installed.</p>
 </li>
 <li>
-<p>Destination database is installed and configured to accept JDBC connections.</p>
+<p>A destination database is installed and configured to accept JDBC connections.</p>
 </li>
 </ul>
 </div>
@@ -1123,7 +1144,7 @@ If you find a mapping could be improved, please let us know.</p>
 <div class="title">Procedure</div>
 <ol class="arabic">
 <li>
-<p>Download the Debezium <a href="https://repo1.maven.org/maven2/io/debezium/debezium-connector-jdbc/2.4.0.Alpha1/debezium-connector-jdbc-2.4.0.Alpha1-plugin.tar.gz">JDBC connector plug-in archive</a>.</p>
+<p>Download the Debezium <a href="https://repo1.maven.org/maven2/io/debezium/debezium-connector-jdbc/2.4.1.Final/debezium-connector-jdbc-2.4.1.Final-plugin.tar.gz">JDBC connector plug-in archive</a>.</p>
 </li>
 <li>
 <p>Extract the files into your Kafka Connect environment.</p>
@@ -1137,7 +1158,10 @@ If you find a mapping could be improved, please let us know.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Drivers for Oracle and Db2 are not automatically shipped with the JDBC sink connector and must be manually installed.
+<div class="paragraph">
+<p>Drivers for Oracle and Db2 are not included with the JDBC sink connector.
+You must download the drivers and install them manually.</p>
+</div>
 </td>
 </tr>
 </table>
@@ -1147,10 +1171,10 @@ Drivers for Oracle and Db2 are not automatically shipped with the JDBC sink conn
 <p>Add the driver JAR files to the path where the JDBC sink connector has been installed.</p>
 </li>
 <li>
-<p>Make sure that the path where the JDBC sink connector is installed is part of <a href="https://kafka.apache.org/documentation/#connectconfigs">Kafka Connect&#8217;s <code>plugin.path</code></a>.</p>
+<p>Make sure that the path where you install the JDBC sink connector is part of the <a href="https://kafka.apache.org/documentation/#connectconfigs">Kafka Connect <code>plugin.path</code></a>.</p>
 </li>
 <li>
-<p>Restart your Kafka Connect process to pick up the new JAR files.</p>
+<p>Restart the Kafka Connect process to pick up the new JAR files.</p>
 </li>
 </ol>
 </div>
@@ -1270,16 +1294,16 @@ Information about the properties is organized as follows:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#jdbc-connector-properties-generic">Generic properties</a></p>
+<p><a href="#jdbc-connector-properties-generic">JDBC connector generic properties</a></p>
 </li>
 <li>
-<p><a href="#jdbc-connector-properties-connection">Connection properties</a></p>
+<p><a href="#jdbc-connector-properties-connection">JDBC connector connection properties</a></p>
 </li>
 <li>
-<p><a href="#jdbc-connector-properties-runtime">Runtime properties</a></p>
+<p><a href="#jdbc-connector-properties-runtime">JDBC connector runtime properties</a></p>
 </li>
 <li>
-<p><a href="#jdbc-connector-properties-extendable">Extendable properties</a></p>
+<p><a href="#jdbc-connector-properties-extendable">JDBC connector extendable properties</a></p>
 </li>
 </ul>
 </div>
@@ -1362,7 +1386,7 @@ Do not use this property in combination with the <a href="#jdbc-property-connect
 </tbody>
 </table>
 <table id="jdbc-connector-properties-connection" class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 6. Connection properties</caption>
+<caption class="title">Table 6. JDBC connector connection properties</caption>
 <colgroup>
 <col style="width: 30%;">
 <col style="width: 25%;">
@@ -1456,7 +1480,7 @@ Do not use this property in combination with the <a href="#jdbc-property-connect
 </tbody>
 </table>
 <table id="jdbc-connector-properties-runtime" class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 7. Runtime properties</caption>
+<caption class="title">Table 7. JDBC connector runtime properties</caption>
 <colgroup>
 <col style="width: 30%;">
 <col style="width: 25%;">
@@ -1491,6 +1515,42 @@ Do not use this property in combination with the <a href="#jdbc-property-connect
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Specifies whether the connector processes <code>DELETE</code> or <em>tombstone</em> events and removes the corresponding row from the database.
 Use of this option requires that you set the <a href="#jdbc-property-primary-key-mode"><code>primary.key.mode</code></a> to <code>record.key</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="jdbc-property-truncate-enabled"></a><a href="#jdbc-property-truncate-enabled"><code>truncate.enabled</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specifies whether the connector processes <code>TRUNCATE</code> events and truncates the corresponding tables from the database.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Although support for <code>TRUNCATE</code> statements has been available in Db2 since <a href="https://www.ibm.com/support/pages/apar/JR37942/">version 9.7</a>,
+currently, the JDBC connector is unable to process standard <code>TRUNCATE</code> events that the Db2 connector emits.</p>
+</div>
+<div class="paragraph">
+<p>To ensure that the JDBC connector can process <code>TRUNCATE</code> events received from Db2, perform the truncation by using an alternative to the standard <code>TRUNCATE TABLE</code> statement.
+For example:</p>
+</div>
+<div class="paragraph">
+<p><code>ALTER TABLE <em>&lt;table_name&gt;</em> ACTIVATE NOT LOGGED INITIALLY WITH EMPTY TABLE</code></p>
+</div>
+<div class="paragraph">
+<p>The user account that submits the preceding query requires <code>ALTER</code> privileges on the table to be truncated.</p>
+</div>
+</td>
+</tr>
+</table>
 </div></div></td>
 </tr>
 <tr>
@@ -1639,10 +1699,34 @@ The connector adds missing columns to the table by comparing the incoming event&
 The placeholder, <code>${topic}</code>, is replaced by the topic name.</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="jdbc-property-dialect-postgres-postgis-schema"></a><a href="#jdbc-property-dialect-postgres-postgis-schema"><code>dialect.postgres.postgis.schema</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>public</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specifies the schema name where the PostgreSQL PostGIS extension is installed.
+The default is <code>public</code>; however, if the PostGIS extension was installed in another schema, this property should be used to specify the alternate schema name.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="jdbc-property-dialect-sqlserver-identity-insert"></a><a href="#jdbc-property-dialect-sqlserver-identity-insert"><code>dialect.sqlserver.identity.insert</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specifies whether the connector automatically sets an <code>IDENTITY_INSERT</code> before an <code>INSERT</code> or <code>UPSERT</code> operation into the identity column of SQL Server tables, and then unsets it immediately after the operation.
+When the default setting (<code>false</code>) is in effect, an <code>INSERT</code> or <code>UPSERT</code> operation into the <code>IDENTITY</code> column of a table results in a SQL exception.</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 <table id="jdbc-connector-properties-extendable" class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 8. Extendable properties</caption>
+<caption class="title">Table 8. JDBC connector extendable properties</caption>
 <colgroup>
 <col style="width: 30%;">
 <col style="width: 25%;">
@@ -1746,7 +1830,7 @@ Quoting behavior is dialect-specific, and varies among different types of databa
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2023 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/ac56c6e7a3f7678c0ee9dfca35046f38b4ca36b9">ac56c6e7</a></span>)
+            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/8c607e24d77a61db360135c33983769717b3b15c">8c607e24</a></span>)
             
         </div>
     </footer>

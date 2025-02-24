@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Exporting CloudEvents :: Debezium Documentation</title>
     <link rel="canonical" href="https://debezium.io/documentation/reference/stable/integrations/cloudevents.html">
-    <meta name="generator" content="Antora 3.0.0-alpha.9">
+    <meta name="generator" content="Antora 3.1.7">
 <link rel="stylesheet" href="../../debezium-antora/css/site.css">
 <link rel="stylesheet" href="../../debezium-antora/css/debezium-antora.css">
 <link rel="stylesheet" href="../../debezium-antora/css/highlightjs-dark.css">
@@ -94,13 +94,16 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Connectors</span>
+    <span class="nav-text">Source Connectors</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/index.html">Overview</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/mysql.html">MySQL</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/mariadb.html">MariaDB</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/mongodb.html">MongoDB</a>
@@ -127,7 +130,19 @@
     <a class="nav-link" href="../connectors/spanner.html">Spanner</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../connectors/jdbc.html">Jdbc</a>
+    <a class="nav-link" href="../connectors/informix.html">Informix</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Sink Connectors</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/index-sink.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/jdbc.html">JDBC</a>
   </li>
 </ul>
   </li>
@@ -160,19 +175,46 @@
     <a class="nav-link" href="../transformations/filtering.html">Message Filtering</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/schema-change-event-filter.html">Schema Change Event Filtering</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/content-based-routing.html">Content-Based Routing</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/applying-transformations-selectively.html">Using SMT Predicates to Selectively Apply Transformations</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../transformations/compute-partition.html">Compute Partition [Deprecated]</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/partition-routing.html">Partition Routing</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/header-to-value.html">HeaderToValue</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/timezone-converter.html">Timezone Converter</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/timescaledb.html">TimescaleDB Integration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/decode-logical-decoding-message-content.html">Decode Logical Decoding Message Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/convert-cloudevent-to-saveable-form.html">Convert CloudEvents to Saveable Form</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/vector-to-json.html">Vector Data Types to JSON Types</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Post Processors</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../post-processors/index.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../post-processors/reselect-columns.html">Reselect Columns</a>
   </li>
 </ul>
   </li>
@@ -202,7 +244,7 @@
     <a class="nav-link" href="cloudevents.html">CloudEvents</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="tracing.html">OpenTracing</a>
+    <a class="nav-link" href="tracing.html">OpenTelemetry</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="testcontainers.html">Integration Testing with Testcontainers</a>
@@ -229,9 +271,6 @@
     <a class="nav-link" href="../operations/openshift.html">Running on Openshift</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../operations/embedded.html">Embedding Debezium</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../operations/debezium-ui.html">Debezium UI</a>
   </li>
 </ul>
@@ -254,6 +293,21 @@
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version">
+          <a href="/documentation/reference/3.0/index.html">3.0</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.1/index.html">3.1</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.7/index.html">2.7</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.6/index.html">2.6</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.5/index.html">2.5</a>
+        </li>
+        <li class="version">
           <a href="/documentation/reference/2.4/index.html">2.4</a>
         </li>
         <li class="version">
@@ -270,39 +324,6 @@
         </li>
         <li class="version">
           <a href="/documentation/reference/1.9/index.html">1.9</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.8/index.html">1.8</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.7/index.html">1.7</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.6/index.html">1.6</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.5/index.html">1.5</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.4/index.html">1.4</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.3/index.html">1.3</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.2/index.html">1.2</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.1/index.html">1.1</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.0/index.html">1.0</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.10/index.html">0.10</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.9/index.html">0.9</a>
         </li>
       </ul>
     </li>
@@ -327,28 +348,39 @@
     <div class="page-versions">
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
-                <a class="version is-current" href="/documentation/reference/nightly/index.html">nightly</a>
-                <a class="version" href="/documentation/reference/2.4/index.html">2.4</a>
-                <a class="version" href="/documentation/reference/2.3/index.html">2.3</a>
-                <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
-                <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
-                <a class="version" href="/documentation/reference/2.0/index.html">2.0</a>
-                <a class="version" href="/documentation/reference/1.9/index.html">1.9</a>
-                <a class="version" href="/documentation/reference/1.8/index.html">1.8</a>
-                <a class="version" href="/documentation/reference/1.7/index.html">1.7</a>
-                <a class="version" href="/documentation/reference/1.6/index.html">1.6</a>
-                <a class="version" href="/documentation/reference/1.5/index.html">1.5</a>
-                <a class="version" href="/documentation/reference/1.4/index.html">1.4</a>
-                <a class="version" href="/documentation/reference/1.3/index.html">1.3</a>
-                <a class="version" href="/documentation/reference/1.2/index.html">1.2</a>
-                <a class="version" href="/documentation/reference/1.1/index.html">1.1</a>
-                <a class="version is-missing" href="/documentation/reference/1.0/index.html">1.0</a>
-                <a class="version is-missing" href="/documentation/reference/0.10/index.html">0.10</a>
-                <a class="version is-missing" href="/documentation/reference/0.9/index.html">0.9</a>
+                        <a class="version is-current" href="/reference/integrations/cloudevents.html" data-hash="true">nightly</a>
+                        <a class="version" href="/documentation//reference/stable/integrations/cloudevents.html" data-hash="true">3.0</a>
+                        <a class="version" href="/documentation//reference/3.1/integrations/cloudevents.html" data-hash="true">3.1</a>
+                        <a class="version" href="/documentation//reference/2.7/integrations/cloudevents.html" data-hash="true">2.7</a>
+                        <a class="version" href="/documentation//reference/2.6/integrations/cloudevents.html" data-hash="true">2.6</a>
+                        <a class="version" href="/documentation//reference/2.5/integrations/cloudevents.html" data-hash="true">2.5</a>
+                        <a class="version" href="/documentation//reference/2.4/integrations/cloudevents.html" data-hash="true">2.4</a>
+                        <a class="version" href="/documentation//reference/2.3/integrations/cloudevents.html" data-hash="true">2.3</a>
+                        <a class="version" href="/documentation//reference/2.2/integrations/cloudevents.html" data-hash="true">2.2</a>
+                        <a class="version" href="/documentation//reference/2.1/integrations/cloudevents.html" data-hash="true">2.1</a>
+                        <a class="version" href="/documentation//reference/2.0/integrations/cloudevents.html" data-hash="true">2.0</a>
+                        <a class="version" href="/documentation//reference/1.9/integrations/cloudevents.html" data-hash="true">1.9</a>
         </div>
         |
     </div>
     </div>
+    <script>
+        function updateAnchorsWithHash() {
+            const currentHash = window.location.hash;
+            if (currentHash) {
+                document.querySelectorAll('a[data-hash="true"]').forEach(link => {
+                    const baseHref = link.getAttribute('href').split('#')[0];
+                    link.setAttribute('href', baseHref + currentHash);
+                });
+            }
+        }
+
+        // Listen for hashchange and update anchors
+        window.addEventListener('hashchange', updateAnchorsWithHash);
+
+        // Update anchors on initial load
+        document.addEventListener('DOMContentLoaded', updateAnchorsWithHash);
+    </script>
   <div class="edit-this-page"><a href="https://github.com/debezium/debezium/edit/main/documentation/modules/ROOT/pages/integrations/cloudevents.adoc">Edit this Page</a></div>
   </div>
 <div class="article-grid">
@@ -368,11 +400,21 @@
 <ul class="sectlevel1">
 <li><a href="#_example_event_format">Example event format</a></li>
 <li><a href="#_example_configuration">Example configuration</a></li>
+<li><a href="#configuration-of-sources-of-metadata-and-some-cloudevents-fields">Configuration of sources of metadata and some CloudEvents fields</a>
+<ul class="sectlevel2">
+<li><a href="#_obtaining_record_metadata">Obtaining record metadata</a></li>
+<li><a href="#_obtaining_cloudevent_metadata">Obtaining CloudEvent metadata</a></li>
+</ul>
+</li>
 <li><a href="#cloud-events-converter-configuration-options">Configuration options</a></li>
 </ul>
 </div>
 <div class="paragraph">
-<p><a href="https://cloudevents.io/">CloudEvents</a> is a specification for describing event data in a common way. Its aim is to provide interoperability across services, platforms and systems. Debezium enables you to configure a MongoDB, MySQL, PostgreSQL, or SQL Server connector to emit change event records that conform to the CloudEvents specification.</p>
+<p><a href="https://cloudevents.io/">CloudEvents</a> is a specification for describing event data in a common way.
+Its aim is to provide interoperability across services, platforms and systems.
+Debezium enables you to configure a Db2,
+Informix,
+MongoDB, MySQL, Oracle, PostgreSQL, or SQL Server connector to emit change event records that conform to the CloudEvents specification.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -401,7 +443,7 @@ Please let us know your specific requirements or if you encounter any problems w
 <p>Rules for defining custom attributes</p>
 </li>
 <li>
-<p>Encoding rules for mapping event formats to serialized representations such as JSON or Avro</p>
+<p>Encoding rules for mapping event formats to serialized representations such as JSON or Apache Avro</p>
 </li>
 <li>
 <p>Protocol bindings for transport layers such as Apache Kafka, HTTP or AMQP</p>
@@ -412,7 +454,9 @@ Please let us know your specific requirements or if you encounter any problems w
 <p>To configure a Debezium connector to emit change event records that conform to the CloudEvents specification, Debezium provides the <code>io.debezium.converters.CloudEventsConverter</code>, which is a Kafka Connect message converter.</p>
 </div>
 <div class="paragraph">
-<p>Currently, only structured mapping mode is supported. The CloudEvents change event envelope can be JSON or Avro and each envelope type supports JSON or Avro as the <code>data</code> format. It is expected that a future Debezium release will support binary mapping mode.</p>
+<p>Currently, only structured mapping mode can be used.
+The CloudEvents change event envelope can be JSON or Avro, and you can use JSON or Avro as the <code>data</code> format for each envelope type.
+It is expected that a future Debezium release will support binary mapping mode.</p>
 </div>
 <div class="paragraph">
 <p>For information about using Avro, see:</p>
@@ -420,7 +464,7 @@ Please let us know your specific requirements or if you encounter any problems w
 <div class="ulist">
 <ul>
 <li>
-<p><a href="../configuration/avro.html#avro-serialization" class="page">Avro serialization</a></p>
+<p><a href="../configuration/avro.html#avro-serialization" class="xref page">Avro serialization</a></p>
 </li>
 <li>
 <p><a href="https://github.com/Apicurio/apicurio-registry">Apicurio Registry</a></p>
@@ -433,19 +477,20 @@ Please let us know your specific requirements or if you encounter any problems w
 <h2 id="_example_event_format"><a class="anchor" href="#_example_event_format"></a>Example event format</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The following example shows what a CloudEvents change event record emitted by a PostgreSQL connector looks like. In this example, the PostgreSQL connector is configured to use JSON as the CloudEvents format envelope and also as the <code>data</code> format.</p>
+<p>The following example shows what a CloudEvents change event record emitted by a PostgreSQL connector looks like.
+In this example, the PostgreSQL connector is configured to use JSON as the CloudEvents format envelope and also as the <code>data</code> format.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
-  "id" : "name:test_server;lsn:29274832;txId:565",   <i class="conum" data-value="1"></i><b>(1)</b>
-  "source" : "/debezium/postgresql/test_server",     <i class="conum" data-value="2"></i><b>(2)</b>
-  "specversion" : "1.0",                             <i class="conum" data-value="3"></i><b>(3)</b>
-  "type" : "io.debezium.postgresql.datachangeevent", <i class="conum" data-value="4"></i><b>(4)</b>
-  "time" : "2020-01-13T13:55:39.738Z",               <i class="conum" data-value="5"></i><b>(5)</b>
-  "datacontenttype" : "application/json",            <i class="conum" data-value="6"></i><b>(6)</b>
-  "iodebeziumop" : "r",                              <i class="conum" data-value="7"></i><b>(7)</b>
-  "iodebeziumversion" : "2.4.0.Alpha1",        <i class="conum" data-value="8"></i><b>(8)</b>
+  "id" : "name:test_server;lsn:29274832;txId:565",  <i class="conum" data-value="1"></i><b>(1)</b>
+  "source" : "/debezium/postgresql/test_server",    <i class="conum" data-value="2"></i><b>(2)</b>
+  "specversion" : "1.0",                            <i class="conum" data-value="3"></i><b>(3)</b>
+  "type" : "io.debezium.connector.postgresql.DataChangeEvent", <i class="conum" data-value="4"></i><b>(4)</b>
+  "time" : "2020-01-13T13:55:39.738Z",             <i class="conum" data-value="5"></i><b>(5)</b>
+  "datacontenttype" : "application/json",          <i class="conum" data-value="6"></i><b>(6)</b>
+  "iodebeziumop" : "r",                            <i class="conum" data-value="7"></i><b>(7)</b>
+  "iodebeziumversion" : "3.1.0.Alpha2",      <i class="conum" data-value="8"></i><b>(8)</b>
   "iodebeziumconnector" : "postgresql",
   "iodebeziumname" : "test_server",
   "iodebeziumtsms" : "1578923739738",
@@ -455,10 +500,10 @@ Please let us know your specific requirements or if you encounter any problems w
   "iodebeziumtable" : "a",
   "iodebeziumlsn" : "29274832",
   "iodebeziumxmin" : null,
-  "iodebeziumtxid": "565",                           <i class="conum" data-value="9"></i><b>(9)</b>
+  "iodebeziumtxid": "565",                       <i class="conum" data-value="9"></i><b>(9)</b>
   "iodebeziumtxtotalorder": "1",
   "iodebeziumtxdatacollectionorder": "1",
-  "data" : {                                         <i class="conum" data-value="10"></i><b>(10)</b>
+  "data" : {                                       <i class="conum" data-value="10"></i><b>(10)</b>
     "before" : null,
     "after" : {
       "pk" : 1,
@@ -468,51 +513,70 @@ Please let us know your specific requirements or if you encounter any problems w
 }</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Descriptions of fields in a CloudEvents change event record</caption>
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 87.5%;">
+</colgroup>
+<thead>
 <tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Unique ID that the connector generates for the change event based on the change event&#8217;s content.</td>
+<th class="tableblock halign-left valign-top">Item</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unique ID that the connector generates for the change event based on the change event&#8217;s content.</p></td>
 </tr>
 <tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The source of the event, which is the logical name of the database as specified by the <code>topic.prefix</code> property in the connector&#8217;s configuration.</td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The source of the event, which is the logical name of the database as specified by the <code>topic.prefix</code> property in the connector&#8217;s configuration.</p></td>
 </tr>
 <tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>The CloudEvents specification version.</td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The CloudEvents specification version.</p></td>
 </tr>
 <tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Connector type that generated the change event. The format of this field is <code>io.debezium.<em>CONNECTOR_TYPE</em>.datachangeevent</code>. The value of <code><em>CONNECTOR_TYPE</em></code> is <code>mongodb</code>, <code>mysql</code>, <code>postgresql</code>, or <code>sqlserver</code>.</td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Connector type that generated the change event.
+The format of this field is <code>io.debezium.connector.<em>CONNECTOR_TYPE</em>.DataChangeEvent</code>.<br>
+Valid values for <code><em>CONNECTOR_TYPE</em></code> are <code>db2</code>,
+<code>informix</code>,
+<code>mongodb</code>, <code>mysql</code>, <code>oracle</code>, <code>postgresql</code>, or <code>sqlserver</code>.</p>
+</div></div></td>
 </tr>
 <tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>Time of the change in the source database.</td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time of the change in the source database.</p></td>
 </tr>
 <tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>Describes the content type of the <code>data</code> attribute, which is JSON in this example.
-The only alternative is Avro.</td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Describes the content type of the <code>data</code> attribute.
+Possible values are <code>json</code>, as in this example, or <code>avro</code>.</p></td>
 </tr>
 <tr>
-<td><i class="conum" data-value="7"></i><b>7</b></td>
-<td>An operation identifier. Possible values are <code>r</code> for read, <code>c</code> for create, <code>u</code> for update, or <code>d</code> for delete.</td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An operation identifier.
+Possible values are <code>r</code> for read, <code>c</code> for create, <code>u</code> for update, or <code>d</code> for delete.</p></td>
 </tr>
 <tr>
-<td><i class="conum" data-value="8"></i><b>8</b></td>
-<td>All <code>source</code> attributes that are known from Debezium change events are mapped to CloudEvents extension attributes by using the <code>iodebezium</code> prefix for the attribute name.</td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All <code>source</code> attributes that are known from Debezium change events are mapped to CloudEvents extension attributes by using the <code>iodebezium</code> prefix for the attribute name.</p></td>
 </tr>
 <tr>
-<td><i class="conum" data-value="9"></i><b>9</b></td>
-<td>When enabled in the connector, each <code>transaction</code> attribute that is known from Debezium change events is mapped to a CloudEvents extension attribute by using the <code>iodebeziumtx</code> prefix for the attribute name.</td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">9</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When enabled in the connector, each <code>transaction</code> attribute that is known from Debezium change events is mapped to a CloudEvents extension attribute by using the <code>iodebeziumtx</code> prefix for the attribute name.</p></td>
 </tr>
 <tr>
-<td><i class="conum" data-value="10"></i><b>10</b></td>
-<td>The actual data change itself. Depending on the operation and the connector, the data might contain <code>before</code>, <code>after</code> and/or <code>patch</code> fields.</td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The actual data change.
+Depending on the operation and the connector, the data might contain <code>before</code>, <code>after</code>, or <code>patch</code> fields.</p></td>
 </tr>
+</tbody>
 </table>
-</div>
 <div class="paragraph">
 <p>The following example also shows what a CloudEvents change event record emitted by a PostgreSQL connector looks like. In this example, the PostgreSQL connector is again configured to use JSON as the CloudEvents format envelope, but this time the connector is configured to use Avro for the <code>data</code> format.</p>
 </div>
@@ -522,12 +586,12 @@ The only alternative is Avro.</td>
   "id" : "name:test_server;lsn:33227720;txId:578",
   "source" : "/debezium/postgresql/test_server",
   "specversion" : "1.0",
-  "type" : "io.debezium.postgresql.datachangeevent",
+  "type" : "io.debezium.connector.postgresql.DataChangeEvent",
   "time" : "2020-01-13T14:04:18.597Z",
-  "datacontenttype" : "application/avro",            <i class="conum" data-value="1"></i><b>(1)</b>
+  "datacontenttype" : "application/avro",          <i class="conum" data-value="1"></i><b>(1)</b>
   "dataschema" : "http://my-registry/schemas/ids/1", <i class="conum" data-value="2"></i><b>(2)</b>
   "iodebeziumop" : "r",
-  "iodebeziumversion" : "2.4.0.Alpha1",
+  "iodebeziumversion" : "3.1.0.Alpha2",
   "iodebeziumconnector" : "postgresql",
   "iodebeziumname" : "test_server",
   "iodebeziumtsms" : "1578924258597",
@@ -541,26 +605,37 @@ The only alternative is Avro.</td>
   "iodebeziumtxid": "578",
   "iodebeziumtxtotalorder": "1",
   "iodebeziumtxdatacollectionorder": "1",
-  "data" : "AAAAAAEAAgICAg=="                        <i class="conum" data-value="3"></i><b>(3)</b>
+  "data" : "AAAAAAEAAgICAg=="                    <i class="conum" data-value="3"></i><b>(3)</b>
 }</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. Descriptions of fields in a CloudEvents event record for a connector that uses Avro to format data</caption>
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 87.5%;">
+</colgroup>
+<thead>
 <tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Indicates that the <code>data</code> attribute contains Avro binary data.</td>
+<th class="tableblock halign-left valign-top">Item</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates that the <code>data</code> attribute contains Avro binary data.</p></td>
 </tr>
 <tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>URI of the schema to which the Avro data adheres.</td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI of the schema to which the Avro data adheres.</p></td>
 </tr>
 <tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>The <code>data</code> attribute contains base64-encoded Avro binary data.</td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>data</code> attribute contains base64-encoded Avro binary data.</p></td>
 </tr>
+</tbody>
 </table>
-</div>
 <div class="paragraph">
 <p>It is also possible to use Avro for the envelope as well as the <code>data</code> attribute.</p>
 </div>
@@ -587,23 +662,177 @@ The following example shows how to configure the CloudEvents converter to emit c
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">...
 "value.converter": "io.debezium.converters.CloudEventsConverter",
-"value.converter.serializer.type" : "json",          <i class="conum" data-value="1"></i><b>(1)</b>
+"value.converter.serializer.type" : "json",        <i class="conum" data-value="1"></i><b>(1)</b>
 "value.converter.data.serializer.type" : "avro",
 "value.converter.avro.schema.registry.url": "http://my-registry/schemas/ids/1"
 ...</code></pre>
 </div>
 </div>
-<div class="colist arabic">
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 3. Description of fields in CloudEvents converter configuration</caption>
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 87.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Item</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifying the <code>serializer.type</code> is optional, because <code>json</code> is the default.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The CloudEvents converter converts Kafka record values. In the same connector configuration, you can specify <code>key.converter</code> if you want to operate on record keys.
+For example, you might specify <code>StringConverter</code>, <code>LongConverter</code>, <code>JsonConverter</code>, or <code>AvroConverter</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuration-of-sources-of-metadata-and-some-cloudevents-fields"><a class="anchor" href="#configuration-of-sources-of-metadata-and-some-cloudevents-fields"></a>Configuration of sources of metadata and some CloudEvents fields</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default, the <code>metadata.source</code> property consists of three parts, as seen in the following example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">"value,id:generate,type:generate,dataSchemaName:generate"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The first part specifies the source for retrieving a record&#8217;s metadata; the permitted values are <code>value</code> and <code>header</code>.
+The next parts specify how the converter populates values for the following metadata fields:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>id</code></p>
+</li>
+<li>
+<p><code>type</code></p>
+</li>
+<li>
+<p><code>dataSchemaName</code> (the name under which the schema is registered in the Schema Registry)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The converter can use one of the following methods to populate each field:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>generate</code></dt>
+<dd>
+<p>The converter generates a value for the field.</p>
+</dd>
+<dt class="hdlist1"><code>header</code></dt>
+<dd>
+<p>The converter obtain values for the field from a message header.</p>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_obtaining_record_metadata"><a class="anchor" href="#_obtaining_record_metadata"></a>Obtaining record metadata</h3>
+<div class="paragraph">
+<p>To construct a CloudEvent, the converter requires source, operation, and transaction metadata.
+Generally, the converter can retrieve the metadata from a record&#8217;s value.
+But in some cases, before the converter receives a record, the record might be processed in such a way that metadata is not present in its value, for example, after the record is processed by the Outbox Event Router SMT.
+To preserve the required metadata, you can use the following approach to pass the metadata in the record headers.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Implement a mechanism for recording the metadata in the record&#8217;s headers before the record reaches the converter, for example, by using the <code>HeaderFrom</code> SMT.</p>
+</li>
+<li>
+<p>Set the value of the converter&#8217;s <code>metadata.source</code> property to <code>header</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The following example shows the configuration for a connector that uses the Outbox Event Router SMT, and the <code>HeaderFrom</code> SMT:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">...
+"tombstones.on.delete": false,
+"transforms": "addMetadataHeaders,outbox",
+"transforms.addMetadataHeaders.type": "org.apache.kafka.connect.transforms.HeaderFrom$Value",
+"transforms.addMetadataHeaders.fields": "source,op,transaction",
+"transforms.addMetadataHeaders.headers": "source,op,transaction",
+"transforms.addMetadataHeaders.operation": "copy",
+"transforms.addMetadataHeaders.predicate": "isHeartbeat",
+"transforms.addMetadataHeaders.negate": true,
+"transforms.outbox.type": "io.debezium.transforms.outbox.EventRouter",
+"transforms.outbox.table.expand.json.payload": true,
+"transforms.outbox.table.fields.additional.placement": "type:header",
+"predicates": "isHeartbeat",
+"predicates.isHeartbeat.type": "org.apache.kafka.connect.transforms.predicates.TopicNameMatches",
+"predicates.isHeartbeat.pattern": "__debezium-heartbeat.*",
+"value.converter": "io.debezium.converters.CloudEventsConverter",
+"value.converter.metadata.source": "header",
+"header.converter": "org.apache.kafka.connect.json.JsonConverter",
+"header.converter.schemas.enable": true
+...</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
 <table>
 <tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Specifying the <code>serializer.type</code> is optional, because <code>json</code> is the default.</td>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To use the <code>HeaderFrom</code> transformation, it might be necessary to filter tombstone and heartbeat messages.
+</td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>The CloudEvents converter converts Kafka record values. In the same connector configuration, you can specify <code>key.converter</code> if you want to operate on record keys.
-For example, you might specify <code>StringConverter</code>, <code>LongConverter</code>, <code>JsonConverter</code>, or <code>AvroConverter</code>.</p>
+<p>The <code>header</code> value of the <code>metadata.source</code> property is a global setting.
+As a result, even if you omit parts of a property&#8217;s value, such as the <code>id</code> and <code>type</code> sources, the converter generates <code>header</code> values for the omitted parts.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_obtaining_cloudevent_metadata"><a class="anchor" href="#_obtaining_cloudevent_metadata"></a>Obtaining CloudEvent metadata</h3>
+<div class="paragraph">
+<p>By default, the CloudEvents converter automatically generates values for the <code>id</code> and <code>type</code> fields of a CloudEvent, and generates the schema name for its <code>data</code> field.
+You can customize the way that the converter populates these fields by changing the defaults and specifying the fields' values in the appropriate headers.
+For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">"value.converter.metadata.source": "value,id:header,type:header,dataSchemaName:header"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With the preceding configuration in effect, you could configure upstream functions to add <code>id</code> and <code>type</code> headers with the values that you want to pass to the CloudEvents converter.</p>
+</div>
+<div class="paragraph">
+<p>If you want to provide values only for <code>id</code> header, use:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">"value.converter.metadata.source": "value,id:header,type:generate,dataSchemaName:generate"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To configure the converter to obtain <code>id</code>, <code>type</code>, and <code>dataSchemaName</code>  metadata from headers, use the following short syntax:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">"value.converter.metadata.source": "header"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To enable the converter to retrieve the data schema name from a header field, you must set <a href="#cloud-events-converter-schema-data-name-source-header-enable"><code>schema.data.name.source.header.enable</code></a> to <code>true</code>.</p>
+</div>
 </div>
 </div>
 </div>
@@ -614,7 +843,7 @@ For example, you might specify <code>StringConverter</code>, <code>LongConverter
 <p>When you configure a Debezium connector to use the CloudEvent converter you can specify the following options.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. Descriptions of CloudEvents converter configuration options</caption>
+<caption class="title">Table 4. Descriptions of CloudEvents converter configuration options</caption>
 <colgroup>
 <col style="width: 30%;">
 <col style="width: 25%;">
@@ -689,6 +918,69 @@ The value can be <code>json</code> or <code>avro</code>.</p>
 <p>Specifies how schema names should be adjusted for compatibility with the message converter used by the connector. The value can be <code>none</code> or <code>avro</code>.</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="cloud-events-converter-schema-cloudevents-name"></a><a href="#cloud-events-converter-schema-cloudevents-name"><code>schema.cloudevents.name</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>none</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specifies CloudEvents schema name under which the schema is registered in a Schema Registry. The setting is ignored when <code>serializer.type</code> is <code>json</code> in
+which case a record&#8217;s value is schemaless.
+If this property is not specified, the default algorithm is used to generate the
+schema name: <code>${serverName}.${databaseName}.CloudEvents.Envelope</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="cloud-events-converter-schema-data-name-source-header-enable"></a><a href="#cloud-events-converter-schema-data-name-source-header-enable"><code>schema.data.name.source.header.enable</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>false</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specifies whether the converter can retrieve the schema name of the CloudEvents <code>data</code> field from a header.
+The schema name is obtained from the <code>dataSchemaName</code> parameter that is specified in the <a href="#cloud-events-converter-metadata-source"><code>metadata.source</code></a> property.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="cloud-events-converter-extension-attributes-enable"></a><a href="#cloud-events-converter-extension-attributes-enable"><code>extension.attributes.enable</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>true</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specifies whether the converter includes extension attributes when it generates a cloud event.
+The value can be <code>true</code> or <code>false</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="cloud-events-converter-metadata-source"></a><a href="#cloud-events-converter-metadata-source"><code>metadata.source</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>value,id:generate,type:generate,dataSchemaName:generate</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A comma-separated list that specifies the sources from which the converter retrieves metadata values (source, operation, transaction) for CloudEvent <code>id</code> and <code>type</code> fields,
+and for the <code>dataSchemaName</code> parameter, which specifies the name under which the schema is registered in a Schema Registry.
+The first element in the list is a global setting that specifies the source of the metadata.
+The source of metadata can be <code>value</code> or <code>header</code>.
+The global setting is followed by a set of pairs.
+The first element in each pair specifies the name of a CloudEvent field (<code>id</code> or <code>type</code>), or the name of a data schema (<code>dataSchemaName</code>).
+The second element in the pair specifies how the converter populates the value of the field.
+Valid values are <code>generate</code> or <code>header</code>.
+Separate the values in each pair with a colon, for example:</p>
+</div>
+<div class="paragraph">
+<p><code>value,id:header,type:generate,dataSchemaName:header</code></p>
+</div>
+<div class="paragraph">
+<p>For configuration examples, see <a href="#configuration-of-sources-of-metadata-and-some-cloudevents-fields">Configuration of sources of metadata and some CloudEvents fields</a>.</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -701,7 +993,7 @@ The value can be <code>json</code> or <code>avro</code>.</p>
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2023 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/230c056577672b69f2f2d65968cf64d159c5d42b">230c0565</a></span>)
+            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/ee9d3467111c73d8f337ef6bfee02f75c4df77ed">ee9d3467</a></span>)
             
         </div>
     </footer>

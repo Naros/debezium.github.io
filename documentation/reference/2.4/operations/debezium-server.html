@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Debezium Server :: Debezium Documentation</title>
     <link rel="canonical" href="https://debezium.io/documentation/reference/stable/operations/debezium-server.html">
-    <meta name="generator" content="Antora 3.0.0-alpha.9">
+    <meta name="generator" content="Antora 3.1.7">
 <link rel="stylesheet" href="../../../debezium-antora/css/site.css">
 <link rel="stylesheet" href="../../../debezium-antora/css/debezium-antora.css">
 <link rel="stylesheet" href="../../../debezium-antora/css/highlightjs-dark.css">
@@ -160,6 +160,9 @@
     <a class="nav-link" href="../transformations/filtering.html">Message Filtering</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/schema-change-event-filter.html">Schema Change Event Filtering</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/content-based-routing.html">Content-Based Routing</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -173,6 +176,12 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/header-to-value.html">HeaderToValue</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/timezone-converter.html">Timezone Converter</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/timescaledb.html">TimescaleDB Integration</a>
   </li>
 </ul>
   </li>
@@ -202,7 +211,7 @@
     <a class="nav-link" href="../integrations/cloudevents.html">CloudEvents</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../integrations/tracing.html">OpenTracing</a>
+    <a class="nav-link" href="../integrations/tracing.html">OpenTelemetry</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../integrations/testcontainers.html">Integration Testing with Testcontainers</a>
@@ -253,6 +262,21 @@
         <li class="version">
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
+        <li class="version">
+          <a href="/documentation/reference/3.0/index.html">3.0</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.1/index.html">3.1</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.7/index.html">2.7</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.6/index.html">2.6</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.5/index.html">2.5</a>
+        </li>
         <li class="version is-current">
           <a href="/documentation/reference/2.4/index.html">2.4</a>
         </li>
@@ -270,39 +294,6 @@
         </li>
         <li class="version">
           <a href="/documentation/reference/1.9/index.html">1.9</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.8/index.html">1.8</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.7/index.html">1.7</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.6/index.html">1.6</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.5/index.html">1.5</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.4/index.html">1.4</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.3/index.html">1.3</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.2/index.html">1.2</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.1/index.html">1.1</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.0/index.html">1.0</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.10/index.html">0.10</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.9/index.html">0.9</a>
         </li>
       </ul>
     </li>
@@ -327,36 +318,47 @@
     <div class="page-versions">
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">2.4</button>
         <div class="version-menu">
-                <a class="version" href="/documentation/reference/nightly/index.html">nightly</a>
-                <a class="version is-current" href="/documentation/reference/2.4/index.html">2.4</a>
-                <a class="version" href="/documentation/reference/2.3/index.html">2.3</a>
-                <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
-                <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
-                <a class="version" href="/documentation/reference/2.0/index.html">2.0</a>
-                <a class="version" href="/documentation/reference/1.9/index.html">1.9</a>
-                <a class="version" href="/documentation/reference/1.8/index.html">1.8</a>
-                <a class="version" href="/documentation/reference/1.7/index.html">1.7</a>
-                <a class="version" href="/documentation/reference/1.6/index.html">1.6</a>
-                <a class="version" href="/documentation/reference/1.5/index.html">1.5</a>
-                <a class="version" href="/documentation/reference/1.4/index.html">1.4</a>
-                <a class="version" href="/documentation/reference/1.3/index.html">1.3</a>
-                <a class="version" href="/documentation/reference/1.2/index.html">1.2</a>
-                <a class="version is-missing" href="/documentation/reference/1.1/index.html">1.1</a>
-                <a class="version is-missing" href="/documentation/reference/1.0/index.html">1.0</a>
-                <a class="version is-missing" href="/documentation/reference/0.10/index.html">0.10</a>
-                <a class="version is-missing" href="/documentation/reference/0.9/index.html">0.9</a>
+                        <a class="version" href="/documentation//reference/operations/debezium-server.html" data-hash="true">nightly</a>
+                        <a class="version" href="/documentation//reference/stable/operations/debezium-server.html" data-hash="true">3.0</a>
+                        <a class="version" href="/documentation//reference/3.1/operations/debezium-server.html" data-hash="true">3.1</a>
+                        <a class="version" href="/documentation//reference/2.7/operations/debezium-server.html" data-hash="true">2.7</a>
+                        <a class="version" href="/documentation//reference/2.6/operations/debezium-server.html" data-hash="true">2.6</a>
+                        <a class="version" href="/documentation//reference/2.5/operations/debezium-server.html" data-hash="true">2.5</a>
+                        <a class="version is-current" href="/reference/2.4/operations/debezium-server.html" data-hash="true">2.4</a>
+                        <a class="version" href="/documentation//reference/2.3/operations/debezium-server.html" data-hash="true">2.3</a>
+                        <a class="version" href="/documentation//reference/2.2/operations/debezium-server.html" data-hash="true">2.2</a>
+                        <a class="version" href="/documentation//reference/2.1/operations/debezium-server.html" data-hash="true">2.1</a>
+                        <a class="version" href="/documentation//reference/2.0/operations/debezium-server.html" data-hash="true">2.0</a>
+                        <a class="version" href="/documentation//reference/1.9/operations/debezium-server.html" data-hash="true">1.9</a>
         </div>
         |
     </div>
     </div>
+    <script>
+        function updateAnchorsWithHash() {
+            const currentHash = window.location.hash;
+            if (currentHash) {
+                document.querySelectorAll('a[data-hash="true"]').forEach(link => {
+                    const baseHref = link.getAttribute('href').split('#')[0];
+                    link.setAttribute('href', baseHref + currentHash);
+                });
+            }
+        }
+
+        // Listen for hashchange and update anchors
+        window.addEventListener('hashchange', updateAnchorsWithHash);
+
+        // Update anchors on initial load
+        document.addEventListener('DOMContentLoaded', updateAnchorsWithHash);
+    </script>
   <div class="edit-this-page"><a href="https://github.com/debezium/debezium/edit/2.4/documentation/modules/ROOT/pages/operations/debezium-server.adoc">Edit this Page</a></div>
   </div>
 <div class="article-grid">
 <div class="article-cell1">
 <article class="doc">
         
-    <div class="version-banner version-banner-development">
-    You are viewing documentation for the current development version of Debezium.
+    <div class="version-banner version-banner-outdated">
+    You are viewing documentation for an outdated version of Debezium.
     <br/>
             If you want to view the latest stable version of this page, please go <a href=/documentation/reference/stable/index.html>here</a>.
             
@@ -443,7 +445,7 @@ For streaming change events to Apache Kafka, it is recommended to deploy the Deb
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://repo1.maven.org/maven2/io/debezium/debezium-server-dist/2.4.0.Alpha1/debezium-server-dist-2.4.0.Alpha1.tar.gz">Debezium Server distribution</a></p>
+<p><a href="https://repo1.maven.org/maven2/io/debezium/debezium-server-dist/2.4.1.Final/debezium-server-dist-2.4.1.Final.tar.gz">Debezium Server distribution</a></p>
 </li>
 </ul>
 </div>
@@ -457,7 +459,7 @@ For streaming change events to Apache Kafka, it is recommended to deploy the Deb
 |-- conf
 |-- CONTRIBUTE.md
 |-- COPYRIGHT.txt
-|-- debezium-server-2.4.0.Alpha1-runner.jar
+|-- debezium-server-2.4.1.Final-runner.jar
 |-- lib
 |-- LICENSE-3rd-PARTIES.txt
 |-- LICENSE.txt
@@ -477,7 +479,7 @@ For streaming change events to Apache Kafka, it is recommended to deploy the Deb
 <td class="content">
 <div class="paragraph">
 <p>In case of using the Oracle connector you will have to add to the <code>lib</code> directory the ORACLE JDBC driver (if using XStream also the XStream API files),
-explained here: <a href="../connectors/oracle.html#obtaining-oracle-jdbc-driver-and-xstreams-api-files" class="page">Obtaining the Oracle JDBC driver and XStream API files</a></p>
+explained here: <a href="../connectors/oracle.html#obtaining-oracle-jdbc-driver-and-xstreams-api-files" class="xref page">Obtaining the Oracle JDBC driver and XStream API files</a></p>
 </div>
 </td>
 </tr>
@@ -1290,7 +1292,7 @@ The most frequent used are:</p>
 <p>8080</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The port on which Debezium exposes Microprofile Health endpoint and other exposed status information.</p>
+<p>The port on which Debezium exposes Microprofile Health endpoint and other exposed status information. Health can be accessed on <code>http://host:8080/q/health</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1323,7 +1325,7 @@ The most frequent used are:</p>
 <div class="sect3">
 <h4 id="_enabling_message_filtering"><a class="anchor" href="#_enabling_message_filtering"></a>Enabling message filtering</h4>
 <div class="paragraph">
-<p>Debezium Server provides filter STM capability, see <a href="../transformations/filtering.html" class="page">Message Filtering</a> for more details.
+<p>Debezium Server provides filter STM capability, see <a href="../transformations/filtering.html" class="xref page">Message Filtering</a> for more details.
 However, for security reasons it&#8217;s not enabled by default and has to be explicitly enabled when Debezium Server is started.
 To enable it, set environment variable <code>ENABLE_DEBEZIUM_SCRIPTING</code> to <code>true</code>.
 This will add <code>debezium-scripting</code> jar file and <a href="https://jcp.org/en/jsr/detail?id=223">JSR 223</a> implementations (currently Groovy and graalvm.js) jar files into the server class path.
@@ -2092,7 +2094,7 @@ This is not supported by Pulsar so a surrogate key must be used.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="pulsar-tenant"></a><a href="#pulsar-tenant"><code>debezium.sink.pusar.tenant</code></a></p>
+<p><a id="pulsar-tenant"></a><a href="#pulsar-tenant"><code>debezium.sink.pulsar.tenant</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>public</code></p>
@@ -2103,7 +2105,7 @@ This is not supported by Pulsar so a surrogate key must be used.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="pulsar-namespace"></a><a href="#pulsar-namespace"><code>debezium.sink.pusar.namespace</code></a></p>
+<p><a id="pulsar-namespace"></a><a href="#pulsar-namespace"><code>debezium.sink.pulsar.namespace</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>default</code></p>
@@ -2297,6 +2299,17 @@ The Stream is a data type which models a <em>log data structure</em> in a more a
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="redis-db-index"></a><a href="#redis-db-index"><code>debezium.sink.redis.db.index</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>0</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A number in the range 0..15 used for selecting the database to work with. Default is database 0. This feature is only available for standalone Redis connections; Redis clusters use only database 0.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="redis-user"></a><a href="#redis-user"><code>debezium.sink.redis.user</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
@@ -2317,9 +2330,11 @@ The Stream is a data type which models a <em>log data structure</em> in a more a
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="redis-ssl-enabled"></a><a href="#redis-ssl-enabled"><code>debezium.sink.redis.ssl.enabled</code></a></p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>(Optional) Use SSL to communicate with Redis. Default 'false'</p>
+<p><code>false</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>(Optional) A Boolean value that specifies whether connections to Redis require SSL.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3091,7 +3106,7 @@ captured change events to a configured RocketMQ.</p>
 <p>4M, Suggest less than 4 MB.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>(Optional)Maximum number of bytes of sent message body.</p>
+<p>(Optional) Maximum number of bytes of sent message body.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3258,11 +3273,90 @@ The connection <a href="https://github.com/rabbitmq/rabbitmq-java-client/blob/ma
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="rabbitmq-exchange"></a><a href="#rabbitmq-exchange"><code>debezium.sink.rabbitmq.exchange</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><em>topic name</em></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>(Optional) Exchange name to use when publishing messages.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="rabbitmq-routing-key"></a><a href="#rabbitmq-routing-key"><code>debezium.sink.rabbitmq.routingKey</code></a></p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>(Optional) Routing key to use when publishing messages.</p>
+<p><em>empty string</em></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>(Optional) Static routing key to use when publishing messages.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="rabbitmq-auto-create-routing-key"></a><a href="#rabbitmq-auto-create-routing-key"><code>debezium.sink.rabbitmq.autoCreateRoutingKey</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>false</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>(Optional) If <code>true</code> the non-existing routing key is automatically created.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="rabbitmq-routing-key-durable"></a><a href="#rabbitmq-routing-key-durable"><code>debezium.sink.rabbitmq.routingKeyDurable</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>true</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>(Optional) If <code>true</code> the target queue content will survive a RabbitMQ server restart.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="rabbitmq-routing-key-from-topic-name"></a><a href="#rabbitmq-routing-key-from-topic-name"><code>debezium.sink.rabbitmq.routingKeyFromTopicName</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>false</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>(Optional) If <code>true</code> the routing key is used from topic name instead of a static value.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="rabbitmq-delivery-mode"></a><a href="#rabbitmq-delivery-mode"><code>debezium.sink.rabbitmq.deliveryMode</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>2</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>(Optional) The way how the message is delivered to and stored on a RabbitMQ server</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1 - Non-persistent</p>
+</li>
+<li>
+<p>2 - Persistent</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="rabbitmq-null-value"></a><a href="#rabbitmq-null-value"><code>debezium.sink.rabbitmq.null.value</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>default</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>RabbitMQ does not support the notion of null payloads, as is the case with tombstone events.
+So this string will be used as value for records without a payload.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -3293,7 +3387,7 @@ When the alternative implementations are not available then the default ones are
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Custom implementation maps the planned destination (stream) name into a RabbitMQ exchange name.
+<p>Custom implementation maps the planned destination (stream) name into a RabbitMQ exchange name and (if enabled) into the routing key name.
 By default the same name is used.</p>
 </div></div></td>
 </tr>
@@ -3419,7 +3513,7 @@ RANGE_TOMBSTONE "r" -&gt; TRUNCATE "t"</code></pre>
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2023 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/ac56c6e7a3f7678c0ee9dfca35046f38b4ca36b9">ac56c6e7</a></span>)
+            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/8c607e24d77a61db360135c33983769717b3b15c">8c607e24</a></span>)
             
         </div>
     </footer>

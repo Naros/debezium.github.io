@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Custom Converters :: Debezium Documentation</title>
     <link rel="canonical" href="https://debezium.io/documentation/reference/stable/development/converters.html">
-    <meta name="generator" content="Antora 3.0.0-alpha.9">
+    <meta name="generator" content="Antora 3.1.7">
 <link rel="stylesheet" href="../../debezium-antora/css/site.css">
 <link rel="stylesheet" href="../../debezium-antora/css/debezium-antora.css">
 <link rel="stylesheet" href="../../debezium-antora/css/highlightjs-dark.css">
@@ -94,13 +94,16 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Connectors</span>
+    <span class="nav-text">Source Connectors</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/index.html">Overview</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/mysql.html">MySQL</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/mariadb.html">MariaDB</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/mongodb.html">MongoDB</a>
@@ -127,7 +130,19 @@
     <a class="nav-link" href="../connectors/spanner.html">Spanner</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../connectors/jdbc.html">Jdbc</a>
+    <a class="nav-link" href="../connectors/informix.html">Informix</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Sink Connectors</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/index-sink.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/jdbc.html">JDBC</a>
   </li>
 </ul>
   </li>
@@ -160,19 +175,46 @@
     <a class="nav-link" href="../transformations/filtering.html">Message Filtering</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/schema-change-event-filter.html">Schema Change Event Filtering</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/content-based-routing.html">Content-Based Routing</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/applying-transformations-selectively.html">Using SMT Predicates to Selectively Apply Transformations</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../transformations/compute-partition.html">Compute Partition [Deprecated]</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/partition-routing.html">Partition Routing</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/header-to-value.html">HeaderToValue</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/timezone-converter.html">Timezone Converter</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/timescaledb.html">TimescaleDB Integration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/decode-logical-decoding-message-content.html">Decode Logical Decoding Message Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/convert-cloudevent-to-saveable-form.html">Convert CloudEvents to Saveable Form</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/vector-to-json.html">Vector Data Types to JSON Types</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Post Processors</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../post-processors/index.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../post-processors/reselect-columns.html">Reselect Columns</a>
   </li>
 </ul>
   </li>
@@ -202,7 +244,7 @@
     <a class="nav-link" href="../integrations/cloudevents.html">CloudEvents</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../integrations/tracing.html">OpenTracing</a>
+    <a class="nav-link" href="../integrations/tracing.html">OpenTelemetry</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../integrations/testcontainers.html">Integration Testing with Testcontainers</a>
@@ -229,9 +271,6 @@
     <a class="nav-link" href="../operations/openshift.html">Running on Openshift</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../operations/embedded.html">Embedding Debezium</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../operations/debezium-ui.html">Debezium UI</a>
   </li>
 </ul>
@@ -254,6 +293,21 @@
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version">
+          <a href="/documentation/reference/3.0/index.html">3.0</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.1/index.html">3.1</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.7/index.html">2.7</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.6/index.html">2.6</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.5/index.html">2.5</a>
+        </li>
+        <li class="version">
           <a href="/documentation/reference/2.4/index.html">2.4</a>
         </li>
         <li class="version">
@@ -270,39 +324,6 @@
         </li>
         <li class="version">
           <a href="/documentation/reference/1.9/index.html">1.9</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.8/index.html">1.8</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.7/index.html">1.7</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.6/index.html">1.6</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.5/index.html">1.5</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.4/index.html">1.4</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.3/index.html">1.3</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.2/index.html">1.2</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.1/index.html">1.1</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.0/index.html">1.0</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.10/index.html">0.10</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.9/index.html">0.9</a>
         </li>
       </ul>
     </li>
@@ -327,28 +348,39 @@
     <div class="page-versions">
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
-                <a class="version is-current" href="/documentation/reference/nightly/index.html">nightly</a>
-                <a class="version" href="/documentation/reference/2.4/index.html">2.4</a>
-                <a class="version" href="/documentation/reference/2.3/index.html">2.3</a>
-                <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
-                <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
-                <a class="version" href="/documentation/reference/2.0/index.html">2.0</a>
-                <a class="version" href="/documentation/reference/1.9/index.html">1.9</a>
-                <a class="version" href="/documentation/reference/1.8/index.html">1.8</a>
-                <a class="version" href="/documentation/reference/1.7/index.html">1.7</a>
-                <a class="version" href="/documentation/reference/1.6/index.html">1.6</a>
-                <a class="version" href="/documentation/reference/1.5/index.html">1.5</a>
-                <a class="version" href="/documentation/reference/1.4/index.html">1.4</a>
-                <a class="version" href="/documentation/reference/1.3/index.html">1.3</a>
-                <a class="version" href="/documentation/reference/1.2/index.html">1.2</a>
-                <a class="version" href="/documentation/reference/1.1/index.html">1.1</a>
-                <a class="version is-missing" href="/documentation/reference/1.0/index.html">1.0</a>
-                <a class="version is-missing" href="/documentation/reference/0.10/index.html">0.10</a>
-                <a class="version is-missing" href="/documentation/reference/0.9/index.html">0.9</a>
+                        <a class="version is-current" href="/reference/development/converters.html" data-hash="true">nightly</a>
+                        <a class="version" href="/documentation//reference/stable/development/converters.html" data-hash="true">3.0</a>
+                        <a class="version" href="/documentation//reference/3.1/development/converters.html" data-hash="true">3.1</a>
+                        <a class="version" href="/documentation//reference/2.7/development/converters.html" data-hash="true">2.7</a>
+                        <a class="version" href="/documentation//reference/2.6/development/converters.html" data-hash="true">2.6</a>
+                        <a class="version" href="/documentation//reference/2.5/development/converters.html" data-hash="true">2.5</a>
+                        <a class="version" href="/documentation//reference/2.4/development/converters.html" data-hash="true">2.4</a>
+                        <a class="version" href="/documentation//reference/2.3/development/converters.html" data-hash="true">2.3</a>
+                        <a class="version" href="/documentation//reference/2.2/development/converters.html" data-hash="true">2.2</a>
+                        <a class="version" href="/documentation//reference/2.1/development/converters.html" data-hash="true">2.1</a>
+                        <a class="version" href="/documentation//reference/2.0/development/converters.html" data-hash="true">2.0</a>
+                        <a class="version" href="/documentation//reference/1.9/development/converters.html" data-hash="true">1.9</a>
         </div>
         |
     </div>
     </div>
+    <script>
+        function updateAnchorsWithHash() {
+            const currentHash = window.location.hash;
+            if (currentHash) {
+                document.querySelectorAll('a[data-hash="true"]').forEach(link => {
+                    const baseHref = link.getAttribute('href').split('#')[0];
+                    link.setAttribute('href', baseHref + currentHash);
+                });
+            }
+        }
+
+        // Listen for hashchange and update anchors
+        window.addEventListener('hashchange', updateAnchorsWithHash);
+
+        // Update anchors on initial load
+        document.addEventListener('DOMContentLoaded', updateAnchorsWithHash);
+    </script>
   <div class="edit-this-page"><a href="https://github.com/debezium/debezium/edit/main/documentation/modules/ROOT/pages/development/converters.adoc">Edit this Page</a></div>
   </div>
 <div class="article-grid">
@@ -426,6 +458,21 @@ The <code>converters</code> property specifies the converters that are available
 The registry associates each converter with the columns or fields for it to process.
 Whenever Debezium processes a new change event, it invokes the configured converter to convert the columns or fields for which it is registered.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The instructions that follow apply to Debezium relational database source connectors only.
+You cannot use this information to create a custom converter for the Debezium MongoDB connector, or for the Debezium JDBC sink connector.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -453,27 +500,38 @@ Whenever Debezium processes a new change event, it invokes the configured conver
 }</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Descriptions of fields in a Java converter class that implements the <code>io.debezium.spi.converter.CustomConverter</code> interface</caption>
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 87.5%;">
+</colgroup>
+<thead>
 <tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>A function for converting data from one type to another.</td>
+<th class="tableblock halign-left valign-top">Item</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Converts data from one type to another.</p></td>
 </tr>
 <tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Callback for registering a converter.</td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Callback for registering a converter.</p></td>
 </tr>
 <tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Registers the given schema and converter for the current field.
-Should not be invoked more than once for the same field.</td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Registers the given schema and converter for the current field.
+Should not be invoked more than once for the same field.</p></td>
 </tr>
 <tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Registers the customized value and schema converter for use with a specific field.</td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Registers the customized value and schema converter for use with a specific field.</p></td>
 </tr>
+</tbody>
 </table>
-</div>
 <div class="sect2">
 <h3 id="debezium-custom-converter-methods"><a class="anchor" href="#debezium-custom-converter-methods"></a>Custom converter methods</h3>
 <div class="paragraph">
@@ -557,11 +615,11 @@ The converter configuration is specific to each instance.</p>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public static class IsbnConverter implements CustomConverter&lt;SchemaBuilder, RelationalColumn&gt; {
 
-    private SchemaBuilder isbnSchema;
+    private String isbnSchemaName;
 
     @Override
     public void configure(Properties props) {
-        isbnSchema = SchemaBuilder.string().name(props.getProperty("schema.name"));
+        isbnSchemaName = props.getProperty("schema.name");
     }
 
     @Override
@@ -569,7 +627,7 @@ The converter configuration is specific to each instance.</p>
             ConverterRegistration&lt;SchemaBuilder&gt; registration) {
 
         if ("isbn".equals(column.typeName())) {
-            registration.register(isbnSchema, x -&gt; x.toString());
+            registration.register(SchemaBuilder.string().name(isbnSchemaName)), x -&gt; x.toString());
         }
     }
 }</code></pre>
@@ -598,18 +656,29 @@ These compile dependencies must be included in your project&#8217;s <code>pom.xm
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. Descriptions of compile dependency versions in <code>pom.xml</code></caption>
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 87.5%;">
+</colgroup>
+<thead>
 <tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><code>${version.debezium}</code> represents the version of the Debezium connector.</td>
+<th class="tableblock halign-left valign-top">Item</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${version.debezium}</code> represents the version of the Debezium connector.</p></td>
 </tr>
 <tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><code>${version.kafka}</code> represents the version of Apache Kafka in your environment.</td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${version.kafka}</code> represents the version of Apache Kafka in your environment.</p></td>
 </tr>
+</tbody>
 </table>
-</div>
 </div>
 </div>
 </div>
@@ -619,6 +688,21 @@ These compile dependencies must be included in your project&#8217;s <code>pom.xm
 <div class="paragraph">
 <p>Custom converters act on specific columns or column types in a source table to specify how to convert the data types in the source to Kafka Connect schema types.
 To use a custom converter with a connector, you deploy the converter JAR file alongside the connector file, and then configure the connector to use the converter.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Custom converters are designed to modify messages emitted by Debezium relational database source connectors.
+You cannot configure either the Debezium MongoDB connector, or the Debezium JDBC sink connector to use a custom converter.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="sect2">
 <h3 id="deploying-a-debezium-custom-converter"><a class="anchor" href="#deploying-a-debezium-custom-converter"></a>Deploying a custom converter</h3>
@@ -657,8 +741,20 @@ To use a converter with multiple connectors, you must place a copy of the conver
 <div class="sect2">
 <h3 id="configuring-a-connectors-to-use-a-custom-converter"><a class="anchor" href="#configuring-a-connectors-to-use-a-custom-converter"></a>Configuring a connector to use a custom converter</h3>
 <div class="paragraph">
-<p>To enable a connector to use the custom converter, you add properties to the connector configuration that specify the converter name and class.
-If the converter requires further information to customize the formats of specific data types, you can also define other coniguration options to provide that information.</p>
+<p>To enable a connector to use the custom converter, add properties to specify the name and class of the converter to the configuration of a Debezium source connector.
+You cannot configure the Debezium JDBC sink connector to use a custom converter.
+If the converter requires further information to customize the formats of specific data types, you can define other configuration options to provide that information.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>You <a href="#implementing-a-custom-converter">created</a> and <a href="#deploying-a-debezium-custom-converter">deployed a custom converter</a>.</p>
+</li>
+<li>
+<p>A Debezium relational database source connector is deployed.</p>
+</li>
+</ul>
 </div>
 <div class="ulist">
 <div class="title">Procedure</div>
@@ -671,19 +767,36 @@ If the converter requires further information to customize the formats of specif
 <em>&lt;converterSymbolicName&gt;</em>.type: <em>&lt;fullyQualifiedConverterClassName&gt;</em> <i class="conum" data-value="2"></i><b>(2)</b></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 3. Description of connector configuration properties for enabling a converter</caption>
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 87.5%;">
+</colgroup>
+<thead>
 <tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The <code>converters</code> property is mandatory and enumerates a comma-separated list of symbolic names of the converter instances to use with the connector.
-The values listed for this property serve as prefixes in the names of other properties that you specify for the converter.</td>
+<th class="tableblock halign-left valign-top">Item</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The mandatory <code>converters</code> property enumerates a comma-separated list of symbolic names of the converter instances to use with the connector.
+The values listed for this property serve as prefixes in the names of other properties that you specify for the converter.</p>
+</div></div></td>
 </tr>
 <tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The <code><em>&lt;converterSymbolicName&gt;</em>.type</code> property is mandatory, and specifies the name of the class that implements the converter.
-For example, for the earlier <a href="#example-debezium-simple-custom-converter">custom converter example</a>, you would add the following properties to the connector configuration:</td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The mandatory <code><em>&lt;converterSymbolicName&gt;</em>.type</code> property specifies the name of the class that implements the converter.</p>
+</div></div></td>
 </tr>
+</tbody>
 </table>
+<div class="paragraph">
+<p>For example, for the earlier <a href="#example-debezium-simple-custom-converter">custom converter example</a>, you would add the following properties to the connector configuration:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -715,7 +828,7 @@ For example, to add a property for the preceding <code>isbn</code> converter to 
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2023 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/230c056577672b69f2f2d65968cf64d159c5d42b">230c0565</a></span>)
+            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/ee9d3467111c73d8f337ef6bfee02f75c4df77ed">ee9d3467</a></span>)
             
         </div>
     </footer>

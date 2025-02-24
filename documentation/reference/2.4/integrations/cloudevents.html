@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Exporting CloudEvents :: Debezium Documentation</title>
     <link rel="canonical" href="https://debezium.io/documentation/reference/stable/integrations/cloudevents.html">
-    <meta name="generator" content="Antora 3.0.0-alpha.9">
+    <meta name="generator" content="Antora 3.1.7">
 <link rel="stylesheet" href="../../../debezium-antora/css/site.css">
 <link rel="stylesheet" href="../../../debezium-antora/css/debezium-antora.css">
 <link rel="stylesheet" href="../../../debezium-antora/css/highlightjs-dark.css">
@@ -160,6 +160,9 @@
     <a class="nav-link" href="../transformations/filtering.html">Message Filtering</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/schema-change-event-filter.html">Schema Change Event Filtering</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/content-based-routing.html">Content-Based Routing</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -173,6 +176,12 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/header-to-value.html">HeaderToValue</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/timezone-converter.html">Timezone Converter</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/timescaledb.html">TimescaleDB Integration</a>
   </li>
 </ul>
   </li>
@@ -202,7 +211,7 @@
     <a class="nav-link" href="cloudevents.html">CloudEvents</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="tracing.html">OpenTracing</a>
+    <a class="nav-link" href="tracing.html">OpenTelemetry</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="testcontainers.html">Integration Testing with Testcontainers</a>
@@ -253,6 +262,21 @@
         <li class="version">
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
+        <li class="version">
+          <a href="/documentation/reference/3.0/index.html">3.0</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.1/index.html">3.1</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.7/index.html">2.7</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.6/index.html">2.6</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.5/index.html">2.5</a>
+        </li>
         <li class="version is-current">
           <a href="/documentation/reference/2.4/index.html">2.4</a>
         </li>
@@ -270,39 +294,6 @@
         </li>
         <li class="version">
           <a href="/documentation/reference/1.9/index.html">1.9</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.8/index.html">1.8</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.7/index.html">1.7</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.6/index.html">1.6</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.5/index.html">1.5</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.4/index.html">1.4</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.3/index.html">1.3</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.2/index.html">1.2</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.1/index.html">1.1</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.0/index.html">1.0</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.10/index.html">0.10</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.9/index.html">0.9</a>
         </li>
       </ul>
     </li>
@@ -327,36 +318,47 @@
     <div class="page-versions">
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">2.4</button>
         <div class="version-menu">
-                <a class="version" href="/documentation/reference/nightly/index.html">nightly</a>
-                <a class="version is-current" href="/documentation/reference/2.4/index.html">2.4</a>
-                <a class="version" href="/documentation/reference/2.3/index.html">2.3</a>
-                <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
-                <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
-                <a class="version" href="/documentation/reference/2.0/index.html">2.0</a>
-                <a class="version" href="/documentation/reference/1.9/index.html">1.9</a>
-                <a class="version" href="/documentation/reference/1.8/index.html">1.8</a>
-                <a class="version" href="/documentation/reference/1.7/index.html">1.7</a>
-                <a class="version" href="/documentation/reference/1.6/index.html">1.6</a>
-                <a class="version" href="/documentation/reference/1.5/index.html">1.5</a>
-                <a class="version" href="/documentation/reference/1.4/index.html">1.4</a>
-                <a class="version" href="/documentation/reference/1.3/index.html">1.3</a>
-                <a class="version" href="/documentation/reference/1.2/index.html">1.2</a>
-                <a class="version" href="/documentation/reference/1.1/index.html">1.1</a>
-                <a class="version is-missing" href="/documentation/reference/1.0/index.html">1.0</a>
-                <a class="version is-missing" href="/documentation/reference/0.10/index.html">0.10</a>
-                <a class="version is-missing" href="/documentation/reference/0.9/index.html">0.9</a>
+                        <a class="version" href="/documentation//reference/integrations/cloudevents.html" data-hash="true">nightly</a>
+                        <a class="version" href="/documentation//reference/stable/integrations/cloudevents.html" data-hash="true">3.0</a>
+                        <a class="version" href="/documentation//reference/3.1/integrations/cloudevents.html" data-hash="true">3.1</a>
+                        <a class="version" href="/documentation//reference/2.7/integrations/cloudevents.html" data-hash="true">2.7</a>
+                        <a class="version" href="/documentation//reference/2.6/integrations/cloudevents.html" data-hash="true">2.6</a>
+                        <a class="version" href="/documentation//reference/2.5/integrations/cloudevents.html" data-hash="true">2.5</a>
+                        <a class="version is-current" href="/reference/2.4/integrations/cloudevents.html" data-hash="true">2.4</a>
+                        <a class="version" href="/documentation//reference/2.3/integrations/cloudevents.html" data-hash="true">2.3</a>
+                        <a class="version" href="/documentation//reference/2.2/integrations/cloudevents.html" data-hash="true">2.2</a>
+                        <a class="version" href="/documentation//reference/2.1/integrations/cloudevents.html" data-hash="true">2.1</a>
+                        <a class="version" href="/documentation//reference/2.0/integrations/cloudevents.html" data-hash="true">2.0</a>
+                        <a class="version" href="/documentation//reference/1.9/integrations/cloudevents.html" data-hash="true">1.9</a>
         </div>
         |
     </div>
     </div>
+    <script>
+        function updateAnchorsWithHash() {
+            const currentHash = window.location.hash;
+            if (currentHash) {
+                document.querySelectorAll('a[data-hash="true"]').forEach(link => {
+                    const baseHref = link.getAttribute('href').split('#')[0];
+                    link.setAttribute('href', baseHref + currentHash);
+                });
+            }
+        }
+
+        // Listen for hashchange and update anchors
+        window.addEventListener('hashchange', updateAnchorsWithHash);
+
+        // Update anchors on initial load
+        document.addEventListener('DOMContentLoaded', updateAnchorsWithHash);
+    </script>
   <div class="edit-this-page"><a href="https://github.com/debezium/debezium/edit/2.4/documentation/modules/ROOT/pages/integrations/cloudevents.adoc">Edit this Page</a></div>
   </div>
 <div class="article-grid">
 <div class="article-cell1">
 <article class="doc">
         
-    <div class="version-banner version-banner-development">
-    You are viewing documentation for the current development version of Debezium.
+    <div class="version-banner version-banner-outdated">
+    You are viewing documentation for an outdated version of Debezium.
     <br/>
             If you want to view the latest stable version of this page, please go <a href=/documentation/reference/stable/index.html>here</a>.
             
@@ -420,7 +422,7 @@ Please let us know your specific requirements or if you encounter any problems w
 <div class="ulist">
 <ul>
 <li>
-<p><a href="../configuration/avro.html#avro-serialization" class="page">Avro serialization</a></p>
+<p><a href="../configuration/avro.html#avro-serialization" class="xref page">Avro serialization</a></p>
 </li>
 <li>
 <p><a href="https://github.com/Apicurio/apicurio-registry">Apicurio Registry</a></p>
@@ -445,7 +447,7 @@ Please let us know your specific requirements or if you encounter any problems w
   "time" : "2020-01-13T13:55:39.738Z",               <i class="conum" data-value="5"></i><b>(5)</b>
   "datacontenttype" : "application/json",            <i class="conum" data-value="6"></i><b>(6)</b>
   "iodebeziumop" : "r",                              <i class="conum" data-value="7"></i><b>(7)</b>
-  "iodebeziumversion" : "2.4.0.Alpha1",        <i class="conum" data-value="8"></i><b>(8)</b>
+  "iodebeziumversion" : "2.4.1.Final",        <i class="conum" data-value="8"></i><b>(8)</b>
   "iodebeziumconnector" : "postgresql",
   "iodebeziumname" : "test_server",
   "iodebeziumtsms" : "1578923739738",
@@ -527,7 +529,7 @@ The only alternative is Avro.</td>
   "datacontenttype" : "application/avro",            <i class="conum" data-value="1"></i><b>(1)</b>
   "dataschema" : "http://my-registry/schemas/ids/1", <i class="conum" data-value="2"></i><b>(2)</b>
   "iodebeziumop" : "r",
-  "iodebeziumversion" : "2.4.0.Alpha1",
+  "iodebeziumversion" : "2.4.1.Final",
   "iodebeziumconnector" : "postgresql",
   "iodebeziumname" : "test_server",
   "iodebeziumtsms" : "1578924258597",
@@ -701,7 +703,7 @@ The value can be <code>json</code> or <code>avro</code>.</p>
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2023 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/ac56c6e7a3f7678c0ee9dfca35046f38b4ca36b9">ac56c6e7</a></span>)
+            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/8c607e24d77a61db360135c33983769717b3b15c">8c607e24</a></span>)
             
         </div>
     </footer>

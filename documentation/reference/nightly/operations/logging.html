@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Debezium logging :: Debezium Documentation</title>
     <link rel="canonical" href="https://debezium.io/documentation/reference/stable/operations/logging.html">
-    <meta name="generator" content="Antora 3.0.0-alpha.9">
+    <meta name="generator" content="Antora 3.1.7">
 <link rel="stylesheet" href="../../debezium-antora/css/site.css">
 <link rel="stylesheet" href="../../debezium-antora/css/debezium-antora.css">
 <link rel="stylesheet" href="../../debezium-antora/css/highlightjs-dark.css">
@@ -94,13 +94,16 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Connectors</span>
+    <span class="nav-text">Source Connectors</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/index.html">Overview</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/mysql.html">MySQL</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/mariadb.html">MariaDB</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/mongodb.html">MongoDB</a>
@@ -127,7 +130,19 @@
     <a class="nav-link" href="../connectors/spanner.html">Spanner</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../connectors/jdbc.html">Jdbc</a>
+    <a class="nav-link" href="../connectors/informix.html">Informix</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Sink Connectors</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/index-sink.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/jdbc.html">JDBC</a>
   </li>
 </ul>
   </li>
@@ -160,19 +175,46 @@
     <a class="nav-link" href="../transformations/filtering.html">Message Filtering</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/schema-change-event-filter.html">Schema Change Event Filtering</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/content-based-routing.html">Content-Based Routing</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/applying-transformations-selectively.html">Using SMT Predicates to Selectively Apply Transformations</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../transformations/compute-partition.html">Compute Partition [Deprecated]</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/partition-routing.html">Partition Routing</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/header-to-value.html">HeaderToValue</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/timezone-converter.html">Timezone Converter</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/timescaledb.html">TimescaleDB Integration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/decode-logical-decoding-message-content.html">Decode Logical Decoding Message Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/convert-cloudevent-to-saveable-form.html">Convert CloudEvents to Saveable Form</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/vector-to-json.html">Vector Data Types to JSON Types</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Post Processors</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../post-processors/index.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../post-processors/reselect-columns.html">Reselect Columns</a>
   </li>
 </ul>
   </li>
@@ -202,7 +244,7 @@
     <a class="nav-link" href="../integrations/cloudevents.html">CloudEvents</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../integrations/tracing.html">OpenTracing</a>
+    <a class="nav-link" href="../integrations/tracing.html">OpenTelemetry</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../integrations/testcontainers.html">Integration Testing with Testcontainers</a>
@@ -229,9 +271,6 @@
     <a class="nav-link" href="openshift.html">Running on Openshift</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="embedded.html">Embedding Debezium</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="debezium-ui.html">Debezium UI</a>
   </li>
 </ul>
@@ -254,6 +293,21 @@
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version">
+          <a href="/documentation/reference/3.0/index.html">3.0</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.1/index.html">3.1</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.7/index.html">2.7</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.6/index.html">2.6</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.5/index.html">2.5</a>
+        </li>
+        <li class="version">
           <a href="/documentation/reference/2.4/index.html">2.4</a>
         </li>
         <li class="version">
@@ -270,39 +324,6 @@
         </li>
         <li class="version">
           <a href="/documentation/reference/1.9/index.html">1.9</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.8/index.html">1.8</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.7/index.html">1.7</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.6/index.html">1.6</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.5/index.html">1.5</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.4/index.html">1.4</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.3/index.html">1.3</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.2/index.html">1.2</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.1/index.html">1.1</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.0/index.html">1.0</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.10/index.html">0.10</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.9/index.html">0.9</a>
         </li>
       </ul>
     </li>
@@ -327,28 +348,39 @@
     <div class="page-versions">
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
-                <a class="version is-current" href="/documentation/reference/nightly/index.html">nightly</a>
-                <a class="version" href="/documentation/reference/2.4/index.html">2.4</a>
-                <a class="version" href="/documentation/reference/2.3/index.html">2.3</a>
-                <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
-                <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
-                <a class="version" href="/documentation/reference/2.0/index.html">2.0</a>
-                <a class="version" href="/documentation/reference/1.9/index.html">1.9</a>
-                <a class="version" href="/documentation/reference/1.8/index.html">1.8</a>
-                <a class="version" href="/documentation/reference/1.7/index.html">1.7</a>
-                <a class="version" href="/documentation/reference/1.6/index.html">1.6</a>
-                <a class="version" href="/documentation/reference/1.5/index.html">1.5</a>
-                <a class="version" href="/documentation/reference/1.4/index.html">1.4</a>
-                <a class="version" href="/documentation/reference/1.3/index.html">1.3</a>
-                <a class="version" href="/documentation/reference/1.2/index.html">1.2</a>
-                <a class="version" href="/documentation/reference/1.1/index.html">1.1</a>
-                <a class="version" href="/documentation/reference/1.0/index.html">1.0</a>
-                <a class="version" href="/documentation/reference/0.10/index.html">0.10</a>
-                <a class="version" href="/documentation/reference/0.9/index.html">0.9</a>
+                        <a class="version is-current" href="/reference/operations/logging.html" data-hash="true">nightly</a>
+                        <a class="version" href="/documentation//reference/stable/operations/logging.html" data-hash="true">3.0</a>
+                        <a class="version" href="/documentation//reference/3.1/operations/logging.html" data-hash="true">3.1</a>
+                        <a class="version" href="/documentation//reference/2.7/operations/logging.html" data-hash="true">2.7</a>
+                        <a class="version" href="/documentation//reference/2.6/operations/logging.html" data-hash="true">2.6</a>
+                        <a class="version" href="/documentation//reference/2.5/operations/logging.html" data-hash="true">2.5</a>
+                        <a class="version" href="/documentation//reference/2.4/operations/logging.html" data-hash="true">2.4</a>
+                        <a class="version" href="/documentation//reference/2.3/operations/logging.html" data-hash="true">2.3</a>
+                        <a class="version" href="/documentation//reference/2.2/operations/logging.html" data-hash="true">2.2</a>
+                        <a class="version" href="/documentation//reference/2.1/operations/logging.html" data-hash="true">2.1</a>
+                        <a class="version" href="/documentation//reference/2.0/operations/logging.html" data-hash="true">2.0</a>
+                        <a class="version" href="/documentation//reference/1.9/operations/logging.html" data-hash="true">1.9</a>
         </div>
         |
     </div>
     </div>
+    <script>
+        function updateAnchorsWithHash() {
+            const currentHash = window.location.hash;
+            if (currentHash) {
+                document.querySelectorAll('a[data-hash="true"]').forEach(link => {
+                    const baseHref = link.getAttribute('href').split('#')[0];
+                    link.setAttribute('href', baseHref + currentHash);
+                });
+            }
+        }
+
+        // Listen for hashchange and update anchors
+        window.addEventListener('hashchange', updateAnchorsWithHash);
+
+        // Update anchors on initial load
+        document.addEventListener('DOMContentLoaded', updateAnchorsWithHash);
+    </script>
   <div class="edit-this-page"><a href="https://github.com/debezium/debezium/edit/main/documentation/modules/ROOT/pages/operations/logging.adoc">Edit this Page</a></div>
   </div>
 <div class="article-grid">
@@ -451,8 +483,10 @@ giving you even more control over what the log messages look like.</p>
 then Kafka Connect uses the Log4j configuration file (for example, <code>/opt/kafka/config/connect-log4j.properties</code>) in the Kafka installation.
 By default, this file contains the following configuration:</p>
 </div>
+<div class="exampleblock">
+<div class="title">Example 1. Default configuration in <code>connect-log4j.properties</code></div>
+<div class="content">
 <div class="listingblock">
-<div class="title">connect-log4j.properties</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-properties hljs" data-lang="properties">log4j.rootLogger=INFO, stdout  <i class="conum" data-value="1"></i><b>(1)</b>
 
@@ -462,28 +496,41 @@ log4j.appender.stdout.layout.ConversionPattern=[%d] %p %m (%c)%n  <i class="conu
 ...</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The root logger, which defines the default logger configuration.
-By default, loggers include <code>INFO</code>, <code>WARN</code>, and <code>ERROR</code> messages.
-These log messages are written to the <code>stdout</code> appender.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The <code>stdout</code> appender writes log messages to the console (as opposed to a file).</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>The <code>stdout</code> appender uses a pattern matching algorithm to format the log messages.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>The pattern for the <code>stdout</code> appender (see the <a href="https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html">Log4j documentation</a> for details).</td>
-</tr>
-</table>
 </div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Descriptions of default <code>connect-log4j.properties</code> settings</caption>
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 87.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The root logger, which defines the default logger configuration.
+By default, loggers include <code>INFO</code>, <code>WARN</code>, and <code>ERROR</code> messages.
+These log messages are written to the <code>stdout</code> appender.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Directs the <code>stdout</code> appender to write log messages to the console, as opposed to a file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies that the <code>stdout</code> appender uses a pattern matching algorithm to format log messages.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The pattern that the <code>stdout</code> appender uses (see the <a href="https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html">Log4j documentation</a> for details).</p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
 <p>Unless you configure other loggers,
 all of the loggers that Debezium uses inherit the <code>rootLogger</code> configuration.</p>
@@ -540,59 +587,66 @@ This means that you can control all of the log messages for a specific class or 
 <div class="title">Procedure</div>
 <ol class="arabic">
 <li>
-<p>Open the <code>log4j.properties</code> file.</p>
+<p>Open the <code>connect-log4j.properties</code> file.</p>
 </li>
 <li>
 <p>Configure a logger for the connector.</p>
-<div class="openblock">
-<div class="content">
 <div class="paragraph">
-<p>This example configures loggers for the MySQL connector and the database schema history implementation used by the connector,
-and sets them to log <code>DEBUG</code> level messages:</p>
+<p>The following example configures loggers for the MySQL connector and for the database schema history implementation used by the connector,
+and sets them to log <code>DEBUG</code> level messages:<br></p>
 </div>
+<div class="exampleblock">
+<div class="title">Example 2. connect-log4j.properties configuration to enable loggers and set the log level to <code>DEBUG</code></div>
+<div class="content">
 <div class="listingblock">
-<div class="title">log4j.properties</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-properties hljs" data-lang="properties">...
 log4j.logger.io.debezium.connector.mysql=DEBUG, stdout  <i class="conum" data-value="1"></i><b>(1)</b>
 log4j.logger.io.debezium.relational.history=DEBUG, stdout  <i class="conum" data-value="2"></i><b>(2)</b>
 
 log4j.additivity.io.debezium.connector.mysql=false  <i class="conum" data-value="3"></i><b>(3)</b>
-log4j.additivity.io.debezium.storage.kafka.history=false  <i class="conum" data-value="3"></i><b>(3)</b>
+log4j.additivity.io.debezium.storage.kafka.history=false
 ...</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. Descriptions of <code>connect-log4j.properties</code> settings for enabling loggers and setting the log level</caption>
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 87.5%;">
+</colgroup>
+<thead>
 <tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Configures the logger named <code>io.debezium.connector.mysql</code> to send <code>DEBUG</code>, <code>INFO</code>, <code>WARN</code>, and <code>ERROR</code> messages to the <code>stdout</code> appender.</td>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configures the logger named <code>io.debezium.connector.mysql</code> to send <code>DEBUG</code>, <code>INFO</code>, <code>WARN</code>, and <code>ERROR</code> messages to the <code>stdout</code> appender.</p></td>
 </tr>
 <tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Configures the logger named <code>io.debezium.relational.history</code> to send <code>DEBUG</code>, <code>INFO</code>, <code>WARN</code>, and <code>ERROR</code> messages to the <code>stdout</code> appender.</td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configures the logger named <code>io.debezium.relational.history</code> to send <code>DEBUG</code>, <code>INFO</code>, <code>WARN</code>, and <code>ERROR</code> messages to the <code>stdout</code> appender.</p></td>
 </tr>
 <tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Turns off <em>additivity</em>,
-which results in log messages not being sent to the appenders of parent loggers (this can prevent seeing duplicate log messages when using multiple appenders).</td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This pair of <code>log4j.additivity.io</code> entries disable <a href="https://logging.apache.org/log4j/2.x/manual/configuration.html#additivity">additivity</a>.
+If you use multiple appenders, set <code>additivity</code> values to <code>false</code> to prevent duplicate log messages from being sent to the appenders of the parent loggers.</p></td>
 </tr>
+</tbody>
 </table>
-</div>
-</div>
-</div>
 </li>
 <li>
 <p>If necessary, change the logging level for a specific subset of the classes within the connector.</p>
-<div class="openblock">
-<div class="content">
 <div class="paragraph">
 <p>Increasing the logging level for the entire connector increases the log verbosity,
 which can make it difficult to understand what is happening.
 In these cases,
 you can change the logging level just for the subset of classes that are related to the issue that you are troubleshooting.</p>
-</div>
-</div>
 </div>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
@@ -601,13 +655,9 @@ you can change the logging level just for the subset of classes that are related
 </li>
 <li>
 <p>Review the connector&#8217;s log messages.</p>
-<div class="openblock">
-<div class="content">
 <div class="paragraph">
 <p>Find the log messages that are related to the issue that you are troubleshooting.
 The end of each log message shows the name of the Java class that produced the message.</p>
-</div>
-</div>
 </div>
 </li>
 <li>
@@ -615,15 +665,15 @@ The end of each log message shows the name of the Java class that produced the m
 </li>
 <li>
 <p>Configure a logger for each Java class that you identified.</p>
-<div class="openblock">
-<div class="content">
 <div class="paragraph">
 <p>For example, consider a scenario in which you are unsure why the MySQL connector is skipping some events when it is processing the binlog.
 Rather than turn on <code>DEBUG</code> or <code>TRACE</code> logging for the entire connector,
 you can keep the connector&#8217;s logging level at <code>INFO</code> and then configure <code>DEBUG</code> or <code>TRACE</code> on just the class that is reading the binlog:</p>
 </div>
+<div class="exampleblock">
+<div class="title">Example 3. connect-log4j.properties configuration that enables <code>DEBUG</code> logging for the <code>BinlogReader</code> class</div>
+<div class="content">
 <div class="listingblock">
-<div class="title">log4j.properties</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-properties hljs" data-lang="properties">...
 log4j.logger.io.debezium.connector.mysql=INFO, stdout
@@ -649,7 +699,7 @@ log4j.additivity.io.debezium.connector.mysql.BinlogReader=false
 <h3 id="setting-the-logging-level-with-the-kafka-connect-rest-api"><a class="anchor" href="#setting-the-logging-level-with-the-kafka-connect-rest-api"></a>Dynamically setting the logging level with the Kafka Connect REST API</h3>
 <div class="paragraph">
 <p>You can use the Kafka Connect REST API to set logging levels for a connector dynamically at runtime.
-Unlike log level changes that you set in <code>log4j.properties</code>, changes that you make via the API take effect immediately, and do not require you to restart the worker.</p>
+Unlike log level changes that you set in <code>connect-log4j.properties</code>, changes that you make via the API take effect immediately, and do not require you to restart the worker.</p>
 </div>
 <div class="paragraph">
 <p>The log level setting that you specify in the API applies only to the worker at the endpoint that receives the request.
@@ -657,7 +707,7 @@ The log levels of other workers in the cluster remain unchanged.</p>
 </div>
 <div class="paragraph">
 <p>The specified level is not persisted after the worker restarts.
-To make persistent changes to the logging level, set the log level in <code>log4j.properties</code> by <a href="#changing-logging-level">configuring loggers</a> or <a href="#adding-mapped-diagnostic-contexts">adding mapped diagnostic contexts</a>.</p>
+To make persistent changes to the logging level, set the log level in <code>connect-log4j.properties</code> by <a href="#changing-logging-level">configuring loggers</a> or <a href="#adding-mapped-diagnostic-contexts">adding mapped diagnostic contexts</a>.</p>
 </div>
 <div class="ulist">
 <div class="title">Procedure</div>
@@ -731,27 +781,27 @@ so you can find all of the log messages associated with this particular activity
 </div>
 <div class="paragraph">
 <p>To enable MDC for a connector,
-you configure an appender in the <code>log4j.properties</code> file.</p>
+you configure an appender in the <code>connect-log4j.properties</code> file.</p>
 </div>
 <div class="olist arabic">
 <div class="title">Procedure</div>
 <ol class="arabic">
 <li>
-<p>Open the <code>log4j.properties</code> file.</p>
+<p>Open the <code>connect-log4j.properties</code> file.</p>
 </li>
 <li>
-<p>Configure an appender to use any of the supported Debezium MDC properties.</p>
-<div class="openblock">
+<p>Configure an appender to use any of the supported Debezium MDC properties.
+In the following example, the <code>stdout</code> appender is configured to use these MDC properties.</p>
+<div class="exampleblock">
+<div class="title">Example 4. connect-log4j.properties configuration that sets the <code>stdout</code> appender to use MDC properties</div>
 <div class="content">
-<div class="paragraph">
-<p>In the following example, the <code>stdout</code> appender is configured to use these MDC properties:</p>
-</div>
 <div class="listingblock">
-<div class="title">log4j.properties</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-properties hljs" data-lang="properties">...
 log4j.appender.stdout.layout.ConversionPattern=%d{ISO8601} %-5p  %X{dbz.connectorType}|%X{dbz.connectorName}|%X{dbz.connectorContext}  %m   [%c]%n
 ...</code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="paragraph">
@@ -762,17 +812,15 @@ log4j.appender.stdout.layout.ConversionPattern=%d{ISO8601} %-5p  %X{dbz.connecto
 <pre class="highlightjs highlight nowrap"><code class="language-shell hljs" data-lang="shell">...
 2017-02-07 20:49:37,692 INFO   MySQL|dbserver1|snapshot  Starting snapshot for jdbc:mysql://mysql:3306/?useInformationSchema=true&amp;nullCatalogMeansCurrent=false&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;characterSetResults=UTF-8&amp;zeroDateTimeBehavior=convertToNull with user 'debezium'   [io.debezium.connector.mysql.SnapshotReader]
 2017-02-07 20:49:37,696 INFO   MySQL|dbserver1|snapshot  Snapshot is using user 'debezium' with these MySQL grants:   [io.debezium.connector.mysql.SnapshotReader]
-2017-02-07 20:49:37,697 INFO   MySQL|dbserver1|snapshot  	GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'debezium'@'%'   [io.debezium.connector.mysql.SnapshotReader]
+2017-02-07 20:49:37,697 INFO   MySQL|dbserver1|snapshot  GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'debezium'@'%'   [io.debezium.connector.mysql.SnapshotReader]
 ...</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Each line in the log includes the connector type (for example, <code>MySQL</code>), the name of the connector (for example, <code>dbserver1</code>), and the activity of the thread (for example, <code>snapshot</code>).</p>
-</div>
 </div>
 </div>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p>Each line in the log includes the connector type (for example, <code>MySQL</code>), the name of the connector (for example, <code>dbserver1</code>), and the activity of the thread (for example, <code>snapshot</code>).</p>
 </div>
 </div>
 </div>
@@ -822,7 +870,7 @@ COPY log4j.properties $KAFKA_HOME/config/log4j.properties
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2023 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/230c056577672b69f2f2d65968cf64d159c5d42b">230c0565</a></span>)
+            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/ee9d3467111c73d8f337ef6bfee02f75c4df77ed">ee9d3467</a></span>)
             
         </div>
     </footer>

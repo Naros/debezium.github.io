@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>New Record State Extraction :: Debezium Documentation</title>
     <link rel="canonical" href="https://debezium.io/documentation/reference/stable/transformations/event-flattening.html">
-    <meta name="generator" content="Antora 3.0.0-alpha.9">
+    <meta name="generator" content="Antora 3.1.7">
 <link rel="stylesheet" href="../../debezium-antora/css/site.css">
 <link rel="stylesheet" href="../../debezium-antora/css/debezium-antora.css">
 <link rel="stylesheet" href="../../debezium-antora/css/highlightjs-dark.css">
@@ -94,13 +94,16 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Connectors</span>
+    <span class="nav-text">Source Connectors</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/index.html">Overview</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/mysql.html">MySQL</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/mariadb.html">MariaDB</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/mongodb.html">MongoDB</a>
@@ -127,7 +130,19 @@
     <a class="nav-link" href="../connectors/spanner.html">Spanner</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../connectors/jdbc.html">Jdbc</a>
+    <a class="nav-link" href="../connectors/informix.html">Informix</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Sink Connectors</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/index-sink.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/jdbc.html">JDBC</a>
   </li>
 </ul>
   </li>
@@ -160,19 +175,46 @@
     <a class="nav-link" href="filtering.html">Message Filtering</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="schema-change-event-filter.html">Schema Change Event Filtering</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="content-based-routing.html">Content-Based Routing</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="applying-transformations-selectively.html">Using SMT Predicates to Selectively Apply Transformations</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="compute-partition.html">Compute Partition [Deprecated]</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="partition-routing.html">Partition Routing</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="header-to-value.html">HeaderToValue</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="timezone-converter.html">Timezone Converter</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="timescaledb.html">TimescaleDB Integration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="decode-logical-decoding-message-content.html">Decode Logical Decoding Message Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="convert-cloudevent-to-saveable-form.html">Convert CloudEvents to Saveable Form</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="vector-to-json.html">Vector Data Types to JSON Types</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Post Processors</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../post-processors/index.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../post-processors/reselect-columns.html">Reselect Columns</a>
   </li>
 </ul>
   </li>
@@ -202,7 +244,7 @@
     <a class="nav-link" href="../integrations/cloudevents.html">CloudEvents</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../integrations/tracing.html">OpenTracing</a>
+    <a class="nav-link" href="../integrations/tracing.html">OpenTelemetry</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../integrations/testcontainers.html">Integration Testing with Testcontainers</a>
@@ -229,9 +271,6 @@
     <a class="nav-link" href="../operations/openshift.html">Running on Openshift</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../operations/embedded.html">Embedding Debezium</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../operations/debezium-ui.html">Debezium UI</a>
   </li>
 </ul>
@@ -254,6 +293,21 @@
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version">
+          <a href="/documentation/reference/3.0/index.html">3.0</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.1/index.html">3.1</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.7/index.html">2.7</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.6/index.html">2.6</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.5/index.html">2.5</a>
+        </li>
+        <li class="version">
           <a href="/documentation/reference/2.4/index.html">2.4</a>
         </li>
         <li class="version">
@@ -270,39 +324,6 @@
         </li>
         <li class="version">
           <a href="/documentation/reference/1.9/index.html">1.9</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.8/index.html">1.8</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.7/index.html">1.7</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.6/index.html">1.6</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.5/index.html">1.5</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.4/index.html">1.4</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.3/index.html">1.3</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.2/index.html">1.2</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.1/index.html">1.1</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.0/index.html">1.0</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.10/index.html">0.10</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.9/index.html">0.9</a>
         </li>
       </ul>
     </li>
@@ -327,28 +348,39 @@
     <div class="page-versions">
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
-                <a class="version is-current" href="/documentation/reference/nightly/index.html">nightly</a>
-                <a class="version" href="/documentation/reference/2.4/index.html">2.4</a>
-                <a class="version" href="/documentation/reference/2.3/index.html">2.3</a>
-                <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
-                <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
-                <a class="version" href="/documentation/reference/2.0/index.html">2.0</a>
-                <a class="version" href="/documentation/reference/1.9/index.html">1.9</a>
-                <a class="version" href="/documentation/reference/1.8/index.html">1.8</a>
-                <a class="version" href="/documentation/reference/1.7/index.html">1.7</a>
-                <a class="version" href="/documentation/reference/1.6/index.html">1.6</a>
-                <a class="version" href="/documentation/reference/1.5/index.html">1.5</a>
-                <a class="version" href="/documentation/reference/1.4/index.html">1.4</a>
-                <a class="version" href="/documentation/reference/1.3/index.html">1.3</a>
-                <a class="version" href="/documentation/reference/1.2/index.html">1.2</a>
-                <a class="version" href="/documentation/reference/1.1/index.html">1.1</a>
-                <a class="version" href="/documentation/reference/1.0/index.html">1.0</a>
-                <a class="version" href="/documentation/reference/0.10/index.html">0.10</a>
-                <a class="version" href="/documentation/reference/0.9/index.html">0.9</a>
+                        <a class="version is-current" href="/reference/transformations/event-flattening.html" data-hash="true">nightly</a>
+                        <a class="version" href="/documentation//reference/stable/transformations/event-flattening.html" data-hash="true">3.0</a>
+                        <a class="version" href="/documentation//reference/3.1/transformations/event-flattening.html" data-hash="true">3.1</a>
+                        <a class="version" href="/documentation//reference/2.7/transformations/event-flattening.html" data-hash="true">2.7</a>
+                        <a class="version" href="/documentation//reference/2.6/transformations/event-flattening.html" data-hash="true">2.6</a>
+                        <a class="version" href="/documentation//reference/2.5/transformations/event-flattening.html" data-hash="true">2.5</a>
+                        <a class="version" href="/documentation//reference/2.4/transformations/event-flattening.html" data-hash="true">2.4</a>
+                        <a class="version" href="/documentation//reference/2.3/transformations/event-flattening.html" data-hash="true">2.3</a>
+                        <a class="version" href="/documentation//reference/2.2/transformations/event-flattening.html" data-hash="true">2.2</a>
+                        <a class="version" href="/documentation//reference/2.1/transformations/event-flattening.html" data-hash="true">2.1</a>
+                        <a class="version" href="/documentation//reference/2.0/transformations/event-flattening.html" data-hash="true">2.0</a>
+                        <a class="version" href="/documentation//reference/1.9/transformations/event-flattening.html" data-hash="true">1.9</a>
         </div>
         |
     </div>
     </div>
+    <script>
+        function updateAnchorsWithHash() {
+            const currentHash = window.location.hash;
+            if (currentHash) {
+                document.querySelectorAll('a[data-hash="true"]').forEach(link => {
+                    const baseHref = link.getAttribute('href').split('#')[0];
+                    link.setAttribute('href', baseHref + currentHash);
+                });
+            }
+        }
+
+        // Listen for hashchange and update anchors
+        window.addEventListener('hashchange', updateAnchorsWithHash);
+
+        // Update anchors on initial load
+        document.addEventListener('DOMContentLoaded', updateAnchorsWithHash);
+    </script>
   <div class="edit-this-page"><a href="https://github.com/debezium/debezium/edit/main/documentation/modules/ROOT/pages/transformations/event-flattening.adoc">Edit this Page</a></div>
   </div>
 <div class="article-grid">
@@ -401,7 +433,7 @@ To enable Apache Kafka to retain the Debezium change event messages in their ori
 <td class="content">
 <div class="paragraph">
 <p>The information in this chapter describes the event flattening single message transformation (SMT) for Debezium SQL-based database connectors.
-For information about an equivalent SMT for the Debezium MongoDB connector, see <a href="mongodb-event-flattening.html#mongodb-new-document-state-extraction" class="page">MongoDB New Document State Extraction</a>.</p>
+For information about an equivalent SMT for the Debezium MongoDB connector, see <a href="mongodb-event-flattening.html#mongodb-new-document-state-extraction" class="xref page">MongoDB New Document State Extraction</a>.</p>
 </div>
 </td>
 </tr>
@@ -456,6 +488,8 @@ Each event consists of three parts:</p>
 		...
 	},
 	"ts_ms" : "...",
+	"ts_us" : "...",
+	"ts_ns" : "...",
 	"before" : {
 		"field1" : "oldvalue1",
 		"field2" : "oldvalue2"
@@ -469,7 +503,7 @@ Each event consists of three parts:</p>
 </div>
 <div class="paragraph">
 <p>For more information about the change event structure for a connector, see
-<a href="../connectors/index.html" class="page">the documentation for the connector</a>.</p>
+<a href="../connectors/index.html" class="xref page">the documentation for the connector</a>.</p>
 </div>
 <div class="paragraph">
 <p>After the event flattening SMT processes the message in the previous example, it simplifies the message format, resulting in the message in the following example:</p>
@@ -594,7 +628,7 @@ transforms.unwrap.add.fields=table,lsn</code></pre>
 <div class="paragraph">
 <div class="title">Customizing the configuration</div>
 <p>The connector might emit many types of event messages (heartbeat messages, tombstone messages, or metadata messages about transactions or schema changes).
-To apply the transformation to a subset of events, you can define <a href="#options-for-applying-the-transformation-selectively">an SMT predicate statement that selectively applies the transformation</a> to specific events only.</p>
+To apply the transformation to a subset of events, you can define <a href="#options-for-applying-the-event-flattening-transformation-selectively">an SMT predicate statement that selectively applies the transformation</a> to specific events only.</p>
 </div>
 </div>
 </div>
@@ -619,7 +653,7 @@ For example, you might want the simplified record&#8217;s header or value to con
 </ul>
 </div>
 <div class="paragraph">
-<p>For more information on what is available see <a href="../connectors/index.html" class="page">the documentation for each connector</a>.</p>
+<p>For more information on what is available see <a href="../connectors/index.html" class="xref page">the documentation for each connector</a>.</p>
 </div>
 <div class="paragraph">
 <p>To add metadata to the simplified Kafka record&#8217;s header, specify the <code>add.headers</code> option.
@@ -669,7 +703,7 @@ transforms.unwrap.delete.handling.mode=rewrite</pre>
 Because the structure of these other messages differs from the structure of the change event messages that the SMT is designed to process, it&#8217;s best to configure the connector to selectively apply the SMT, so that it processes only the intended data change messages.</p>
 </div>
 <div class="paragraph">
-<p>For more information about how to apply the SMT selectively, see <a href="applying-transformations-selectively.html#applying-transformations-selectively" class="page">Configure an SMT predicate for the transformation</a>.</p>
+<p>For more information about how to apply the SMT selectively, see <a href="applying-transformations-selectively.html#applying-the-event-flattening-transformation-selectively" class="xref page">Configure an SMT predicate for the transformation</a>.</p>
 </div>
 </div>
 </div>
@@ -703,6 +737,21 @@ Because the structure of these other messages differs from the structure of the 
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Debezium generates a tombstone record for each <code>DELETE</code> operation. The default behavior is that event flattening SMT removes tombstone records from the stream. To keep tombstone records in the stream, specify <code>drop.tombstones=false</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This option is scheduled for removal in a future release.
+In its place, use the <a href="#extract-new-record-state-delete-tombstone-handling-mode"><code>delete.tombstone.handling.mode</code></a> option.</p>
+</div>
+</td>
+</tr>
+</table>
 </div></div></td>
 </tr>
 <tr>
@@ -720,6 +769,86 @@ Specify <code>none</code> to keep the change event record in the stream. The rec
 Specify <code>rewrite</code> to keep the change event record in the stream and edit the record to have a <code>value</code> field that contains the key/value pairs that were in the <code>before</code> field and also add <code>__deleted: true</code> to the <code>value</code>. This is another way to indicate that the record has been deleted.<br>
 <br>
 When you  specify <code>rewrite</code>, the updated simplified records for <code>DELETE</code> operations might be all you need to track deleted records. You can consider accepting the default behavior of dropping the tombstone records that the Debezium connector creates.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This option is scheduled for removal in a future release.
+In its place, use the <a href="#extract-new-record-state-delete-tombstone-handling-mode"><code>delete.tombstone.handling.mode</code></a> option.</p>
+</div>
+</td>
+</tr>
+</table>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="extract-new-record-state-delete-tombstone-handling-mode"></a><a href="#extract-new-record-state-delete-tombstone-handling-mode"><code>delete.tombstone.handling.mode</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>No default</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Debezium generates a change event record for each <code>DELETE</code> operation. This setting determines how the event flattening SMT handles <code>DELETE</code> events from the stream.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The setting for this option takes precedence over any conflicting settings that you might configure for the deprecated <a href="#extract-new-record-state-drop-tombstones"><code>drop.tombstones</code></a> or <a href="#extract-new-record-state-delete-handling-mode"><code>delete.handling.mode</code></a> options.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Set one of the following options:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>drop</code></dt>
+<dd>
+<p>The SMT removes both the <code>DELETE</code> event and <code>TOMBSTONE</code> from the stream.</p>
+</dd>
+<dt class="hdlist1"><code>tombstone</code> (default)</dt>
+<dd>
+<p>The SMT retains <code>TOMBSTONE</code> records in the stream.
+The <code>TOMBSTONE</code> record contains only the following value: <code>"value": "null"</code>.</p>
+</dd>
+<dt class="hdlist1"><code>rewrite</code></dt>
+<dd>
+<p>The SMT retains the change event record in the stream and makes the following changes:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Adds a <code>value</code> field to the record that contains the key/value pairs from the <code>before</code> field of the original record.</p>
+</li>
+<li>
+<p>Adds <code>__deleted: true</code> to the <code>value</code> of the record.</p>
+</li>
+<li>
+<p>Removes <code>TOMBSTONE</code> records.</p>
+<div class="paragraph">
+<p>This setting provides another way to indicate that the record has been deleted.</p>
+</div>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1"><code>rewrite-with-tombstone</code></dt>
+<dd>
+<p>The SMT behaves as it does when you select the <code>rewrite</code> option, except that it also retains <code>TOMBSTONE</code> records.</p>
+</dd>
+</dl>
 </div></div></td>
 </tr>
 <tr>
@@ -820,6 +949,17 @@ If you specify a field that is not in the change event record, the SMT does not 
 By default, the SMT only removes fields that are marked <code>optional</code>.</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="replace-null-with-default"></a><a href="#replace-null-with-default"><code>replace.null.with.default</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>true</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specifies whether you want the SMT to replace record&#8217;s null values with source-defined default.</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -832,7 +972,7 @@ By default, the SMT only removes fields that are marked <code>optional</code>.</
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2023 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/230c056577672b69f2f2d65968cf64d159c5d42b">230c0565</a></span>)
+            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/ee9d3467111c73d8f337ef6bfee02f75c4df77ed">ee9d3467</a></span>)
             
         </div>
     </footer>

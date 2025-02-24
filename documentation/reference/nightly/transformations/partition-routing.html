@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Partition Routing :: Debezium Documentation</title>
     <link rel="canonical" href="https://debezium.io/documentation/reference/stable/transformations/partition-routing.html">
-    <meta name="generator" content="Antora 3.0.0-alpha.9">
+    <meta name="generator" content="Antora 3.1.7">
 <link rel="stylesheet" href="../../debezium-antora/css/site.css">
 <link rel="stylesheet" href="../../debezium-antora/css/debezium-antora.css">
 <link rel="stylesheet" href="../../debezium-antora/css/highlightjs-dark.css">
@@ -94,13 +94,16 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Connectors</span>
+    <span class="nav-text">Source Connectors</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/index.html">Overview</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/mysql.html">MySQL</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/mariadb.html">MariaDB</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/mongodb.html">MongoDB</a>
@@ -127,7 +130,19 @@
     <a class="nav-link" href="../connectors/spanner.html">Spanner</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../connectors/jdbc.html">Jdbc</a>
+    <a class="nav-link" href="../connectors/informix.html">Informix</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Sink Connectors</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/index-sink.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/jdbc.html">JDBC</a>
   </li>
 </ul>
   </li>
@@ -160,19 +175,46 @@
     <a class="nav-link" href="filtering.html">Message Filtering</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="schema-change-event-filter.html">Schema Change Event Filtering</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="content-based-routing.html">Content-Based Routing</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="applying-transformations-selectively.html">Using SMT Predicates to Selectively Apply Transformations</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="compute-partition.html">Compute Partition [Deprecated]</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="partition-routing.html">Partition Routing</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="header-to-value.html">HeaderToValue</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="timezone-converter.html">Timezone Converter</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="timescaledb.html">TimescaleDB Integration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="decode-logical-decoding-message-content.html">Decode Logical Decoding Message Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="convert-cloudevent-to-saveable-form.html">Convert CloudEvents to Saveable Form</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="vector-to-json.html">Vector Data Types to JSON Types</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Post Processors</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../post-processors/index.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../post-processors/reselect-columns.html">Reselect Columns</a>
   </li>
 </ul>
   </li>
@@ -202,7 +244,7 @@
     <a class="nav-link" href="../integrations/cloudevents.html">CloudEvents</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../integrations/tracing.html">OpenTracing</a>
+    <a class="nav-link" href="../integrations/tracing.html">OpenTelemetry</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../integrations/testcontainers.html">Integration Testing with Testcontainers</a>
@@ -229,9 +271,6 @@
     <a class="nav-link" href="../operations/openshift.html">Running on Openshift</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../operations/embedded.html">Embedding Debezium</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../operations/debezium-ui.html">Debezium UI</a>
   </li>
 </ul>
@@ -254,6 +293,21 @@
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version">
+          <a href="/documentation/reference/3.0/index.html">3.0</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.1/index.html">3.1</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.7/index.html">2.7</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.6/index.html">2.6</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.5/index.html">2.5</a>
+        </li>
+        <li class="version">
           <a href="/documentation/reference/2.4/index.html">2.4</a>
         </li>
         <li class="version">
@@ -270,39 +324,6 @@
         </li>
         <li class="version">
           <a href="/documentation/reference/1.9/index.html">1.9</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.8/index.html">1.8</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.7/index.html">1.7</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.6/index.html">1.6</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.5/index.html">1.5</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.4/index.html">1.4</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.3/index.html">1.3</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.2/index.html">1.2</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.1/index.html">1.1</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.0/index.html">1.0</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.10/index.html">0.10</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.9/index.html">0.9</a>
         </li>
       </ul>
     </li>
@@ -327,28 +348,39 @@
     <div class="page-versions">
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
-                <a class="version is-current" href="/documentation/reference/nightly/index.html">nightly</a>
-                <a class="version" href="/documentation/reference/2.4/index.html">2.4</a>
-                <a class="version" href="/documentation/reference/2.3/index.html">2.3</a>
-                <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
-                <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
-                <a class="version is-missing" href="/documentation/reference/2.0/index.html">2.0</a>
-                <a class="version is-missing" href="/documentation/reference/1.9/index.html">1.9</a>
-                <a class="version is-missing" href="/documentation/reference/1.8/index.html">1.8</a>
-                <a class="version is-missing" href="/documentation/reference/1.7/index.html">1.7</a>
-                <a class="version is-missing" href="/documentation/reference/1.6/index.html">1.6</a>
-                <a class="version is-missing" href="/documentation/reference/1.5/index.html">1.5</a>
-                <a class="version is-missing" href="/documentation/reference/1.4/index.html">1.4</a>
-                <a class="version is-missing" href="/documentation/reference/1.3/index.html">1.3</a>
-                <a class="version is-missing" href="/documentation/reference/1.2/index.html">1.2</a>
-                <a class="version is-missing" href="/documentation/reference/1.1/index.html">1.1</a>
-                <a class="version is-missing" href="/documentation/reference/1.0/index.html">1.0</a>
-                <a class="version is-missing" href="/documentation/reference/0.10/index.html">0.10</a>
-                <a class="version is-missing" href="/documentation/reference/0.9/index.html">0.9</a>
+                        <a class="version is-current" href="/reference/transformations/partition-routing.html" data-hash="true">nightly</a>
+                        <a class="version" href="/documentation//reference/stable/transformations/partition-routing.html" data-hash="true">3.0</a>
+                        <a class="version" href="/documentation//reference/3.1/transformations/partition-routing.html" data-hash="true">3.1</a>
+                        <a class="version" href="/documentation//reference/2.7/transformations/partition-routing.html" data-hash="true">2.7</a>
+                        <a class="version" href="/documentation//reference/2.6/transformations/partition-routing.html" data-hash="true">2.6</a>
+                        <a class="version" href="/documentation//reference/2.5/transformations/partition-routing.html" data-hash="true">2.5</a>
+                        <a class="version" href="/documentation//reference/2.4/transformations/partition-routing.html" data-hash="true">2.4</a>
+                        <a class="version" href="/documentation//reference/2.3/transformations/partition-routing.html" data-hash="true">2.3</a>
+                        <a class="version" href="/documentation//reference/2.2/transformations/partition-routing.html" data-hash="true">2.2</a>
+                        <a class="version" href="/documentation//reference/2.1/transformations/partition-routing.html" data-hash="true">2.1</a>
+                    <a class="version is-missing" href="#">2.0</a>
+                    <a class="version is-missing" href="#">1.9</a>
         </div>
         |
     </div>
     </div>
+    <script>
+        function updateAnchorsWithHash() {
+            const currentHash = window.location.hash;
+            if (currentHash) {
+                document.querySelectorAll('a[data-hash="true"]').forEach(link => {
+                    const baseHref = link.getAttribute('href').split('#')[0];
+                    link.setAttribute('href', baseHref + currentHash);
+                });
+            }
+        }
+
+        // Listen for hashchange and update anchors
+        window.addEventListener('hashchange', updateAnchorsWithHash);
+
+        // Update anchors on initial load
+        document.addEventListener('DOMContentLoaded', updateAnchorsWithHash);
+    </script>
   <div class="edit-this-page"><a href="https://github.com/debezium/debezium/edit/main/documentation/modules/ROOT/pages/transformations/partition-routing.adoc">Edit this Page</a></div>
   </div>
 <div class="article-grid">
@@ -374,7 +406,7 @@
 </div>
 <div class="paragraph">
 <p>By default, when Debezium detects a change in a data collection, the change event that it emits is sent to a topic that uses a single Apache Kafka partition.
-As described in <a href="../configuration/topic-auto-create-config.html#customizing-debezium-automatically-created-topics" class="page">Customization of Kafka Connect automatic topic creation</a>, you can customize the default configuration to route events to multiple partitions, based on a hash of the primary key.</p>
+As described in <a href="../configuration/topic-auto-create-config.html#customizing-debezium-automatically-created-topics" class="xref page">Customization of Kafka Connect automatic topic creation</a>, you can customize the default configuration to route events to multiple partitions, based on a hash of the primary key.</p>
 </div>
 <div class="paragraph">
 <p>However, in some cases, you might also want Debezium to route events to a specific topic partition.
@@ -392,7 +424,7 @@ The configuration specifies the following parameters:</p>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1"><code>partition.payload.field</code></dt>
+<dt class="hdlist1"><code>partition.payload.fields</code></dt>
 <dd>
 <p>Specifies the fields in the event payload that the SMT uses to calculate the destination partition.
 You can use dot notation to specify nested payload fields.</p>
@@ -633,7 +665,7 @@ predicates.myTopic.pattern=my_topic</code></pre>
 </div>
 <div class="paragraph">
 <p>The preceding configuration does not specify how to re-route events so that they are sent to a specific destination topic.
-For information about how to send events to topics other than their default destination topics, see the <a href="topic-routing.html" class="page">Topic Routing SMT</a>., see the <a href="topic-routing.html" class="page">Topic Routing SMT</a>.</p>
+For information about how to send events to topics other than their default destination topics, see the <a href="topic-routing.html" class="xref page">Topic Routing SMT</a>., see the <a href="topic-routing.html" class="xref page">Topic Routing SMT</a>.</p>
 </div>
 </div>
 </div>
@@ -641,7 +673,7 @@ For information about how to send events to topics other than their default dest
 <h2 id="migrate-debezium-compute-partition-smt"><a class="anchor" href="#migrate-debezium-compute-partition-smt"></a>Migrating from the Debezium ComputePartition SMT</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Debezium <code>ComputePartition</code> SMT is to be discontinued in a future release.
+<p>The Debezium <code>ComputePartition</code> SMT has been discontinued.
 The information in the following section describes how migrate from the  <code>ComputePartition</code> SMT to the new <code>PartitionRouting</code> SMT.</p>
 </div>
 <div class="paragraph">
@@ -812,7 +844,7 @@ If not specified or invalid value is used, the default value will be used.</p>
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2023 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/230c056577672b69f2f2d65968cf64d159c5d42b">230c0565</a></span>)
+            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/ee9d3467111c73d8f337ef6bfee02f75c4df77ed">ee9d3467</a></span>)
             
         </div>
     </footer>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Debezium notifications :: Debezium Documentation</title>
     <link rel="canonical" href="https://debezium.io/documentation/reference/stable/configuration/notification.html">
-    <meta name="generator" content="Antora 3.0.0-alpha.9">
+    <meta name="generator" content="Antora 3.1.7">
 <link rel="stylesheet" href="../../../debezium-antora/css/site.css">
 <link rel="stylesheet" href="../../../debezium-antora/css/debezium-antora.css">
 <link rel="stylesheet" href="../../../debezium-antora/css/highlightjs-dark.css">
@@ -160,6 +160,9 @@
     <a class="nav-link" href="../transformations/filtering.html">Message Filtering</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/schema-change-event-filter.html">Schema Change Event Filtering</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/content-based-routing.html">Content-Based Routing</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -173,6 +176,12 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/header-to-value.html">HeaderToValue</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/timezone-converter.html">Timezone Converter</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/timescaledb.html">TimescaleDB Integration</a>
   </li>
 </ul>
   </li>
@@ -202,7 +211,7 @@
     <a class="nav-link" href="../integrations/cloudevents.html">CloudEvents</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../integrations/tracing.html">OpenTracing</a>
+    <a class="nav-link" href="../integrations/tracing.html">OpenTelemetry</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../integrations/testcontainers.html">Integration Testing with Testcontainers</a>
@@ -253,6 +262,21 @@
         <li class="version">
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
+        <li class="version">
+          <a href="/documentation/reference/3.0/index.html">3.0</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.1/index.html">3.1</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.7/index.html">2.7</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.6/index.html">2.6</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.5/index.html">2.5</a>
+        </li>
         <li class="version is-current">
           <a href="/documentation/reference/2.4/index.html">2.4</a>
         </li>
@@ -270,39 +294,6 @@
         </li>
         <li class="version">
           <a href="/documentation/reference/1.9/index.html">1.9</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.8/index.html">1.8</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.7/index.html">1.7</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.6/index.html">1.6</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.5/index.html">1.5</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.4/index.html">1.4</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.3/index.html">1.3</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.2/index.html">1.2</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.1/index.html">1.1</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.0/index.html">1.0</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.10/index.html">0.10</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.9/index.html">0.9</a>
         </li>
       </ul>
     </li>
@@ -327,36 +318,47 @@
     <div class="page-versions">
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">2.4</button>
         <div class="version-menu">
-                <a class="version" href="/documentation/reference/nightly/index.html">nightly</a>
-                <a class="version is-current" href="/documentation/reference/2.4/index.html">2.4</a>
-                <a class="version" href="/documentation/reference/2.3/index.html">2.3</a>
-                <a class="version is-missing" href="/documentation/reference/2.2/index.html">2.2</a>
-                <a class="version is-missing" href="/documentation/reference/2.1/index.html">2.1</a>
-                <a class="version is-missing" href="/documentation/reference/2.0/index.html">2.0</a>
-                <a class="version is-missing" href="/documentation/reference/1.9/index.html">1.9</a>
-                <a class="version is-missing" href="/documentation/reference/1.8/index.html">1.8</a>
-                <a class="version is-missing" href="/documentation/reference/1.7/index.html">1.7</a>
-                <a class="version is-missing" href="/documentation/reference/1.6/index.html">1.6</a>
-                <a class="version is-missing" href="/documentation/reference/1.5/index.html">1.5</a>
-                <a class="version is-missing" href="/documentation/reference/1.4/index.html">1.4</a>
-                <a class="version is-missing" href="/documentation/reference/1.3/index.html">1.3</a>
-                <a class="version is-missing" href="/documentation/reference/1.2/index.html">1.2</a>
-                <a class="version is-missing" href="/documentation/reference/1.1/index.html">1.1</a>
-                <a class="version is-missing" href="/documentation/reference/1.0/index.html">1.0</a>
-                <a class="version is-missing" href="/documentation/reference/0.10/index.html">0.10</a>
-                <a class="version is-missing" href="/documentation/reference/0.9/index.html">0.9</a>
+                        <a class="version" href="/documentation//reference/configuration/notification.html" data-hash="true">nightly</a>
+                        <a class="version" href="/documentation//reference/stable/configuration/notification.html" data-hash="true">3.0</a>
+                        <a class="version" href="/documentation//reference/3.1/configuration/notification.html" data-hash="true">3.1</a>
+                        <a class="version" href="/documentation//reference/2.7/configuration/notification.html" data-hash="true">2.7</a>
+                        <a class="version" href="/documentation//reference/2.6/configuration/notification.html" data-hash="true">2.6</a>
+                        <a class="version" href="/documentation//reference/2.5/configuration/notification.html" data-hash="true">2.5</a>
+                        <a class="version is-current" href="/reference/2.4/configuration/notification.html" data-hash="true">2.4</a>
+                        <a class="version" href="/documentation//reference/2.3/configuration/notification.html" data-hash="true">2.3</a>
+                    <a class="version is-missing" href="#">2.2</a>
+                    <a class="version is-missing" href="#">2.1</a>
+                    <a class="version is-missing" href="#">2.0</a>
+                    <a class="version is-missing" href="#">1.9</a>
         </div>
         |
     </div>
     </div>
+    <script>
+        function updateAnchorsWithHash() {
+            const currentHash = window.location.hash;
+            if (currentHash) {
+                document.querySelectorAll('a[data-hash="true"]').forEach(link => {
+                    const baseHref = link.getAttribute('href').split('#')[0];
+                    link.setAttribute('href', baseHref + currentHash);
+                });
+            }
+        }
+
+        // Listen for hashchange and update anchors
+        window.addEventListener('hashchange', updateAnchorsWithHash);
+
+        // Update anchors on initial load
+        document.addEventListener('DOMContentLoaded', updateAnchorsWithHash);
+    </script>
   <div class="edit-this-page"><a href="https://github.com/debezium/debezium/edit/2.4/documentation/modules/ROOT/pages/configuration/notification.adoc">Edit this Page</a></div>
   </div>
 <div class="article-grid">
 <div class="article-cell1">
 <article class="doc">
         
-    <div class="version-banner version-banner-development">
-    You are viewing documentation for the current development version of Debezium.
+    <div class="version-banner version-banner-outdated">
+    You are viewing documentation for an outdated version of Debezium.
     <br/>
             If you want to view the latest stable version of this page, please go <a href=/documentation/reference/stable/index.html>here</a>.
             
@@ -367,10 +369,15 @@
 <div id="toctitle" class="title">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_overview">Overview</a></li>
-<li><a href="#debezium-notification-format">Debezium notification format</a>
+<li><a href="#debezium-notification-format">Debezium notification format</a></li>
+<li><a href="#debezium-available-notifications">Available notifications</a>
 <ul class="sectlevel2">
-<li><a href="#debezium-available-notifications">Available notifications</a></li>
-<li><a href="#enabling-debezium-notifications">Enabling Debezium notifications</a></li>
+<li><a href="#debezium-notifications-about-the-status-of-an-initial-snapshot">Debezium notifications about the status of an initial snapshot</a></li>
+<li><a href="#debezium-notifications-about-the-progress-of-incremental-snapshots">Debezium notifications about the progress of incremental snapshots</a></li>
+</ul>
+</li>
+<li><a href="#enabling-debezium-notifications">Enabling Debezium notifications</a>
+<ul class="sectlevel2">
 <li><a href="#access-debezium-jmx-notifications">Access to Debezium JMX notifications</a></li>
 </ul>
 </li>
@@ -451,15 +458,22 @@ In domain-driven design, exported events should always refer to an aggregate.</p
 <td class="tableblock halign-left valign-top"><p class="tableblock">A Map&lt;String,String&gt; with detailed information about the notification.
 For an example, see <a href="#debezium-notifications-about-the-progress-of-incremental-snapshots">Debezium notifications about the progress of incremental snapshots</a>.</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">timestamp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The time when the notification has been created. Epoch unix timestamp in milliseconds</p></td>
+</tr>
 </tbody>
 </table>
-<div class="sect2">
-<h3 id="debezium-available-notifications"><a class="anchor" href="#debezium-available-notifications"></a>Available notifications</h3>
-<div class="paragraph">
-<p>Debezium notifications deliver information about the progress of <a href="#debezium-notifications-about-the-status-of-an-initial-snapshot">initial snapshots</a> or <a href="#debezium-notifications-about-the-progress-of-incremental-snapshot">incremental snapshots</a>.</p>
 </div>
-<div class="sect3">
-<h4 id="_status_of_an_initial_snapshot"><a class="anchor" href="#_status_of_an_initial_snapshot"></a>Status of an initial snapshot</h4>
+</div>
+<div class="sect1">
+<h2 id="debezium-available-notifications"><a class="anchor" href="#debezium-available-notifications"></a>Available notifications</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Debezium notifications deliver information about the progress of <a href="#debezium-notifications-about-the-status-of-an-initial-snapshot">initial snapshots</a> or <a href="#debezium-notifications-about-the-progress-of-incremental-snapshots">incremental snapshots</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="debezium-notifications-about-the-status-of-an-initial-snapshot"><a class="anchor" href="#debezium-notifications-about-the-status-of-an-initial-snapshot"></a>Debezium notifications about the status of an initial snapshot</h3>
 <div class="paragraph">
 <p>The following example shows a typical notification that provides the status of an initial snapshot:</p>
 </div>
@@ -468,7 +482,11 @@ For an example, see <a href="#debezium-notifications-about-the-progress-of-incre
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
     "id": "5563ae14-49f8-4579-9641-c1bbc2d76f99",
     "aggregate_type": "Initial Snapshot",
-    "type": "COMPLETED" <i class="conum" data-value="1"></i><b>(1)</b>
+    "type": "COMPLETED", <i class="conum" data-value="1"></i><b>(1)</b>
+    "additional_data" : {
+        "connector_name": "myConnector"
+    },
+    "timestamp": "1695817046353"
 }</code></pre>
 </div>
 </div>
@@ -476,11 +494,17 @@ For an example, see <a href="#debezium-notifications-about-the-progress-of-incre
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The type field can contain one of the following values:
+<td>The <code>type</code> field can contain one of the following values:
 <div class="ulist">
 <ul>
 <li>
 <p><code>STARTED</code></p>
+</li>
+<li>
+<p><code>IN_PROGRESS</code></p>
+</li>
+<li>
+<p><code>TABLE_SCAN_COMPLETED</code></p>
 </li>
 <li>
 <p><code>COMPLETED</code></p>
@@ -497,8 +521,8 @@ For an example, see <a href="#debezium-notifications-about-the-progress-of-incre
 </table>
 </div>
 </div>
-<div class="sect3">
-<h4 id="debezium-notifications-about-the-progress-of-incremental-snapshots"><a class="anchor" href="#debezium-notifications-about-the-progress-of-incremental-snapshots"></a>Debezium notifications about the progress of incremental snapshots</h4>
+<div class="sect2">
+<h3 id="debezium-notifications-about-the-progress-of-incremental-snapshots"><a class="anchor" href="#debezium-notifications-about-the-progress-of-incremental-snapshots"></a>Debezium notifications about the progress of incremental snapshots</h3>
 <div class="paragraph">
 <p>The following table shows examples of the different payloads that might be present in notifications that report the status of incremental snapshots:</p>
 </div>
@@ -525,7 +549,8 @@ For an example, see <a href="#debezium-notifications-about-the-progress-of-incre
       "additional_data":{
          "connector_name":"my-connector",
          "data_collections":"table1, table2"
-      }
+      },
+      "timestamp": "1695817046353"
 }</code></pre>
 </div>
 </div></div></td>
@@ -541,7 +566,8 @@ For an example, see <a href="#debezium-notifications-about-the-progress-of-incre
       "additional_data":{
          "connector_name":"my-connector",
          "data_collections":"table1, table2"
-      }
+      },
+      "timestamp": "1695817046353"
 }</code></pre>
 </div>
 </div></div></td>
@@ -557,7 +583,8 @@ For an example, see <a href="#debezium-notifications-about-the-progress-of-incre
    "additional_data":{
       "connector_name":"my-connector",
       "data_collections":"table1, table2"
-   }
+   },
+   "timestamp": "1695817046353"
 }</code></pre>
 </div>
 </div></div></td>
@@ -572,7 +599,8 @@ For an example, see <a href="#debezium-notifications-about-the-progress-of-incre
    "type":"ABORTED",
    "additional_data":{
       "connector_name":"my-connector"
-   }
+   },
+   "timestamp": "1695817046353"
 }</code></pre>
 </div>
 </div></div></td>
@@ -591,7 +619,8 @@ For an example, see <a href="#debezium-notifications-about-the-progress-of-incre
       "current_collection_in_progress":"table1",
       "maximum_key":"100",
       "last_processed_key":"50"
-   }
+   },
+   "timestamp": "1695817046353"
 }</code></pre>
 </div>
 </div></div></td>
@@ -610,7 +639,8 @@ For an example, see <a href="#debezium-notifications-about-the-progress-of-incre
       "scanned_collection":"table1",
       "total_rows_scanned":"100",
       "status":"SUCCEEDED" <i class="conum" data-value="1"></i><b>(1)</b>
-   }
+   },
+   "timestamp": "1695817046353"
 }</code></pre>
 </div>
 </div>
@@ -655,7 +685,8 @@ For an example, see <a href="#debezium-notifications-about-the-progress-of-incre
    "type":"COMPLETED",
    "additional_data":{
       "connector_name":"my-connector"
-   }
+   },
+   "timestamp": "1695817046353"
 }</code></pre>
 </div>
 </div></div></td>
@@ -664,8 +695,10 @@ For an example, see <a href="#debezium-notifications-about-the-progress-of-incre
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="enabling-debezium-notifications"><a class="anchor" href="#enabling-debezium-notifications"></a>Enabling Debezium notifications</h3>
+</div>
+<div class="sect1">
+<h2 id="enabling-debezium-notifications"><a class="anchor" href="#enabling-debezium-notifications"></a>Enabling Debezium notifications</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>To enable Debezium to emit notifications, specify a list of notification channels by setting the <code>notification.enabled.channels</code> configuration property.
 By default, the following notification channels are available:</p>
@@ -697,7 +730,6 @@ By default, the following notification channels are available:</p>
 </tr>
 </table>
 </div>
-</div>
 <div class="sect2">
 <h3 id="access-debezium-jmx-notifications"><a class="anchor" href="#access-debezium-jmx-notifications"></a>Access to Debezium JMX notifications</h3>
 <div class="paragraph">
@@ -706,7 +738,7 @@ By default, the following notification channels are available:</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><a href="../operations/monitoring.html#monitoring-debezium" class="page">Enable the JMX MBean Server</a> to expose the notification bean.</p>
+<p><a href="../operations/monitoring.html#monitoring-debezium" class="xref page">Enable the JMX MBean Server</a> to expose the notification bean.</p>
 </li>
 <li>
 <p>Add <code>jmx</code> to the <code>notification.enabled.channels</code> property in the connector configuration.</p>
@@ -866,7 +898,7 @@ To use a custom notification channel with multiple connectors, you must place a 
 <div class="sect2">
 <h3 id="configuring-connectors-to-use-a-custom-notification-channel"><a class="anchor" href="#configuring-connectors-to-use-a-custom-notification-channel"></a>Configuring connectors to use a custom notification channel</h3>
 <div class="paragraph">
-<p>Add the name of the custom notification channel to the <code>notification.enabled.channels</code> configuration property.</p>
+<p>In the connector configuration, add the name of the custom notification channel to the <code>notification.enabled.channels</code> property.</p>
 </div>
 </div>
 </div>
@@ -879,7 +911,7 @@ To use a custom notification channel with multiple connectors, you must place a 
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2023 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/ac56c6e7a3f7678c0ee9dfca35046f38b4ca36b9">ac56c6e7</a></span>)
+            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/8c607e24d77a61db360135c33983769717b3b15c">8c607e24</a></span>)
             
         </div>
     </footer>

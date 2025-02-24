@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Transformations :: Debezium Documentation</title>
     <link rel="canonical" href="https://debezium.io/documentation/reference/stable/transformations/index.html">
-    <meta name="generator" content="Antora 3.0.0-alpha.9">
+    <meta name="generator" content="Antora 3.1.7">
 <link rel="stylesheet" href="../../../debezium-antora/css/site.css">
 <link rel="stylesheet" href="../../../debezium-antora/css/debezium-antora.css">
 <link rel="stylesheet" href="../../../debezium-antora/css/highlightjs-dark.css">
@@ -160,6 +160,9 @@
     <a class="nav-link" href="filtering.html">Message Filtering</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="schema-change-event-filter.html">Schema Change Event Filtering</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="content-based-routing.html">Content-Based Routing</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -173,6 +176,12 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="header-to-value.html">HeaderToValue</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="timezone-converter.html">Timezone Converter</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="timescaledb.html">TimescaleDB Integration</a>
   </li>
 </ul>
   </li>
@@ -202,7 +211,7 @@
     <a class="nav-link" href="../integrations/cloudevents.html">CloudEvents</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../integrations/tracing.html">OpenTracing</a>
+    <a class="nav-link" href="../integrations/tracing.html">OpenTelemetry</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../integrations/testcontainers.html">Integration Testing with Testcontainers</a>
@@ -253,6 +262,21 @@
         <li class="version">
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
+        <li class="version">
+          <a href="/documentation/reference/3.0/index.html">3.0</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.1/index.html">3.1</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.7/index.html">2.7</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.6/index.html">2.6</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.5/index.html">2.5</a>
+        </li>
         <li class="version is-current">
           <a href="/documentation/reference/2.4/index.html">2.4</a>
         </li>
@@ -270,39 +294,6 @@
         </li>
         <li class="version">
           <a href="/documentation/reference/1.9/index.html">1.9</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.8/index.html">1.8</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.7/index.html">1.7</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.6/index.html">1.6</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.5/index.html">1.5</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.4/index.html">1.4</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.3/index.html">1.3</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.2/index.html">1.2</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.1/index.html">1.1</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.0/index.html">1.0</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.10/index.html">0.10</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.9/index.html">0.9</a>
         </li>
       </ul>
     </li>
@@ -327,42 +318,53 @@
     <div class="page-versions">
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">2.4</button>
         <div class="version-menu">
-                <a class="version" href="/documentation/reference/nightly/index.html">nightly</a>
-                <a class="version is-current" href="/documentation/reference/2.4/index.html">2.4</a>
-                <a class="version" href="/documentation/reference/2.3/index.html">2.3</a>
-                <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
-                <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
-                <a class="version" href="/documentation/reference/2.0/index.html">2.0</a>
-                <a class="version" href="/documentation/reference/1.9/index.html">1.9</a>
-                <a class="version" href="/documentation/reference/1.8/index.html">1.8</a>
-                <a class="version" href="/documentation/reference/1.7/index.html">1.7</a>
-                <a class="version" href="/documentation/reference/1.6/index.html">1.6</a>
-                <a class="version is-missing" href="/documentation/reference/1.5/index.html">1.5</a>
-                <a class="version is-missing" href="/documentation/reference/1.4/index.html">1.4</a>
-                <a class="version is-missing" href="/documentation/reference/1.3/index.html">1.3</a>
-                <a class="version is-missing" href="/documentation/reference/1.2/index.html">1.2</a>
-                <a class="version is-missing" href="/documentation/reference/1.1/index.html">1.1</a>
-                <a class="version is-missing" href="/documentation/reference/1.0/index.html">1.0</a>
-                <a class="version is-missing" href="/documentation/reference/0.10/index.html">0.10</a>
-                <a class="version is-missing" href="/documentation/reference/0.9/index.html">0.9</a>
+                        <a class="version" href="/documentation//reference/transformations/index.html" data-hash="true">nightly</a>
+                        <a class="version" href="/documentation//reference/stable/transformations/index.html" data-hash="true">3.0</a>
+                        <a class="version" href="/documentation//reference/3.1/transformations/index.html" data-hash="true">3.1</a>
+                        <a class="version" href="/documentation//reference/2.7/transformations/index.html" data-hash="true">2.7</a>
+                        <a class="version" href="/documentation//reference/2.6/transformations/index.html" data-hash="true">2.6</a>
+                        <a class="version" href="/documentation//reference/2.5/transformations/index.html" data-hash="true">2.5</a>
+                        <a class="version is-current" href="/reference/2.4/transformations/index.html" data-hash="true">2.4</a>
+                        <a class="version" href="/documentation//reference/2.3/transformations/index.html" data-hash="true">2.3</a>
+                        <a class="version" href="/documentation//reference/2.2/transformations/index.html" data-hash="true">2.2</a>
+                        <a class="version" href="/documentation//reference/2.1/transformations/index.html" data-hash="true">2.1</a>
+                        <a class="version" href="/documentation//reference/2.0/transformations/index.html" data-hash="true">2.0</a>
+                        <a class="version" href="/documentation//reference/1.9/transformations/index.html" data-hash="true">1.9</a>
         </div>
         |
     </div>
     </div>
+    <script>
+        function updateAnchorsWithHash() {
+            const currentHash = window.location.hash;
+            if (currentHash) {
+                document.querySelectorAll('a[data-hash="true"]').forEach(link => {
+                    const baseHref = link.getAttribute('href').split('#')[0];
+                    link.setAttribute('href', baseHref + currentHash);
+                });
+            }
+        }
+
+        // Listen for hashchange and update anchors
+        window.addEventListener('hashchange', updateAnchorsWithHash);
+
+        // Update anchors on initial load
+        document.addEventListener('DOMContentLoaded', updateAnchorsWithHash);
+    </script>
   <div class="edit-this-page"><a href="https://github.com/debezium/debezium/edit/2.4/documentation/modules/ROOT/pages/transformations/index.adoc">Edit this Page</a></div>
   </div>
 <div class="article-grid">
 <div class="article-cell1">
 <article class="doc">
         
-    <div class="version-banner version-banner-development">
-    You are viewing documentation for the current development version of Debezium.
+    <div class="version-banner version-banner-outdated">
+    You are viewing documentation for an outdated version of Debezium.
     <br/>
             If you want to view the latest stable version of this page, please go <a href=/documentation/reference/stable/index.html>here</a>.
             
 </div>            <h1 class="page">Transformations</h1>
         <div class="paragraph">
-<p>Connectors can be configured with transformations to make lightweight per message modifications. Debezium provides several <a href="https://kafka.apache.org/documentation/#connect_transforms">single message transformations</a> (SMTs) that you can use to either modify records before they are sent to Apache Kafka (by applying them to the Debezium connectors), or when they are read from Kafka by a sink connector. Also <a href="../operations/debezium-server.html" class="page">Debezium Server</a> supports the usage of SMTs.</p>
+<p>Connectors can be configured with transformations to make lightweight per message modifications. Debezium provides several <a href="https://kafka.apache.org/documentation/#connect_transforms">single message transformations</a> (SMTs) that you can use to either modify records before they are sent to Apache Kafka (by applying them to the Debezium connectors), or when they are read from Kafka by a sink connector. Also <a href="../operations/debezium-server.html" class="xref page">Debezium Server</a> supports the usage of SMTs.</p>
 </div>
 <div class="paragraph">
 <p>The following SMTs are provided by Debezium:</p>
@@ -381,7 +383,7 @@
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="topic-routing.html" class="page">Topic Routing</a></p>
+<p><a href="topic-routing.html" class="xref page">Topic Routing</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Re-routes records to different topics based on a regular expression applied to the original topic name.</p>
@@ -389,7 +391,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="content-based-routing.html" class="page">Content-Based Routing</a></p>
+<p><a href="content-based-routing.html" class="xref page">Content-Based Routing</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Reroute selected events to other topics, based on the event content.</p>
@@ -397,7 +399,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="event-flattening.html" class="page">New Record State Extraction</a></p>
+<p><a href="event-flattening.html" class="xref page">New Record State Extraction</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Extracts the flat structure of field names and values from Debezium change events, facilitating sink connectors which cannot process Debezium&#8217;s complex event structure.</p>
@@ -405,15 +407,15 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="mongodb-event-flattening.html" class="page">MongoDB New Document State Extraction</a></p>
+<p><a href="mongodb-event-flattening.html" class="xref page">MongoDB New Document State Extraction</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The MongoDB-specific counter-part to the <a href="event-flattening.html" class="page">New Record State Extraction</a> SMT.</p>
+<p>The MongoDB-specific counter-part to the <a href="event-flattening.html" class="xref page">New Record State Extraction</a> SMT.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="outbox-event-router.html" class="page">Outbox Event Router</a></p>
+<p><a href="outbox-event-router.html" class="xref page">Outbox Event Router</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Provides a way to safely and reliably exchange data between multiple (micro) services.</p>
@@ -421,15 +423,15 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="mongodb-outbox-event-router.html" class="page">MongoDB Outbox Event Router</a></p>
+<p><a href="mongodb-outbox-event-router.html" class="xref page">MongoDB Outbox Event Router</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The MongoDB-specific counter-part to the <a href="outbox-event-router.html" class="page">Outbox Event Router</a> SMT.</p>
+<p>The MongoDB-specific counter-part to the <a href="outbox-event-router.html" class="xref page">Outbox Event Router</a> SMT.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="filtering.html" class="page">Message Filtering</a></p>
+<p><a href="filtering.html" class="xref page">Message Filtering</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Applies a filter to the change events emitted by the connectors, based on their content. This lets you propagate only those records that are relevant to you.</p>
@@ -437,7 +439,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="compute-partition.html" class="page">Compute Partition</a></p>
+<p><a href="compute-partition.html" class="xref page">Compute Partition</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Re-routes records to specific partition based on configured table column.</p>
@@ -445,7 +447,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="header-to-value.html" class="page">HeaderToValue</a></p>
+<p><a href="header-to-value.html" class="xref page">HeaderToValue</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Moves or copies headers into the record value.</p>
@@ -453,16 +455,32 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="partition-routing.html" class="page">Partition Routing</a></p>
+<p><a href="partition-routing.html" class="xref page">Partition Routing</a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Re-routes records to specific partitions based on configured payload fields.</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="timezone-converter.html" class="xref page">Timezone Converter</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Converts Debezium and Kafka Connect timestamp fields in event records to a specified timezone.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="timescaledb.html" class="xref page">TimescaleDB Integration</a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Routes and enriches messages that the Debezium PostgreSQL connector captures from a TimescaleDB.</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>By means of <a href="applying-transformations-selectively.html" class="page">SMT Predicates</a> you can apply any of the transformations selectively, so that it modifies only that subset of change event messages that share a common characteristic.</p>
+<p>By means of <a href="applying-transformations-selectively.html" class="xref page">SMT Predicates</a> you can apply any of the transformations selectively, so that it modifies only that subset of change event messages that share a common characteristic.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -486,7 +504,7 @@
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2023 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/ac56c6e7a3f7678c0ee9dfca35046f38b4ca36b9">ac56c6e7</a></span>)
+            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/8c607e24d77a61db360135c33983769717b3b15c">8c607e24</a></span>)
             
         </div>
     </footer>

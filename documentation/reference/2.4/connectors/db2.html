@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Debezium connector for Db2 :: Debezium Documentation</title>
     <link rel="canonical" href="https://debezium.io/documentation/reference/stable/connectors/db2.html">
-    <meta name="generator" content="Antora 3.0.0-alpha.9">
+    <meta name="generator" content="Antora 3.1.7">
 <link rel="stylesheet" href="../../../debezium-antora/css/site.css">
 <link rel="stylesheet" href="../../../debezium-antora/css/debezium-antora.css">
 <link rel="stylesheet" href="../../../debezium-antora/css/highlightjs-dark.css">
@@ -160,6 +160,9 @@
     <a class="nav-link" href="../transformations/filtering.html">Message Filtering</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/schema-change-event-filter.html">Schema Change Event Filtering</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/content-based-routing.html">Content-Based Routing</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -173,6 +176,12 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/header-to-value.html">HeaderToValue</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/timezone-converter.html">Timezone Converter</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/timescaledb.html">TimescaleDB Integration</a>
   </li>
 </ul>
   </li>
@@ -202,7 +211,7 @@
     <a class="nav-link" href="../integrations/cloudevents.html">CloudEvents</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../integrations/tracing.html">OpenTracing</a>
+    <a class="nav-link" href="../integrations/tracing.html">OpenTelemetry</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../integrations/testcontainers.html">Integration Testing with Testcontainers</a>
@@ -253,6 +262,21 @@
         <li class="version">
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
+        <li class="version">
+          <a href="/documentation/reference/3.0/index.html">3.0</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.1/index.html">3.1</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.7/index.html">2.7</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.6/index.html">2.6</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.5/index.html">2.5</a>
+        </li>
         <li class="version is-current">
           <a href="/documentation/reference/2.4/index.html">2.4</a>
         </li>
@@ -270,39 +294,6 @@
         </li>
         <li class="version">
           <a href="/documentation/reference/1.9/index.html">1.9</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.8/index.html">1.8</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.7/index.html">1.7</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.6/index.html">1.6</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.5/index.html">1.5</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.4/index.html">1.4</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.3/index.html">1.3</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.2/index.html">1.2</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.1/index.html">1.1</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.0/index.html">1.0</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.10/index.html">0.10</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.9/index.html">0.9</a>
         </li>
       </ul>
     </li>
@@ -327,36 +318,47 @@
     <div class="page-versions">
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">2.4</button>
         <div class="version-menu">
-                <a class="version" href="/documentation/reference/nightly/index.html">nightly</a>
-                <a class="version is-current" href="/documentation/reference/2.4/index.html">2.4</a>
-                <a class="version" href="/documentation/reference/2.3/index.html">2.3</a>
-                <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
-                <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
-                <a class="version" href="/documentation/reference/2.0/index.html">2.0</a>
-                <a class="version" href="/documentation/reference/1.9/index.html">1.9</a>
-                <a class="version" href="/documentation/reference/1.8/index.html">1.8</a>
-                <a class="version" href="/documentation/reference/1.7/index.html">1.7</a>
-                <a class="version" href="/documentation/reference/1.6/index.html">1.6</a>
-                <a class="version" href="/documentation/reference/1.5/index.html">1.5</a>
-                <a class="version" href="/documentation/reference/1.4/index.html">1.4</a>
-                <a class="version" href="/documentation/reference/1.3/index.html">1.3</a>
-                <a class="version" href="/documentation/reference/1.2/index.html">1.2</a>
-                <a class="version" href="/documentation/reference/1.1/index.html">1.1</a>
-                <a class="version is-missing" href="/documentation/reference/1.0/index.html">1.0</a>
-                <a class="version is-missing" href="/documentation/reference/0.10/index.html">0.10</a>
-                <a class="version is-missing" href="/documentation/reference/0.9/index.html">0.9</a>
+                        <a class="version" href="/documentation//reference/connectors/db2.html" data-hash="true">nightly</a>
+                        <a class="version" href="/documentation//reference/stable/connectors/db2.html" data-hash="true">3.0</a>
+                        <a class="version" href="/documentation//reference/3.1/connectors/db2.html" data-hash="true">3.1</a>
+                        <a class="version" href="/documentation//reference/2.7/connectors/db2.html" data-hash="true">2.7</a>
+                        <a class="version" href="/documentation//reference/2.6/connectors/db2.html" data-hash="true">2.6</a>
+                        <a class="version" href="/documentation//reference/2.5/connectors/db2.html" data-hash="true">2.5</a>
+                        <a class="version is-current" href="/reference/2.4/connectors/db2.html" data-hash="true">2.4</a>
+                        <a class="version" href="/documentation//reference/2.3/connectors/db2.html" data-hash="true">2.3</a>
+                        <a class="version" href="/documentation//reference/2.2/connectors/db2.html" data-hash="true">2.2</a>
+                        <a class="version" href="/documentation//reference/2.1/connectors/db2.html" data-hash="true">2.1</a>
+                        <a class="version" href="/documentation//reference/2.0/connectors/db2.html" data-hash="true">2.0</a>
+                        <a class="version" href="/documentation//reference/1.9/connectors/db2.html" data-hash="true">1.9</a>
         </div>
         |
     </div>
     </div>
+    <script>
+        function updateAnchorsWithHash() {
+            const currentHash = window.location.hash;
+            if (currentHash) {
+                document.querySelectorAll('a[data-hash="true"]').forEach(link => {
+                    const baseHref = link.getAttribute('href').split('#')[0];
+                    link.setAttribute('href', baseHref + currentHash);
+                });
+            }
+        }
+
+        // Listen for hashchange and update anchors
+        window.addEventListener('hashchange', updateAnchorsWithHash);
+
+        // Update anchors on initial load
+        document.addEventListener('DOMContentLoaded', updateAnchorsWithHash);
+    </script>
   <div class="edit-this-page"><a href="https://github.com/debezium/debezium/edit/2.4/documentation/modules/ROOT/pages/connectors/db2.adoc">Edit this Page</a></div>
   </div>
 <div class="article-grid">
 <div class="article-cell1">
 <article class="doc">
         
-    <div class="version-banner version-banner-development">
-    You are viewing documentation for the current development version of Debezium.
+    <div class="version-banner version-banner-outdated">
+    You are viewing documentation for an outdated version of Debezium.
     <br/>
             If you want to view the latest stable version of this page, please go <a href=/documentation/reference/stable/index.html>here</a>.
             
@@ -370,8 +372,11 @@
 <li><a href="#how-the-db2-connector-works">How the connector works</a>
 <ul class="sectlevel2">
 <li><a href="#db2-snapshots">Snapshots</a></li>
+<li><a href="#db2-ad-hoc-snapshots">Ad hoc snapshots</a></li>
+<li><a href="#debezium-db2-incremental-snapshots">Incremental snapshots</a></li>
 <li><a href="#how-debezium-db2-connectors-read-change-data-tables">Change-data tables</a></li>
 <li><a href="#db2-topic-names">Topic names</a></li>
+<li><a href="#db2-schema-history-topic">Schema history topic</a></li>
 <li><a href="#about-the-debezium-db2-connector-schema-change-topic">Schema change topic</a></li>
 <li><a href="#db2-transaction-metadata">Transaction metadata</a></li>
 </ul>
@@ -395,7 +400,7 @@
 </li>
 <li><a href="#setting-up-db2">Setting up Db2</a>
 <ul class="sectlevel2">
-<li><a href="#_putting_tables_into_capture_mode">Putting tables into capture mode</a></li>
+<li><a href="#putting-tables-in-capture-mode">Putting tables into capture mode</a></li>
 <li><a href="#_effect_of_db2_capture_agent_configuration_on_server_load_and_latency">Effect of Db2 capture agent configuration on server load and latency</a></li>
 <li><a href="#_db2_capture_agent_configuration_parameters">Db2 capture agent configuration parameters</a></li>
 </ul>
@@ -480,7 +485,7 @@ that enable SQL Replication in Db2. A capture agent:</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>The Debezium connector uses a SQL interface to query change-data tables for  change events.</p>
+<p>The Debezium connector uses a SQL interface to query change-data tables for change events.</p>
 </div>
 <div class="paragraph">
 <p>The database administrator must put the tables for which you want to capture changes into capture mode.
@@ -506,10 +511,17 @@ For convenience and for automating testing, there are <a href="#db2-management">
 <p>Alternatively, you can use Db2 control commands to accomplish these tasks.</p>
 </div>
 <div class="paragraph">
-<p>After the tables of interest are in capture mode, the connector reads their corresponding change-data tables to obtain change events for table updates. The connector emits a change event for each row-level insert, update, and delete operation to a Kafka topic that has the same name as the changed table. This is default behavior that you can modify. Client applications read the Kafka topics that correspond to the database tables of interest and can react to each row-level change event.</p>
+<p>After the tables of interest are in capture mode, the connector reads their corresponding change-data tables to obtain change events for table updates.
+The connector emits a change event for each row-level insert, update, and delete operation to a Kafka topic that has the same name as the changed table.
+This is default behavior that you can modify.
+Client applications read the Kafka topics that correspond to the database tables of interest and can react to each row-level change event.</p>
 </div>
 <div class="paragraph">
-<p>Typically, the database administrator puts a table into capture mode in the middle of the life of a table. This means that the connector does not have the complete history of all changes that have been made to the table. Therefore, when the Db2 connector first connects to a particular Db2 database, it starts by performing a <em>consistent snapshot</em> of each table that is in capture mode. After the connector completes the snapshot, the connector streams change events from the point at which the snapshot was made. In this way, the connector starts with a consistent view of the tables that are in capture mode, and does not drop any changes that were made while it was performing the snapshot.</p>
+<p>Typically, the database administrator puts a table into capture mode in the middle of the life of a table.
+This means that the connector does not have the complete history of all changes that have been made to the table.
+Therefore, when the Db2 connector first connects to a particular Db2 database, it starts by performing a <em>consistent snapshot</em> of each table that is in capture mode.
+After the connector completes the snapshot, the connector streams change events from the point at which the snapshot was made.
+In this way, the connector starts with a consistent view of the tables that are in capture mode, and does not drop any changes that were made while it was performing the snapshot.</p>
 </div>
 <div class="paragraph">
 <p>Debezium connectors are tolerant of failures. As the connector reads and produces change events, it records the log sequence number (LSN) of the change-data table entry. The LSN is the position of the change event in the database log. If the connector stops for any reason, including communication failures, network problems, or crashes, upon restarting it continues reading the change-data tables where it left off. This includes snapshots. That is, if the snapshot was not complete when the connector stopped, upon restart the connector begins a new snapshot.</p>
@@ -525,52 +537,442 @@ For convenience and for automating testing, there are <a href="#db2-management">
 <div class="sect2">
 <h3 id="db2-snapshots"><a class="anchor" href="#db2-snapshots"></a>Snapshots</h3>
 <div class="paragraph">
-<p>Db2`s replication feature is not designed to store the complete history of database changes. Consequently, when a Debezium Db2 connector connects to a database for the first time, it takes a consistent snapshot of tables that are in capture mode and streams this state to Kafka. This establishes the baseline for table content.</p>
+<p>Db2`s replication feature is not designed to store the complete history of database changes.
+As a result, the Debezium Db2 connector cannot retrieve the entire history of the database from the logs.
+To enable the connector to establish a baseline for the current state of the database, the first time that the connector starts, it performs an initial <em>consistent snapshot</em> of the tables that are in <a href="#putting-tables-in-capture-mode">capture mode</a>.
+For each change that the snapshot captures, the connector emits a <code>read</code> event to the Kafka topic for the captured table.</p>
 </div>
 <div class="paragraph">
-<p>By default, when a Db2 connector performs a snapshot, it does the following:</p>
+<div class="title">Default workflow that the Debezium Db2 connector uses to perform an initial snapshot</div>
+<p>The following workflow lists the steps that Debezium takes to create a snapshot.
+These steps describe the process for a snapshot when the <a href="#db2-property-snapshot-mode"><code>snapshot.mode</code></a> configuration property is set to its default value, which is <code>initial</code>.
+You can customize the way that the connector creates snapshots by changing the value of the <code>snapshot.mode</code> property.
+If you configure a different snapshot mode, the connector completes the snapshot by using a modified version of this workflow.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Determines which tables are in capture mode, and thus must be included in the snapshot. By default, all non-system tables are in capture mode. Connector configuration properties, such as <code>table.exclude.list</code> and <code>table.include.list</code> let you specify which tables should be in capture mode.</p>
+<p>Establish a connection to the database.</p>
 </li>
 <li>
-<p>Obtains a lock on each of the tables in capture mode. This ensures that no schema changes can occur in those tables during the snapshot.
-The level of the lock is determined by the <code>snapshot.isolation.mode</code> connector  configuration property.</p>
+<p>Determine which tables are in capture mode and should be included in the snapshot.
+By default, the connector captures the data for all non-system tables.
+After the snapshot completes, the connector continues to stream data for the specified tables.
+If you want the connector to capture data only from specific tables you can direct the connector to capture the data for only a subset of tables or table elements by setting properties such as <a href="#db2-property-table-include-list"><code>table.include.list</code></a> or <a href="#db2-property-table-exclude-list"><code>table.exclude.list</code></a>.</p>
 </li>
 <li>
-<p>Reads the highest (most recent) LSN position in the server&#8217;s transaction log.</p>
+<p>Obtain a lock on each of the tables in capture mode.
+This lock ensures that no schema changes can occur in those tables until the snapshot completes.
+The level of the lock is determined by the <code>snapshot.isolation.mode</code> connector configuration property.</p>
 </li>
 <li>
-<p>Captures the schema of all tables that are in capture mode. The connector persists this information in its internal database schema history topic.</p>
+<p>Read the highest (most recent) LSN position in the server&#8217;s transaction log.</p>
 </li>
 <li>
-<p>Optional, releases the locks obtained in step 2. Typically, these locks are held for only a short time.</p>
+<p>Capture the schema of all tables or all tables that are designated for capture.
+The connector persists schema information in its internal database schema history topic.
+The schema history provides information about the structure that is in effect when a change event occurs.<br></p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>By default, the connector captures the schema of every table in the database that is in capture mode, including tables that are not configured for capture.
+If tables are not configured for capture, the initial snapshot captures only their structure; it does not capture any table data.</p>
+</div>
+<div class="paragraph">
+<p>For more information about why snapshots persist schema information for tables that you did not include in the initial snapshot, see <a href="#understanding-why-initial-snapshots-capture-the-schema-history-for-all-tables">Understanding why initial snapshots capture the schema for all tables</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </li>
 <li>
-<p>At the LSN position read in step 3, the connector scans the capture mode tables as well as their schemas. During the scan, the connector:</p>
+<p>Release any locks obtained in Step 3.
+Other database clients can now write to any previously locked tables.</p>
+</li>
+<li>
+<p>At the LSN position read in Step 4, the connector scans the tables that are designated for capture.
+During the scan, the connector completes the following tasks:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Confirms that the table was created before the start of the snapshot. If it was not, the snapshot skips that table. After the snapshot is complete, and the connector starts emitting change events, the connector produces change events for any tables that were created during the snapshot.</p>
+<p>Confirms that the table was created before the snapshot began.
+If the table was created after the snapshot began, the connector skips the table.
+After the snapshot is complete, and the connector transitions to streaming, it emits change events for any tables that were created after the snapshot began.</p>
 </li>
 <li>
-<p>Produces a <em>read</em> event for each row in each table that is in capture mode. All <em>read</em> events contain the same LSN position, which is the LSN position that was obtained in step 3.</p>
+<p>Produces a <code>read</code> event for each row that is captured from a table.
+All <code>read</code> events contain the same LSN position, which is the LSN position that was obtained in step 4.</p>
 </li>
 <li>
-<p>Emits each <em>read</em> event to the Kafka topic that has the same name as the table.</p>
+<p>Emits each <code>read</code> event to the Kafka topic for the source table.</p>
+</li>
+<li>
+<p>Releases data table locks, if applicable.</p>
 </li>
 </ol>
 </div>
 </li>
 <li>
-<p>Records the successful completion of the snapshot in the connector offsets.</p>
+<p>Record the successful completion of the snapshot in the connector offsets.</p>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p>The resulting initial snapshot captures the current state of each row in the captured tables.
+From this baseline state, the connector captures subsequent changes as they occur.</p>
+</div>
+<div class="paragraph">
+<p>After the snapshot process begins, if the process is interrupted due to connector failure, rebalancing, or other reasons, the process restarts after the connector restarts.</p>
+</div>
+<div class="paragraph">
+<p>After the connector completes the initial snapshot, it continues streaming from the position that it read in Step 4 so that it does not miss any updates.</p>
+</div>
+<div class="paragraph">
+<p>If the connector stops again for any reason, after it restarts, it resumes streaming changes from where it previously left off.</p>
 </div>
 <div class="sect3">
-<h4 id="db2-ad-hoc-snapshots"><a class="anchor" href="#db2-ad-hoc-snapshots"></a>Ad hoc snapshots</h4>
+<h4 id="understanding-why-initial-snapshots-capture-the-schema-history-for-all-tables"><a class="anchor" href="#understanding-why-initial-snapshots-capture-the-schema-history-for-all-tables"></a>Understanding why initial snapshots capture the schema history for all tables</h4>
+<div class="paragraph">
+<p>The initial snapshot that a connector runs captures two types of information:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Table data</dt>
+<dd>
+<p>Information about <code>INSERT</code>, <code>UPDATE</code>, and <code>DELETE</code> operations in tables that are named in the connector&#8217;s <a href="#db2-property-table-include-list"><code>table.include.list</code></a> property.</p>
+</dd>
+<dt class="hdlist1">Schema data</dt>
+<dd>
+<p>DDL statements that describe the structural changes that are applied to tables.
+Schema data is persisted to both the internal schema history topic, and to the connector&#8217;s schema change topic, if one is configured.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>After you run an initial snapshot, you might notice that the snapshot captures schema information for tables that are not designated for capture.
+By default, initial snapshots are designed to capture schema information for every table that is present in the database, not only from tables that are designated for capture.
+Connectors require that the table&#8217;s schema is present in the schema history topic before they can capture a table.
+By enabling the initial snapshot to capture schema data for tables that are not part of the original capture set, Debezium prepares the connector to readily capture event data from these tables should that later become necessary.
+If the initial snapshot does not capture a table&#8217;s schema, you must add the schema to the history topic before the connector can capture data from the table.</p>
+</div>
+<div class="paragraph">
+<p>In some cases, you might want to limit schema capture in the initial snapshot.
+This can be useful when you want to reduce the time required to complete a snapshot.
+Or when Debezium connects to the database instance through a user account that has access to multiple logical databases, but you want the connector to capture changes only from tables in a specific logic database.</p>
+</div>
+<div class="ulist">
+<div class="title">Additional information</div>
+<ul>
+<li>
+<p><a href="#db2-capturing-data-from-tables-not-captured-by-the-initial-snapshot">Capturing data from tables not captured by the initial snapshot (no schema change)</a></p>
+</li>
+<li>
+<p><a href="#db2-capturing-data-from-new-tables-with-schema-changes">Capturing data from tables not captured by the initial snapshot (schema change)</a></p>
+</li>
+<li>
+<p>Setting the <a href="#db2-property-database-history-store-only-captured-tables-ddl"><code>schema.history.internal.store.only.captured.tables.ddl</code></a> property to specify the tables from which to capture schema information.</p>
+</li>
+<li>
+<p>Setting the <a href="#db2-property-database-history-store-only-captured-databases-ddl"><code>schema.history.internal.store.only.captured.databases.ddl</code></a> property to specify the logical databases from which to capture schema changes.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="db2-capturing-data-from-tables-not-captured-by-the-initial-snapshot"><a class="anchor" href="#db2-capturing-data-from-tables-not-captured-by-the-initial-snapshot"></a>Capturing data from tables not captured by the initial snapshot (no schema change)</h4>
+<div class="paragraph">
+<p>In some cases, you might want the connector to capture data from a table whose schema was not captured by the initial snapshot.
+Depending on the connector configuration, the initial snapshot might capture the table schema only for specific tables in the database.
+If the table schema is not present in the history topic, the connector fails to capture the table, and reports a missing schema error.</p>
+</div>
+<div class="paragraph">
+<p>You might still be able to capture data from the table, but you must perform additional steps to add the table schema.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>You want to capture data from a table with a schema that the connector did not capture during the initial snapshot.</p>
+</li>
+<li>
+<p>No schema changes were applied to the table between the LSNs of the earliest and latest change table entry that the connector reads.
+For information about capturing data from a new table that has undergone structural changes, see <a href="#db2-capturing-data-from-new-tables-with-schema-changes">Capturing data from tables not captured by the initial snapshot (schema change)</a>.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Stop the connector.</p>
+</li>
+<li>
+<p>Remove the internal database schema history topic that is specified by the <a href="#db2-property-database-history-kafka-topic"><code>schema.history.internal.kafka.topic property</code></a>.</p>
+</li>
+<li>
+<p>Clear the offsets in the configured Kafka Connect <a href="https://kafka.apache.org/documentation/#connectconfigs_offset.storage.topic"><code>offset.storage.topic</code></a>.
+For more information about how to remove offsets, see the <a href="https://debezium.io/documentation/faq/#how_to_remove_committed_offsets_for_a_connector">Debezium community FAQ</a>.</p>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Removing offsets should be performed only by advanced users who have experience in manipulating internal Kafka Connect data.
+This operation is potentially destructive, and should be performed only as a last resort.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Apply the following changes to the connector configuration:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>(Optional) Set the value of <a href="#db2-property-database-history-store-only-captured-tables-ddl"><code>schema.history.internal.captured.tables.ddl</code></a> to <code>false</code>.
+This setting causes the snapshot to capture the schema for all tables, and guarantees that, in the future, the connector can reconstruct the schema history for all tables.<br></p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Snapshots that capture the schema for all tables require more time to complete.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Add the tables that you want the connector to capture to <a href="#db2-property-table-include-list"><code>table.include.list</code></a>.</p>
+</li>
+<li>
+<p>Set the <a href="#db2-property-snapshot-mode"><code>snapshot.mode</code></a> to one of the following values:</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>initial</code></dt>
+<dd>
+<p>When you restart the connector, it takes a full snapshot of the database that captures the table data and table structures.<br>
+If you select this option, consider setting the value of the <a href="#db2-property-database-history-store-only-captured-tables-ddl"><code>schema.history.internal.captured.tables.ddl</code></a> property to <code>false</code> to enable the connector to capture the schema of all tables.</p>
+</dd>
+<dt class="hdlist1"><code>schema_only</code></dt>
+<dd>
+<p>When you restart the connector, it takes a snapshot that captures only the table schema.
+Unlike a full data snapshot, this option does not capture any table data.
+Use this option if you want to restart the connector more quickly than with a full snapshot.</p>
+</dd>
+</dl>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Restart the connector.
+The connector completes the type of snapshot specified by the <code>snapshot.mode</code>.</p>
+</li>
+<li>
+<p>(Optional) If the connector performed a <code>schema_only</code> snapshot, after the snapshot completes, initiate an <a href="#debezium-db2-incremental-snapshots">incremental snapshot</a> to capture data from the tables that you added.
+The connector runs the snapshot while it continues to stream real-time changes from the tables.
+Running an incremental snapshot captures the following data changes:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>For tables that the connector previously captured, the incremental snapsot captures changes that occur while the connector was down, that is, in the interval between the time that the connector was stopped, and the current restart.</p>
+</li>
+<li>
+<p>For newly added tables, the incremental snapshot captures all existing table rows.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="db2-capturing-data-from-new-tables-with-schema-changes"><a class="anchor" href="#db2-capturing-data-from-new-tables-with-schema-changes"></a>Capturing data from tables not captured by the initial snapshot (schema change)</h4>
+<div class="paragraph">
+<p>If a schema change is applied to a table, records that are committed before the schema change have different structures than those that were committed after the change.
+When Debezium captures data from a table, it reads the schema history to ensure that it applies the correct schema to each event.
+If the schema is not present in the schema history topic, the connector is unable to capture the table, and an error results.</p>
+</div>
+<div class="paragraph">
+<p>If you want to capture data from a table that was not captured by the initial snapshot, and the schema of the table was modified, you must add the schema to the history topic, if it is not already available.
+You can add the schema by running a new schema snapshot, or by running an initial snapshot for the table.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>You want to capture data from a table with a schema that the connector did not capture during the initial snapshot.</p>
+</li>
+<li>
+<p>A schema change was applied to the table so that the records to be captured do not have a uniform structure.</p>
+</li>
+</ul>
+</div>
+<div class="dlist">
+<div class="title">Procedure</div>
+<dl>
+<dt class="hdlist1">Initial snapshot captured the schema for all tables (<code>store.only.captured.tables.ddl</code> was set to <code>false</code>)</dt>
+<dd>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Edit the <a href="#db2-property-table-include-list"><code>table.include.list</code></a> property to specify the tables that you want to capture.</p>
+</li>
+<li>
+<p>Restart the connector.</p>
+</li>
+<li>
+<p>Initiate an <a href="#db2-incremental-snapshots">incremental snapshot</a> if you want to capture existing data from the newly added tables.</p>
+</li>
+</ol>
+</div>
+</dd>
+<dt class="hdlist1">Initial snapshot did not capture the schema for all tables (<code>store.only.captured.tables.ddl</code> was set to <code>true</code>)</dt>
+<dd>
+<p>If the initial snapshot did not save the schema of the table that you want to capture, complete one of the following procedures:</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Procedure 1: Schema snapshot, followed by incremental snapshot</dt>
+<dd>
+<p>In this procedure, the connector first performs a schema snapshot.
+You can then initiate an incremental snapshot to enable the connector to synchronize data.</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Stop the connector.</p>
+</li>
+<li>
+<p>Remove the internal database schema history topic that is specified by the <a href="#db2-property-database-history-kafka-topic"><code>schema.history.internal.kafka.topic property</code></a>.</p>
+</li>
+<li>
+<p>Clear the offsets in the configured Kafka Connect <a href="https://kafka.apache.org/documentation/#connectconfigs_offset.storage.topic"><code>offset.storage.topic</code></a>.
+For more information about how to remove offsets, see the <a href="https://debezium.io/documentation/faq/#how_to_remove_committed_offsets_for_a_connector">Debezium community FAQ</a>.</p>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Removing offsets should be performed only by advanced users who have experience in manipulating internal Kafka Connect data.
+This operation is potentially destructive, and should be performed only as a last resort.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Set values for properties in the connector configuration as described in the following steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Set the value of the <a href="#db2-property-snapshot-mode"><code>snapshot.mode</code></a> property to <code>schema_only</code>.</p>
+</li>
+<li>
+<p>Edit the <a href="#db2-property-table-include-list"><code>table.include.list</code></a> to add the tables that you want to capture.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Restart the connector.</p>
+</li>
+<li>
+<p>Wait for Debezium to capture the schema of the new and existing tables.
+Data changes that occurred any tables after the connector stopped are not captured.</p>
+</li>
+<li>
+<p>To ensure that no data is lost, initiate an <a href="#debezium-db2-incremental-snapshots">incremental snapshot</a>.</p>
+</li>
+</ol>
+</div>
+</dd>
+<dt class="hdlist1">Procedure 2: Initial snapshot, followed by optional incremental snapshot</dt>
+<dd>
+<p>In this procedure the connector performs a full initial snapshot of the database.
+As with any initial snapshot, in a database with many large tables, running an initial snapshot can be a time-consuming operation.
+After the snapshot completes, you can optionally trigger an incremental snapshot to capture any changes that occur while the connector is off-line.</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Stop the connector.</p>
+</li>
+<li>
+<p>Remove the internal database schema history topic that is specified by the <a href="#db2-property-database-history-kafka-topic"><code>schema.history.internal.kafka.topic property</code></a>.</p>
+</li>
+<li>
+<p>Clear the offsets in the configured Kafka Connect <a href="https://kafka.apache.org/documentation/#connectconfigs_offset.storage.topic"><code>offset.storage.topic</code></a>.
+For more information about how to remove offsets, see the <a href="https://debezium.io/documentation/faq/#how_to_remove_committed_offsets_for_a_connector">Debezium community FAQ</a>.</p>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Removing offsets should be performed only by advanced users who have experience in manipulating internal Kafka Connect data.
+This operation is potentially destructive, and should be performed only as a last resort.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Edit the <a href="#db2-property-table-include-list"><code>table.include.list</code></a> to add the tables that you want to capture.</p>
+</li>
+<li>
+<p>Set values for properties in the connector configuration as described in the following steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Set the value of the <a href="#db2-property-snapshot-mode"><code>snapshot.mode</code></a> property to <code>initial</code>.</p>
+</li>
+<li>
+<p>(Optional) Set <a href="#db2-property-database-history-store-only-captured-tables-ddl"><code>schema.history.internal.store.only.captured.tables.ddl</code></a> to <code>false</code>.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Restart the connector.
+The connector takes a full database snapshot.
+After the snapshot completes, the connector transitions to streaming.</p>
+</li>
+<li>
+<p>(Optional) To capture any data that changed while the connector was off-line, initiate an <a href="#debezium-db2-incremental-snapshots">incremental snapshot</a>.</p>
+</li>
+</ol>
+</div>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="db2-ad-hoc-snapshots"><a class="anchor" href="#db2-ad-hoc-snapshots"></a>Ad hoc snapshots</h3>
 <div class="paragraph">
 <p>By default, a connector runs an initial snapshot operation only after it starts for the first time.
 Following this initial snapshot, under normal circumstances, the connector does not repeat the snapshot process.
@@ -579,7 +981,7 @@ Any future change event data that the connector captures comes in through the st
 <div class="paragraph">
 <p>However, in some situations the data that the connector obtained during the initial snapshot might become stale, lost, or incomplete.
 To provide a mechanism for recapturing table data, Debezium includes an option to perform ad hoc snapshots.
-The following changes in a database might be cause for performing an ad hoc snapshot:</p>
+You might want to perform an ad hoc snapshot after any of the following changes occur in your Debezium environment:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -596,12 +998,12 @@ The following changes in a database might be cause for performing an ad hoc snap
 </div>
 <div class="paragraph">
 <p>You can re-run a snapshot for a table for which you previously captured a snapshot by initiating a so-called <em>ad-hoc snapshot</em>.
-Ad hoc snapshots require the use of <a href="../configuration/signalling.html#sending-signals-to-a-debezium-connector" class="page">signaling tables</a>.
+Ad hoc snapshots require the use of <a href="../configuration/signalling.html#sending-signals-to-a-debezium-connector" class="xref page">signaling tables</a>.
 You initiate an ad hoc snapshot by sending a signal request to the Debezium signaling table.</p>
 </div>
 <div class="paragraph">
 <p>When you initiate an ad hoc snapshot of an existing table, the connector appends content to the topic that already exists for the table.
-If a previously existing topic was removed, Debezium can create a topic automatically if <a href="../configuration/topic-auto-create-config.html#customizing-debezium-automatically-created-topics" class="page">automatic topic creation</a> is enabled.</p>
+If a previously existing topic was removed, Debezium can create a topic automatically if <a href="../configuration/topic-auto-create-config.html#customizing-debezium-automatically-created-topics" class="xref page">automatic topic creation</a> is enabled.</p>
 </div>
 <div class="paragraph">
 <p>Ad hoc snapshot signals specify the tables to include in the snapshot.
@@ -610,7 +1012,7 @@ Also, the snapshot can capture a subset of the contents of the table(s) in the d
 </div>
 <div class="paragraph">
 <p>You specify the tables to capture by sending an <code>execute-snapshot</code> message to the signaling table.
-Set the type of the <code>execute-snapshot</code> signal to <code>incremental</code>, and provide the names of the tables to include in the snapshot, as described in the following table:</p>
+Set the type of the <code>execute-snapshot</code> signal to <code>incremental</code> or <code>blocking</code>, and provide the names of the tables to include in the snapshot, as described in the following table:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. Example of an ad hoc <code>execute-snapshot</code> signal record</caption>
@@ -630,46 +1032,102 @@ Set the type of the <code>execute-snapshot</code> signal to <code>incremental</c
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>type</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>incremental</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the type of snapshot that you want to run.<br>
-Setting the type is optional.
-Currently, you can request only <code>incremental</code> snapshots.</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specifies the type of snapshot that you want to run.<br>
+Currently, you can request <code>incremental</code> or <code>blocking</code> snapshots.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data-collections</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>N/A</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An array that contains regular expressions matching the fully-qualified names of the table to be snapshotted.<br>
-The format of the names is the same as for the <code>signal.data.collection</code> configuration option.</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An array that contains regular expressions matching the fully-qualified names of the table to be snapshotted.<br>
+The format of the names is the same as for the <code>signal.data.collection</code> configuration option.</p>
+</div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>additional-condition</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><span class="line-through">additional-condition</span></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>N/A</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An optional string, which specifies a condition based on the column(s) of the table(s), to capture a
-subset of the contents of the table(s).</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An optional string, which specifies a condition based on the column(s) of the table(s), to capture a
+subset of the contents of the table(s).<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This property is deprecated.
+To specify criteria for defining the subset of data that you want the snapshot to capture, use the <code>additional-conditions</code> parameter.</p>
+</div>
+</td>
+</tr>
+</table>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>additional-conditions</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>N/A</em></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An optional array that specifies a set of additional conditions that the connector evaluates to determine the subset of records to include in a snapshot.<br>
+Each additional condition is an object that specifies the criteria for filtering the data that an ad hoc snapshot captures.
+You can set the following parameters for each additional condition:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>data-collection</code></dt>
+<dd>
+<p>The fully-qualified name of the table that the filter applies to.
+You can apply different filters to each table.</p>
+</dd>
+<dt class="hdlist1"><code>filter</code></dt>
+<dd>
+<p>Specifies column values that must be present in a database record for the snapshot to include it, for example,  <code>"color='blue'"</code>.<br>
+<br>
+The values that you assign to the <code>filter</code> parameter are the same types of values that you might specify in the <code>WHERE</code> clause of <code>SELECT</code> statements when you set the <code>snapshot.select.statement.overrides</code> property for a blocking snapshot.
+In earlier Debezium releases, an explicit <code>filter</code> parameter was not defined for snapshot signals; instead, filter criteria were implied by the values that were specified for the now deprecated  <code>additional-condition</code> parameter.</p>
+</dd>
+</dl>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>surrogate-key</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>N/A</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An optional string that specifies the column name that the connector uses as the primary key of a table during the snapshot process.</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An optional string that specifies the column name that the connector uses as the primary key of a table during the snapshot process.</p>
+</div></div></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<div class="title">Triggering an ad hoc snapshot</div>
-<p>You initiate an ad hoc snapshot by adding an entry with the <code>execute-snapshot</code> signal type to the signaling table.
+<div class="title">Triggering an ad hoc incremental snapshot</div>
+<p>You initiate an ad hoc incremental snapshot by adding an entry with the <code>execute-snapshot</code> signal type to the signaling table.
 After the connector processes the message, it begins the snapshot operation.
 The snapshot process reads the first and last primary key values and uses those values as the start and end point for each table.
 Based on the number of entries in the table, and the configured chunk size, Debezium divides the table into chunks, and proceeds to snapshot each chunk, in succession, one at a time.</p>
 </div>
 <div class="paragraph">
-<p>Currently, the <code>execute-snapshot</code> action type triggers <a href="../configuration/signalling.html#debezium-signaling-incremental-snapshots" class="page">incremental snapshots</a> only.
-For more information, see <a href="#db2-incremental-snapshots">Incremental snapshots</a>.</p>
+<p>For more information, see <a href="#db2-incremental-snapshots">Incremental snapshots</a>.</p>
+</div>
+<div class="paragraph">
+<div class="title">Triggering an ad hoc blocking snapshot</div>
+<p>You initiate an ad hoc blocking snapshot by adding an entry with the <code>execute-snapshot</code> signal type to the signaling table.
+After the connector processes the message, it begins the snapshot operation.
+The connector temporarily stops streaming, and then initiates a snapshot of the specified table, following the same process that it uses during an initial snapshot.
+After the snapshot completes, the connector resumes streaming.</p>
+</div>
+<div class="paragraph">
+<p>For more information, see <a href="#db2-blocking-snapshots">Blocking snapshots</a>.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="db2-incremental-snapshots"><a class="anchor" href="#db2-incremental-snapshots"></a>Incremental snapshots</h4>
+<div class="sect2">
+<h3 id="debezium-db2-incremental-snapshots"><a class="anchor" href="#debezium-db2-incremental-snapshots"></a>Incremental snapshots</h3>
 <div class="paragraph">
 <p>To provide flexibility in managing snapshots, Debezium includes a supplementary snapshot mechanism, known as <em>incremental snapshotting</em>.
-Incremental snapshots rely on the Debezium mechanism for <a href="../configuration/signalling.html#sending-signals-to-a-debezium-connector" class="page">sending signals to a Debezium connector</a>.
+Incremental snapshots rely on the Debezium mechanism for <a href="../configuration/signalling.html#sending-signals-to-a-debezium-connector" class="xref page">sending signals to a Debezium connector</a>.
 Incremental snapshots are based on the <a href="https://github.com/debezium/debezium-design-documents/blob/main/DDD-3.md">DDD-3</a> design document.</p>
 </div>
 <div class="paragraph">
@@ -755,11 +1213,10 @@ Debezium emits these remaining <code>READ</code> events to the table&#8217;s Kaf
 </tr>
 </table>
 </div>
-</div>
 <div class="sect3">
 <h4 id="db2-triggering-an-incremental-snapshot"><a class="anchor" href="#db2-triggering-an-incremental-snapshot"></a>Triggering an incremental snapshot</h4>
 <div class="paragraph">
-<p>Currently, the only way to initiate an incremental snapshot is to send an <a href="../configuration/signalling.html#debezium-signaling-ad-hoc-snapshots" class="page">ad hoc snapshot signal</a> to the signaling table on the source database.</p>
+<p>Currently, the only way to initiate an incremental snapshot is to send an <a href="../configuration/signalling.html#debezium-signaling-ad-hoc-snapshots" class="xref page">ad hoc snapshot signal</a> to the signaling table on the source database.</p>
 </div>
 <div class="paragraph">
 <p>You submit a signal to the signaling table as SQL <code>INSERT</code> queries.</p>
@@ -801,7 +1258,7 @@ For example, to include a table that exists in the <code><strong>public</strong>
 <div class="title">Prerequisites</div>
 <ul>
 <li>
-<p><a href="../configuration/signalling.html#debezium-signaling-enabling-source-signaling-channel" class="page">Signaling is enabled</a>.<br></p>
+<p><a href="../configuration/signalling.html#debezium-signaling-enabling-source-signaling-channel" class="xref page">Signaling is enabled</a>.<br></p>
 <div class="ulist">
 <ul>
 <li>
@@ -822,7 +1279,7 @@ For example, to include a table that exists in the <code><strong>public</strong>
 <p>Send a SQL query to add the ad hoc incremental snapshot request to the signaling table:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO <em>&lt;signalTable&gt;</em> (id, type, data) VALUES (<em>'&lt;id&gt;'</em>, <em>'&lt;snapshotType&gt;'</em>, '{"data-collections": ["<em>&lt;tableName&gt;</em>","<em>&lt;tableName&gt;</em>"],"type":"<em>&lt;snapshotType&gt;</em>","additional-condition":"<em>&lt;additional-condition&gt;</em>"}');</code></pre>
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO <em>&lt;signalTable&gt;</em> (id, type, data) VALUES (<em>'&lt;id&gt;'</em>, <em>'&lt;snapshotType&gt;'</em>, '{"data-collections": ["<em>&lt;tableName&gt;</em>","<em>&lt;tableName&gt;</em>"],"type":"<em>&lt;snapshotType&gt;</em>","additional-conditions":[{"data-collection": "<em>&lt;tableName&gt;</em>", "filter": "<em>&lt;additional-condition&gt;</em>"}]}');</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -835,11 +1292,11 @@ values ('ad-hoc-1',   <i class="conum" data-value="2"></i><b>(2)</b>
     'execute-snapshot',  <i class="conum" data-value="3"></i><b>(3)</b>
     '{"data-collections": ["schema1.table1", "schema2.table2"], <i class="conum" data-value="4"></i><b>(4)</b>
     "type":"incremental"}, <i class="conum" data-value="5"></i><b>(5)</b>
-    "additional-condition":"color=blue"}'); <i class="conum" data-value="6"></i><b>(6)</b></code></pre>
+    "additional-conditions":[{"data-collection": "schema1.table1" ,"filter":"color='blue'"}]}'); <i class="conum" data-value="6"></i><b>(6)</b></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The values of the <code>id</code>,<code>type</code>, and <code>data</code> parameters in the command correspond to the <a href="../configuration/signalling.html#debezium-signaling-description-of-required-structure-of-a-signaling-data-collection" class="page">fields of the signaling table</a>.</p>
+<p>The values of the <code>id</code>,<code>type</code>, and <code>data</code> parameters in the command correspond to the <a href="../configuration/signalling.html#debezium-signaling-description-of-required-structure-of-a-signaling-data-collection" class="xref page">fields of the signaling table</a>.</p>
 </div>
 <div class="paragraph">
 <p>The following table describes the parameters in the example:</p>
@@ -892,19 +1349,21 @@ If you do not specify a value, the connector runs an incremental snapshot.</p></
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>additional-condition</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An optional string, which specifies a condition based on the column(s) of the table(s), to capture a
-subset of the contents of the tables.
-For more information about the <code>additional-condition</code> parameter, see <a href="#db2-incremental-snapshots-additional-condition">Ad hoc incremental snapshots with <code>additional-condition</code></a>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>additional-conditions</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An optional array that specifies a set of additional conditions that the connector evaluates to determine the subset of records to include in a snapshot.<br>
+Each additional condition is an object with <code>data-collection</code> and <code>filter</code> properties.
+You can specify different filters for each data collection.<br>
+* The <code>data-collection</code> property is the fully-qualified name of the data collection for which the filter will be applied.
+For more information about the <code>additional-conditions</code> parameter, see <a href="#db2-incremental-snapshots-additional-conditions">Ad hoc incremental snapshots with <code>additional-conditions</code></a>.</p></td>
 </tr>
 </tbody>
 </table>
 </li>
 </ol>
 </div>
-<div id="db2-incremental-snapshots-additional-condition" class="paragraph">
-<div class="title">Ad hoc incremental snapshots with <code>additional-condition</code></div>
-<p>If you want a snapshot to include only a subset of the content in a table, you can modify the signal request by appending an <code>additional-condition</code> parameter to the snapshot signal.</p>
+<div id="db2-incremental-snapshots-additional-conditions" class="paragraph">
+<div class="title">Ad hoc incremental snapshots with <code>additional-conditions</code></div>
+<p>If you want a snapshot to include only a subset of the content in a table, you can modify the signal request by appending an <code>additional-conditions</code> parameter to the snapshot signal.</p>
 </div>
 <div class="paragraph">
 <p>The SQL query for a typical snapshot takes the following form:</p>
@@ -915,11 +1374,11 @@ For more information about the <code>additional-condition</code> parameter, see 
 </div>
 </div>
 <div class="paragraph">
-<p>By adding an <code>additional-condition</code> parameter, you append a <code>WHERE</code> condition to the SQL query, as in the following example:</p>
+<p>By adding an <code>additional-conditions</code> parameter, you append a <code>WHERE</code> condition to the SQL query, as in the following example:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT * FROM <em>&lt;tableName&gt;</em> WHERE <em>&lt;additional-condition&gt;</em> ....</code></pre>
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT * FROM <em>&lt;data-collection&gt;</em> WHERE <em>&lt;filter&gt;</em> ....</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -927,7 +1386,7 @@ For more information about the <code>additional-condition</code> parameter, see 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO <em>&lt;signalTable&gt;</em> (id, type, data) VALUES (<em>'&lt;id&gt;'</em>, <em>'&lt;snapshotType&gt;'</em>, '{"data-collections": ["<em>&lt;tableName&gt;</em>","<em>&lt;tableName&gt;</em>"],"type":"<em>&lt;snapshotType&gt;</em>","additional-condition":"<em>&lt;additional-condition&gt;</em>"}');</code></pre>
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO <em>&lt;signalTable&gt;</em> (id, type, data) VALUES (<em>'&lt;id&gt;'</em>, <em>'&lt;snapshotType&gt;'</em>, '{"data-collections": ["<em>&lt;tableName&gt;</em>","<em>&lt;tableName&gt;</em>"],"type":"<em>&lt;snapshotType&gt;</em>","additional-conditions":[{"data-collection": "<em>&lt;tableName&gt;</em>", "filter": "<em>&lt;additional-condition&gt;</em>"}]}');</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -951,16 +1410,16 @@ For more information about the <code>additional-condition</code> parameter, see 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO myschema.debezium_signal (id, type, data) VALUES('ad-hoc-1', 'execute-snapshot', '{"data-collections": ["schema1.products"],"type":"incremental", "additional-condition":"color=blue"}');</code></pre>
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO myschema.debezium_signal (id, type, data) VALUES('ad-hoc-1', 'execute-snapshot', '{"data-collections": ["schema1.products"],"type":"incremental", "additional-conditions":[{"data-collection": "schema1.products", "filter": "color=blue"}]}');</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>additional-condition</code> parameter also enables you to pass conditions that are based on more than one column.
+<p>The <code>additional-conditions</code> parameter also enables you to pass conditions that are based on more than one column.
 For example, using the <code>products</code> table from the previous example, you can submit a query that triggers an incremental snapshot that includes the data of only those items for which <code>color=blue</code> and <code>quantity&gt;10</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO myschema.debezium_signal (id, type, data) VALUES('ad-hoc-1', 'execute-snapshot', '{"data-collections": ["schema1.products"],"type":"incremental", "additional-condition":"color=blue AND quantity&gt;10"}');</code></pre>
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO myschema.debezium_signal (id, type, data) VALUES('ad-hoc-1', 'execute-snapshot', '{"data-collections": ["schema1.products"],"type":"incremental", "additional-conditions":[{"data-collection": "schema1.products", "filter": "color=blue AND quantity&gt;10"}]}');</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1015,9 +1474,11 @@ The value for snapshot events is <code>r</code>, signifying a <code>READ</code> 
 </tr>
 </tbody>
 </table>
+</div>
+<div class="sect3">
+<h4 id="db2-triggering-an-incremental-snapshot-kafka"><a class="anchor" href="#db2-triggering-an-incremental-snapshot-kafka"></a>Using the Kafka signaling channel to trigger an incremental snapshot</h4>
 <div class="paragraph">
-<div class="title">Procedure using kafka signaling channel</div>
-<p>You can send a message to the <a href="../configuration/signalling.html#debezium-signaling-enabling-kafka-signaling-channel" class="page">configured Kafka topic</a> to request the connector to run an ad hoc incremental snapshot.</p>
+<p>You can send a message to the <a href="../configuration/signalling.html#debezium-signaling-enabling-kafka-signaling-channel" class="xref page">configured Kafka topic</a> to request the connector to run an ad hoc incremental snapshot.</p>
 </div>
 <div class="paragraph">
 <p>The key of the Kafka message must match the value of the <code>topic.prefix</code> connector configuration option.</p>
@@ -1046,20 +1507,55 @@ The value for snapshot events is <code>r</code>, signifying a <code>READ</code> 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>type</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>incremental</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The type of the snapshot to be executed.
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The type of the snapshot to be executed.
 Currently Debezium supports only the <code>incremental</code> type. <br>
-See the next section for more details.</p></td>
+See the next section for more details.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data-collections</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>N/A</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An array of comma-separated regular expressions that match the fully-qualified names of tables to include in the snapshot.<br>
-Specify the names by using the same format as is required for the <a href="#db2-property-signal-data-collection">signal.data.collection</a> configuration option.</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An array of comma-separated regular expressions that match the fully-qualified names of tables to include in the snapshot.<br>
+Specify the names by using the same format as is required for the <a href="#db2-property-signal-data-collection">signal.data.collection</a> configuration option.</p>
+</div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>additional-condition</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><span class="line-through">additional-condition</span></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>N/A</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An optional string that specifies a condition that the connector evaluates to designate a subset of columns to include in a snapshot.</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An optional string that specifies a condition that the connector evaluates to designate a subset of records to include in a snapshot.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This property is deprecated and should be replaced by the <code>additional-conditions</code> property.</p>
+</div>
+</td>
+</tr>
+</table>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>additional-conditions</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>N/A</em></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An optional array of additional conditions that specifies criteria that the connector evaluates to designate a subset of records to include in a snapshot.<br>
+Each additional condition is an object that specifies the criteria for filtering the data that an ad hoc snapshot captures.
+You can set the following parameters for each additional condition:
+<code>data-collection</code>:: The fully-qualified name of the table that the filter applies to.
+You can apply different filters to each table.
+<code>filter</code>:: Specifies column values that must be present in a database record for the snapshot to include it, for example,  <code>"color='blue'"</code>.<br>
+<br>
+The values that you assign to the <code>filter</code> parameter are the same types of values that you might specify in the <code>WHERE</code> clause of <code>SELECT</code> statements when you set the <code>snapshot.select.statement.overrides</code> property for a blocking snapshot.
+In earlier Debezium releases, an explicit <code>filter</code> parameter was not defined for snapshot signals; instead, filter criteria were implied by the values that were specified for the now deprecated <code>additional-condition</code> parameter.</p>
+</div></div></td>
 </tr>
 </tbody>
 </table>
@@ -1073,10 +1569,9 @@ Specify the names by using the same format as is required for the <a href="#db2-
 Value = `{"type":"execute-snapshot","data": {"data-collections": ["schema1.table1", "schema1.table2"], "type": "INCREMENTAL"}}`</pre>
 </div>
 </div>
-<div class="sect9">
-<h10 id="_ad_hoc_incremental_snapshots_with_additional_condition"><a class="anchor" href="#_ad_hoc_incremental_snapshots_with_additional_condition"></a>Ad hoc incremental snapshots with additional-condition</h10>
 <div class="paragraph">
-<p>Debezium uses the <code>additional-condition</code> field to select a subset of a table&#8217;s content.</p>
+<div class="title">Ad hoc incremental snapshots with additional-condition</div>
+<p>Debezium uses the <code>additional-conditions</code> field to select a subset of a table&#8217;s content.</p>
 </div>
 <div class="paragraph">
 <p>Typically, when Debezium runs a snapshot, it runs a SQL query such as:</p>
@@ -1085,31 +1580,30 @@ Value = `{"type":"execute-snapshot","data": {"data-collections": ["schema1.table
 <p><code>SELECT * FROM <em>&lt;tableName&gt;</em> &#8230;&#8203;.</code></p>
 </div>
 <div class="paragraph">
-<p>When the snapshot request includes an <code>additional-condition</code>, the <code>additional-condition</code> is appended to the SQL query, for example:</p>
+<p>When the snapshot request includes an <code>additional-conditions</code> property, the <code>data-collection</code> and <code>filter</code> parameters of the  property are appended to the SQL query, for example:</p>
 </div>
 <div class="paragraph">
-<p><code>SELECT * FROM <em>&lt;tableName&gt;</em> WHERE <em>&lt;additional-condition&gt;</em> &#8230;&#8203;.</code></p>
+<p><code>SELECT * FROM <em>&lt;data-collection&gt;</em> WHERE <em>&lt;filter&gt;</em> &#8230;&#8203;.</code></p>
 </div>
 <div class="paragraph">
-<p>For example, given a <code>products</code> table with the columns <code>id</code> (primary key), <code>color</code>, and <code>brand</code>, if you want a snapshot to include only content for which <code>color='blue'</code>, when you request the snapshot, you could append an <code>additional-condition</code> statement to filter the content:</p>
+<p>For example, given a <code>products</code> table with the columns <code>id</code> (primary key), <code>color</code>, and <code>brand</code>, if you want a snapshot to include only content for which <code>color='blue'</code>, when you request the snapshot, you could add the <code>additional-conditions</code> property to filter the content:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>Key = `test_connector`
 
-Value = `{"type":"execute-snapshot","data": {"data-collections": ["schema1.products"], "type": "INCREMENTAL", "additional-condition":"color='blue'"}}`</pre>
+Value = `{"type":"execute-snapshot","data": {"data-collections": ["schema1.products"], "type": "INCREMENTAL", "additional-conditions": [{"data-collection": "schema1.products" ,"filter":"color='blue'"}]}}`</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You can use the <code>additional-condition</code> statement to pass conditions based on multiple columns.
+<p>You can use the <code>additional-conditions</code> property to pass conditions based on multiple columns.
 For example, using the same <code>products</code> table as in the previous example, if you want a snapshot to include only the content from the <code>products</code> table for which <code>color='blue'</code>, and <code>brand='MyBrand'</code>, you could send the following request:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>Key = `test_connector`
 
-Value = `{"type":"execute-snapshot","data": {"data-collections": ["schema1.products"], "type": "INCREMENTAL", "additional-condition":"color='blue' AND brand='MyBrand'"}}`</pre>
-</div>
+Value = `{"type":"execute-snapshot","data": {"data-collections": ["schema1.products"], "type": "INCREMENTAL", "additional-conditions": [{"data-collection": "schema1.products" ,"filter":"color='blue' AND brand='MyBrand'"}]}}`</pre>
 </div>
 </div>
 </div>
@@ -1129,7 +1623,7 @@ You submit a stop snapshot signal to the table by sending a SQL <code>INSERT</co
 <div class="title">Prerequisites</div>
 <ul>
 <li>
-<p><a href="../configuration/signalling.html#debezium-signaling-enabling-source-signaling-channel" class="page">Signaling is enabled</a>.<br></p>
+<p><a href="../configuration/signalling.html#debezium-signaling-enabling-source-signaling-channel" class="xref page">Signaling is enabled</a>.<br></p>
 <div class="ulist">
 <ul>
 <li>
@@ -1166,7 +1660,7 @@ values ('ad-hoc-1',   <i class="conum" data-value="2"></i><b>(2)</b>
 </div>
 </div>
 <div class="paragraph">
-<p>The values of the <code>id</code>, <code>type</code>, and <code>data</code> parameters in the signal command correspond to the <a href="../configuration/signalling.html#debezium-signaling-description-of-required-structure-of-a-signaling-data-collection" class="page">fields of the signaling table</a>.</p>
+<p>The values of the <code>id</code>, <code>type</code>, and <code>data</code> parameters in the signal command correspond to the <a href="../configuration/signalling.html#debezium-signaling-description-of-required-structure-of-a-signaling-data-collection" class="xref page">fields of the signaling table</a>.</p>
 </div>
 <div class="paragraph">
 <p>The following table describes the parameters in the example:</p>
@@ -1222,9 +1716,11 @@ If you do not specify a <code>type</code> value, the signal fails to stop the in
 </li>
 </ol>
 </div>
+</div>
+<div class="sect3">
+<h4 id="db2-stopping-an-incremental-snapshot-kafka"><a class="anchor" href="#db2-stopping-an-incremental-snapshot-kafka"></a>Using the Kafka signaling channel to stop an incremental snapshot</h4>
 <div class="paragraph">
-<div class="title">Using the Kafka signaling channel to stop an incremental snapshot</div>
-<p>You can send a signal message to the <a href="../configuration/signalling.html#debezium-signaling-enabling-kafka-signaling-channel" class="page">configured Kafka signaling topic</a> to stop an ad hoc incremental snapshot.</p>
+<p>You can send a signal message to the <a href="../configuration/signalling.html#debezium-signaling-enabling-kafka-signaling-channel" class="xref page">configured Kafka signaling topic</a> to stop an ad hoc incremental snapshot.</p>
 </div>
 <div class="paragraph">
 <p>The key of the Kafka message must match the value of the <code>topic.prefix</code> connector configuration option.</p>
@@ -1274,6 +1770,71 @@ Specify the names by using the same format as is required for the <a href="#db2-
 
 Value = `{"type":"stop-snapshot","data": {"data-collections": ["schema1.table1", "schema1.table2"], "type": "INCREMENTAL"}}`</pre>
 </div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="db2-blocking-snapshots"><a class="anchor" href="#db2-blocking-snapshots"></a>Blocking snapshots</h4>
+<div class="paragraph">
+<p>To provide more flexibility in managing snapshots, Debezium includes a supplementary ad hoc snapshot mechanism, known as a <em>blocking snapshot</em>.
+Blocking snapshots rely on the Debezium mechanism for <a href="../configuration/signalling.html#sending-signals-to-a-debezium-connector" class="xref page">sending signals to a Debezium connector</a>.</p>
+</div>
+<div class="paragraph">
+<p>A blocking snapshot behaves just like an <em>initial snapshot</em>, except that you can trigger it at run time.</p>
+</div>
+<div class="paragraph">
+<p>You might want to run a blocking snapshot rather than use the standard initial snapshot process in the following situations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You add a new table and you want to complete the snapshot while the connector is running.</p>
+</li>
+<li>
+<p>You add a large table, and you want the snapshot to complete in less time than is possible with an incremental snapshot.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<div class="title">Blocking snapshot process</div>
+<p>When you run a blocking snapshot, Debezium stops streaming, and then initiates a snapshot of the specified table, following the same process that it uses during an initial snapshot.
+After the snapshot completes, the streaming is resumed.</p>
+</div>
+<div class="paragraph">
+<div class="title">Configure snapshot</div>
+<p>You can set the following properties in the <code>data</code> component of a signal:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>data-collections: to specify which tables must be snapshot</p>
+</li>
+<li>
+<p>additional-conditions: You can specify different filters for different table.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>data-collection</code> property is the fully-qualified name of the table for which the filter will be applied.</p>
+</li>
+<li>
+<p>The <code>filter</code> property will have the same value used in the  <code>snapshot.select.statement.overrides</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">  {"type": "blocking", "data-collections": ["schema1.table1", "schema1.table2"], "additional-conditions": [{"data-collection": "schema1.table1", "filter": "SELECT * FROM [schema1].[table1] WHERE column1 = 0 ORDER BY column2 DESC"}, {"data-collection": "schema1.table2", "filter": "SELECT * FROM [schema1].[table2] WHERE column2 &gt; 0"}]}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Possible duplicates</div>
+<p>A delay might exist between the time that you send the signal to trigger the snapshot, and the time when streaming stops and the snapshot starts.
+As a result of this delay, after the snapshot completes, the connector might emit some event records that duplicate records captured by the snapshot.</p>
 </div>
 </div>
 </div>
@@ -1358,13 +1919,48 @@ The connector uses the following convention to name change event topics:</p>
 <div class="paragraph">
 <p>If the default topic name do not meet your requirements, you can configure custom topic names.
 To configure custom topic names, you specify regular expressions in the logical topic routing SMT.
-For more information about using the logical topic routing SMT to customize topic naming, see <a href="../transformations/topic-routing.html#topic-routing" class="page">Topic routing</a>.</p>
+For more information about using the logical topic routing SMT to customize topic naming, see <a href="../transformations/topic-routing.html#topic-routing" class="xref page">Topic routing</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="db2-schema-history-topic"><a class="anchor" href="#db2-schema-history-topic"></a>Schema history topic</h3>
+<div class="paragraph">
+<p>When a database client queries a database, the client uses the database’s current schema.
+However, the database schema can be changed at any time, which means that the connector must be able to identify what the schema was at the time each insert, update, or delete operation was recorded.
+Also, a connector cannot necessarily apply the current schema to every event.
+If an event is relatively old, it&#8217;s possible that it was recorded before the current schema was applied.</p>
+</div>
+<div class="paragraph">
+<p>To ensure correct processing of events that occur after a schema change, the Debezium Db2 connector stores a snapshot of the new schema based on the structures of the Db2 change data tables, which mirror the structures of their associated data tables.
+The connector stores the table schema information, together with the LSN of operations the result in schema changes, in the database schema history Kafka topic.
+The connector uses the stored schema representation to produce change events that correctly mirror the structure of tables at the time of each insert, update, or delete operation.</p>
+</div>
+<div class="paragraph">
+<p>When the connector restarts after either a crash or a graceful stop, it resumes reading entries in the Db2 change data tables from the last position that it read.
+Based on the schema information that the connector reads from the database schema history topic, the connector applies the table structures that existed at the position where the connector restarts.</p>
+</div>
+<div class="paragraph">
+<p>If you update the schema of a Db2 table that is in capture mode, it&#8217;s important that you also update the schema of the corresponding change table.
+You must be a Db2 database administrator with elevated privileges to update database schema.
+For more information about how to update Db2 database schema in Debezium environments, see <a href="#db2-schema-evolution">Schema history eveolution</a>.</p>
+</div>
+<div class="paragraph">
+<p>The database schema history topic is for internal connector use only.
+Optionally, the connector can also <a href="#about-the-debezium-db2-connector-schema-change-topic">emit schema change events to a different topic that is intended for consumer applications</a>.</p>
+</div>
+<div class="ulist">
+<div class="title">Additional resources</div>
+<ul>
+<li>
+<p><a href="#db2-topic-names">Default names for topics</a> that receive Debezium event records.</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
 <h3 id="about-the-debezium-db2-connector-schema-change-topic"><a class="anchor" href="#about-the-debezium-db2-connector-schema-change-topic"></a>Schema change topic</h3>
 <div class="paragraph">
-<p>You can configure a Debezium Db2 connector to produce schema change events that describe schema changes that are applied to captured tables in the database.</p>
+<p>You can configure a Debezium Db2 connector to produce schema change events that describe schema changes that are applied to tables in the database.</p>
 </div>
 <div class="paragraph">
 <p>Debezium emits a message to the schema change topic when:</p>
@@ -1446,7 +2042,7 @@ The value of <code>databaseName</code> serves as the message key.</p>
 </dd>
 <dt class="hdlist1"><code>pos</code></dt>
 <dd>
-<p>The position in the binlog where the statements appear.</p>
+<p>The position in the transaction log where the statements appear.</p>
 </dd>
 <dt class="hdlist1"><code>tableChanges</code></dt>
 <dd>
@@ -1527,7 +2123,7 @@ The message contains a logical representation of the table schema.</p>
   },
   "payload": {
     "source": {
-      "version": "2.4.0.Alpha1",
+      "version": "2.4.1.Final",
       "connector": "db2",
       "name": "db2",
       "ts_ms": 0,
@@ -2245,7 +2841,7 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
       "EMAIL": "john.doe@example.org"
     },
     "source": {  <i class="conum" data-value="8"></i><b>(8)</b>
-      "version": "2.4.0.Alpha1",
+      "version": "2.4.1.Final",
       "connector": "db2",
       "name": "myconnector",
       "ts_ms": 1559729468470,
@@ -2291,7 +2887,7 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
 <code>mydatabase.MYSCHEMA.CUSTOMERS.Value</code> is the schema for the payload&#8217;s <code>before</code> and <code>after</code> fields. This schema is specific to the <code>customers</code> table. The connector uses this schema for all rows in the <code>MYSCHEMA.CUSTOMERS</code> table.<br>
 <br>
 Names of schemas for <code>before</code> and <code>after</code> fields are of the form <code><em>logicalName</em>.<em>schemaName</em>.<em>tableName</em>.Value</code>, which ensures that the schema name is unique in the database.
-This means that when using the <a href="../configuration/avro.html#avro-serialization" class="page">Avro converter</a>, the resulting Avro schema for each table in each logical source has its own evolution and history.</p>
+This means that when using the <a href="../configuration/avro.html#avro-serialization" class="xref page">Avro converter</a>, the resulting Avro schema for each table in each logical source has its own evolution and history.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2314,7 +2910,7 @@ This means that when using the <a href="../configuration/avro.html#avro-serializ
 <td class="tableblock halign-left valign-top"><p class="tableblock">The value&#8217;s actual data. This is the information that the change event is providing.<br>
 <br>
 It may appear that JSON representations of events are much larger than the rows they describe. This is because a JSON representation must include the schema portion and the payload portion of the message.
-However, by using the <a href="../configuration/avro.html#avro-serialization" class="page">Avro converter</a>, you can significantly decrease the size of the messages that the connector streams to Kafka topics.</p></td>
+However, by using the <a href="../configuration/avro.html#avro-serialization" class="xref page">Avro converter</a>, you can significantly decrease the size of the messages that the connector streams to Kafka topics.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
@@ -2416,7 +3012,7 @@ In the <code>source</code> object, <code>ts_ms</code> indicates the time that th
       "EMAIL": "noreply@example.org"
     },
     "source": {  <i class="conum" data-value="3"></i><b>(3)</b>
-      "version": "2.4.0.Alpha1",
+      "version": "2.4.1.Final",
       "connector": "db2",
       "name": "myconnector",
       "ts_ms": 1559729995937,
@@ -2542,7 +3138,7 @@ In the <code>source</code> object, <code>ts_ms</code> indicates the time that th
     },
     "after": null,  <i class="conum" data-value="2"></i><b>(2)</b>
     "source": {  <i class="conum" data-value="3"></i><b>(3)</b>
-      "version": "2.4.0.Alpha1",
+      "version": "2.4.1.Final",
       "connector": "db2",
       "name": "myconnector",
       "ts_ms": 1559730445243,
@@ -2650,16 +3246,16 @@ In the <code>source</code> object, <code>ts_ms</code> indicates the time that th
 <h2 id="db2-data-types"><a class="anchor" href="#db2-data-types"></a>Data type mappings</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Db2&#8217;s data types are described in <a href="https://www.ibm.com/support/knowledgecenter/en/SSEPGG_11.5.0/com.ibm.db2.luw.sql.ref.doc/doc/r0008483.html">Db2 SQL Data Types</a>.</p>
+<p>For a complete description of the data types that Db2 supports, see <a href="https://www.ibm.com/support/knowledgecenter/en/SSEPGG_11.5.0/com.ibm.db2.luw.sql.ref.doc/doc/r0008483.html">Data Types</a> in the Db2 documentation.</p>
 </div>
 <div class="paragraph">
 <p>The Db2 connector represents changes to rows with events that are structured like the table in which the row exists. The event contains a field for each column value. How that value is represented in the event depends on the Db2 data type of the column. This section describes these mappings.
-If the default data type conversions do not meet your needs, you can <a href="../development/converters.html#custom-converters" class="page">create a custom converter</a> for the connector.</p>
+If the default data type conversions do not meet your needs, you can <a href="../development/converters.html#custom-converters" class="xref page">create a custom converter</a> for the connector.</p>
 </div>
 <div class="sect2">
 <h3 id="db2-basic-types"><a class="anchor" href="#db2-basic-types"></a>Basic types</h3>
 <div class="paragraph">
-<p>The following table describes how the connector maps each of the Db2 data types to a <em>literal type</em> and a <em>semantic type</em> in event fields.</p>
+<p>The following table describes how the connector maps each Db2 data type to a <em>literal type</em> and a <em>semantic type</em> in event fields.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -2918,13 +3514,14 @@ String representation of an XML document</p>
 </table>
 <div class="paragraph">
 <p>If present, a column&#8217;s default value is propagated to the corresponding field&#8217;s Kafka Connect schema. Change events contain the field&#8217;s default value unless an explicit column value had been given. Consequently, there is rarely a need to obtain the default value from the schema.
-Passing the default value helps satisfy compatibility rules when <a href="../configuration/avro.html" class="page">using Avro</a> as the serialization format together with the Confluent schema registry.</p>
+Passing the default value helps satisfy compatibility rules when <a href="../configuration/avro.html" class="xref page">using Avro</a> as the serialization format together with the Confluent schema registry.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="db2-temporal-types"><a class="anchor" href="#db2-temporal-types"></a>Temporal types</h3>
 <div class="paragraph">
-<p>Other than Db2&#8217;s <code>DATETIMEOFFSET</code> data type, which contains time zone information, how temporal types are mapped depends on the value of the <code>time.precision.mode</code> connector configuration property. The following sections describe these mappings:</p>
+<p>Except for the <code>DATETIMEOFFSET</code> data type, which contains time zone information, Db2 maps temporal types based on the value of the <code>time.precision.mode</code> connector configuration property.
+The following sections describe these mappings:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -3151,7 +3748,7 @@ The <code>connect.decimal.precision</code> schema parameter contains an integer 
 After you begin to run Debezium you can adjust the configuration of the capture agent to optimize performance.</p>
 </div>
 <div class="sect2">
-<h3 id="_putting_tables_into_capture_mode"><a class="anchor" href="#_putting_tables_into_capture_mode"></a>Putting tables into capture mode</h3>
+<h3 id="putting-tables-in-capture-mode"><a class="anchor" href="#putting-tables-in-capture-mode"></a>Putting tables into capture mode</h3>
 <div class="paragraph">
 <p>To put tables into capture mode, Debezium provides a set of user-defined functions (UDFs) for your convenience.
 The procedure here shows how to install and run these management UDFs.
@@ -3168,6 +3765,9 @@ The administrator must then enable CDC for each table that you want Debezium to 
 <p>On the Db2 host, the Debezium management UDFs are available in the $HOME/asncdctools/src directory.
 UDFs are available from the <a href="https://github.com/debezium/debezium-examples/tree/main/tutorial/debezium-db2-init/db2server">Debezium examples repository</a>.</p>
 </li>
+<li>
+<p>The Db2 command <code>bldrtn</code> is on PATH, e.g. by running <code>export PATH=$PATH:/opt/ibm/db2/V11.5.0.0/samples/c/</code> with Db2 11.5</p>
+</li>
 </ul>
 </div>
 <div class="olist arabic">
@@ -3183,7 +3783,7 @@ command provided with Db2:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">./bldrtn asncdc</code></pre>
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">bldrtn asncdc</code></pre>
 </div>
 </div>
 </li>
@@ -3204,7 +3804,8 @@ command provided with Db2:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">db2 bind db2schema.bnd blocking all grant public sqlerror continue</code></pre>
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">db2 connect to DB_NAME
+db2 bind db2schema.bnd blocking all grant public sqlerror continue</code></pre>
 </div>
 </div>
 </li>
@@ -3282,10 +3883,18 @@ For other UDFs, use the SQL <code>CALL</code> statement.</p>
 </div>
 </li>
 <li>
-<p>Start the ASN agent:</p>
+<p>Start the ASN agent from an SQL client:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">VALUES ASNCDC.ASNCDCSERVICES('start','asncdc');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or from the shell:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">db2 "VALUES ASNCDC.ASNCDCSERVICES('start','asncdc');"</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3445,13 +4054,13 @@ You can adjust the values for these parameters to balance the configuration of t
 <div class="title">Procedure</div>
 <ol class="arabic">
 <li>
-<p>Download the <a href="https://repo1.maven.org/maven2/io/debezium/debezium-connector-db2/2.4.0.Alpha1/debezium-connector-db2-2.4.0.Alpha1-plugin.tar.gz">Debezium Db2 connector plug-in archive</a> from Maven Central.</p>
+<p>Download the <a href="https://repo1.maven.org/maven2/io/debezium/debezium-connector-db2/2.4.1.Final/debezium-connector-db2-2.4.1.Final-plugin.tar.gz">Debezium Db2 connector plug-in archive</a> from Maven Central.</p>
 </li>
 <li>
 <p>Extract the JAR files into your Kafka Connect environment.</p>
 </li>
 <li>
-<p>Download the <a href="https://repo1.maven.org/maven2/com/ibm/db2/jcc/11.5.0.0/jcc-11.5.0.0.jar">JDBC driver for Db2</a> from Maven Central, and extract the downloaded driver file to the directory that contains the Debezium Db2 connector JAR file (that is, <code>debezium-connector-db2-2.4.0.Alpha1.jar</code>).</p>
+<p>Download the <a href="https://repo1.maven.org/maven2/com/ibm/db2/jcc/11.5.0.0/jcc-11.5.0.0.jar">JDBC driver for Db2</a> from Maven Central, and extract the downloaded driver file to the directory that contains the Debezium Db2 connector JAR file (that is, <code>debezium-connector-db2-2.4.1.Final.jar</code>).</p>
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -3480,7 +4089,7 @@ To enable the connector to access the database, you must add the driver to your 
 <p>If you are working with immutable containers, see <a href="https://quay.io/organization/debezium">Debezium&#8217;s container images</a> for Apache ZooKeeper, Apache Kafka and Kafka Connect with the Db2 connector already installed and ready to run.</p>
 </div>
 <div class="paragraph">
-<p>You can also <a href="../operations/openshift.html" class="page">run Debezium on Kubernetes and OpenShift</a>.</p>
+<p>You can also <a href="../operations/openshift.html" class="xref page">run Debezium on Kubernetes and OpenShift</a>.</p>
 </div>
 <div class="ulist">
 <div class="title">Next steps</div>
@@ -3551,7 +4160,7 @@ Optionally, you can ignore, mask, or truncate columns that contain sensitive dat
 </tr>
 <tr>
 <td><i class="conum" data-value="8"></i><b>8</b></td>
-<td>The logical name of the Db2 instance/cluster, which forms a namespace and is used in all the names of the Kafka topics to which the connector writes, the Kafka Connect schema names, and the namespaces of the corresponding Avro schema when the <a href="../configuration/avro.html" class="page">Avro Connector</a> is used.</td>
+<td>The logical name of the Db2 instance/cluster, which forms a namespace and is used in all the names of the Kafka topics to which the connector writes, the Kafka Connect schema names, and the namespaces of the corresponding Avro schema when the <a href="../configuration/avro.html" class="xref page">Avro Connector</a> is used.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="9"></i><b>9</b></td>
@@ -4135,7 +4744,7 @@ For <code>purchaseorders</code> tables in any schema, the columns <code>pk3</cod
 </ul>
 </div>
 <div class="paragraph">
-<p>See <a href="../configuration/avro.html#avro-naming" class="page">Avro naming</a> for more details.</p>
+<p>See <a href="../configuration/avro.html#avro-naming" class="xref page">Avro naming</a> for more details.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -4168,7 +4777,7 @@ For <code>purchaseorders</code> tables in any schema, the columns <code>pk3</cod
 <p>No default</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Enumerates a comma-separated list of the symbolic names of the <a href="../development/converters.html#custom-converters" class="page">custom converter</a> instances that the connector can use.
+<p>Enumerates a comma-separated list of the symbolic names of the <a href="../development/converters.html#custom-converters" class="xref page">custom converter</a> instances that the connector can use.
 For example,<br></p>
 </div>
 <div class="paragraph">
@@ -4452,7 +5061,7 @@ By default, truncate operations are skipped (not emitted by this connector).</p>
 <p>No default</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Fully-qualified name of the data collection that is used to send <a href="../configuration/signalling.html#debezium-signaling-enabling-source-signaling-channel" class="page">signals</a> to the connector.
+<p>Fully-qualified name of the data collection that is used to send <a href="../configuration/signalling.html#debezium-signaling-enabling-source-signaling-channel" class="xref page">signals</a> to the connector.
 Use the following format to specify the collection name:<br>
 <code><em>&lt;schemaName&gt;</em>.<em>&lt;tableName&gt;</em></code></p>
 </div></div></td>
@@ -4480,12 +5089,10 @@ By default, the following channels are available:</p>
 <p><code>file</code></p>
 </li>
 <li>
-<p><code>jmx</code></p>
+<p><code>jmx</code>
+Optionally, you can also implement a <a href="../configuration/signalling.html#debezium-signaling-enabling-custom-signaling-channel" class="xref page">custom signaling channel</a>.</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>Optionally, you can also implement a <a href="../configuration/signalling.html#debezium-signaling-enabling-custom-signaling-channel" class="page">custom signaling channel</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4508,12 +5115,10 @@ By default, the following channels are available:</p>
 <p><code>log</code></p>
 </li>
 <li>
-<p><code>jmx</code></p>
+<p><code>jmx</code>
+Optionally, you can also implement a <a href="../configuration/notification.html#debezium-notification-custom-channel" class="xref page">custom notification channel</a>.</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>Optionally, you can also implement a <a href="../configuration/notification.html#debezium-notification-custom-channel" class="page">custom notification channel</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4616,6 +5221,17 @@ This feature is incubating.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The custom metric tags will accept key-value pairs to customize the MBean object name which should be appended the end of regular name, each key would represent a tag for the MBean object name, and the corresponding value would be the value of that tag the key is. For example: <code>k1=v1,k2=v2</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="db2-property-errors-max-retires"></a><a href="#db2-property-errors-max-retires"><code>errors.max.retries</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>-1</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The maximum number of retries on retriable errors (e.g. connection errors) before failing (-1 = no limit, 0 = disabled, &gt; 0 = num of retries).</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -4731,13 +5347,24 @@ Skipping should be used only with care as it can lead to data loss or mangling w
 <p><code>false</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>A Boolean value that specifies whether the connector should record all DDL statements from specified schema or database<br></p>
+<p>A Boolean value that specifies whether the connector records schema structures from all tables in a schema or database, or only from tables that are designated for capture.<br>
+Specify one of the following values:</p>
 </div>
-<div class="paragraph">
-<p><code>true</code> records only those DDL statements that are relevant to tables whose changes are being captured by Debezium. Set to <code>true</code> with care because missing data might become necessary if you change which tables have their changes captured.<br></p>
-</div>
-<div class="paragraph">
-<p>The safe default is <code>false</code>.</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>false</code> (default)</dt>
+<dd>
+<p>During a database snapshot, the connector records the schema data for all non-system tables in the database, including tables that are not designated for capture.
+It&#8217;s best to retain the default setting.
+If you later decide to capture changes from tables that you did not originally designate for capture, the connector can easily begin to capture data from those tables, because their schema structure is already stored in the schema history topic.
+Debezium requires the schema history of a table so that it can identify the structure that was present at the time that a change event occurred.</p>
+</dd>
+<dt class="hdlist1"><code>true</code></dt>
+<dd>
+<p>During a database snapshot, the connector records the table schemas only for the tables from which Debezium captures change events.
+If you change the default value, and you later configure the connector to capture data from other tables in the database, the connector lacks the schema information that it requires to capture change events from the tables.<br></p>
+</dd>
+</dl>
 </div></div></td>
 </tr>
 <tr>
@@ -4748,10 +5375,20 @@ Skipping should be used only with care as it can lead to data loss or mangling w
 <p><code>false</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>A Boolean value that specifies whether the connector should record all DDL statements<br></p>
+<p>A Boolean value that specifies whether the connector records schema structures from all logical databases in the database instance.<br>
+Specify one of the following values:</p>
 </div>
-<div class="paragraph">
-<p><code>true</code> records only those DDL statements that are relevant to database/schema&#8217;s tables whose changes are being captured by Debezium. <code>false</code> will store all incoming DDL statements.<br></p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>true</code></dt>
+<dd>
+<p>The connector records schema structures only for tables in the logical database and schema from which Debezium captures change events.</p>
+</dd>
+<dt class="hdlist1"><code>false</code></dt>
+<dd>
+<p>The connector records schema structures for all logical databases.<br></p>
+</dd>
+</dl>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -4828,10 +5465,37 @@ schema.history.internal.consumer.ssl.key.password=test1234</code></pre>
 <p><a id="db2-property-signal-kafka-topic"></a><a href="#db2-property-signal-kafka-topic"><code>signal.kafka.topic</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>No default</p>
+<p>&lt;topic.prefix&gt;-signal</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The name of the Kafka topic that the connector monitors for ad hoc signals.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If <a href="../configuration/topic-auto-create-config.html#topic-auto-create-config" class="xref page">automatic topic creation</a> is disabled, you must manually create the required signaling topic.
+A signaling topic is required to preserve signal ordering.
+The signaling topic must have a single partition.</p>
+</div>
+</td>
+</tr>
+</table>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="db2-property-signal-kafka-groupId"></a><a href="#db2-property-signal-kafka-groupId"><code>signal.kafka.groupId</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>kafka-signal</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The name of the group ID  that is used by Kafka consumers.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4868,7 +5532,7 @@ Pass-through signals properties begin with the prefix <code>signals.consumer.*</
 For example, the connector passes properties such as <code>signal.consumer.security.protocol=SSL</code> to the Kafka consumer.</p>
 </div>
 <div class="paragraph">
-<p>As is the case with the <a href="#db2-pass-through-database-history-properties-for-configuring-producer-and-consumer-clients">pass-through properties for database schema history clients</a>, Debezium strips the prefixes from the properties before it passes them to the Kafka signals consumer.</p>
+<p>Debezium strips the prefixes from the properties before it passes the properties to the Kafka signals consumer.</p>
 </div>
 </div>
 <div class="sect3">
@@ -4940,12 +5604,12 @@ For example, the connector passes properties such as <code>driver.foobar=false</
 </ul>
 </div>
 <div class="paragraph">
-<p><a href="../operations/monitoring.html#monitoring-debezium" class="page">Debezium monitoring documentation</a> provides details for how to expose these metrics by using JMX.</p>
+<p><a href="../operations/monitoring.html#monitoring-debezium" class="xref page">Debezium monitoring documentation</a> provides details for how to expose these metrics by using JMX.</p>
 </div>
 <div class="sect2">
 <h3 id="db2-snapshot-metrics"><a class="anchor" href="#db2-snapshot-metrics"></a>Snapshot metrics</h3>
 <div class="paragraph">
-<p>The <strong>MBean</strong> is <code>debezium.db2:type=connector-metrics,context=snapshot,server=<em>&lt;db2.server.name&gt;</em></code>.</p>
+<p>The <strong>MBean</strong> is <code>debezium.db2:type=connector-metrics,context=snapshot,server=<em>&lt;topic.prefix&gt;</em></code>.</p>
 </div>
 <div class="paragraph">
 <p>Snapshot metrics are not exposed unless a snapshot operation is active, or if a snapshot has occurred since the last connector start.</p>
@@ -5247,7 +5911,7 @@ Updates every 10,000 rows scanned and upon completing a table.</p>
 <div class="sect2">
 <h3 id="db2-streaming-metrics"><a class="anchor" href="#db2-streaming-metrics"></a>Streaming metrics</h3>
 <div class="paragraph">
-<p>The <strong>MBean</strong> is <code>debezium.db2:type=connector-metrics,context=streaming,server=<em>&lt;db2.server.name&gt;</em></code>.</p>
+<p>The <strong>MBean</strong> is <code>debezium.db2:type=connector-metrics,context=streaming,server=<em>&lt;topic.prefix&gt;</em></code>.</p>
 </div>
 <div class="paragraph">
 <p>The following table lists the streaming metrics that are available.</p>
@@ -5460,7 +6124,7 @@ The values will incoporate any differences between the clocks on the machines wh
 <div class="sect2">
 <h3 id="db2-schema-history-metrics"><a class="anchor" href="#db2-schema-history-metrics"></a>Schema history metrics</h3>
 <div class="paragraph">
-<p>The <strong>MBean</strong> is <code>debezium.db2:type=connector-metrics,context=schema-history,server=<em>&lt;db2.server.name&gt;</em></code>.</p>
+<p>The <strong>MBean</strong> is <code>debezium.db2:type=connector-metrics,context=schema-history,server=<em>&lt;topic.prefix&gt;</em></code>.</p>
 </div>
 <div class="paragraph">
 <p>The following table lists the schema history metrics that are available.</p>
@@ -5630,7 +6294,7 @@ Do this after you put a table into capture mode or after you remove a table from
 <p>While a Debezium Db2 connector can capture schema changes, to update a schema, you must collaborate with a database administrator to ensure that the connector continues to produce change events. This is required by the way that Db2 implements replication.</p>
 </div>
 <div class="paragraph">
-<p>For each table in capture mode, Db2&#8217;s replication feature creates a change-data table that contains all changes to that source table. However, change-data table schemas are static. If you update the schema for a table in capture mode then you must also update the schema of its corresponding change-data table. A Debezium Db2 connector cannot do this. A database administrator with elevated privileges must update schemas for tables that are in capture mode.</p>
+<p>For each table in capture mode, the replication feature in Db2 creates a change-data table that contains all changes to that source table. However, change-data table schemas are static. If you update the schema for a table in capture mode then you must also update the schema of its corresponding change-data table. A Debezium Db2 connector cannot do this. A database administrator with elevated privileges must update schemas for tables that are in capture mode.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -5827,7 +6491,7 @@ Do this after you put a table into capture mode or after you remove a table from
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2023 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/ac56c6e7a3f7678c0ee9dfca35046f38b4ca36b9">ac56c6e7</a></span>)
+            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/8c607e24d77a61db360135c33983769717b3b15c">8c607e24</a></span>)
             
         </div>
     </footer>

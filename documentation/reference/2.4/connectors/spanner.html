@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Debezium connector for Cloud Spanner :: Debezium Documentation</title>
     <link rel="canonical" href="https://debezium.io/documentation/reference/stable/connectors/spanner.html">
-    <meta name="generator" content="Antora 3.0.0-alpha.9">
+    <meta name="generator" content="Antora 3.1.7">
 <link rel="stylesheet" href="../../../debezium-antora/css/site.css">
 <link rel="stylesheet" href="../../../debezium-antora/css/debezium-antora.css">
 <link rel="stylesheet" href="../../../debezium-antora/css/highlightjs-dark.css">
@@ -160,6 +160,9 @@
     <a class="nav-link" href="../transformations/filtering.html">Message Filtering</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/schema-change-event-filter.html">Schema Change Event Filtering</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/content-based-routing.html">Content-Based Routing</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -173,6 +176,12 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/header-to-value.html">HeaderToValue</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/timezone-converter.html">Timezone Converter</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/timescaledb.html">TimescaleDB Integration</a>
   </li>
 </ul>
   </li>
@@ -202,7 +211,7 @@
     <a class="nav-link" href="../integrations/cloudevents.html">CloudEvents</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../integrations/tracing.html">OpenTracing</a>
+    <a class="nav-link" href="../integrations/tracing.html">OpenTelemetry</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../integrations/testcontainers.html">Integration Testing with Testcontainers</a>
@@ -253,6 +262,21 @@
         <li class="version">
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
+        <li class="version">
+          <a href="/documentation/reference/3.0/index.html">3.0</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.1/index.html">3.1</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.7/index.html">2.7</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.6/index.html">2.6</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/2.5/index.html">2.5</a>
+        </li>
         <li class="version is-current">
           <a href="/documentation/reference/2.4/index.html">2.4</a>
         </li>
@@ -270,39 +294,6 @@
         </li>
         <li class="version">
           <a href="/documentation/reference/1.9/index.html">1.9</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.8/index.html">1.8</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.7/index.html">1.7</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.6/index.html">1.6</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.5/index.html">1.5</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.4/index.html">1.4</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.3/index.html">1.3</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.2/index.html">1.2</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.1/index.html">1.1</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/1.0/index.html">1.0</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.10/index.html">0.10</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/0.9/index.html">0.9</a>
         </li>
       </ul>
     </li>
@@ -327,36 +318,47 @@
     <div class="page-versions">
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">2.4</button>
         <div class="version-menu">
-                <a class="version" href="/documentation/reference/nightly/index.html">nightly</a>
-                <a class="version is-current" href="/documentation/reference/2.4/index.html">2.4</a>
-                <a class="version" href="/documentation/reference/2.3/index.html">2.3</a>
-                <a class="version" href="/documentation/reference/2.2/index.html">2.2</a>
-                <a class="version" href="/documentation/reference/2.1/index.html">2.1</a>
-                <a class="version is-missing" href="/documentation/reference/2.0/index.html">2.0</a>
-                <a class="version is-missing" href="/documentation/reference/1.9/index.html">1.9</a>
-                <a class="version is-missing" href="/documentation/reference/1.8/index.html">1.8</a>
-                <a class="version is-missing" href="/documentation/reference/1.7/index.html">1.7</a>
-                <a class="version is-missing" href="/documentation/reference/1.6/index.html">1.6</a>
-                <a class="version is-missing" href="/documentation/reference/1.5/index.html">1.5</a>
-                <a class="version is-missing" href="/documentation/reference/1.4/index.html">1.4</a>
-                <a class="version is-missing" href="/documentation/reference/1.3/index.html">1.3</a>
-                <a class="version is-missing" href="/documentation/reference/1.2/index.html">1.2</a>
-                <a class="version is-missing" href="/documentation/reference/1.1/index.html">1.1</a>
-                <a class="version is-missing" href="/documentation/reference/1.0/index.html">1.0</a>
-                <a class="version is-missing" href="/documentation/reference/0.10/index.html">0.10</a>
-                <a class="version is-missing" href="/documentation/reference/0.9/index.html">0.9</a>
+                        <a class="version" href="/documentation//reference/connectors/spanner.html" data-hash="true">nightly</a>
+                        <a class="version" href="/documentation//reference/stable/connectors/spanner.html" data-hash="true">3.0</a>
+                        <a class="version" href="/documentation//reference/3.1/connectors/spanner.html" data-hash="true">3.1</a>
+                        <a class="version" href="/documentation//reference/2.7/connectors/spanner.html" data-hash="true">2.7</a>
+                        <a class="version" href="/documentation//reference/2.6/connectors/spanner.html" data-hash="true">2.6</a>
+                        <a class="version" href="/documentation//reference/2.5/connectors/spanner.html" data-hash="true">2.5</a>
+                        <a class="version is-current" href="/reference/2.4/connectors/spanner.html" data-hash="true">2.4</a>
+                        <a class="version" href="/documentation//reference/2.3/connectors/spanner.html" data-hash="true">2.3</a>
+                        <a class="version" href="/documentation//reference/2.2/connectors/spanner.html" data-hash="true">2.2</a>
+                        <a class="version" href="/documentation//reference/2.1/connectors/spanner.html" data-hash="true">2.1</a>
+                    <a class="version is-missing" href="#">2.0</a>
+                    <a class="version is-missing" href="#">1.9</a>
         </div>
         |
     </div>
     </div>
+    <script>
+        function updateAnchorsWithHash() {
+            const currentHash = window.location.hash;
+            if (currentHash) {
+                document.querySelectorAll('a[data-hash="true"]').forEach(link => {
+                    const baseHref = link.getAttribute('href').split('#')[0];
+                    link.setAttribute('href', baseHref + currentHash);
+                });
+            }
+        }
+
+        // Listen for hashchange and update anchors
+        window.addEventListener('hashchange', updateAnchorsWithHash);
+
+        // Update anchors on initial load
+        document.addEventListener('DOMContentLoaded', updateAnchorsWithHash);
+    </script>
   <div class="edit-this-page"><a href="https://github.com/debezium/debezium/edit/2.4/documentation/modules/ROOT/pages/connectors/spanner.adoc">Edit this Page</a></div>
   </div>
 <div class="article-grid">
 <div class="article-cell1">
 <article class="doc">
         
-    <div class="version-banner version-banner-development">
-    You are viewing documentation for the current development version of Debezium.
+    <div class="version-banner version-banner-outdated">
+    You are viewing documentation for an outdated version of Debezium.
     <br/>
             If you want to view the latest stable version of this page, please go <a href=/documentation/reference/stable/index.html>here</a>.
             
@@ -943,7 +945,7 @@ PRIMARY KEY (id);</code></pre>
             "email": "annek@noanswer.org"
         },
         "source": { <i class="conum" data-value="8"></i><b>(8)</b>
-            "version": "2.4.0.Alpha1",
+            "version": "2.4.1.Final",
             "connector": "spanner",
             "name": "spanner_connector",
             "ts_ms": 1670955531785,
@@ -1160,7 +1162,7 @@ In the <code>source</code> object, <code>ts_ms</code> indicates the time that th
             "email": "annek@noanswer.org"
         },
         "source": { <i class="conum" data-value="3"></i><b>(3)</b>
-            "version": "2.4.0.Alpha1",
+            "version": "2.4.1.Final",
             "connector": "spanner",
             "name": "spanner_connector",
             "ts_ms": 1670955531785,
@@ -1326,7 +1328,7 @@ In the <code>source</code> object, <code>ts_ms</code> indicates the time that th
         },
         "after": null, <i class="conum" data-value="2"></i><b>(2)</b>
         "source": { <i class="conum" data-value="3"></i><b>(3)</b>
-            "version": "2.4.0.Alpha1",
+            "version": "2.4.1.Final",
             "connector": "spanner",
             "name": "spanner_connector",
             "ts_ms": 1670955531785,
@@ -1607,10 +1609,10 @@ In the <code>source</code> object, <code>ts_ms</code> indicates the time that th
 <h2 id="spanner-deploying-a-connector"><a class="anchor" href="#spanner-deploying-a-connector"></a>Deployment</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>With <a href="https://zookeeper.apache.org">Zookeeper</a>, <a href="http://kafka.apache.org/">Kafka</a>, and <a href="https://kafka.apache.org/documentation.html#connect">Kafka Connect</a> installed, the remaining tasks to deploy a Debezium Spanner connector are to download the <a href="https://repo1.maven.org/maven2/io/debezium/debezium-connector-spanner/2.4.0.Alpha1/debezium-connector-spanner-2.4.0.Alpha1-plugin.tar.gz">connector&#8217;s plug-in archive</a>, extract the JAR files into your Kafka Connect environment, and add the directory with the JAR files to <a href="https://kafka.apache.org/documentation/#connectconfigs">Kafka Connect&#8217;s <code>plugin.path</code></a>. You then need to restart your Kafka Connect process to pick up the new JAR files.</p>
+<p>With <a href="https://zookeeper.apache.org">Zookeeper</a>, <a href="http://kafka.apache.org/">Kafka</a>, and <a href="https://kafka.apache.org/documentation.html#connect">Kafka Connect</a> installed, the remaining tasks to deploy a Debezium Spanner connector are to download the <a href="https://repo1.maven.org/maven2/io/debezium/debezium-connector-spanner/2.4.1.Final/debezium-connector-spanner-2.4.1.Final-plugin.tar.gz">connector&#8217;s plug-in archive</a>, extract the JAR files into your Kafka Connect environment, and add the directory with the JAR files to <a href="https://kafka.apache.org/documentation/#connectconfigs">Kafka Connect&#8217;s <code>plugin.path</code></a>. You then need to restart your Kafka Connect process to pick up the new JAR files.</p>
 </div>
 <div class="paragraph">
-<p>If you are working with immutable containers, see <a href="https://quay.io/organization/debezium">Debezium&#8217;s Container images</a> for Zookeeper, Kafka and Kafka Connect with the Spanner connector already installed and ready to run. You can also <a href="../operations/openshift.html" class="page">run Debezium on Kubernetes and OpenShift</a>.</p>
+<p>If you are working with immutable containers, see <a href="https://quay.io/organization/debezium">Debezium&#8217;s Container images</a> for Zookeeper, Kafka and Kafka Connect with the Spanner connector already installed and ready to run. You can also <a href="../operations/openshift.html" class="xref page">run Debezium on Kubernetes and OpenShift</a>.</p>
 </div>
 <div class="sect2">
 <h3 id="spanner-example-configuration"><a class="anchor" href="#spanner-example-configuration"></a>Connector configuration example</h3>
@@ -1721,12 +1723,12 @@ In the <code>source</code> object, <code>ts_ms</code> indicates the time that th
 </ul>
 </div>
 <div class="paragraph">
-<p><a href="../operations/monitoring.html#monitoring-debezium" class="page">Debezium monitoring documentation</a> provides details for how to expose these metrics by using JMX.</p>
+<p><a href="../operations/monitoring.html#monitoring-debezium" class="xref page">Debezium monitoring documentation</a> provides details for how to expose these metrics by using JMX.</p>
 </div>
 <div class="sect3">
 <h4 id="spanner-streaming-metrics"><a class="anchor" href="#spanner-streaming-metrics"></a>Streaming metrics</h4>
 <div class="paragraph">
-<p>The <strong>MBean</strong> is <code>debezium.Cloud Spanner:type=connector-metrics,context=streaming,server=<em>&lt;Cloud Spanner.server.name&gt;</em></code>.</p>
+<p>The <strong>MBean</strong> is <code>debezium.Cloud Spanner:type=connector-metrics,context=streaming,server=<em>&lt;topic.prefix&gt;</em></code>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -2216,7 +2218,7 @@ The values will incoporate any differences between the clocks on the machines wh
 </ul>
 </div>
 <div class="paragraph">
-<p>See <a href="../configuration/avro.html#avro-naming" class="page">Avro naming</a> for more details.</p>
+<p>See <a href="../configuration/avro.html#avro-naming" class="xref page">Avro naming</a> for more details.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2481,6 +2483,17 @@ The values will incoporate any differences between the clocks on the machines wh
 <p>The custom metric tags will accept key-value pairs to customize the MBean object name which should be appended the end of regular name, each key would represent a tag for the MBean object name, and the corresponding value would be the value of that tag the key is. For example: <code>k1=v1,k2=v2</code>.</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="spanner-property-errors-max-retires"></a><a href="#spanner-property-errors-max-retires"><code>errors.max.retries</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>-1</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The maximum number of retries on retriable errors (e.g. connection errors) before failing (-1 = no limit, 0 = disabled, &gt; 0 = num of retries).</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
@@ -2598,7 +2611,7 @@ routing transformations</a>.</p>
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2023 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/ac56c6e7a3f7678c0ee9dfca35046f38b4ca36b9">ac56c6e7</a></span>)
+            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/8c607e24d77a61db360135c33983769717b3b15c">8c607e24</a></span>)
             
         </div>
     </footer>
