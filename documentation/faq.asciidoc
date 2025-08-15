@@ -260,7 +260,7 @@ There are two ways to reset the offsets depending on your Kafka Connect version:
 [id=reset-offsets-kafka-3.6]
 === With Kafka Connect 3.6 or later
 
-Kafka Connect introduced a set of dedicated REST API endpoints for managing connector offsets as part of KIP-875.
+Kafka Connect introduced a set of dedicated REST API endpoints for managing connector offsets as part of https://cwiki.apache.org/confluence/display/KAFKA/KIP-875%3A+First-class+offsets+support+in+Kafka+Connect[KIP-875].
 These endpoints simplify the process of removing connector offsets with a few simple REST endpoint calls.
 
 Step 1 - Stop the connector::
