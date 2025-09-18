@@ -15,10 +15,6 @@
 </head>
 <body class="article">
 <header class="header">
-  <div id="rhbar">
-      <a class="jbdevlogo" href="https://developers.redhat.com"></a>
-      <a class="rhlogo" href="https://www.redhat.com"></a>
-  </div>
   <nav class="navbar">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
@@ -36,12 +32,13 @@
         <a class="navbar-item" href="/documentation">DOCUMENTATION</a>
         <a class="navbar-item" href="/releases">RELEASES</a>
         <a class="navbar-item" href="/community">COMMUNITY</a>
+        <a class="navbar-item" href="/community/users/">ADOPTERS</a>
         <a class="navbar-item" href="/blog">BLOG</a>
       </div>
     </div>
   </nav>
 </header><div class="body">
-<div class="nav-container" data-component="reference" data-version="stable">
+<div class="nav-container" data-component="reference" data-version="3.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -289,11 +286,17 @@
         <li class="version">
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
-        <li class="version is-current">
-          <a href="/documentation/reference/3.0/index.html">3.0</a>
+        <li class="version">
+          <a href="/documentation/reference/3.2/index.html">3.2</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.3/index.html">3.3</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.1/index.html">3.1</a>
+        </li>
+        <li class="version is-current">
+          <a href="/documentation/reference/3.0/index.html">3.0</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/2.7/index.html">2.7</a>
@@ -332,7 +335,7 @@
 <main role="main" class="main">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../index.html" class="home-link"></a>
+  <a href="../../stable/index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Debezium Documentation</a></li>
@@ -346,8 +349,10 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">3.0</button>
         <div class="version-menu">
                         <a class="version" href="/documentation//reference/connectors/db2.html" data-hash="true">nightly</a>
-                        <a class="version is-current" href="/reference/stable/connectors/db2.html" data-hash="true">3.0</a>
+                        <a class="version" href="/documentation//reference/stable/connectors/db2.html" data-hash="true">3.2</a>
+                        <a class="version" href="/documentation//reference/3.3/connectors/db2.html" data-hash="true">3.3</a>
                         <a class="version" href="/documentation//reference/3.1/connectors/db2.html" data-hash="true">3.1</a>
+                        <a class="version is-current" href="/reference/3.0/connectors/db2.html" data-hash="true">3.0</a>
                         <a class="version" href="/documentation//reference/2.7/connectors/db2.html" data-hash="true">2.7</a>
                         <a class="version" href="/documentation//reference/2.6/connectors/db2.html" data-hash="true">2.6</a>
                         <a class="version" href="/documentation//reference/2.5/connectors/db2.html" data-hash="true">2.5</a>
@@ -384,7 +389,12 @@
 <div class="article-cell1">
 <article class="doc">
         
-    <!-- This partial is a placeholder -->            <h1 class="page">Debezium connector for Db2</h1>
+    <div class="version-banner version-banner-outdated">
+    You are viewing documentation for an outdated version of Debezium.
+    <br/>
+            If you want to view the latest stable version of this page, please go <a href=/documentation/reference/stable/index.html>here</a>.
+            
+</div>            <h1 class="page">Debezium connector for Db2</h1>
         <div id="preamble">
 <div class="sectionbody">
 <div id="toc" class="toc">
@@ -2447,7 +2457,7 @@ The message contains a logical representation of the table schema.</p>
   },
   "payload": {
     "source": {
-      "version": "3.0.6.Final",
+      "version": "3.0.8.Final",
       "connector": "db2",
       "name": "db2",
       "ts_ms": 0,
@@ -3187,7 +3197,7 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
       "EMAIL": "john.doe@example.org"
     },
     "source": {  <i class="conum" data-value="8"></i><b>(8)</b>
-      "version": "3.0.6.Final",
+      "version": "3.0.8.Final",
       "connector": "db2",
       "name": "myconnector",
       "ts_ms": 1559729468470,
@@ -3363,7 +3373,7 @@ In the <code>source</code> object, <code>ts_ms</code> indicates the time that th
       "EMAIL": "noreply@example.org"
     },
     "source": {  <i class="conum" data-value="3"></i><b>(3)</b>
-      "version": "3.0.6.Final",
+      "version": "3.0.8.Final",
       "connector": "db2",
       "name": "myconnector",
       "ts_ms": 1559729995937,
@@ -3494,7 +3504,7 @@ In the <code>source</code> object, <code>ts_ms</code> indicates the time that th
     },
     "after": null,  <i class="conum" data-value="2"></i><b>(2)</b>
     "source": {  <i class="conum" data-value="3"></i><b>(3)</b>
-      "version": "3.0.6.Final",
+      "version": "3.0.8.Final",
       "connector": "db2",
       "name": "myconnector",
       "ts_ms": 1559730445243,
@@ -4415,13 +4425,13 @@ You can adjust the values for these parameters to balance the configuration of t
 <div class="title">Procedure</div>
 <ol class="arabic">
 <li>
-<p>Download the <a href="https://repo1.maven.org/maven2/io/debezium/debezium-connector-db2/3.0.6.Final/debezium-connector-db2-3.0.6.Final-plugin.tar.gz">Debezium Db2 connector plug-in archive</a> from Maven Central.</p>
+<p>Download the <a href="https://repo1.maven.org/maven2/io/debezium/debezium-connector-db2/3.0.8.Final/debezium-connector-db2-3.0.8.Final-plugin.tar.gz">Debezium Db2 connector plug-in archive</a> from Maven Central.</p>
 </li>
 <li>
 <p>Extract the JAR files into your Kafka Connect environment.</p>
 </li>
 <li>
-<p>Download the <a href="https://repo1.maven.org/maven2/com/ibm/db2/jcc/11.5.0.0/jcc-11.5.0.0.jar">JDBC driver for Db2</a> from Maven Central, and extract the downloaded driver file to the directory that contains the Debezium Db2 connector JAR file (that is, <code>debezium-connector-db2-3.0.6.Final.jar</code>).</p>
+<p>Download the <a href="https://repo1.maven.org/maven2/com/ibm/db2/jcc/11.5.0.0/jcc-11.5.0.0.jar">JDBC driver for Db2</a> from Maven Central, and extract the downloaded driver file to the directory that contains the Debezium Db2 connector JAR file (that is, <code>debezium-connector-db2-3.0.8.Final.jar</code>).</p>
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -5512,10 +5522,16 @@ For more information, see <a href="#connector-custom-snapshot">custom snapshotte
 <p><a id="db2-property-poll-interval-ms"></a><a href="#db2-property-poll-interval-ms"><code>poll.interval.ms</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>500</code></p>
+<p><code>500</code> (0.5 seconds)</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Positive integer value that specifies the number of milliseconds the connector should wait for new change events to appear before it starts processing a batch of events. Defaults to 500 milliseconds, or 0.5 second.</p>
+<p>Positive integer value that specifies the number of milliseconds that the connector waits before it checks the database for new change events.<br>
+<br>
+The value that you specify influences the behavior of <a href="#db2-property-heartbeat-interval-ms"><code>heartbeat.interval.ms</code></a>.
+The connector can emit heartbeat messages only during the specified polling cycle.<br></p>
+</div>
+<div class="paragraph">
+<p>To prevent this setting from delaying heartbeat emissions, set it to a value that is less than or equal to the value of <code>heartbeat.interval.ms</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5568,11 +5584,34 @@ For example, if you set <code>max.queue.size=1000</code>, and <code>max.queue.si
 <p><code>0</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Controls how frequently the connector sends heartbeat messages to a Kafka topic. The default behavior is that the connector does not send heartbeat messages.<br>
+<p>Specifies an interval in milliseconds that determines how frequently the connector sends messages to a Kafka heartbeat topic, regardless of whether changes occur in the database.<br>
+By default, the connector does not send heartbeat messages.<br>
 <br>
-Heartbeat messages are useful for monitoring whether the connector is receiving change events from the database. Heartbeat messages might help decrease the number of change events that need to be re-sent when a connector restarts. To send heartbeat messages, set this property to a positive integer, which indicates the number of milliseconds between heartbeat messages.<br>
+Setting this property can help to confirm whether the connector is still receiving change events from the database.
+This can be especially important in databases where captured tables remain unchanged for long periods.
+When a database experiences frequent long intervals during which changes no changes occur in captured tables, although the connector continues to read the transaction log as usual, it only rarely commits offset values to Kafka.
+As a result, after a connector restart, because the offset value is stale, the connector must send a high number of change events.<br>
 <br>
-Heartbeat messages are useful when there are many updates in a database that is being tracked but only a tiny number of updates are in tables that are in capture mode. In this situation, the connector reads from the database transaction log as usual but rarely emits change records to Kafka. This means that the connector has few opportunities to send the latest offset to Kafka. Sending heartbeat messages enables the connector to send the latest offset to Kafka.</p>
+By contrast, when you configure the connector to send regular heartbeat messages, it can update the offset in Kafka more frequently.
+Because the offset values in Kafka remain current, fewer change events must be re-sent after a connector restarts.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Heartbeats are only emitted during polling cycles.
+That is, in a Debezium environment, the actual interval between sending heartbeat messages is jointly controlled by the settings of the <code>heartbeat.interval.ms</code> and <a href="#db2-property-poll-interval-ms"><code>poll.interval.ms</code></a> properties.
+The actual frequency for sending heartbeat messages is based on the lower of the two values.
+To prevent delays in sending heartbeat messages, reducing their effectiveness, set this property to a value that is greater than or equal to the value of <code>poll.interval.ms</code>.
+For example, if you set <code>poll.interval.ms</code> to <code>100</code>, set <code>heartbeat.interval.ms</code> to <code>5000</code>.</p>
+</div>
+</td>
+</tr>
+</table>
 </div></div></td>
 </tr>
 <tr>
@@ -5911,7 +5950,26 @@ For example, if the topic prefix is <code>fulfillment</code>, the default topic 
 <p>Specifies the number of threads that the connector uses when performing an initial snapshot.
 To enable parallel initial snapshots, set the property to a value greater than 1.
 In a parallel initial snapshot, the connector processes multiple tables concurrently.
-This feature is incubating.</p>
+<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When you enable parallel initial snapshots, the threads that perform each table snapshot can require varying times to complete their work.
+If a snapshot for one table requires significantly more time to complete than the snapshots for other tables, threads that have completed their work sit idle.
+In some environments, a network device such as a load balancer or firewall, terminates connections that remain idle for an extended interval.
+After the snapshot completes, the connector is unable to close the connection, resulting in an exception, and an incomplete snapshot, even in cases where the connector successfully transmitted all snapshot data.<br>
+<br>
+If you experience this problem, revert the value of <code>snapshot.max.threads</code> to <code>1</code>, and retry the snapshot.</p>
+</div>
+</td>
+</tr>
+</table>
 </div></div></td>
 </tr>
 <tr>
@@ -7309,7 +7367,7 @@ Do this after you put a table into capture mode or after you remove a table from
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/4e281814dd475b1404dfe0a26bdf81359226e8cd">4e281814</a></span>)
+            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/d67bca37f6f3250f68621f6211ae54f12f2b15b3">d67bca37</a></span>)
             
         </div>
     </footer>

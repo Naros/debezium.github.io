@@ -15,10 +15,6 @@
 </head>
 <body class="article">
 <header class="header">
-  <div id="rhbar">
-      <a class="jbdevlogo" href="https://developers.redhat.com"></a>
-      <a class="rhlogo" href="https://www.redhat.com"></a>
-  </div>
   <nav class="navbar">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
@@ -36,12 +32,13 @@
         <a class="navbar-item" href="/documentation">DOCUMENTATION</a>
         <a class="navbar-item" href="/releases">RELEASES</a>
         <a class="navbar-item" href="/community">COMMUNITY</a>
+        <a class="navbar-item" href="/community/users/">ADOPTERS</a>
         <a class="navbar-item" href="/blog">BLOG</a>
       </div>
     </div>
   </nav>
 </header><div class="body">
-<div class="nav-container" data-component="reference" data-version="stable">
+<div class="nav-container" data-component="reference" data-version="3.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -289,11 +286,17 @@
         <li class="version">
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
-        <li class="version is-current">
-          <a href="/documentation/reference/3.0/index.html">3.0</a>
+        <li class="version">
+          <a href="/documentation/reference/3.2/index.html">3.2</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.3/index.html">3.3</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.1/index.html">3.1</a>
+        </li>
+        <li class="version is-current">
+          <a href="/documentation/reference/3.0/index.html">3.0</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/2.7/index.html">2.7</a>
@@ -332,7 +335,7 @@
 <main role="main" class="main">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../index.html" class="home-link"></a>
+  <a href="../../stable/index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Debezium Documentation</a></li>
@@ -346,8 +349,10 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">3.0</button>
         <div class="version-menu">
                         <a class="version" href="/documentation//reference/connectors/mongodb.html" data-hash="true">nightly</a>
-                        <a class="version is-current" href="/reference/stable/connectors/mongodb.html" data-hash="true">3.0</a>
+                        <a class="version" href="/documentation//reference/stable/connectors/mongodb.html" data-hash="true">3.2</a>
+                        <a class="version" href="/documentation//reference/3.3/connectors/mongodb.html" data-hash="true">3.3</a>
                         <a class="version" href="/documentation//reference/3.1/connectors/mongodb.html" data-hash="true">3.1</a>
+                        <a class="version is-current" href="/reference/3.0/connectors/mongodb.html" data-hash="true">3.0</a>
                         <a class="version" href="/documentation//reference/2.7/connectors/mongodb.html" data-hash="true">2.7</a>
                         <a class="version" href="/documentation//reference/2.6/connectors/mongodb.html" data-hash="true">2.6</a>
                         <a class="version" href="/documentation//reference/2.5/connectors/mongodb.html" data-hash="true">2.5</a>
@@ -384,7 +389,12 @@
 <div class="article-cell1">
 <article class="doc">
         
-    <!-- This partial is a placeholder -->            <h1 class="page">Debezium connector for MongoDB</h1>
+    <div class="version-banner version-banner-outdated">
+    You are viewing documentation for an outdated version of Debezium.
+    <br/>
+            If you want to view the latest stable version of this page, please go <a href=/documentation/reference/stable/index.html>here</a>.
+            
+</div>            <h1 class="page">Debezium connector for MongoDB</h1>
         <div id="preamble">
 <div class="sectionbody">
 <div id="toc" class="toc">
@@ -2434,7 +2444,7 @@ The value of this field is the document&#8217;s identifier represented as a stri
     "payload": { <i class="conum" data-value="5"></i><b>(5)</b>
       "after": "{\"_id\" : {\"$numberLong\" : \"1004\"},\"first_name\" : \"Anne\",\"last_name\" : \"Kretchmar\",\"email\" : \"annek@noanswer.org\"}", <i class="conum" data-value="6"></i><b>(6)</b>
       "source": { <i class="conum" data-value="7"></i><b>(7)</b>
-        "version": "3.0.6.Final",
+        "version": "3.0.8.Final",
         "connector": "mongodb",
         "name": "fulfillment",
         "ts_ms": 1558965508000,
@@ -2648,7 +2658,7 @@ There is a new structured field <code>updateDescription</code> with a few additi
         "truncatedArrays": null
       },
       "source": { <i class="conum" data-value="6"></i><b>(6)</b>
-        "version": "3.0.6.Final",
+        "version": "3.0.8.Final",
         "connector": "mongodb",
         "name": "fulfillment",
         "ts_ms": 1558965508000,
@@ -2790,7 +2800,7 @@ It is thus possible if multiple updates are closely following one after the othe
       "ts_ns": 1465495462115748263, <i class="conum" data-value="2"></i><b>(2)</b>
       "before":"{\"_id\": {\"$numberLong\": \"1004\"},\"first_name\": \"Anne Marie\",\"last_name\": \"Kretchmar\",\"email\": \"annek@noanswer.org\"}",<i class="conum" data-value="3"></i><b>(3)</b>
       "source": { <i class="conum" data-value="4"></i><b>(4)</b>
-        "version": "3.0.6.Final",
+        "version": "3.0.8.Final",
         "connector": "mongodb",
         "name": "fulfillment",
         "ts_ms": 1558965508000,
@@ -2991,7 +3001,7 @@ If Debezium were to fail during this time, its last oplog position is likely to 
 <ol class="arabic">
 <li>
 <p>Download the
-<a href="https://repo1.maven.org/maven2/io/debezium/debezium-connector-mongodb/3.0.6.Final/debezium-connector-mongodb-3.0.6.Final-plugin.tar.gz">connector&#8217;s plug-in archive</a>,</p>
+<a href="https://repo1.maven.org/maven2/io/debezium/debezium-connector-mongodb/3.0.8.Final/debezium-connector-mongodb-3.0.8.Final-plugin.tar.gz">connector&#8217;s plug-in archive</a>,</p>
 </li>
 <li>
 <p>Extract the JAR files into your Kafka Connect environment.</p>
@@ -3844,39 +3854,6 @@ For example, if you set <code>max.queue.size=1000</code>, and <code>max.queue.si
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="mongodb-property-poll-interval-ms"></a><a href="#mongodb-property-poll-interval-ms"><code>poll.interval.ms</code></a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>500</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Positive integer value that specifies the number of milliseconds the connector should wait during each iteration for new change events to appear. Defaults to 500 milliseconds, or 0.5 second.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="mongodb-property-connect-backoff-initial-delay-ms"></a><a href="#mongodb-property-connect-backoff-initial-delay-ms"><code>connect.backoff.initial.delay.ms</code></a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>1000</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Positive integer value that specifies the initial delay when trying to reconnect to a primary after the first failed connection attempt or when no primary is available. Defaults to 1 second (1000 ms).</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="mongodb-property-connect-backoff-max-delay-ms"></a><a href="#mongodb-property-connect-backoff-max-delay-ms"><code>connect.backoff.max.delay.ms</code></a></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>1000</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Positive integer value that specifies the maximum delay when trying to reconnect to a primary after repeated failed connection attempts or when no primary is available. Defaults to 120 seconds (120,000 ms).</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="mongodb-property-connect-max-attempts"></a><a href="#mongodb-property-connect-max-attempts"><code>connect.max.attempts</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -3888,7 +3865,7 @@ For example, if you set <code>max.queue.size=1000</code>, and <code>max.queue.si
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="mongodb-property-mongodb-ssl-keystore"></a><a href="#mongodb-property-ssl-keystore"><code>mongodb.ssl.keystore</code></a></p>
+<p><a id="mongodb-property-ssl-keystore"></a><a href="#mongodb-property-ssl-keystore"><code>mongodb.ssl.keystore</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>No Default</p>
@@ -3905,7 +3882,7 @@ For example, if you set <code>max.queue.size=1000</code>, and <code>max.queue.si
 <p>No Default</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The password for the key store file. Specify a password only if the <a href="#mongodb-property-mongodb-ssl-keystore"><code>mongodb.ssl.keystore</code></a> is configured.</p>
+<p>The password for the key store file. Specify a password only if the <a href="#mongodb-property-ssl-keystore"><code>mongodb.ssl.keystore</code></a> is configured.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3916,7 +3893,7 @@ For example, if you set <code>max.queue.size=1000</code>, and <code>max.queue.si
 <p>No Default</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The type of key store file. Specify a type only if the <a href="#mongodb-property-mongodb-ssl-keystore"><code>mongodb.ssl.keystore</code></a> is configured.</p>
+<p>The type of key store file. Specify a type only if the <a href="#mongodb-property-ssl-keystore"><code>mongodb.ssl.keystore</code></a> is configured.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5706,7 +5683,7 @@ As a result, the secondary node that is elected as the new primary node might be
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/4e281814dd475b1404dfe0a26bdf81359226e8cd">4e281814</a></span>)
+            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/d67bca37f6f3250f68621f6211ae54f12f2b15b3">d67bca37</a></span>)
             
         </div>
     </footer>

@@ -15,10 +15,6 @@
 </head>
 <body class="article">
 <header class="header">
-  <div id="rhbar">
-      <a class="jbdevlogo" href="https://developers.redhat.com"></a>
-      <a class="rhlogo" href="https://www.redhat.com"></a>
-  </div>
   <nav class="navbar">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
@@ -36,6 +32,7 @@
         <a class="navbar-item" href="/documentation">DOCUMENTATION</a>
         <a class="navbar-item" href="/releases">RELEASES</a>
         <a class="navbar-item" href="/community">COMMUNITY</a>
+        <a class="navbar-item" href="/community/users/">ADOPTERS</a>
         <a class="navbar-item" href="/blog">BLOG</a>
       </div>
     </div>
@@ -253,11 +250,20 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Operations</span>
+    <span class="nav-text">Standalone Debezium</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../operations/debezium-server.html">Debezium Server</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../operations/debezium-platform.html">Debezium Management Platform</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Operations</span>
+<ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../operations/logging.html">Logging</a>
   </li>
@@ -269,9 +275,6 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../operations/openshift.html">Running on Openshift</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../operations/debezium-ui.html">Debezium UI</a>
   </li>
 </ul>
   </li>
@@ -293,10 +296,16 @@
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version">
-          <a href="/documentation/reference/3.0/index.html">3.0</a>
+          <a href="/documentation/reference/3.2/index.html">3.2</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.3/index.html">3.3</a>
         </li>
         <li class="version is-current">
           <a href="/documentation/reference/3.1/index.html">3.1</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.0/index.html">3.0</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/2.7/index.html">2.7</a>
@@ -349,8 +358,10 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">3.1</button>
         <div class="version-menu">
                         <a class="version" href="/documentation//reference/transformations/event-changes.html" data-hash="true">nightly</a>
-                        <a class="version" href="/documentation//reference/stable/transformations/event-changes.html" data-hash="true">3.0</a>
+                        <a class="version" href="/documentation//reference/stable/transformations/event-changes.html" data-hash="true">3.2</a>
+                        <a class="version" href="/documentation//reference/3.3/transformations/event-changes.html" data-hash="true">3.3</a>
                         <a class="version is-current" href="/reference/3.1/transformations/event-changes.html" data-hash="true">3.1</a>
+                        <a class="version" href="/documentation//reference/3.0/transformations/event-changes.html" data-hash="true">3.0</a>
                         <a class="version" href="/documentation//reference/2.7/transformations/event-changes.html" data-hash="true">2.7</a>
                         <a class="version" href="/documentation//reference/2.6/transformations/event-changes.html" data-hash="true">2.6</a>
                         <a class="version" href="/documentation//reference/2.5/transformations/event-changes.html" data-hash="true">2.5</a>
@@ -387,8 +398,8 @@
 <div class="article-cell1">
 <article class="doc">
         
-    <div class="version-banner version-banner-development">
-    You are viewing documentation for the current development version of Debezium.
+    <div class="version-banner version-banner-outdated">
+    You are viewing documentation for an outdated version of Debezium.
     <br/>
             If you want to view the latest stable version of this page, please go <a href=/documentation/reference/stable/index.html>here</a>.
             
@@ -509,7 +520,7 @@ The <code>ExtractChangedRecordState</code> SMT adds headers to the change event 
 <p>The event changes SMT extracts the <code>before</code> and <code>after</code> fields from a Debezium <code>UPDATE</code> change event in a Kafka record.
 The transformation examines the <code>before</code> and <code>after</code> event state structures to identify the fields that are altered by an operation, and those that remain unchanged.
 Depending on the connector configuration, the transformation then produces a modified event message that adds message headers to list the changed fields, the unchanged fields, or both.
-If the event represents an <code>INSERT</code> or <code>DELETE</code>, this single message transformation has no effect.</p>
+If the event represents an <code>INSERT</code>, <code>DELETE</code>, or <code>READ</code>, this single message transformation adds the configured headers as an empty list, as there are no changed or unchanged fields.</p>
 </div>
 <div class="paragraph">
 <p>You can configure the event changes SMT for a Debezium connector, or for a sink connector that consumes messages emitted by a Debezium connector.
@@ -640,7 +651,7 @@ Because the structure of these other messages differs from the structure of the 
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/c180886a5726d917af320ee1d8ff2ff6d6d493b1">c180886a</a></span>)
+            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/f07e0f9872a523a17fb177b0037c1543569bf774">f07e0f98</a></span>)
             
         </div>
     </footer>

@@ -15,10 +15,6 @@
 </head>
 <body class="article">
 <header class="header">
-  <div id="rhbar">
-      <a class="jbdevlogo" href="https://developers.redhat.com"></a>
-      <a class="rhlogo" href="https://www.redhat.com"></a>
-  </div>
   <nav class="navbar">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
@@ -36,12 +32,13 @@
         <a class="navbar-item" href="/documentation">DOCUMENTATION</a>
         <a class="navbar-item" href="/releases">RELEASES</a>
         <a class="navbar-item" href="/community">COMMUNITY</a>
+        <a class="navbar-item" href="/community/users/">ADOPTERS</a>
         <a class="navbar-item" href="/blog">BLOG</a>
       </div>
     </div>
   </nav>
 </header><div class="body">
-<div class="nav-container" data-component="reference" data-version="stable">
+<div class="nav-container" data-component="reference" data-version="3.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -289,11 +286,17 @@
         <li class="version">
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
-        <li class="version is-current">
-          <a href="/documentation/reference/3.0/index.html">3.0</a>
+        <li class="version">
+          <a href="/documentation/reference/3.2/index.html">3.2</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.3/index.html">3.3</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.1/index.html">3.1</a>
+        </li>
+        <li class="version is-current">
+          <a href="/documentation/reference/3.0/index.html">3.0</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/2.7/index.html">2.7</a>
@@ -332,7 +335,7 @@
 <main role="main" class="main">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../index.html" class="home-link"></a>
+  <a href="../../stable/index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Debezium Documentation</a></li>
@@ -346,8 +349,10 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">3.0</button>
         <div class="version-menu">
                         <a class="version" href="/documentation//reference/configuration/signalling.html" data-hash="true">nightly</a>
-                        <a class="version is-current" href="/reference/stable/configuration/signalling.html" data-hash="true">3.0</a>
+                        <a class="version" href="/documentation//reference/stable/configuration/signalling.html" data-hash="true">3.2</a>
+                        <a class="version" href="/documentation//reference/3.3/configuration/signalling.html" data-hash="true">3.3</a>
                         <a class="version" href="/documentation//reference/3.1/configuration/signalling.html" data-hash="true">3.1</a>
+                        <a class="version is-current" href="/reference/3.0/configuration/signalling.html" data-hash="true">3.0</a>
                         <a class="version" href="/documentation//reference/2.7/configuration/signalling.html" data-hash="true">2.7</a>
                         <a class="version" href="/documentation//reference/2.6/configuration/signalling.html" data-hash="true">2.6</a>
                         <a class="version" href="/documentation//reference/2.5/configuration/signalling.html" data-hash="true">2.5</a>
@@ -384,7 +389,12 @@
 <div class="article-cell1">
 <article class="doc">
         
-    <!-- This partial is a placeholder -->            <h1 class="page">Sending signals to a Debezium connector</h1>
+    <div class="version-banner version-banner-outdated">
+    You are viewing documentation for an outdated version of Debezium.
+    <br/>
+            If you want to view the latest stable version of this page, please go <a href=/documentation/reference/stable/index.html>here</a>.
+            
+</div>            <h1 class="page">Sending signals to a Debezium connector</h1>
         <div id="preamble">
 <div class="sectionbody">
 <div id="toc" class="toc">
@@ -1827,17 +1837,21 @@ Include the following compile dependencies in your project&#8217;s <code>pom.xml
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
     &lt;groupId&gt;io.debezium&lt;/groupId&gt;
     &lt;artifactId&gt;debezium-core&lt;/artifactId&gt;
-    &lt;version&gt;${version.debezium}&lt;/version&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+    &lt;version&gt;${version.debezium}&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><code>${version.debezium}</code> represents the version of the Debezium connector.</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>In the preceding example, the placeholder <code>${version.debezium}</code> represents the version of the Debezium connector.
+Specify a value for the <code>version.debezium</code> property in the <code>&lt;properties&gt;</code> section of the <code>pom.xml file</code>.
+For example,</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;properties&gt;
+    &lt;version.debezium&gt;3.0.8.Final&lt;/version.debezium&gt;
+&lt;/properties&gt;</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>Declare your provider implementation in the <code>META-INF/services/io.debezium.pipeline.signal.actions.SignalActionProvider</code> file.</p>
@@ -1886,7 +1900,7 @@ To use a custom action with multiple connectors, you must place a copy of the cu
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/4e281814dd475b1404dfe0a26bdf81359226e8cd">4e281814</a></span>)
+            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/d67bca37f6f3250f68621f6211ae54f12f2b15b3">d67bca37</a></span>)
             
         </div>
     </footer>

@@ -15,10 +15,6 @@
 </head>
 <body class="article">
 <header class="header">
-  <div id="rhbar">
-      <a class="jbdevlogo" href="https://developers.redhat.com"></a>
-      <a class="rhlogo" href="https://www.redhat.com"></a>
-  </div>
   <nav class="navbar">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
@@ -36,12 +32,13 @@
         <a class="navbar-item" href="/documentation">DOCUMENTATION</a>
         <a class="navbar-item" href="/releases">RELEASES</a>
         <a class="navbar-item" href="/community">COMMUNITY</a>
+        <a class="navbar-item" href="/community/users/">ADOPTERS</a>
         <a class="navbar-item" href="/blog">BLOG</a>
       </div>
     </div>
   </nav>
 </header><div class="body">
-<div class="nav-container" data-component="reference" data-version="stable">
+<div class="nav-container" data-component="reference" data-version="3.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -289,11 +286,17 @@
         <li class="version">
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
-        <li class="version is-current">
-          <a href="/documentation/reference/3.0/index.html">3.0</a>
+        <li class="version">
+          <a href="/documentation/reference/3.2/index.html">3.2</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.3/index.html">3.3</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.1/index.html">3.1</a>
+        </li>
+        <li class="version is-current">
+          <a href="/documentation/reference/3.0/index.html">3.0</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/2.7/index.html">2.7</a>
@@ -332,7 +335,7 @@
 <main role="main" class="main">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../index.html" class="home-link"></a>
+  <a href="../../stable/index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Debezium Documentation</a></li>
@@ -346,8 +349,10 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">3.0</button>
         <div class="version-menu">
                         <a class="version" href="/documentation//reference/connectors/oracle.html" data-hash="true">nightly</a>
-                        <a class="version is-current" href="/reference/stable/connectors/oracle.html" data-hash="true">3.0</a>
+                        <a class="version" href="/documentation//reference/stable/connectors/oracle.html" data-hash="true">3.2</a>
+                        <a class="version" href="/documentation//reference/3.3/connectors/oracle.html" data-hash="true">3.3</a>
                         <a class="version" href="/documentation//reference/3.1/connectors/oracle.html" data-hash="true">3.1</a>
+                        <a class="version is-current" href="/reference/3.0/connectors/oracle.html" data-hash="true">3.0</a>
                         <a class="version" href="/documentation//reference/2.7/connectors/oracle.html" data-hash="true">2.7</a>
                         <a class="version" href="/documentation//reference/2.6/connectors/oracle.html" data-hash="true">2.6</a>
                         <a class="version" href="/documentation//reference/2.5/connectors/oracle.html" data-hash="true">2.5</a>
@@ -384,7 +389,12 @@
 <div class="article-cell1">
 <article class="doc">
         
-    <!-- This partial is a placeholder -->            <h1 class="page">Debezium Connector for Oracle</h1>
+    <div class="version-banner version-banner-outdated">
+    You are viewing documentation for an outdated version of Debezium.
+    <br/>
+            If you want to view the latest stable version of this page, please go <a href=/documentation/reference/stable/index.html>here</a>.
+            
+</div>            <h1 class="page">Debezium Connector for Oracle</h1>
         <div id="preamble">
 <div class="sectionbody">
 <div id="toc" class="toc">
@@ -458,6 +468,7 @@
 <li><a href="#oracle-example-configuration">Debezium Oracle connector configuration</a></li>
 <li><a href="#oracle-adding-connector-configuration">Adding connector configuration</a></li>
 <li><a href="#pluggable-vs-non-pluggable-databases">Pluggable vs Non-Pluggable databases</a></li>
+<li><a href="#using-mtls-secure-connections">Using mTLS secure connections</a></li>
 </ul>
 </li>
 <li><a href="#oracle-connector-properties">Connector properties</a>
@@ -488,10 +499,10 @@
 <li><a href="#oracle-openlogreplicator-xml-support">OpenLogReplicator XML support</a></li>
 </ul>
 </li>
-<li><a href="#oracle-xstreams-support">XStreams support</a>
+<li><a href="#oracle-xstreams-support">XStream support</a>
 <ul class="sectlevel2">
 <li><a href="#_preparing_the_database_3">Preparing the Database</a></li>
-<li><a href="#_creating_xstream_users_for_the_connector">Creating XStream users for the connector</a></li>
+<li><a href="#creating-xstream-users-for-the-connector">Creating XStream users for the connector</a></li>
 <li><a href="#_create_an_xstream_outbound_server">Create an XStream Outbound Server</a></li>
 <li><a href="#selecting-the-xstream-adapter">Configuring the XStream adapter</a></li>
 <li><a href="#obtaining-oracle-jdbc-driver-and-xstreams-api-files">Obtaining the Oracle JDBC driver and XStream API files</a></li>
@@ -516,8 +527,8 @@ You can configure the connector to emit change events for specific subsets of sc
 <p>For information about the Oracle Database versions that are compatible with this connector, see the <a href="https://debezium.io/releases/">Debezium release overview</a>.</p>
 </div>
 <div class="paragraph">
-<p>Debezium ingests change events from Oracle by using the native LogMiner database package
-, the <a href="https://docs.oracle.com/database/121/XSTRM/xstrm_intro.htm#XSTRM72647">XStream API</a>, or <a href="https://www.bersler.com/openlogreplicator/">OpenLogReplicator</a>.</p>
+<p>Debezium can ingest change events from Oracle by using the native LogMiner database package, the <a href="https://docs.oracle.com/en/database/oracle/oracle-database/19/xstrm/introduction-to-xstream.html">XStream API</a>,
+or <a href="https://www.bersler.com/openlogreplicator/">OpenLogReplicator</a>.</p>
 </div>
 </div>
 </div>
@@ -2358,7 +2369,7 @@ The message contains a logical representation of the table schema.</p>
   },
   "payload": {
     "source": {
-      "version": "3.0.6.Final",
+      "version": "3.0.8.Final",
       "connector": "oracle",
       "name": "server1",
       "ts_ms": 1588252618953,
@@ -2731,8 +2742,7 @@ However, before you choose a log mining strategy, it&#8217;s important to consid
 <div class="sect3">
 <h4 id="_writing_the_data_dictionary_to_redo_logs"><a class="anchor" href="#_writing_the_data_dictionary_to_redo_logs"></a>Writing the data dictionary to redo logs</h4>
 <div class="paragraph">
-<p>The default mining strategy is called <code>redo_log_catalog</code>.
-In this strategy, the database flushes a copy of the data dictionary to the redo logs immediately after each redo log switch.
+<p>The <code>redo_log_catalog</code> mining strategy instructs the database to flush a copy of the data dictionary to the redo logs immediately after each redo log switch.
 This is the most reliable strategy for tracking schema changes that are interwoven with data changes, because Oracle LogMiner has a way to interpolate between the starting and ending data dictionary states across a series of change vectors.</p>
 </div>
 <div class="paragraph">
@@ -2759,7 +2769,7 @@ If you intend to use this mode, coordinate with your database administrators to 
 <div class="sect3">
 <h4 id="_using_the_online_catalog_directly"><a class="anchor" href="#_using_the_online_catalog_directly"></a>Using the online catalog directly</h4>
 <div class="paragraph">
-<p>The next strategy mode, <code>online_catalog</code>, works differently from the <code>redo_log_catalog</code> mode.
+<p>The default strategy mode, <code>online_catalog</code>, works differently from the <code>redo_log_catalog</code> mode.
 When the strategy is set to <code>online_catalog</code>, the database never flushes the data dictionary to the redo logs.
 Instead, Oracle LogMiner always uses the most current data dictionary state to perform comparisons.
 By always using the current dictionary, and eliminating flushing to the redo logs, this strategy requires less overhead, and operates more efficiently.
@@ -2792,7 +2802,7 @@ If the Debezium connector is configured to use the <code>online_catalog</code> m
 <div class="sect3">
 <h4 id="_hybrid_approach"><a class="anchor" href="#_hybrid_approach"></a>Hybrid approach</h4>
 <div class="paragraph">
-<p>This is a new, experimental strategy that can be enabled by setting the strategy to <code>hybrid</code>.
+<p>You can enable this strategy by setting the value of the <a href="#oracle-property-log-mining-strategy"><code>log.mining.strategy</code></a> configuration property to <code>hybrid</code>.
 The goal of this strategy is to provide the reliability of the <code>redo_log_catalog</code> strategy with the performance and low overhead of the <code>online_catalog</code> strategy, without incurring the disadvantages of either strategy.</p>
 </div>
 <div class="paragraph">
@@ -3239,14 +3249,87 @@ In the case of the Oracle connector, the structure includes the following fields
 <p>Whether the event is part of an ongoing snapshot or not.</p>
 </li>
 <li>
-<p>The transaction id (not includes for snapshots).</p>
+<p>The transaction id (not included for snapshots).</p>
 </li>
 <li>
-<p>The SCN of the change.</p>
+<p>The following values related to the SCN (system change number) that the database assigns when a change is committed:</p>
 </li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+<code>scn</code>
+</td>
+<td class="hdlist2">
+<p>The unique identifier that the database uses to track the transaction.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>start_scn</code>
+</td>
+<td class="hdlist2">
+<p>The SCN when the transaction started.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>start_ts_ms</code>
+</td>
+<td class="hdlist2">
+<p>The time when the transaction started.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>commit_ts_ms</code>
+</td>
+<td class="hdlist2">
+<p>The time when the transaction was committed.</p>
+<div class="ulist">
+<ul>
 <li>
-<p>A timestamp that indicates when the record in the source database changed (for snapshots, the timestamp indicates when the snapshot occurred).</p>
+<p>Timestamps that represent when the connector processed the event, based on the system clock of the JVM running the Kafka Connect task.
+For snapshots, the timestamp indicates when the snapshot occurred.<br>
+The connector reports the timestamp value with differing precision in the following fields:</p>
 </li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+<code>ts_ms</code>
+</td>
+<td class="hdlist2">
+<p>Provides the timestamp in milliseconds.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>ts_us</code>
+</td>
+<td class="hdlist2">
+<p>Provides the timestamp in microseconds.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>ts_ns</code>
+</td>
+<td class="hdlist2">
+<p>Provides the timestamp in nanoseconds.</p>
+<div class="ulist">
+<ul>
 <li>
 <p>Username who made the change</p>
 </li>
@@ -3284,12 +3367,17 @@ This field is only present when using the LogMiner connection adapter.</p>
 </li>
 </ul>
 </div>
-</dd>
-<dt class="hdlist1"><code>ts_ms</code></dt>
-<dd>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>ts_ms</code>
+</td>
+<td class="hdlist2">
 <p>An optional field that, if present, contains the time (based on the system clock in the JVM that runs the Kafka Connect task) at which the connector processed the event.</p>
-</dd>
-</dl>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <div class="title">Schema of a change event value</div>
@@ -3474,7 +3562,7 @@ This field is only present when using the LogMiner connection adapter.</p>
             "EMAIL": "annek@noanswer.org"
         },
         "source": {
-            "version": "3.0.6.Final",
+            "version": "3.0.8.Final",
             "name": "server1",
             "ts_ms": 1520085154000,
             "ts_us": 1520085154000000,
@@ -3572,7 +3660,7 @@ You can use the <a href="../configuration/avro.html#avro-serialization" class="x
             "EMAIL": "anne@example.com"
         },
         "source": {
-            "version": "3.0.6.Final",
+            "version": "3.0.8.Final",
             "name": "server1",
             "ts_ms": 1520085811000,
             "ts_us": 1520085811000000,
@@ -3672,7 +3760,7 @@ The <code>schema</code> portion of the <em>delete</em> event is identical to the
         },
         "after": null,
         "source": {
-            "version": "3.0.6.Final",
+            "version": "3.0.8.Final",
             "name": "server1",
             "ts_ms": 1520085153000,
             "ts_us": 1520085153000000,
@@ -3746,7 +3834,7 @@ The message key is <code>null</code> in this case, the message value looks like 
         "before": null,
         "after": null,
         "source": { <i class="conum" data-value="1"></i><b>(1)</b>
-            "version": "3.0.6.Final",
+            "version": "3.0.8.Final",
             "connector": "oracle",
             "name": "oracle_server",
             "ts_ms": 1638974535000,
@@ -3988,21 +4076,6 @@ Please file a <a href="https://issues.redhat.com/browse/DBZ">JIRA issue</a> for 
 </div>
 <div class="sect2">
 <h3 id="oracle-binary-character-lob-types"><a class="anchor" href="#oracle-binary-character-lob-types"></a>Binary and Character LOB types</h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Support for <code>BLOB</code>, <code>CLOB</code>, and <code>NCLOB</code> is currently in incubating state, that is, the exact semantics, configuration options and so forth might change in future revisions, based on feedback we receive.
-Please let us know if you encounter any problems while using these data types.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
 <p>The following table describes how the connector maps binary and character large object (LOB) data types.</p>
 </div>
@@ -5526,9 +5599,19 @@ And because these operation types very closely resemble <code>CLOB</code> operat
 </td>
 <td class="content">
 <div class="paragraph">
-<p>When storing strings when <code>EXTENDED</code> is enabled that contain apostrophe. (<code>'</code>) characters and the byte length does not exceed the legacy maximum lengths.
-In this use case, Oracle LogMiner does not properly escape the single apostrophe characters in the reconstructed SQL, which leads to invalid SQL that cannot be handled by the Debezium Oracle connector.
-Please see <a href="https://issues.redhat.com/browse/DBZ-8034">DBZ-8034</a> for more details.</p>
+<p>When Oracle is configured to use EXTENDED string sizes, LogMiner sometimes fails to escape single quote characters (<code>'</code>) when it reconstructs the SQL for an extended string field.
+This problem can occur if the byte length of the extended string field does not exceed the legacy maximum length.
+As a result, values in these fields can be truncated, resulting in invalid SQL statements, which the Oracle connector is unable to parse.<br></p>
+</div>
+<div class="paragraph">
+<p>To help resolve some instances of the problem, you can configure the connector to relax single-quote detection by setting the following property to <code>true</code>:</p>
+</div>
+<div class="paragraph">
+<p><code>internal.log.mining.sql.relaxed.quote.detection</code><br></p>
+</div>
+<div class="paragraph">
+<p>Note that the use of this internal setting is not currently a supported feature.<br>
+For more information, see <a href="https://issues.redhat.com/browse/DBZ-8034">DBZ-8034</a>.</p>
 </div>
 </td>
 </tr>
@@ -5558,7 +5641,7 @@ Please see <a href="https://issues.redhat.com/browse/DBZ-8034">DBZ-8034</a> for 
 <div class="title">Procedure</div>
 <ol class="arabic">
 <li>
-<p>Download the Debezium <a href="https://repo1.maven.org/maven2/io/debezium/debezium-connector-oracle/3.0.6.Final/debezium-connector-oracle-3.0.6.Final-plugin.tar.gz">Oracle connector plug-in archive</a>.</p>
+<p>Download the Debezium <a href="https://repo1.maven.org/maven2/io/debezium/debezium-connector-oracle/3.0.8.Final/debezium-connector-oracle-3.0.8.Final-plugin.tar.gz">Oracle connector plug-in archive</a>.</p>
 </li>
 <li>
 <p>Extract the files into your Kafka Connect environment.</p>
@@ -5835,6 +5918,133 @@ For non-CDB installation, do <strong>not</strong> specify the <code>database.pdb
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="using-mtls-secure-connections"><a class="anchor" href="#using-mtls-secure-connections"></a>Using mTLS secure connections</h3>
+<div class="paragraph">
+<p>When connecting to Oracle using mutual TLS authentication (mTLS), this involves both the connector and the database service proving their identities.
+The Debezium for Oracle connector relies on the Oracle JDBC driver&#8217;s built-in functionality to support mTLS authentication.</p>
+</div>
+<div class="paragraph">
+<p>You can use either of the following methods to establish mTLS connections between Debezium and Oracle:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#using-mtls-secure-connections-java-key-trust-stores">Using Java key and trust stores to configure mTLS connections</a></p>
+</li>
+<li>
+<p><a href="#using-mtls-secure-connections-oracle-wallet">Using Oracle Wallet to configure mTLS connections</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="using-mtls-secure-connections-java-key-trust-stores"><a class="anchor" href="#using-mtls-secure-connections-java-key-trust-stores"></a>Java key/trust stores</h4>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>Verify connector can access the configured key and trust store files.</p>
+</li>
+<li>
+<p>Verify that the database TNS (Transparent Network Substrate) listener supports TCPS secure connections.</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">Procedure</div>
+<ul>
+<li>
+<p>Configure the Debezium Oracle connector, as illustrated in the following example.</p>
+<div class="listingblock">
+<div class="title">Example: Debezium Oracle connector TLS configuration</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "database.url": "jdbc:oracle:thin@(DESCRIPTION=(ADDRESS=(PROTOCOL=tcps)(HOST=&lt;host&gt;)(PORT=&lt;port&gt;))(CONNECT_DATA(SERVICE_NAME=&lt;service&gt;)))",
+  "driver.javax.net.ssl.keyStore": "&lt;path-to-jks-keystore&gt;",
+  "driver.javax.net.ssl.keyStorePassword": "&lt;keystore-password&gt;",
+  "driver.javax.net.ssl.keyStoreType": "JKS",
+  "driver.javax.net.ssl.trustStore": "&lt;path-to-jks-truststore&gt;",
+  "driver.javax.net.ssl.trustStorePassword": "&lt;truststore-password&gt;",
+  "driver.javax.net.ssl.trustStoreType": "JKS"
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For Debezium to use TLS encryption to communicate with Oracle, requires a TCPS connection with the server.
+To establish a TCPS connection, you must configure the connector to use the <code>database.url</code> property, and not the <code>database.host</code> property.
+Unlike the <code>database.host</code> property, the <code>database.url</code> property permits you to define an Oracle TNS (Transparent Network Substrate) connection string that explicitly requires use of the <code>TCPS</code> protocol.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="using-mtls-secure-connections-oracle-wallet"><a class="anchor" href="#using-mtls-secure-connections-oracle-wallet"></a>Oracle Wallet</h4>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>Verify Oracle Wallet is configured on the Oracle database server with your database administrators</p>
+</li>
+<li>
+<p>Locate the <code>oraclepki.jar</code> inside the Oracle JDBC driver archive</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">Procedure</div>
+<ul>
+<li>
+<p>Install <code>oraclepki.jar</code> in the same location where $Debezium Debezium Oracle connector jars exist.
+If you have downloaded and installed the Oracle JDBC driver, the same location is where you would also place <code>oraclepki.jar</code>.</p>
+</li>
+<li>
+<p>Use the <code>database.url</code> configuration property rather than <code>database.hostname</code> to configure the connector.
+By using <code>database.url</code>, a TNS-based configuration is provided to interact with Oracle Wallet.
+A sample configuration is shown below.</p>
+</li>
+<li>
+<p>Set the Oracle JDBC driver property <code>oracle.net.wallet_location</code> to explicitly set the Oracle Wallet configuration to be used by the Oracle JDBC driver.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Example mTLS configuration</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "database.url": "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCPS)(PORT=xxxx)(HOST=xx.xx.xx.xx))(CONNECT_DATA=(SID=xxxx)))",
+  "driver.oracle.net.wallet_location": "(SOURCE=(METHOD=file)(METHOD_DATA=(DIRECTORY=/opt/kafka/external-configuration/oracle_wallet/)))"
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Be sure that you set the correct host, port, and service identifier (sid) in the <code>database.url</code>.
+Additionally, be sure that the directory in the <code>driver.oracle.net.wallet_location</code> is readable.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -6105,7 +6315,7 @@ You can set the following values:</p>
 </dd>
 <dt class="hdlist1"><code>xstream</code></dt>
 <dd>
-<p>The connector uses the Oracle XStreams API.</p>
+<p>The connector uses the Oracle XStream API.</p>
 </dd>
 </dl>
 </div></div></td>
@@ -6187,7 +6397,7 @@ Note this mode is only safe to be used when it is guaranteed that no schema chan
 </dd>
 <dt class="hdlist1"><code>custom</code></dt>
 <dd>
-<p>The connector performs a snapshot according to the implementation specified by the <a href="#postgresql-property-snapshot-mode-custom-name"><code>snapshot.mode.custom.name</code></a> property, which defines a custom implementation of the <code>io.debezium.spi.snapshot.Snapshotter</code> interface.</p>
+<p>The connector performs a snapshot according to the implementation specified by the <a href="#oracle-property-snapshot-mode-custom-name"><code>snapshot.mode.custom.name</code></a> property, which defines a custom implementation of the <code>io.debezium.spi.snapshot.Snapshotter</code> interface.</p>
 </dd>
 </dl>
 </div>
@@ -7097,7 +7307,7 @@ If the captured table(s) schema changes infrequently or never, this is the ideal
 </dd>
 <dt class="hdlist1"><code>hybrid</code></dt>
 <dd>
-<p>Uses a combination of the database&#8217;s current data dictionary and the Debezium in-memory schema model to resole table and column names seamlessly.
+<p>Uses a combination of the database&#8217;s current data dictionary and the Debezium in-memory schema model to resolve table and column names seamlessly.
 This mode performs at the level of the <code>online_catalog</code> LogMiner strategy with the schema tracking resilience of the <code>redo_log_catalog</code> strategy while not incurring the overhead of archive log generation and performance costs of the <code>redo_log_catalog</code> strategy.</p>
 </dd>
 </dl>
@@ -7504,7 +7714,7 @@ However, if connectors encounter table lock contention errors, use this property
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Specifies whether the redo log constructed SQL statement is included in <code>source.redo_sql</code> field.
-This configuration is ignored when using XStream or OpenLogReplicator adapters.</p>
+This configuration is ignored when using the XStream or OpenLogReplicator adapters.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -7792,7 +8002,26 @@ For example, if the topic prefix is <code>fulfillment</code>, the default topic 
 <p>Specifies the number of threads that the connector uses when performing an initial snapshot.
 To enable parallel initial snapshots, set the property to a value greater than 1.
 In a parallel initial snapshot, the connector processes multiple tables concurrently.
-This feature is incubating.</p>
+<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When you enable parallel initial snapshots, the threads that perform each table snapshot can require varying times to complete their work.
+If a snapshot for one table requires significantly more time to complete than the snapshots for other tables, threads that have completed their work sit idle.
+In some environments, a network device such as a load balancer or firewall, terminates connections that remain idle for an extended interval.
+After the snapshot completes, the connector is unable to close the connection, resulting in an exception, and an incomplete snapshot, even in cases where the connector successfully transmitted all snapshot data.<br>
+<br>
+If you experience this problem, revert the value of <code>snapshot.max.threads</code> to <code>1</code>, and retry the snapshot.</p>
+</div>
+</td>
+</tr>
+</table>
 </div></div></td>
 </tr>
 <tr>
@@ -9237,7 +9466,7 @@ For more information, see <a href="#oracle-property-log-mining-transaction-reten
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="oracle-straeming-metrics-number-of-partial-rollback-count"></a><a href="#oracle-streaming-metrics-number-of-partial-rollback-count"><code>NumberOfPartialRollbackCount</code></a></p>
+<p><a id="oracle-streaming-metrics-number-of-partial-rollback-count"></a><a href="#oracle-streaming-metrics-number-of-partial-rollback-count"><code>NumberOfPartialRollbackCount</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>long</code></p>
@@ -10230,7 +10459,7 @@ Consequently, in environments that use the OpenLogReplicator adapter, the Debezi
 </div>
 </div>
 <div class="sect1">
-<h2 id="oracle-xstreams-support"><a class="anchor" href="#oracle-xstreams-support"></a>XStreams support</h2>
+<h2 id="oracle-xstreams-support"><a class="anchor" href="#oracle-xstreams-support"></a>XStream support</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The Debezium Oracle connector by default ingests changes using native Oracle LogMiner.
@@ -10278,13 +10507,14 @@ The following illustrates how to configure this on a specific table, which is th
 </div>
 </div>
 <div class="sect2">
-<h3 id="_creating_xstream_users_for_the_connector"><a class="anchor" href="#_creating_xstream_users_for_the_connector"></a>Creating XStream users for the connector</h3>
+<h3 id="creating-xstream-users-for-the-connector"><a class="anchor" href="#creating-xstream-users-for-the-connector"></a>Creating XStream users for the connector</h3>
 <div class="paragraph">
 <p>The Debezium Oracle connector requires that users accounts be set up with specific permissions so that the connector can capture change events.
-The following briefly describes these user configurations using a multi-tenant database model.</p>
+The following examples provide information about how to create user configurations in a multi-tenant database model.</p>
 </div>
-<div id="oracle-create-users-xstream" class="listingblock">
-<div class="title">Creating an XStream Administrator user</div>
+<div class="sect3">
+<h4 id="oracle-create-users-xstream"><a class="anchor" href="#oracle-create-users-xstream"></a>Creating an XStream Administrator user</h4>
+<div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-none hljs">sqlplus sys/top_secret@//localhost:1521/ORCLCDB as sysdba
   CREATE TABLESPACE xstream_adm_tbs DATAFILE '/opt/oracle/oradata/ORCLCDB/xstream_adm_tbs.dbf'
@@ -10317,8 +10547,10 @@ sqlplus sys/top_secret@//localhost:1521/ORCLCDB as sysdba
   exit;</code></pre>
 </div>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_creating_the_connectors_xstream_user"><a class="anchor" href="#_creating_the_connectors_xstream_user"></a>Creating the connector&#8217;s XStream user</h4>
 <div class="listingblock">
-<div class="title">Creating the connector&#8217;s XStream user</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-none hljs">sqlplus sys/top_secret@//localhost:1521/ORCLCDB as sysdba
   CREATE TABLESPACE xstream_tbs DATAFILE '/opt/oracle/oradata/ORCLCDB/xstream_tbs.dbf'
@@ -10346,10 +10578,11 @@ sqlplus sys/top_secret@//localhost:1521/ORCLCDB as sysdba
 </div>
 </div>
 </div>
+</div>
 <div class="sect2">
 <h3 id="_create_an_xstream_outbound_server"><a class="anchor" href="#_create_an_xstream_outbound_server"></a>Create an XStream Outbound Server</h3>
 <div class="paragraph">
-<p>Create an <a href="https://docs.oracle.com/cd/E11882_01/server.112/e16545/xstrm_cncpt.htm#XSTRM1088">XStream Outbound server</a>
+<p>Create an <a href="https://docs.oracle.com/en/database/oracle/oracle-database/19/xstrm/xstream-out-concepts.html">XStream Outbound server</a>.
 (given the right privileges, this might be done automatically by the connector going forward, see <a href="https://issues.redhat.com/browse/DBZ-721">DBZ-721</a>):</p>
 </div>
 <div class="listingblock">
@@ -10379,8 +10612,7 @@ exit;</code></pre>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>When setting up an XStream Outbound Server to capture changes from a pluggable database,
-the <code>source_container_name</code> parameter should be provided specifying the pluggable database name.</p>
+<p>When you set up an XStream Outbound Server to capture changes from a pluggable database, specify the pluggable database name as value for the <code>source_container_name</code> parameter.</p>
 </div>
 </td>
 </tr>
@@ -10419,7 +10651,7 @@ Each connector requires a unique XStream Outbound connector to be configured.</p
 <h3 id="selecting-the-xstream-adapter"><a class="anchor" href="#selecting-the-xstream-adapter"></a>Configuring the XStream adapter</h3>
 <div class="paragraph">
 <p>By default, Debezium uses Oracle LogMiner to ingest change events from Oracle.
-You can adjust the connector configuration to enable the connector to use the Oracle XStreams adapter.</p>
+You can adjust the connector configuration to enable the connector to use the Oracle XStream adapter.</p>
 </div>
 <div class="paragraph">
 <p>The following configuration example adds the properties <code>database.connection.adapter</code> and <code>database.out.server.name</code> to enable the connector to use the XStream API implementation.</p>
@@ -10503,7 +10735,7 @@ The following steps describe how to download the Oracle Instant Client and extra
 <div class="sect2">
 <h3 id="oracle-xstreams-connector-properties"><a class="anchor" href="#oracle-xstreams-connector-properties"></a>XStream connector properties</h3>
 <div class="paragraph">
-<p>The following configuration properties are <em>required</em> when using XStreams unless a default value is available.</p>
+<p>The following configuration properties are <em>required</em> when using XStream unless a default value is available.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -10545,7 +10777,8 @@ Most of these programs manipulate the LOB column in totality, however, one progr
 </div>
 <div class="paragraph">
 <p>When using XStream, <code>WRITEAPPEND</code> emits a logical change record (LCR) event for each invocation of the program.
-These LCR events are not combined into a single change event like they are when using the Oracle LogMiner adapter, and so consumers of the topic should be prepared to receive events with partial column values.
+These LCR events are not combined into a single change event as they are when using the Oracle LogMiner adapter.
+As a result, consumers of the topic might receive events with partial column values.
 This diverged behavior is captured in <a href="https://issues.redhat.com/browse/DBZ-4741">DBZ-4741</a> and will be addressed in a future release.</p>
 </div>
 </div>
@@ -10766,19 +10999,20 @@ As a workaround, the include/exclude configuration options can be adjusted to pr
 </dd>
 <dt class="hdlist1"><strong>How to solve SAX feature external-general-entities not supported</strong></dt>
 <dd>
-<p>Debezium 2.4 introduced support for Oracle&#8217;s <code>XMLTYPE</code> column type and to support this feature, the Oracle <code>xdb</code> and <code>xmlparserv2</code> dependencies are required.<br>
+<p>Debezium 2.4 introduced support for Oracle&#8217;s <code>XMLTYPE</code> column type.
+To use this feature, the Oracle <code>xdb</code> and <code>xmlparserv2</code> dependencies are required.<br>
 <br>
 Oracle&#8217;s <code>xmlparserv2</code> dependency implements a SAX-based parser and if the runtime finds an uses this implementation rather than the other on the classpath, this error will occur.
 In order to influence specifically which SAX implementation is used generally, the JVM will need to be started with a specific argument.<br>
 <br>
 When the following JVM argument is provided, the Oracle connector will start successfully without this error.</p>
-</dd>
-</dl>
-</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">-Djavax.xml.parsers.SAXParserFactory=com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl</code></pre>
+<pre class="highlightjs highlight nowrap"><code class="language-bash hljs" data-lang="bash">-Djavax.xml.parsers.SAXParserFactory=com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl</code></pre>
 </div>
+</div>
+</dd>
+</dl>
 </div>
 </div>
 </div>
@@ -10790,7 +11024,7 @@ When the following JVM argument is provided, the Oracle connector will start suc
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/4e281814dd475b1404dfe0a26bdf81359226e8cd">4e281814</a></span>)
+            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/d67bca37f6f3250f68621f6211ae54f12f2b15b3">d67bca37</a></span>)
             
         </div>
     </footer>

@@ -15,10 +15,6 @@
 </head>
 <body class="article">
 <header class="header">
-  <div id="rhbar">
-      <a class="jbdevlogo" href="https://developers.redhat.com"></a>
-      <a class="rhlogo" href="https://www.redhat.com"></a>
-  </div>
   <nav class="navbar">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
@@ -36,6 +32,7 @@
         <a class="navbar-item" href="/documentation">DOCUMENTATION</a>
         <a class="navbar-item" href="/releases">RELEASES</a>
         <a class="navbar-item" href="/community">COMMUNITY</a>
+        <a class="navbar-item" href="/community/users/">ADOPTERS</a>
         <a class="navbar-item" href="/blog">BLOG</a>
       </div>
     </div>
@@ -89,6 +86,12 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../configuration/notification.html">Receive notifications from Debezium</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../configuration/storage.html">Store Debezium state</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../configuration/eos.html">Exactly-once delivery</a>
   </li>
 </ul>
   </li>
@@ -199,9 +202,6 @@
     <a class="nav-link" href="../transformations/decode-logical-decoding-message-content.html">Decode Logical Decoding Message Content</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../transformations/convert-cloudevent-to-saveable-form.html">Convert CloudEvents to Saveable Form</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/vector-to-json.html">Vector Data Types to JSON Types</a>
   </li>
 </ul>
@@ -244,7 +244,13 @@
     <a class="nav-link" href="../integrations/cloudevents.html">CloudEvents</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../integrations/openlineage.html">OpenLineage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../integrations/tracing.html">OpenTelemetry</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../integrations/quarkus-debezium-engine-extension.html">Debezium Extensions for Quarkus</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../integrations/testcontainers.html">Integration Testing with Testcontainers</a>
@@ -253,11 +259,32 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Operations</span>
+    <span class="nav-text">Debezium AI</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ai/embeddings.html">Embeddings Transformation</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Standalone Debezium</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../operations/debezium-server.html">Debezium Server</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../operations/debezium-operator.html">Debezium Operator</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../operations/debezium-platform.html">Debezium Management Platform</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Operations</span>
+<ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../operations/logging.html">Logging</a>
   </li>
@@ -269,9 +296,6 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../operations/openshift.html">Running on Openshift</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../operations/debezium-ui.html">Debezium UI</a>
   </li>
 </ul>
   </li>
@@ -293,10 +317,16 @@
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version">
-          <a href="/documentation/reference/3.0/index.html">3.0</a>
+          <a href="/documentation/reference/3.2/index.html">3.2</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.3/index.html">3.3</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.1/index.html">3.1</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.0/index.html">3.0</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/2.7/index.html">2.7</a>
@@ -349,8 +379,10 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
                         <a class="version is-current" href="/reference/development/engine.html" data-hash="true">nightly</a>
-                        <a class="version" href="/documentation//reference/stable/development/engine.html" data-hash="true">3.0</a>
+                        <a class="version" href="/documentation//reference/stable/development/engine.html" data-hash="true">3.2</a>
+                        <a class="version" href="/documentation//reference/3.3/development/engine.html" data-hash="true">3.3</a>
                         <a class="version" href="/documentation//reference/3.1/development/engine.html" data-hash="true">3.1</a>
+                        <a class="version" href="/documentation//reference/3.0/development/engine.html" data-hash="true">3.0</a>
                         <a class="version" href="/documentation//reference/2.7/development/engine.html" data-hash="true">2.7</a>
                         <a class="version" href="/documentation//reference/2.6/development/engine.html" data-hash="true">2.6</a>
                         <a class="version" href="/documentation//reference/2.5/development/engine.html" data-hash="true">2.5</a>
@@ -434,8 +466,11 @@ They still want the same data change events, but prefer to have the connectors s
 <div class="paragraph">
 <p>Beginning with the 2.6.0 release, Debezium provides two implementations of the <code>DebeziumEngine</code> interface.
 The older <code>EmbeddedEngine</code> implementation runs a single connector that uses only one task.
-The connector emits all records sequentially.
-This the default implementation.</p>
+The connector emits all records sequentially.</p>
+</div>
+<div class="paragraph">
+<p><code>EmbeddedEngine</code> is the default implementation in Debezium release 3.1.0.Final and older.
+Starting Debezium release 3.2.0.Alpha1, the default implementation is <code>AsyncEmbeddedEngine</code> and <code>EmbeddedEngine</code> implementation is not available anymore.</p>
 </div>
 <div class="paragraph">
 <p>Beginning with the 2.6.0 release, a new <code>AsyncEmbeddedEngine</code> implementation is available.
@@ -631,14 +666,14 @@ These fields can be tailored as needed for your application.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">    /* begin connector properties */
-    props.setProperty("database.hostname", "localhost")
-    props.setProperty("database.port", "3306")
-    props.setProperty("database.user", "mysqluser")
-    props.setProperty("database.password", "mysqlpw")
-    props.setProperty("database.server.id", "85744")
-    props.setProperty("topic.prefix", "my-app-connector")
-    props.setProperty("schema.history.internal", "io.debezium.storage.file.history.FileSchemaHistory")
-    props.setProperty("schema.history.internal.file.filename", "/path/to/storage/schemahistory.dat")</code></pre>
+    props.setProperty("database.hostname", "localhost");
+    props.setProperty("database.port", "3306");
+    props.setProperty("database.user", "mysqluser");
+    props.setProperty("database.password", "mysqlpw");
+    props.setProperty("database.server.id", "85744");
+    props.setProperty("topic.prefix", "my-app-connector");
+    props.setProperty("schema.history.internal", "io.debezium.storage.file.history.FileSchemaHistory");
+    props.setProperty("schema.history.internal.file.filename", "/path/to/storage/schemahistory.dat");</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -766,33 +801,8 @@ Although the <code>DebeziumEngine</code> will indeed terminate when its thread i
 <p>As mentioned earlier, there are two implementations of the <code>DebeziumEngine</code> interface.
 The two implementations use the same API, and the preceding code sample is valid for both versions.
 The only exception is the creation of the <code>DebeziumEngine</code> instance.
-As was also mentioned in the introduction, by default, the <code>EmbeddedEngine</code> implementation is used.
-Therefore, the method <code>DebeziumEngine.create(Json.class)</code> results internally in the use of the <code>EmbeddedEngine</code> instance.</p>
-</div>
-<div class="paragraph">
-<p>If you want to use the new <code>AsyncEmbeddedEngine</code> instance instead, use the following method:
-<code>DebeziumEngine#create(KeyValueHeaderChangeEventFormat&lt;K, V, H&gt; format, String builderFactory)</code></p>
-</div>
-<div class="paragraph">
-<p>For example, to create an embedded engine that uses the <code>AsyncEmbeddedEngine</code>, and uses JSON as its key, value, and header format, you would use the following code:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">try (DebeziumEngine&lt;ChangeEvent&lt;String, String&gt;&gt; engine = DebeziumEngine
-        .create(KeyValueHeaderChangeEventFormat.of(Json.class, Json.class, Json.class),
-                "io.debezium.embedded.async.ConvertingAsyncEngineBuilderFactory")
-        .using(props)
-        .notifying(record -&gt; {
-            System.out.println(record);
-        }).build()
-    ) {
-    // Also run the engine asynchronously ...
-    ExecutorService executor = Executors.newSingleThreadExecutor();
-    executor.execute(engine);
-
-    // Do something else or wait for a signal or an event
-}</code></pre>
-</div>
+As was also mentioned in the introduction, by default, the <code>AsyncEmbeddedEngine</code> implementation is used.
+Therefore, the method <code>DebeziumEngine.create(Json.class)</code> results internally in the use of the <code>AsyncEmbeddedEngine</code> instance.</p>
 </div>
 </div>
 </div>
@@ -1413,11 +1423,6 @@ However, this dramatically increases the overhead and decreases the throughput o
 <p>The bottom line is that when using embedded connectors, applications will receive each source record exactly once during normal operation (including restart after a graceful shutdown), but do need to be tolerant of receiving duplicate events immediately following a restart after a crash or improper shutdown.
 If applications need more rigorous exactly-once behavior, then they should use the full Debezium platform that can provide exactly-once guarantees (even after crashes and restarts).</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre></pre>
-</div>
-</div>
 </div>
 </div>
 </article>
@@ -1428,7 +1433,7 @@ If applications need more rigorous exactly-once behavior, then they should use t
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/ee9d3467111c73d8f337ef6bfee02f75c4df77ed">ee9d3467</a></span>)
+            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/902dd6422c9d4eec1c7391107c3e974075fc0cb7">902dd642</a></span>)
             
         </div>
     </footer>

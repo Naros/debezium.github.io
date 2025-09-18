@@ -15,10 +15,6 @@
 </head>
 <body class="article">
 <header class="header">
-  <div id="rhbar">
-      <a class="jbdevlogo" href="https://developers.redhat.com"></a>
-      <a class="rhlogo" href="https://www.redhat.com"></a>
-  </div>
   <nav class="navbar">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
@@ -36,6 +32,7 @@
         <a class="navbar-item" href="/documentation">DOCUMENTATION</a>
         <a class="navbar-item" href="/releases">RELEASES</a>
         <a class="navbar-item" href="/community">COMMUNITY</a>
+        <a class="navbar-item" href="/community/users/">ADOPTERS</a>
         <a class="navbar-item" href="/blog">BLOG</a>
       </div>
     </div>
@@ -89,6 +86,12 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../configuration/notification.html">Receive notifications from Debezium</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../configuration/storage.html">Store Debezium state</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../configuration/eos.html">Exactly-once delivery</a>
   </li>
 </ul>
   </li>
@@ -199,9 +202,6 @@
     <a class="nav-link" href="../transformations/decode-logical-decoding-message-content.html">Decode Logical Decoding Message Content</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../transformations/convert-cloudevent-to-saveable-form.html">Convert CloudEvents to Saveable Form</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/vector-to-json.html">Vector Data Types to JSON Types</a>
   </li>
 </ul>
@@ -243,8 +243,14 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="cloudevents.html">CloudEvents</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="openlineage.html">OpenLineage</a>
+  </li>
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="tracing.html">OpenTelemetry</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="quarkus-debezium-engine-extension.html">Debezium Extensions for Quarkus</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="testcontainers.html">Integration Testing with Testcontainers</a>
@@ -253,11 +259,32 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Operations</span>
+    <span class="nav-text">Debezium AI</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ai/embeddings.html">Embeddings Transformation</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Standalone Debezium</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../operations/debezium-server.html">Debezium Server</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../operations/debezium-operator.html">Debezium Operator</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../operations/debezium-platform.html">Debezium Management Platform</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Operations</span>
+<ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../operations/logging.html">Logging</a>
   </li>
@@ -269,9 +296,6 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../operations/openshift.html">Running on Openshift</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../operations/debezium-ui.html">Debezium UI</a>
   </li>
 </ul>
   </li>
@@ -293,10 +317,16 @@
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version">
-          <a href="/documentation/reference/3.0/index.html">3.0</a>
+          <a href="/documentation/reference/3.2/index.html">3.2</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.3/index.html">3.3</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.1/index.html">3.1</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.0/index.html">3.0</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/2.7/index.html">2.7</a>
@@ -349,8 +379,10 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
                         <a class="version is-current" href="/reference/integrations/tracing.html" data-hash="true">nightly</a>
-                        <a class="version" href="/documentation//reference/stable/integrations/tracing.html" data-hash="true">3.0</a>
+                        <a class="version" href="/documentation//reference/stable/integrations/tracing.html" data-hash="true">3.2</a>
+                        <a class="version" href="/documentation//reference/3.3/integrations/tracing.html" data-hash="true">3.3</a>
                         <a class="version" href="/documentation//reference/3.1/integrations/tracing.html" data-hash="true">3.1</a>
+                        <a class="version" href="/documentation//reference/3.0/integrations/tracing.html" data-hash="true">3.0</a>
                         <a class="version" href="/documentation//reference/2.7/integrations/tracing.html" data-hash="true">2.7</a>
                         <a class="version" href="/documentation//reference/2.6/integrations/tracing.html" data-hash="true">2.6</a>
                         <a class="version" href="/documentation//reference/2.5/integrations/tracing.html" data-hash="true">2.5</a>
@@ -615,7 +647,7 @@ You must also install the <a href="https://opentelemetry.io/docs/instrumentation
 <h2 id="_activatetracingspan_smt"><a class="anchor" href="#_activatetracingspan_smt"></a>ActivateTracingSpan SMT</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The main implementation point of tracing in Debezium is <code>ActivateTracingSpan</code> SMT.
+<p>The main implementation point of tracing in Debezium is <code>io.debezium.transforms.tracing.ActivateTracingSpan</code> SMT.
 In this case, the application writing to a database is responsible for providing the tracing span context.
 The writer must inject the span context into a <code>java.util.Properties</code> instance that is serialized and written to the database as a distinct field of the table.</p>
 </div>
@@ -638,7 +670,7 @@ In this case, Debezium operations together with metadata will be traced but will
 <p>insert fields from <code>source</code> block into the span as <strong>tags</strong></p>
 </li>
 <li>
-<p>create the processing <code>debezium-read</code> span as a child of <code>db-log-write</code> span with the start timestamp set to the processing time of the even</p>
+<p>create the processing <code>debezium-read</code> span as a child of <code>db-log-write</code> span with the start timestamp set to the processing time of the event</p>
 </li>
 <li>
 <p>insert fields from envelope such as <code>op</code> into the processing span as <strong>tags</strong></p>
@@ -791,7 +823,7 @@ set the option <code>quarkus.debezium-outbox.tracing.enabled=false</code> in the
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/ee9d3467111c73d8f337ef6bfee02f75c4df77ed">ee9d3467</a></span>)
+            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/902dd6422c9d4eec1c7391107c3e974075fc0cb7">902dd642</a></span>)
             
         </div>
     </footer>
