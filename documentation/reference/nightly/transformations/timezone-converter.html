@@ -52,7 +52,13 @@
     <span class="nav-text">Getting Started</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../tutorial.html">Tutorial</a>
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../tutorials.html">Tutorials</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../kc-tutorial.html">Kafka Connect</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -147,6 +153,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/jdbc.html">JDBC</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/mongodb-sink.html">MongoDB Sink</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -196,6 +205,9 @@
     <a class="nav-link" href="timezone-converter.html">Timezone Converter</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="geometry-format-transformer.html">Geometry Format Conversion</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="timescaledb.html">TimescaleDB Integration</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -203,6 +215,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="vector-to-json.html">Vector Data Types to JSON Types</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="swap-geometry-coordinates.html">Swap Geometry Coordinates</a>
   </li>
 </ul>
   </li>
@@ -253,6 +268,9 @@
     <a class="nav-link" href="../integrations/quarkus-debezium-engine-extension.html">Debezium Extensions for Quarkus</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../integrations/hibernate-cache.html">Hibernate Cache Invalidation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../integrations/testcontainers.html">Integration Testing with Testcontainers</a>
   </li>
 </ul>
@@ -263,6 +281,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../ai/embeddings.html">Embeddings Transformation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ai/docling.html">Docling Transformation</a>
   </li>
 </ul>
   </li>
@@ -317,10 +338,19 @@
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version">
-          <a href="/documentation/reference/3.2/index.html">3.2</a>
+          <a href="/documentation/reference/3.5/index.html">3.5</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.6/index.html">3.6</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.4/index.html">3.4</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.3/index.html">3.3</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.2/index.html">3.2</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.1/index.html">3.1</a>
@@ -330,27 +360,6 @@
         </li>
         <li class="version">
           <a href="/documentation/reference/2.7/index.html">2.7</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.6/index.html">2.6</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.5/index.html">2.5</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.4/index.html">2.4</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.3/index.html">2.3</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.2/index.html">2.2</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.1/index.html">2.1</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.0/index.html">2.0</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/1.9/index.html">1.9</a>
@@ -379,18 +388,14 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
                         <a class="version is-current" href="/reference/transformations/timezone-converter.html" data-hash="true">nightly</a>
-                        <a class="version" href="/documentation//reference/stable/transformations/timezone-converter.html" data-hash="true">3.2</a>
+                        <a class="version" href="/documentation//reference/stable/transformations/timezone-converter.html" data-hash="true">3.5</a>
+                        <a class="version" href="/documentation//reference/3.6/transformations/timezone-converter.html" data-hash="true">3.6</a>
+                        <a class="version" href="/documentation//reference/3.4/transformations/timezone-converter.html" data-hash="true">3.4</a>
                         <a class="version" href="/documentation//reference/3.3/transformations/timezone-converter.html" data-hash="true">3.3</a>
+                        <a class="version" href="/documentation//reference/3.2/transformations/timezone-converter.html" data-hash="true">3.2</a>
                         <a class="version" href="/documentation//reference/3.1/transformations/timezone-converter.html" data-hash="true">3.1</a>
                         <a class="version" href="/documentation//reference/3.0/transformations/timezone-converter.html" data-hash="true">3.0</a>
                         <a class="version" href="/documentation//reference/2.7/transformations/timezone-converter.html" data-hash="true">2.7</a>
-                        <a class="version" href="/documentation//reference/2.6/transformations/timezone-converter.html" data-hash="true">2.6</a>
-                        <a class="version" href="/documentation//reference/2.5/transformations/timezone-converter.html" data-hash="true">2.5</a>
-                        <a class="version" href="/documentation//reference/2.4/transformations/timezone-converter.html" data-hash="true">2.4</a>
-                    <a class="version is-missing" href="#">2.3</a>
-                    <a class="version is-missing" href="#">2.2</a>
-                    <a class="version is-missing" href="#">2.1</a>
-                    <a class="version is-missing" href="#">2.0</a>
                     <a class="version is-missing" href="#">1.9</a>
         </div>
         |
@@ -485,20 +490,6 @@ Providing a fixed UTC offset is useful when converting timestamp fields to a spe
 <div class="paragraph">
 <p>The SMT also allows conversion of event metadata fields in the source information block, such as <code>ts_ms</code> to the target timezone. In order to convert the metadata fields, you must include the <code>source</code> prefix in the <code>fieldname</code> of the <code>include.list</code> or <code>exclude.list</code> configuration option.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>If the schema for timestamp fields in the source information block, like <code>ts_ms</code>, is currently set to <code>INT64</code>, which is not a timestamp type, future releases aim to support the conversion of such fields by introducing compatibility for a timestamp schema.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -543,7 +534,7 @@ Per the configuration specified in <a href="#basic-example-timezone-converter">t
             "created_at": "2011-01-11T16:40:30.123456789+00:00"
         },
         "source": {
-            "version": "3.3.0.Beta1",
+            "version": "3.6.0.Alpha2",
             "connector": "postgresql",
             "name": "PostgreSQL_server",
             "ts_ms": 1559033904863,
@@ -586,7 +577,7 @@ The SMT also adds an <code>event_timestamp</code> field.</p>
             "created_at": "2011-01-11T11:40:30.123456789-05:00"
         },
         "source": {
-            "version": "3.3.0.Beta1",
+            "version": "3.6.0.Alpha2",
             "connector": "postgresql",
             "name": "PostgreSQL_server",
             "ts_ms": 1559033904863,
@@ -785,7 +776,7 @@ The SMT excludes from conversion only fields that have the specified name. <code
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/902dd6422c9d4eec1c7391107c3e974075fc0cb7">902dd642</a></span>)
+            <div class="copyright">Copyright &copy; 2026 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/1d381a8915e007c99e034748be22264d1466e105">1d381a89</a></span>)
             
         </div>
     </footer>

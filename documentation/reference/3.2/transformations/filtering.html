@@ -38,7 +38,7 @@
     </div>
   </nav>
 </header><div class="body">
-<div class="nav-container" data-component="reference" data-version="stable">
+<div class="nav-container" data-component="reference" data-version="3.2">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -143,6 +143,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/jdbc.html">JDBC</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/mongodb-sink.html">MongoDB Sink</a>
   </li>
 </ul>
   </li>
@@ -307,11 +310,20 @@
         <li class="version">
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
-        <li class="version is-current">
-          <a href="/documentation/reference/3.2/index.html">3.2</a>
+        <li class="version">
+          <a href="/documentation/reference/3.5/index.html">3.5</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.6/index.html">3.6</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.4/index.html">3.4</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.3/index.html">3.3</a>
+        </li>
+        <li class="version is-current">
+          <a href="/documentation/reference/3.2/index.html">3.2</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.1/index.html">3.1</a>
@@ -321,27 +333,6 @@
         </li>
         <li class="version">
           <a href="/documentation/reference/2.7/index.html">2.7</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.6/index.html">2.6</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.5/index.html">2.5</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.4/index.html">2.4</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.3/index.html">2.3</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.2/index.html">2.2</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.1/index.html">2.1</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.0/index.html">2.0</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/1.9/index.html">1.9</a>
@@ -356,7 +347,7 @@
 <main role="main" class="main">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../index.html" class="home-link"></a>
+  <a href="../../stable/index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Debezium Documentation</a></li>
@@ -370,18 +361,14 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">3.2</button>
         <div class="version-menu">
                         <a class="version" href="/documentation//reference/transformations/filtering.html" data-hash="true">nightly</a>
-                        <a class="version is-current" href="/reference/stable/transformations/filtering.html" data-hash="true">3.2</a>
+                        <a class="version" href="/documentation//reference/stable/transformations/filtering.html" data-hash="true">3.5</a>
+                        <a class="version" href="/documentation//reference/3.6/transformations/filtering.html" data-hash="true">3.6</a>
+                        <a class="version" href="/documentation//reference/3.4/transformations/filtering.html" data-hash="true">3.4</a>
                         <a class="version" href="/documentation//reference/3.3/transformations/filtering.html" data-hash="true">3.3</a>
+                        <a class="version is-current" href="/reference/3.2/transformations/filtering.html" data-hash="true">3.2</a>
                         <a class="version" href="/documentation//reference/3.1/transformations/filtering.html" data-hash="true">3.1</a>
                         <a class="version" href="/documentation//reference/3.0/transformations/filtering.html" data-hash="true">3.0</a>
                         <a class="version" href="/documentation//reference/2.7/transformations/filtering.html" data-hash="true">2.7</a>
-                        <a class="version" href="/documentation//reference/2.6/transformations/filtering.html" data-hash="true">2.6</a>
-                        <a class="version" href="/documentation//reference/2.5/transformations/filtering.html" data-hash="true">2.5</a>
-                        <a class="version" href="/documentation//reference/2.4/transformations/filtering.html" data-hash="true">2.4</a>
-                        <a class="version" href="/documentation//reference/2.3/transformations/filtering.html" data-hash="true">2.3</a>
-                        <a class="version" href="/documentation//reference/2.2/transformations/filtering.html" data-hash="true">2.2</a>
-                        <a class="version" href="/documentation//reference/2.1/transformations/filtering.html" data-hash="true">2.1</a>
-                        <a class="version" href="/documentation//reference/2.0/transformations/filtering.html" data-hash="true">2.0</a>
                         <a class="version" href="/documentation//reference/1.9/transformations/filtering.html" data-hash="true">1.9</a>
         </div>
         |
@@ -410,7 +397,12 @@
 <div class="article-cell1">
 <article class="doc">
         
-    <!-- This partial is a placeholder -->            <h1 class="page">Message Filtering</h1>
+    <div class="version-banner version-banner-outdated">
+    You are viewing documentation for an outdated version of Debezium.
+    <br/>
+            If you want to view the latest stable version of this page, please go <a href=/documentation/reference/stable/index.html>here</a>.
+            
+</div>            <h1 class="page">Message Filtering</h1>
         <div id="preamble">
 <div class="sectionbody">
 <div id="toc" class="toc">
@@ -522,7 +514,7 @@ The <code>process</code> function is the entry point for executing the actual fi
 <div class="sectionbody">
 <div class="paragraph">
 <p>For security reasons, the filter SMT is not included with the Debezium connector archives.
-Instead, it is provided in a separate artifact, <code>debezium-scripting-3.2.2.Final.tar.gz</code>.</p>
+Instead, it is provided in a separate artifact, <code>debezium-scripting-3.2.7.Final.tar.gz</code>.</p>
 </div>
 <div class="paragraph">
 <p>To use the content-based routing SMT with a Debezium connector plug-in, you must explicitly add the SMT artifact to your Kafka Connect environment.
@@ -530,12 +522,12 @@ IMPORTANT: After the filter SMT is present in a Kafka Connect instance, any user
 To ensure that scripting expressions can be run only by authorized users, be sure to secure the Kafka Connect instance and its configuration interface before you add the filter SMT.</p>
 </div>
 <div class="paragraph">
-<p>With <a href="https://zookeeper.apache.org">Zookeeper</a>, <a href="http://kafka.apache.org/">Kafka</a>, <a href="https://kafka.apache.org/documentation.html#connect">Kafka Connect</a>, and one or more Debezium connectors installed, the remaining tasks to install the filter SMT are:</p>
+<p>With <a href="http://kafka.apache.org/">Kafka</a>, <a href="https://kafka.apache.org/documentation.html#connect">Kafka Connect</a> and one or more Debezium connectors installed, the remaining tasks to install the filter SMT are:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Download the <a href="https://repo1.maven.org/maven2/io/debezium/debezium-scripting/3.2.2.Final/debezium-scripting-3.2.2.Final.tar.gz">scripting SMT archive</a></p>
+<p>Download the <a href="https://repo1.maven.org/maven2/io/debezium/debezium-scripting/3.2.7.Final/debezium-scripting-3.2.7.Final.tar.gz">scripting SMT archive</a></p>
 </li>
 <li>
 <p>Extract the contents of the archive into the Debezium plug-in directories of your Kafka Connect environment.</p>
@@ -952,7 +944,7 @@ It should be either <code>wasm.chicory</code> or <code>wasm.chicory-interpreter<
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/f0476537bb6d91e814b289bf5abc5ce4a63c818a">f0476537</a></span>)
+            <div class="copyright">Copyright &copy; 2026 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/7e02c26630bb22918d6d8fcd5d924b126b624934">7e02c266</a></span>)
             
         </div>
     </footer>

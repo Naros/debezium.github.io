@@ -147,6 +147,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="jdbc.html">JDBC</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mongodb-sink.html">MongoDB Sink</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -317,10 +320,19 @@
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version">
-          <a href="/documentation/reference/3.2/index.html">3.2</a>
+          <a href="/documentation/reference/3.5/index.html">3.5</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.6/index.html">3.6</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.4/index.html">3.4</a>
         </li>
         <li class="version is-current">
           <a href="/documentation/reference/3.3/index.html">3.3</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.2/index.html">3.2</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.1/index.html">3.1</a>
@@ -330,27 +342,6 @@
         </li>
         <li class="version">
           <a href="/documentation/reference/2.7/index.html">2.7</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.6/index.html">2.6</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.5/index.html">2.5</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.4/index.html">2.4</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.3/index.html">2.3</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.2/index.html">2.2</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.1/index.html">2.1</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.0/index.html">2.0</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/1.9/index.html">1.9</a>
@@ -379,18 +370,14 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">3.3</button>
         <div class="version-menu">
                         <a class="version" href="/documentation//reference/connectors/postgresql.html" data-hash="true">nightly</a>
-                        <a class="version" href="/documentation//reference/stable/connectors/postgresql.html" data-hash="true">3.2</a>
+                        <a class="version" href="/documentation//reference/stable/connectors/postgresql.html" data-hash="true">3.5</a>
+                        <a class="version" href="/documentation//reference/3.6/connectors/postgresql.html" data-hash="true">3.6</a>
+                        <a class="version" href="/documentation//reference/3.4/connectors/postgresql.html" data-hash="true">3.4</a>
                         <a class="version is-current" href="/reference/3.3/connectors/postgresql.html" data-hash="true">3.3</a>
+                        <a class="version" href="/documentation//reference/3.2/connectors/postgresql.html" data-hash="true">3.2</a>
                         <a class="version" href="/documentation//reference/3.1/connectors/postgresql.html" data-hash="true">3.1</a>
                         <a class="version" href="/documentation//reference/3.0/connectors/postgresql.html" data-hash="true">3.0</a>
                         <a class="version" href="/documentation//reference/2.7/connectors/postgresql.html" data-hash="true">2.7</a>
-                        <a class="version" href="/documentation//reference/2.6/connectors/postgresql.html" data-hash="true">2.6</a>
-                        <a class="version" href="/documentation//reference/2.5/connectors/postgresql.html" data-hash="true">2.5</a>
-                        <a class="version" href="/documentation//reference/2.4/connectors/postgresql.html" data-hash="true">2.4</a>
-                        <a class="version" href="/documentation//reference/2.3/connectors/postgresql.html" data-hash="true">2.3</a>
-                        <a class="version" href="/documentation//reference/2.2/connectors/postgresql.html" data-hash="true">2.2</a>
-                        <a class="version" href="/documentation//reference/2.1/connectors/postgresql.html" data-hash="true">2.1</a>
-                        <a class="version" href="/documentation//reference/2.0/connectors/postgresql.html" data-hash="true">2.0</a>
                         <a class="version" href="/documentation//reference/1.9/connectors/postgresql.html" data-hash="true">1.9</a>
         </div>
         |
@@ -419,8 +406,8 @@
 <div class="article-cell1">
 <article class="doc">
         
-    <div class="version-banner version-banner-development">
-    You are viewing documentation for the current development version of Debezium.
+    <div class="version-banner version-banner-outdated">
+    You are viewing documentation for an outdated version of Debezium.
     <br/>
             If you want to view the latest stable version of this page, please go <a href=/documentation/reference/stable/index.html>here</a>.
             
@@ -1050,10 +1037,11 @@ Debezium currently supports the <code>incremental</code> and <code>blocking</cod
 <p>To specify the tables to include in the snapshot, provide a <code>data-collections</code> array that lists the tables, or an array of regular expressions used to match tables, for example,<br></p>
 </div>
 <div class="paragraph">
-<p><code>{"data-collections": ["public.MyFirstTable", "public.MySecondTable"]}</code><br></p>
+<p><code>{"data-collections": ["public.MyFirstTable", "public.MySecondTable"]}</code></p>
 </div>
 <div class="paragraph">
-<p>The <code>data-collections</code> array for an incremental snapshot signal has no default value.
+<p>Data collection names are case-sensitive.
+The <code>data-collections</code> array for an incremental snapshot signal has no default value.
 If the <code>data-collections</code> array is empty, Debezium interprets the empty array to mean that no action is required, and it does not perform a snapshot.</p>
 </div>
 <div class="admonitionblock note">
@@ -1075,7 +1063,7 @@ For example, to include a table that exists in the <code><strong>public</strong>
 <div class="title">Prerequisites</div>
 <ul>
 <li>
-<p><a href="../configuration/signalling.html#debezium-signaling-enabling-source-signaling-channel" class="xref page">Signaling is enabled</a>.<br></p>
+<p><a href="../configuration/signalling.html#debezium-signaling-enabling-source-signaling-channel" class="xref page">Signaling is enabled</a>.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1138,43 +1126,60 @@ The following table describes the parameters in the example:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>schema.debezium_signal</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the fully-qualified name of the signaling table on the source database.</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specifies the fully-qualified name of the signaling table on the source database.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>ad-hoc-1</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>id</code> parameter specifies an arbitrary string that is assigned as the <code>id</code> identifier for the signal request.<br>
-Use this string to identify logging messages to entries in the signaling table.
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The <code>id</code> parameter specifies an arbitrary string that is assigned as the <code>id</code> identifier for the signal request.</p>
+</div>
+<div class="paragraph">
+<p>Use this string to identify logging messages to entries in the signaling table.
 Debezium does not use this string.
-Rather, during the snapshot, Debezium generates its own <code>id</code> string as a watermarking signal.</p></td>
+Rather, during the snapshot, Debezium generates its own <code>id</code> string as a watermarking signal.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>execute-snapshot</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>type</code> parameter specifies the operation that the signal is intended to trigger.<br></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The <code>type</code> parameter specifies the operation that the signal is intended to trigger.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data-collections</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A required component of the <code>data</code> field of a signal that specifies an array of table names or regular expressions to match table names to include in the snapshot.<br>
-The array lists regular expressions that use the format <code>schema.table</code> to match the fully-qualified names of the tables.
-This format is the same as the one that you use to specify the name of the connector&#8217;s <a href="../configuration/signalling.html#format-for-specifying-fully-qualified-names-for-data-collections" class="xref page">signaling table</a>.</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A required component of the <code>data</code> field of a signal that specifies an array of table names or regular expressions to match table names to include in the snapshot.</p>
+</div>
+<div class="paragraph">
+<p>The array lists regular expressions that use the format <code>schema.table</code> to match the fully-qualified names of the tables.
+This format is the same as the one that you use to specify the name of the connector&#8217;s <a href="../configuration/signalling.html#format-for-specifying-fully-qualified-names-for-data-collections" class="xref page">signaling table</a>.
+Data collection names are case-sensitive.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>incremental</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An optional <code>type</code> component of the <code>data</code> field of a signal that specifies the type of snapshot operation to run.<br>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An optional <code>type</code> component of the <code>data</code> field of a signal that specifies the type of snapshot operation to run.<br>
 Valid values are <code>incremental</code> and <code>blocking</code>.<br>
-If you do not specify a value, the connector defaults to performing an incremental snapshot.</p></td>
+If you do not specify a value, the connector defaults to performing an incremental snapshot.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>additional-conditions</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An optional array that specifies a set of additional conditions that the connector evaluates to determine the subset of records to include in a snapshot.<br>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An optional array that specifies a set of additional conditions that the connector evaluates to determine the subset of records to include in a snapshot.<br>
 Each additional condition is an object with <code>data-collection</code> and <code>filter</code> properties.
 You can specify different filters for each data collection.<br>
 * The <code>data-collection</code> property is the fully-qualified name of the data collection that the filter applies to.
-For more information about the <code>additional-conditions</code> parameter, see <a href="#postgresql-incremental-snapshots-additional-conditions">Running an ad hoc incremental snapshots with <code>additional-conditions</code></a>.</p></td>
+For more information about the <code>additional-conditions</code> parameter, see <a href="#postgresql-incremental-snapshots-additional-conditions">Running an ad hoc incremental snapshots with <code>additional-conditions</code></a>.</p>
+</div></div></td>
 </tr>
 </tbody>
 </table>
@@ -1346,22 +1351,38 @@ See the next section for more details.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data-collections</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>N/A</em></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>An array of comma-separated regular expressions that match the fully-qualified names of tables to include in the snapshot.<br>
-Specify the names by using the same format as is required for the <a href="#postgresql-property-signal-data-collection">signal.data.collection</a> configuration option.</p>
+<p>An array of comma-separated regular expressions that match the fully-qualified names of tables to include in the snapshot.</p>
+</div>
+<div class="paragraph">
+<p>Specify the names by using the same format as is required for the <a href="#postgresql-property-signal-data-collection">signal.data.collection</a> configuration option.
+Data collection names are case-sensitive.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>additional-conditions</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>N/A</em></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>An optional array of additional conditions that specifies criteria that the connector evaluates to designate a subset of records to include in a snapshot.<br>
-Each additional condition is an object that specifies the criteria for filtering the data that an ad hoc snapshot captures.
-You can set the following parameters for each additional condition:
-<code>data-collection</code>:: The fully-qualified name of the table that the filter applies to.
-You can apply different filters to each table.
-<code>filter</code>:: Specifies column values that must be present in a database record for the snapshot to include it, for example,  <code>"color='blue'"</code>.<br>
-<br>
-The values that you assign to the <code>filter</code> parameter are the same types of values that you might specify in the <code>WHERE</code> clause of <code>SELECT</code> statements when you set the <code>snapshot.select.statement.overrides</code> property for a blocking snapshot.</p>
+<p>An optional array of additional conditions that specifies criteria that the connector evaluates to designate a subset of records to include in a snapshot.</p>
+</div>
+<div class="paragraph">
+<p>Each additional condition is an object that specifies the criteria for filtering the data that an ad hoc snapshot captures.
+You can set the following parameters for each additional condition:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>data-collection</code></dt>
+<dd>
+<p>The fully-qualified name of the table that the filter applies to.
+You can apply different filters to each table.</p>
+</dd>
+<dt class="hdlist1"><code>filter</code></dt>
+<dd>
+<p>Specifies column values that must be present in a database record for the snapshot to include it, for example,  <code>"color='blue'"</code>.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The values that you assign to the <code>filter</code> parameter are the same types of values that you might specify in the <code>WHERE</code> clause of <code>SELECT</code> statements when you set the <code>snapshot.select.statement.overrides</code> property for a blocking snapshot.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2584,7 +2605,7 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
             "email": "annek@noanswer.org"
         },
         "source": { <i class="conum" data-value="8"></i><b>(8)</b>
-            "version": "3.3.0.Alpha2",
+            "version": "3.3.2.Final",
             "connector": "postgresql",
             "name": "PostgreSQL_server",
             "ts_ms": 1559033904863,
@@ -2788,7 +2809,7 @@ In the <code>source</code> object, <code>ts_ms</code> indicates the time that th
             "email": "annek@noanswer.org"
         },
         "source": { <i class="conum" data-value="3"></i><b>(3)</b>
-            "version": "3.3.0.Alpha2",
+            "version": "3.3.2.Final",
             "connector": "postgresql",
             "name": "PostgreSQL_server",
             "ts_ms": 1559033904863,
@@ -2937,7 +2958,7 @@ as a primary key change. For a primary key change, in place of sending an <code>
         },
         "after": null, <i class="conum" data-value="2"></i><b>(2)</b>
         "source": { <i class="conum" data-value="3"></i><b>(3)</b>
-            "version": "3.3.0.Alpha2",
+            "version": "3.3.2.Final",
             "connector": "postgresql",
             "name": "PostgreSQL_server",
             "ts_ms": 1559033904863,
@@ -3077,7 +3098,7 @@ The message key is <code>null</code> in this case, the message value looks like 
     "schema": { ... },
     "payload": {
         "source": { <i class="conum" data-value="1"></i><b>(1)</b>
-            "version": "3.3.0.Alpha2",
+            "version": "3.3.2.Final",
             "connector": "postgresql",
             "name": "PostgreSQL_server",
             "ts_ms": 1559033904863,
@@ -3220,7 +3241,7 @@ The message value looks like this for transactional messages:</p>
     "schema": { ... },
     "payload": {
         "source": { <i class="conum" data-value="1"></i><b>(1)</b>
-            "version": "3.3.0.Alpha2",
+            "version": "3.3.2.Final",
             "connector": "postgresql",
             "name": "PostgreSQL_server",
             "ts_ms": 1559033904863,
@@ -3256,7 +3277,7 @@ The message value looks like this for non-transactional messages:</p>
     "schema": { ... },
     "payload": {
         "source": { <i class="conum" data-value="1"></i><b>(1)</b>
-            "version": "3.3.0.Alpha2",
+            "version": "3.3.2.Final",
             "connector": "postgresql",
             "name": "PostgreSQL_server",
             "ts_ms": 1559033904863,
@@ -5176,7 +5197,7 @@ shared_preload_libraries = 'decoderbufs' <i class="conum" data-value="1"></i><b>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Instructs the server to load the <code>decoderbufs</code> logical decoding plug-ins at startup (the name of the plug-in is set in the <a href="https://github.com/debezium/postgres-decoderbufs/blob/v3.3.0.Alpha2/Makefile"><code>Protobuf</code></a> make file).</td>
+<td>Instructs the server to load the <code>decoderbufs</code> logical decoding plug-ins at startup (the name of the plug-in is set in the <a href="https://github.com/debezium/postgres-decoderbufs/blob/v3.3.2.Final/Makefile"><code>Protobuf</code></a> make file).</td>
 </tr>
 </table>
 </div>
@@ -5711,7 +5732,7 @@ If necessary, you can confirm whether the connector read all changes from the re
 <div class="title">Procedure</div>
 <ol class="arabic">
 <li>
-<p>Download the Debezium <a href="https://repo1.maven.org/maven2/io/debezium/debezium-connector-postgres/3.3.0.Alpha2/debezium-connector-postgres-3.3.0.Alpha2-plugin.tar.gz">PostgreSQL connector plug-in archive</a>.</p>
+<p>Download the Debezium <a href="https://repo1.maven.org/maven2/io/debezium/debezium-connector-postgres/3.3.2.Final/debezium-connector-postgres-3.3.2.Final-plugin.tar.gz">PostgreSQL connector plug-in archive</a>.</p>
 </li>
 <li>
 <p>Extract the files into your Kafka Connect environment.</p>
@@ -7785,9 +7806,14 @@ You can configure the connector to skip the following types of operations:</p>
 <p>No default value</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Fully-qualified name of the data collection that is used to send signals to the connector.<br>
-Use the following format to specify the collection name:<br>
-<code><em>&lt;schemaName&gt;</em>.<em>&lt;tableName&gt;</em></code><br></p>
+<p>Fully-qualified name of the data collection that is used to send signals to the connector.
+The collection name is case-sensitive.</p>
+</div>
+<div class="paragraph">
+<p>Use the following format to specify the collection name:</p>
+</div>
+<div class="paragraph">
+<p><code><em>&lt;schemaName&gt;</em>.<em>&lt;tableName&gt;</em></code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -8072,6 +8098,43 @@ Set the value to <code>0</code> (zero) to remove the timeout limit.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="postgresql-property-guardrail-collections-max"></a><a href="#postgresql-property-guardrail-collections-max"><code>guardrail.collections.max</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>0</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specifies the maximum number of tables that the connector can capture.
+Exceeding this limit triggers the action specified by <code>guardrail.collections.limit.action</code>.
+Set this property to  <code>0</code> to prevent the connector from triggering guardrail actions.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="postgresql-property-guardrail-collections-limit-action"></a><a href="#postgresql-property-guardrail-collections-limit-action"><code>guardrail.collections.limit.action</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>warn</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specifies the action to trigger if the number of tables that the connector captures exceeds the number that you specify in the <code>guardrail.collections.max</code> property.
+Set the property to one of the following values:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>fail</code></dt>
+<dd>
+<p>The connector fails and reports an exception.</p>
+</dd>
+<dt class="hdlist1"><code>warn</code></dt>
+<dd>
+<p>The connector logs a warning.</p>
+</dd>
+</dl>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="postgresql-property-extended-headers-enabled"></a><a href="#postgresql-property-extended-headers-enabled"><code>extended.headers.enabled</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -8203,7 +8266,7 @@ Each pair references the Kafka cluster that is used by the Debezium Kafka Connec
 <h5 id="debezium-postgresql-connector-pass-through-signals-kafka-consumer-client-configuration-properties"><a class="anchor" href="#debezium-postgresql-connector-pass-through-signals-kafka-consumer-client-configuration-properties"></a>Pass-through properties for configuring the Kafka consumer client for the signaling channel</h5>
 <div class="paragraph">
 <p>The Debezium connector provides for pass-through configuration of the signals Kafka consumer.
-Pass-through signals properties begin with the prefix <code>signals.consumer.*</code>.
+Pass-through signals properties begin with the prefix <code>signal.consumer.*</code>.
 For example, the connector passes properties such as <code>signal.consumer.security.protocol=SSL</code> to the Kafka consumer.</p>
 </div>
 <div class="paragraph">
@@ -8349,9 +8412,9 @@ If you specify multiple key-value pairs, all of the specified pairs are appended
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
+<col style="width: 35%;">
+<col style="width: 20%;">
 <col style="width: 45%;">
-<col style="width: 25%;">
-<col style="width: 30%;">
 </colgroup>
 <thead>
 <tr>
@@ -8381,6 +8444,21 @@ If you specify multiple key-value pairs, all of the specified pairs are appended
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The number of milliseconds since the connector has read and processed the most recent event.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-snaps-metric-numberoferroneousevents_postgresql"></a><a href="#connectors-snaps-metric-numberoferroneousevents_postgresql"><code>NumberOfErroneousEvents</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>long</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Records the number of change events that the connector identifies as erroneous during a snapshot operation.
+The connector increments this metric each time that it encounters an event that it cannot process during an initial, incremental, or ad hoc snapshot.
+Events might fail processing if they are malformed, are incompatible with the schema, or if they encounter failures during transformation.
+The metric value persists for the lifetime of the connector task.
+If the snapshot is interrupted, and the connector task restarts, the metric count resets to <code>0</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -8659,9 +8737,9 @@ Updates every 10,000 rows scanned and upon completing a table.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
+<col style="width: 35%;">
+<col style="width: 20%;">
 <col style="width: 45%;">
-<col style="width: 25%;">
-<col style="width: 30%;">
 </colgroup>
 <thead>
 <tr>
@@ -8691,6 +8769,21 @@ Updates every 10,000 rows scanned and upon completing a table.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The number of milliseconds since the connector has read and processed the most recent event.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-strm-metric-numberoferroneousevents_postgresql"></a><a href="#connectors-strm-metric-numberoferroneousevents_postgresql"><code>NumberOfErroneousEvents</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>long</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Records the number of change events that the connector identifies as erroneous during streaming.
+The connector increments this metric each time that it encounters an event that it cannot process during the lifetime of the streaming session.
+Events might fail processing if they are malformed, are incompatible with the schema, or if they encounter failures during transformation.
+The metric value persists for the lifetime of the connector task.
+After a connector restart, the metric count resets to <code>0</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -9087,7 +9180,7 @@ For example, verify that the configuration includes the correct values for the f
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/5468876a3e40377d05c5976eb80911336c929584">5468876a</a></span>)
+            <div class="copyright">Copyright &copy; 2026 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/0b179dbdf28aad397c0c1abcfa9a11cbfd470c7f">0b179dbd</a></span>)
             
         </div>
     </footer>

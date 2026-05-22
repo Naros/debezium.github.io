@@ -52,7 +52,13 @@
     <span class="nav-text">Getting Started</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../tutorial.html">Tutorial</a>
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../tutorials.html">Tutorials</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../kc-tutorial.html">Kafka Connect</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -147,6 +153,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/jdbc.html">JDBC</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/mongodb-sink.html">MongoDB Sink</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -196,6 +205,9 @@
     <a class="nav-link" href="../transformations/timezone-converter.html">Timezone Converter</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/geometry-format-transformer.html">Geometry Format Conversion</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/timescaledb.html">TimescaleDB Integration</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -203,6 +215,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/vector-to-json.html">Vector Data Types to JSON Types</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/swap-geometry-coordinates.html">Swap Geometry Coordinates</a>
   </li>
 </ul>
   </li>
@@ -253,6 +268,9 @@
     <a class="nav-link" href="../integrations/quarkus-debezium-engine-extension.html">Debezium Extensions for Quarkus</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../integrations/hibernate-cache.html">Hibernate Cache Invalidation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../integrations/testcontainers.html">Integration Testing with Testcontainers</a>
   </li>
 </ul>
@@ -263,6 +281,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../ai/embeddings.html">Embeddings Transformation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ai/docling.html">Docling Transformation</a>
   </li>
 </ul>
   </li>
@@ -317,10 +338,19 @@
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version">
-          <a href="/documentation/reference/3.2/index.html">3.2</a>
+          <a href="/documentation/reference/3.5/index.html">3.5</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.6/index.html">3.6</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.4/index.html">3.4</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.3/index.html">3.3</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.2/index.html">3.2</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.1/index.html">3.1</a>
@@ -330,27 +360,6 @@
         </li>
         <li class="version">
           <a href="/documentation/reference/2.7/index.html">2.7</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.6/index.html">2.6</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.5/index.html">2.5</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.4/index.html">2.4</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.3/index.html">2.3</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.2/index.html">2.2</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.1/index.html">2.1</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.0/index.html">2.0</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/1.9/index.html">1.9</a>
@@ -379,18 +388,14 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
                         <a class="version is-current" href="/reference/operations/logging.html" data-hash="true">nightly</a>
-                        <a class="version" href="/documentation//reference/stable/operations/logging.html" data-hash="true">3.2</a>
+                        <a class="version" href="/documentation//reference/stable/operations/logging.html" data-hash="true">3.5</a>
+                        <a class="version" href="/documentation//reference/3.6/operations/logging.html" data-hash="true">3.6</a>
+                        <a class="version" href="/documentation//reference/3.4/operations/logging.html" data-hash="true">3.4</a>
                         <a class="version" href="/documentation//reference/3.3/operations/logging.html" data-hash="true">3.3</a>
+                        <a class="version" href="/documentation//reference/3.2/operations/logging.html" data-hash="true">3.2</a>
                         <a class="version" href="/documentation//reference/3.1/operations/logging.html" data-hash="true">3.1</a>
                         <a class="version" href="/documentation//reference/3.0/operations/logging.html" data-hash="true">3.0</a>
                         <a class="version" href="/documentation//reference/2.7/operations/logging.html" data-hash="true">2.7</a>
-                        <a class="version" href="/documentation//reference/2.6/operations/logging.html" data-hash="true">2.6</a>
-                        <a class="version" href="/documentation//reference/2.5/operations/logging.html" data-hash="true">2.5</a>
-                        <a class="version" href="/documentation//reference/2.4/operations/logging.html" data-hash="true">2.4</a>
-                        <a class="version" href="/documentation//reference/2.3/operations/logging.html" data-hash="true">2.3</a>
-                        <a class="version" href="/documentation//reference/2.2/operations/logging.html" data-hash="true">2.2</a>
-                        <a class="version" href="/documentation//reference/2.1/operations/logging.html" data-hash="true">2.1</a>
-                        <a class="version" href="/documentation//reference/2.0/operations/logging.html" data-hash="true">2.0</a>
                         <a class="version" href="/documentation//reference/1.9/operations/logging.html" data-hash="true">1.9</a>
         </div>
         |
@@ -461,49 +466,73 @@ In such cases, you can change the logging level so that the connector generates 
 <h2 id="logging-concepts"><a class="anchor" href="#logging-concepts"></a>Logging concepts</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Before configuring logging, you should understand what Log4J <em>loggers</em>, <em>log levels</em>, and <em>appenders</em> are.</p>
+<p>The Log4j logging configuration determines which Debezium messages you see and where they appear, so that you can monitor connector health, troubleshoot problems, and understand connector behavior.
+Understanding how loggers, log levels, and appenders work together helps you to set a logging configuration that filters log output in ways that enhance visibility of relevant information.</p>
 </div>
-<h3 id="_loggers" class="discrete">Loggers</h3>
-<div class="paragraph">
-<p>Each log message produced by the application is sent to a specific <em>logger</em>
-(for example, <code>io.debezium.connector.mysql</code>).
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Loggers</dt>
+<dd>
+<p>Debezium sends each log message that it produces to a specific logger, for example, <code>io.debezium.connector.mysql</code>.
 Loggers are arranged in hierarchies.
-For example, the <code>io.debezium.connector.mysql</code> logger is the child of the <code>io.debezium.connector</code> logger,
-which is the child of the <code>io.debezium</code> logger.
-At the top of the hierarchy,
-the <em>root logger</em> defines the default logger configuration for all of the loggers beneath it.</p>
+For example, the <code>io.debezium.connector.mysql</code> logger is the child of the <code>io.debezium.connector</code> logger, which is the child of the <code>io.debezium</code> logger.
+The root logger is the parent of all other loggers in the hierarchy and its configuration serves as the default configuration for all of its descendants.
+You can override the default configuration of descendant loggers to specify unique log levels and appenders.</p>
+</dd>
+<dt class="hdlist1">Log levels</dt>
+<dd>
+<p>The application assigns one of the following log levels to each log message:</p>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+<code>ERROR</code>
+</td>
+<td class="hdlist2">
+<p>Errors, exceptions, and other significant problems.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>WARN</code>
+</td>
+<td class="hdlist2">
+<p>Potential problems and issues.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>INFO</code>
+</td>
+<td class="hdlist2">
+<p>Status and general activity (usually low-volume).</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>DEBUG</code>
+</td>
+<td class="hdlist2">
+<p>More detailed activity that is useful in diagnosing unexpected behavior.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>TRACE</code>
+</td>
+<td class="hdlist2">
+<p>Very verbose and detailed activity (usually very high-volume).</p>
+</td>
+</tr>
+</table>
 </div>
-<h3 id="_log_levels" class="discrete">Log levels</h3>
-<div class="paragraph">
-<p>Every log message produced by the application also has a specific <em>log level</em>:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><code>ERROR</code> - errors, exceptions, and other significant problems</p>
-</li>
-<li>
-<p><code>WARN</code> - <em>potential</em> problems and issues</p>
-</li>
-<li>
-<p><code>INFO</code> - status and general activity (usually low-volume)</p>
-</li>
-<li>
-<p><code>DEBUG</code> - more detailed activity that would be useful in diagnosing unexpected behavior</p>
-</li>
-<li>
-<p><code>TRACE</code> - very verbose and detailed activity (usually very high-volume)</p>
-</li>
-</ol>
-</div>
-<h3 id="_appenders" class="discrete">Appenders</h3>
-<div class="paragraph">
-<p>An <em>appender</em> is essentially a destination where log messages are written.
-Each appender controls the format of its log messages,
-giving you even more control over what the log messages look like.</p>
-</div>
-<div class="paragraph">
-<p>To configure logging, you specify the desired level for each logger and the appender(s) where those log messages should be written. Since loggers are hierarchical, the configuration for the root logger serves as a default for all of the loggers below it, although you can override any child (or descendant) logger.</p>
+</dd>
+<dt class="hdlist1">Appenders</dt>
+<dd>
+<p>An appender specifies the destination where Debezium writes log messages.
+Because each appender delegates message formatting to an associated Layout, you can control the message format by sending messages to a specific appender.</p>
+</dd>
+</dl>
 </div>
 </div>
 </div>
@@ -793,7 +822,7 @@ For example, <code>MySql</code>, <code>Mongo</code>, <code>Postgres</code>, and 
 All threads associated with the same <em>type</em> of connector use the same value,
 so you can use this to find all log messages produced by a given type of connector.</p>
 </dd>
-<dt class="hdlist1"><code>dbz.connectorName</code></dt>
+<dt class="hdlist1"><code>dbz.connectorLogicalName</code></dt>
 <dd>
 <p>The name of the connector or database server as defined in the connector&#8217;s configuration.
 For example <code>products</code>, <code>serverA</code>, and so on.
@@ -830,7 +859,7 @@ In the following example, the <code>stdout</code> appender is configured to use 
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-properties hljs" data-lang="properties">...
-log4j.appender.stdout.layout.ConversionPattern=%d{ISO8601} %-5p  %X{dbz.connectorType}|%X{dbz.connectorName}|%X{dbz.connectorContext}  %m   [%c]%n
+log4j.appender.stdout.layout.ConversionPattern=%d{ISO8601} %-5p  %X{dbz.connectorType}|%X{dbz.connectorLogicalName}|%X{dbz.connectorContext}  %m   [%c]%n
 ...</code></pre>
 </div>
 </div>
@@ -902,7 +931,7 @@ COPY log4j.properties $KAFKA_HOME/config/log4j.properties
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/902dd6422c9d4eec1c7391107c3e974075fc0cb7">902dd642</a></span>)
+            <div class="copyright">Copyright &copy; 2026 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/1d381a8915e007c99e034748be22264d1466e105">1d381a89</a></span>)
             
         </div>
     </footer>

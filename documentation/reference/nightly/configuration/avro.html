@@ -52,7 +52,13 @@
     <span class="nav-text">Getting Started</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../tutorial.html">Tutorial</a>
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../tutorials.html">Tutorials</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../kc-tutorial.html">Kafka Connect</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -147,6 +153,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/jdbc.html">JDBC</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/mongodb-sink.html">MongoDB Sink</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -196,6 +205,9 @@
     <a class="nav-link" href="../transformations/timezone-converter.html">Timezone Converter</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/geometry-format-transformer.html">Geometry Format Conversion</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/timescaledb.html">TimescaleDB Integration</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -203,6 +215,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/vector-to-json.html">Vector Data Types to JSON Types</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/swap-geometry-coordinates.html">Swap Geometry Coordinates</a>
   </li>
 </ul>
   </li>
@@ -253,6 +268,9 @@
     <a class="nav-link" href="../integrations/quarkus-debezium-engine-extension.html">Debezium Extensions for Quarkus</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../integrations/hibernate-cache.html">Hibernate Cache Invalidation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../integrations/testcontainers.html">Integration Testing with Testcontainers</a>
   </li>
 </ul>
@@ -263,6 +281,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../ai/embeddings.html">Embeddings Transformation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ai/docling.html">Docling Transformation</a>
   </li>
 </ul>
   </li>
@@ -317,10 +338,19 @@
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version">
-          <a href="/documentation/reference/3.2/index.html">3.2</a>
+          <a href="/documentation/reference/3.5/index.html">3.5</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.6/index.html">3.6</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.4/index.html">3.4</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.3/index.html">3.3</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.2/index.html">3.2</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.1/index.html">3.1</a>
@@ -330,27 +360,6 @@
         </li>
         <li class="version">
           <a href="/documentation/reference/2.7/index.html">2.7</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.6/index.html">2.6</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.5/index.html">2.5</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.4/index.html">2.4</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.3/index.html">2.3</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.2/index.html">2.2</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.1/index.html">2.1</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.0/index.html">2.0</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/1.9/index.html">1.9</a>
@@ -379,18 +388,14 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
                         <a class="version is-current" href="/reference/configuration/avro.html" data-hash="true">nightly</a>
-                        <a class="version" href="/documentation//reference/stable/configuration/avro.html" data-hash="true">3.2</a>
+                        <a class="version" href="/documentation//reference/stable/configuration/avro.html" data-hash="true">3.5</a>
+                        <a class="version" href="/documentation//reference/3.6/configuration/avro.html" data-hash="true">3.6</a>
+                        <a class="version" href="/documentation//reference/3.4/configuration/avro.html" data-hash="true">3.4</a>
                         <a class="version" href="/documentation//reference/3.3/configuration/avro.html" data-hash="true">3.3</a>
+                        <a class="version" href="/documentation//reference/3.2/configuration/avro.html" data-hash="true">3.2</a>
                         <a class="version" href="/documentation//reference/3.1/configuration/avro.html" data-hash="true">3.1</a>
                         <a class="version" href="/documentation//reference/3.0/configuration/avro.html" data-hash="true">3.0</a>
                         <a class="version" href="/documentation//reference/2.7/configuration/avro.html" data-hash="true">2.7</a>
-                        <a class="version" href="/documentation//reference/2.6/configuration/avro.html" data-hash="true">2.6</a>
-                        <a class="version" href="/documentation//reference/2.5/configuration/avro.html" data-hash="true">2.5</a>
-                        <a class="version" href="/documentation//reference/2.4/configuration/avro.html" data-hash="true">2.4</a>
-                        <a class="version" href="/documentation//reference/2.3/configuration/avro.html" data-hash="true">2.3</a>
-                        <a class="version" href="/documentation//reference/2.2/configuration/avro.html" data-hash="true">2.2</a>
-                        <a class="version" href="/documentation//reference/2.1/configuration/avro.html" data-hash="true">2.1</a>
-                        <a class="version" href="/documentation//reference/2.0/configuration/avro.html" data-hash="true">2.0</a>
                         <a class="version" href="/documentation//reference/1.9/configuration/avro.html" data-hash="true">1.9</a>
         </div>
         |
@@ -468,7 +473,7 @@ For each change event record, the Debezium connector completes the following act
 <p>You can specify converters for each individual Debezium connector instance.
 Kafka Connect provides a JSON converter that serializes the record keys and values into JSON documents.
 The default behavior is that the JSON converter includes the record&#8217;s message schema, which makes each record very verbose.
-The <a href="../tutorial.html" class="xref page">Debezium Tutorial</a> shows what the records look like when both payload and schemas are included.
+The <a href="../kc-tutorial.html" class="xref page">Debezium Tutorial</a> shows what the records look like when both payload and schemas are included.
 If you want records to be serialized with JSON, consider setting the following connector configuration properties to <code>false</code>:</p>
 </div>
 <div class="ulist">
@@ -585,7 +590,7 @@ Messages do not contain the schema information themselves, but only a schema ID.
 <p>Deploy an <a href="https://github.com/Apicurio/apicurio-registry">Apicurio API and Schema Registry</a> instance.</p>
 </li>
 <li>
-<p>Install the Avro converter from the <a href="https://repo1.maven.org/maven2/io/apicurio/apicurio-registry-distro-connect-converter/2.6.2.Final/apicurio-registry-distro-connect-converter-2.6.2.Final.tar.gz">installation package</a> into a plug-in directory. If you are using the <a href="https://quay.io/repository/debezium/connect">Debezium Connect container image</a>, it&#8217;s not necessary to install the package. For more information, see  <a href="#deploying-with-debezium-containers">Deploying Apicurio Registry with Debezium containers</a>.</p>
+<p>Install the Avro converter from the <a href="https://repo1.maven.org/maven2/io/apicurio/apicurio-registry-distro-connect-converter/2.6.13.Final/apicurio-registry-distro-connect-converter-2.6.13.Final.tar.gz">installation package</a> into a plug-in directory. If you are using the <a href="https://quay.io/repository/debezium/connect">Debezium Connect container image</a>, it&#8217;s not necessary to install the package. For more information, see  <a href="#deploying-with-debezium-containers">Deploying Apicurio Registry with Debezium containers</a>.</p>
 </li>
 <li>
 <p>Configure a Debezium connector instance to use Avro serialization by setting configuration properties as follows:</p>
@@ -680,7 +685,7 @@ Forces Apicurio to serialize Kafka messages with the same structure as Confluent
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-none hljs">docker run -it --rm --name apicurio \
-    -p 8080:8080 apicurio/apicurio-registry-mem:2.6.2.Final</code></pre>
+    -p 8080:8080 apicurio/apicurio-registry-mem:2.6.13.Final</code></pre>
 </div>
 </div>
 </li>
@@ -707,7 +712,7 @@ Forces Apicurio to serialize Kafka messages with the same structure as Confluent
     -e CONNECT_VALUE_CONVERTER_APICURIO_REGISTRY_AUTO-REGISTER=true \
     -e CONNECT_VALUE_CONVERTER_APICURIO_REGISTRY_FIND-LATEST=true \
     -e CONNECT_SCHEMA_NAME_ADJUSTMENT_MODE=avro \
-    -p 8083:8083 quay.io/debezium/connect:3.3</code></pre>
+    -p 8083:8083 quay.io/debezium/connect:3.5</code></pre>
 </div>
 </div>
 </li>
@@ -867,7 +872,7 @@ value.converter.schema.registry.url=http://localhost:8081</code></pre>
     -e VALUE_CONVERTER=io.confluent.connect.avro.AvroConverter \
     -e CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL=http://schema-registry:8081 \
     -e CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL=http://schema-registry:8081 \
-    -p 8083:8083 quay.io/debezium/connect:3.3</code></pre>
+    -p 8083:8083 quay.io/debezium/connect:3.5</code></pre>
 </div>
 </div>
 </li>
@@ -879,7 +884,7 @@ value.converter.schema.registry.url=http://localhost:8081</code></pre>
     --link kafka:kafka \
     --link mysql:mysql \
     --link schema-registry:schema-registry \
-    quay.io/debezium/connect:3.3 \
+    quay.io/debezium/connect:3.5 \
     /kafka/bin/kafka-console-consumer.sh \
       --bootstrap-server kafka:9092 \
       --property print.key=true \
@@ -898,7 +903,7 @@ value.converter.schema.registry.url=http://localhost:8081</code></pre>
 <h2 id="avro-naming"><a class="anchor" href="#avro-naming"></a>Naming</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>As stated in the Avro <a href="https://avro.apache.org/docs/current/spec.html#names">documentation</a>, names must adhere to the following rules:</p>
+<p>As stated in the Avro <a href="https://avro.apache.org/docs/1.12.0/specification/#names">documentation</a>, names must adhere to the following rules:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -940,7 +945,7 @@ see <a href="https://github.com/debezium/debezium-examples/tree/main/tutorial#us
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/902dd6422c9d4eec1c7391107c3e974075fc0cb7">902dd642</a></span>)
+            <div class="copyright">Copyright &copy; 2026 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/1d381a8915e007c99e034748be22264d1466e105">1d381a89</a></span>)
             
         </div>
     </footer>

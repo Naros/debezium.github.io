@@ -52,7 +52,13 @@
     <span class="nav-text">Getting Started</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../tutorial.html">Tutorial</a>
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../tutorials.html">Tutorials</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../kc-tutorial.html">Kafka Connect</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -147,6 +153,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/jdbc.html">JDBC</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/mongodb-sink.html">MongoDB Sink</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -196,6 +205,9 @@
     <a class="nav-link" href="../transformations/timezone-converter.html">Timezone Converter</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/geometry-format-transformer.html">Geometry Format Conversion</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/timescaledb.html">TimescaleDB Integration</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -203,6 +215,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/vector-to-json.html">Vector Data Types to JSON Types</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/swap-geometry-coordinates.html">Swap Geometry Coordinates</a>
   </li>
 </ul>
   </li>
@@ -253,6 +268,9 @@
     <a class="nav-link" href="../integrations/quarkus-debezium-engine-extension.html">Debezium Extensions for Quarkus</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../integrations/hibernate-cache.html">Hibernate Cache Invalidation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../integrations/testcontainers.html">Integration Testing with Testcontainers</a>
   </li>
 </ul>
@@ -263,6 +281,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../ai/embeddings.html">Embeddings Transformation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ai/docling.html">Docling Transformation</a>
   </li>
 </ul>
   </li>
@@ -317,10 +338,19 @@
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version">
-          <a href="/documentation/reference/3.2/index.html">3.2</a>
+          <a href="/documentation/reference/3.5/index.html">3.5</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.6/index.html">3.6</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.4/index.html">3.4</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.3/index.html">3.3</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.2/index.html">3.2</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.1/index.html">3.1</a>
@@ -330,27 +360,6 @@
         </li>
         <li class="version">
           <a href="/documentation/reference/2.7/index.html">2.7</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.6/index.html">2.6</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.5/index.html">2.5</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.4/index.html">2.4</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.3/index.html">2.3</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.2/index.html">2.2</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.1/index.html">2.1</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.0/index.html">2.0</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/1.9/index.html">1.9</a>
@@ -379,18 +388,14 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
                         <a class="version is-current" href="/reference/configuration/signalling.html" data-hash="true">nightly</a>
-                        <a class="version" href="/documentation//reference/stable/configuration/signalling.html" data-hash="true">3.2</a>
+                        <a class="version" href="/documentation//reference/stable/configuration/signalling.html" data-hash="true">3.5</a>
+                        <a class="version" href="/documentation//reference/3.6/configuration/signalling.html" data-hash="true">3.6</a>
+                        <a class="version" href="/documentation//reference/3.4/configuration/signalling.html" data-hash="true">3.4</a>
                         <a class="version" href="/documentation//reference/3.3/configuration/signalling.html" data-hash="true">3.3</a>
+                        <a class="version" href="/documentation//reference/3.2/configuration/signalling.html" data-hash="true">3.2</a>
                         <a class="version" href="/documentation//reference/3.1/configuration/signalling.html" data-hash="true">3.1</a>
                         <a class="version" href="/documentation//reference/3.0/configuration/signalling.html" data-hash="true">3.0</a>
                         <a class="version" href="/documentation//reference/2.7/configuration/signalling.html" data-hash="true">2.7</a>
-                        <a class="version" href="/documentation//reference/2.6/configuration/signalling.html" data-hash="true">2.6</a>
-                        <a class="version" href="/documentation//reference/2.5/configuration/signalling.html" data-hash="true">2.5</a>
-                        <a class="version" href="/documentation//reference/2.4/configuration/signalling.html" data-hash="true">2.4</a>
-                        <a class="version" href="/documentation//reference/2.3/configuration/signalling.html" data-hash="true">2.3</a>
-                        <a class="version" href="/documentation//reference/2.2/configuration/signalling.html" data-hash="true">2.2</a>
-                        <a class="version" href="/documentation//reference/2.1/configuration/signalling.html" data-hash="true">2.1</a>
-                        <a class="version" href="/documentation//reference/2.0/configuration/signalling.html" data-hash="true">2.0</a>
                         <a class="version" href="/documentation//reference/1.9/configuration/signalling.html" data-hash="true">1.9</a>
         </div>
         |
@@ -437,6 +442,7 @@
 </li>
 <li><a href="#debezium-signaling-enabling-source-signaling-channel">Enabling source signaling channel</a>
 <ul class="sectlevel2">
+<li><a href="#format-for-specifying-fully-qualified-names-for-data-collections">Formats for specifying fully qualified names for data collections</a></li>
 <li><a href="#debezium-signaling-data-collection-structure">Structure of a signaling data collection</a></li>
 <li><a href="#debezium-signaling-creating-a-signal-data-collection">Creating a signaling data collection</a></li>
 </ul>
@@ -523,7 +529,7 @@ When Debezium detects that a new <a href="#debezium-signaling-example-of-a-loggi
 <p>Db2</p>
 </li>
 <li>
-<p>MariaDB (Technology Preview)</p>
+<p>MariaDB</p>
 </li>
 <li>
 <p>MongoDB</p>
@@ -578,50 +584,107 @@ For information about the required structure of the signaling data collection, s
 <p>For source databases such as Db2 or SQL Server that implement a native change data capture (CDC) mechanism, enable CDC for the signaling table.</p>
 </li>
 <li>
-<p>Add the name of the signaling data collection to the Debezium connector configuration.<br>
-  In the connector configuration, add the property <code>signal.data.collection</code>, and set its value to the fully-qualified name of the signaling data collection that you created in Step 1.<br>
-<br>
-For example, <code>signal.data.collection = inventory.debezium_signals</code>.<br>
-<br>
-The format for the fully-qualified name of the signaling collection depends on the connector.<br>
-The following example shows the naming formats to use for each connector:</p>
+<p>Add the name of the signaling data collection to the Debezium connector configuration:</p>
+<div class="paragraph">
+<p>In the connector configuration, add the property <code>signal.data.collection</code>, and set its value to the fully-qualified name of the signaling data collection that you created in Step 1.
+The name of the data collection is case-sensitive.</p>
+</div>
+<div class="paragraph">
+<p>For example,</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>signal.data.collection = inventory.debezium_signals</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For more information about setting the <code>signal.data.collection</code> property, see the table of configuration properties for your connector.</p>
+</div>
 </li>
 </ol>
 </div>
-<div id="format-for-specifying-fully-qualified-names-for-data-collections" class="dlist">
-<div class="title">Fully qualified table names</div>
-<dl>
-<dt class="hdlist1">Db2</dt>
-<dd>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you use the <code>table.include.list</code> property, you do not need to include the signaling data collection in it. However, if you use the <code>column.include.list</code> property, you must include the signaling table columns (<code>id</code>, <code>type</code>, and <code>data</code>).
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<div class="title">Additional resources</div>
+<ul>
+<li>
+<p><a href="#format-for-specifying-fully-qualified-names-for-data-collections">Formats for specifying fully qualified names for data collections</a>.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="format-for-specifying-fully-qualified-names-for-data-collections"><a class="anchor" href="#format-for-specifying-fully-qualified-names-for-data-collections"></a>Formats for specifying fully qualified names for data collections</h3>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Db2
+</td>
+<td class="hdlist2">
 <p><code><em>&lt;schemaName&gt;</em>.<em>&lt;tableName&gt;</em></code></p>
-</dd>
-<dt class="hdlist1">MariaDB (Technology Preview)</dt>
-<dd>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+MariaDB
+</td>
+<td class="hdlist2">
 <p><code><em>&lt;databaseName&gt;</em>.<em>&lt;tableName&gt;</em></code></p>
-</dd>
-<dt class="hdlist1">MongoDB</dt>
-<dd>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+MongoDB
+</td>
+<td class="hdlist2">
 <p><code><em>&lt;databaseName&gt;</em>.<em>&lt;collectionName&gt;</em></code></p>
-</dd>
-<dt class="hdlist1">MySQL</dt>
-<dd>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+MySQL
+</td>
+<td class="hdlist2">
 <p><code><em>&lt;databaseName&gt;</em>.<em>&lt;tableName&gt;</em></code></p>
-</dd>
-<dt class="hdlist1">Oracle</dt>
-<dd>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Oracle
+</td>
+<td class="hdlist2">
 <p><code><em>&lt;databaseName&gt;</em>.<em>&lt;schemaName&gt;</em>.<em>&lt;tableName&gt;</em></code></p>
-</dd>
-<dt class="hdlist1">PostgreSQL</dt>
-<dd>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+PostgreSQL
+</td>
+<td class="hdlist2">
 <p><code><em>&lt;schemaName&gt;</em>.<em>&lt;tableName&gt;</em></code></p>
-</dd>
-<dt class="hdlist1">SQL Server</dt>
-<dd>
-<p><code><em>&lt;databaseName&gt;</em>.<em>&lt;schemaName&gt;</em>.<em>&lt;tableName&gt;</em></code><br>
-<br>
-For more information about setting the <code>signal.data.collection</code> property, see the table of configuration properties for your connector.</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+SQL Server
+</td>
+<td class="hdlist2">
+<p><code><em>&lt;databaseName&gt;</em>.<em>&lt;schemaName&gt;</em>.<em>&lt;tableName&gt;</em></code></p>
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="debezium-signaling-data-collection-structure"><a class="anchor" href="#debezium-signaling-data-collection-structure"></a>Structure of a signaling data collection</h3>
@@ -742,6 +805,18 @@ If the size of an ID exceeds the available space, the connector cannot process t
 <pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE TABLE debezium_signal (id VARCHAR(42) PRIMARY KEY, type VARCHAR(32) NOT NULL, data VARCHAR(2048) NULL);</code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The Debezium database user must have the <code>INSERT</code> privilege on the <code>debezium_signal</code> table.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -756,44 +831,30 @@ After you enable the signaling channel, a Kafka consumer is created to consume s
 <div class="title">Additional configuration available for the consumer</div>
 <ul>
 <li>
-<p><a href="../connectors/db2.html#debezium-db2-connector-kafka-signals-configuration-properties" class="xref page">Db2 connector Kafka signal configuration properties</a></p>
+<p><a href="../connectors/db2.html#debezium-db2-connector-pass-through-kafka-signals-configuration-properties" class="xref page">Db2 connector Kafka signal configuration properties</a></p>
 </li>
 <li>
-<p><a href="../connectors/mariadb.html#debezium-mariadb-connector-kafka-signals-configuration-properties" class="xref page">MariaDB connector Kafka signal configuration properties</a></p>
+<p><a href="../connectors/informix.html#debezium-informix-connector-pass-through-kafka-signals-configuration-properties" class="xref page">Informix connector Kafka signal configuration properties</a></p>
 </li>
 <li>
-<p><a href="../connectors/mongodb.html#debezium-mongodb-connector-kafka-signals-configuration-properties" class="xref page">MongoDB connector Kafka signal configuration properties</a></p>
+<p><a href="../connectors/mariadb.html#debezium-mariadb-connector-pass-through-kafka-signals-configuration-properties" class="xref page">MariaDB connector Kafka signal configuration properties</a></p>
 </li>
 <li>
-<p><a href="../connectors/mysql.html#debezium-mysql-connector-kafka-signals-configuration-properties" class="xref page">MySQL connector Kafka signal configuration properties</a></p>
+<p><a href="../connectors/mongodb.html#debezium-mongodb-connector-pass-through-kafka-signals-configuration-properties" class="xref page">MongoDB connector Kafka signal configuration properties</a></p>
 </li>
 <li>
-<p><a href="../connectors/oracle.html#debezium-oracle-connector-kafka-signals-configuration-properties" class="xref page">Oracle connector Kafka signal configuration properties</a></p>
+<p><a href="../connectors/mysql.html#debezium-mysql-connector-pass-through-kafka-signals-configuration-properties" class="xref page">MySQL connector Kafka signal configuration properties</a></p>
 </li>
 <li>
-<p><a href="../connectors/postgresql.html#debezium-postgresql-connector-kafka-signals-configuration-properties" class="xref page">PostgreSQL connector Kafka signal configuration properties</a></p>
+<p><a href="../connectors/oracle.html#debezium-oracle-connector-pass-through-kafka-signals-configuration-properties" class="xref page">Oracle connector Kafka signal configuration properties</a></p>
 </li>
 <li>
-<p><a href="../connectors/sqlserver.html#debezium-sqlserver-connector-kafka-signals-configuration-properties" class="xref page">SQL Server connector Kafka signal configuration properties</a></p>
+<p><a href="../connectors/postgresql.html#debezium-postgresql-connector-pass-through-kafka-signals-configuration-properties" class="xref page">PostgreSQL connector Kafka signal configuration properties</a></p>
+</li>
+<li>
+<p><a href="../connectors/sqlserver.html#debezium-sqlserver-connector-pass-through-kafka-signals-configuration-properties" class="xref page">SQL Server connector Kafka signal configuration properties</a></p>
 </li>
 </ul>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>To use Kafka signaling to trigger ad hoc incremental snapshots for most connectors, you must first <a href="#debezium-signaling-enabling-source-signaling-channel">enable a <code>source</code> signaling channel</a> in the connector configuration.
-The source channel implements a watermarking mechanism to deduplicate events that might be captured by an incremental snapshot and then captured again after streaming resumes.
-Enabling the source channel is not required when using a signaling channel to trigger an incremental snapshot of a read-only MySQL database that has <a href="../connectors/mysql.html#enable-mysql-gtids" class="xref page">GTIDs enabled</a>.
-For more information, see <a href="../connectors/mysql.html#mysql-read-only-incremental-snapshots" class="xref page">MySQL read only incremental snapshot</a></p>
-</div>
-</td>
-</tr>
-</table>
 </div>
 <div class="sect2">
 <h3 id="_message_format"><a class="anchor" href="#_message_format"></a>Message format</h3>
@@ -1138,38 +1199,41 @@ For example:</p>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public interface SignalChannelReader {
 
-    String name(); <i class="conum" data-value="1"></i><b>(1)</b>
+    String name();
 
-    void init(CommonConnectorConfig connectorConfig); <i class="conum" data-value="2"></i><b>(2)</b>
+    void init(CommonConnectorConfig connectorConfig);
 
-    List&lt;SignalRecord&gt; read(); <i class="conum" data-value="3"></i><b>(3)</b>
+    List&lt;SignalRecord&gt; read();
 
-    void close(); <i class="conum" data-value="4"></i><b>(4)</b>
+    void close();
 }</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The name of the reader.
-To enable Debezium to use the channel, specify this name in the connector&#8217;s <code>signal.enabled.channels</code> property.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Initializes specific configuration, variables, or connections that the channel requires.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Reads signal from the channel.
-The <code>SignalProcessor</code> class calls this method to retrieve the signal to process.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Closes all allocated resources.
-Debezium calls this methods when the connector is stopped.</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>The following list describes the purpose of the lines in the preceding example:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>String name();</code></dt>
+<dd>
+<p>The name of the reader.
+To enable Debezium to use the channel, specify this name in the connector&#8217;s <code>signal.enabled.channels</code> property.</p>
+</dd>
+<dt class="hdlist1"><code>void init(CommonConnectorConfig connectorConfig);</code></dt>
+<dd>
+<p>Initializes specific configuration, variables, or connections that the channel requires.</p>
+</dd>
+<dt class="hdlist1"><code>List&lt;SignalRecord&gt; read();</code></dt>
+<dd>
+<p>Reads signal from the channel.
+The <code>SignalProcessor</code> class calls this method to retrieve the signal to process.</p>
+</dd>
+<dt class="hdlist1"><code>void close();</code></dt>
+<dd>
+<p>Closes all allocated resources.
+Debezium calls this methods when the connector is stopped.</p>
+</dd>
+</dl>
 </div>
 </div>
 <div class="sect2">
@@ -1182,18 +1246,13 @@ You must include these compile dependencies in your project&#8217;s <code>pom.xm
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
     &lt;groupId&gt;io.debezium&lt;/groupId&gt;
-    &lt;artifactId&gt;debezium-core&lt;/artifactId&gt;
-    &lt;version&gt;${version.debezium}&lt;/version&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+    &lt;artifactId&gt;debezium-connector-common&lt;/artifactId&gt;
+    &lt;version&gt;${version.debezium}&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><code>${version.debezium}</code> represents the version of the Debezium connector.</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>In the preceding excerpt from <code>pom.xml</code>, <code>${version.debezium}</code> represents the version of the Debezium connector.</p>
 </div>
 <div class="paragraph">
 <p>Declare your implementation in the <code>META-INF/services/io.debezium.pipeline.signal.channels.SignalChannelReader</code> file.</p>
@@ -1271,6 +1330,23 @@ To use a custom signaling channel with multiple connectors, you must place a cop
 </li>
 </ul>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>To use signaling to trigger ad hoc incremental snapshots for most connectors, you must first <a href="#debezium-signaling-enabling-source-signaling-channel">enable a <code>source</code> signaling channel</a> in the connector configuration.
+The source channel implements a watermarking mechanism to deduplicate events that might be captured by an incremental snapshot and then captured again after streaming resumes.
+Enabling the source channel is not required when using a signaling channel to trigger an incremental snapshot of a read-only MySQL database that has <a href="../connectors/mysql.html#enable-mysql-gtids" class="xref page">GTIDs enabled</a>.
+For more information, see <a href="../connectors/mysql.html#mysql-read-only-incremental-snapshots" class="xref page">MySQL read only incremental snapshot</a></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Some signals are not compatible with all connectors.</p>
 </div>
@@ -1338,7 +1414,7 @@ You can initiate ad hoc snapshots at any time.</p>
 <p>Db2</p>
 </li>
 <li>
-<p>MariaDB (Technology Preview)</p>
+<p>MariaDB</p>
 </li>
 <li>
 <p>MongoDB</p>
@@ -1453,7 +1529,7 @@ After processing the signal, the connector will stop the current in-progress sna
 <p>Db2</p>
 </li>
 <li>
-<p>MariaDB (Technology Preview)</p>
+<p>MariaDB</p>
 </li>
 <li>
 <p>MongoDB</p>
@@ -1551,7 +1627,7 @@ Therefor it&#8217;s not possible to specify the data collection as the snapshot 
 <p>Db2</p>
 </li>
 <li>
-<p>MariaDB (Technology Preview)</p>
+<p>MariaDB</p>
 </li>
 <li>
 <p>MongoDB</p>
@@ -1613,7 +1689,7 @@ After processing the signal, the connector will resume previously paused snapsho
 <p>Db2</p>
 </li>
 <li>
-<p>MariaDB (Technology Preview)</p>
+<p>MariaDB</p>
 </li>
 <li>
 <p>MongoDB</p>
@@ -1706,7 +1782,7 @@ You can initiate ad hoc blocking snapshots at any time.</p>
 <p>Db2</p>
 </li>
 <li>
-<p>MariaDB (Technology Preview)</p>
+<p>MariaDB</p>
 </li>
 <li>
 <p>MongoDB</p>
@@ -1866,7 +1942,7 @@ Include the following compile dependencies in your project&#8217;s <code>pom.xml
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
     &lt;groupId&gt;io.debezium&lt;/groupId&gt;
-    &lt;artifactId&gt;debezium-core&lt;/artifactId&gt;
+    &lt;artifactId&gt;debezium-connector-common&lt;/artifactId&gt;
     &lt;version&gt;${version.debezium}&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
@@ -1879,7 +1955,7 @@ For example,</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;properties&gt;
-    &lt;version.debezium&gt;3.3.0.Beta1&lt;/version.debezium&gt;
+    &lt;version.debezium&gt;3.6.0.Alpha2&lt;/version.debezium&gt;
 &lt;/properties&gt;</code></pre>
 </div>
 </div>
@@ -1930,7 +2006,7 @@ To use a custom action with multiple connectors, you must place a copy of the cu
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/902dd6422c9d4eec1c7391107c3e974075fc0cb7">902dd642</a></span>)
+            <div class="copyright">Copyright &copy; 2026 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/1d381a8915e007c99e034748be22264d1466e105">1d381a89</a></span>)
             
         </div>
     </footer>

@@ -52,7 +52,13 @@
     <span class="nav-text">Getting Started</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../tutorial.html">Tutorial</a>
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../tutorials.html">Tutorials</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../kc-tutorial.html">Kafka Connect</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -147,6 +153,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/jdbc.html">JDBC</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/mongodb-sink.html">MongoDB Sink</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -196,6 +205,9 @@
     <a class="nav-link" href="../transformations/timezone-converter.html">Timezone Converter</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/geometry-format-transformer.html">Geometry Format Conversion</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/timescaledb.html">TimescaleDB Integration</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -203,6 +215,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/vector-to-json.html">Vector Data Types to JSON Types</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/swap-geometry-coordinates.html">Swap Geometry Coordinates</a>
   </li>
 </ul>
   </li>
@@ -253,6 +268,9 @@
     <a class="nav-link" href="../integrations/quarkus-debezium-engine-extension.html">Debezium Extensions for Quarkus</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../integrations/hibernate-cache.html">Hibernate Cache Invalidation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../integrations/testcontainers.html">Integration Testing with Testcontainers</a>
   </li>
 </ul>
@@ -263,6 +281,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../ai/embeddings.html">Embeddings Transformation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ai/docling.html">Docling Transformation</a>
   </li>
 </ul>
   </li>
@@ -317,10 +338,19 @@
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version">
-          <a href="/documentation/reference/3.2/index.html">3.2</a>
+          <a href="/documentation/reference/3.5/index.html">3.5</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.6/index.html">3.6</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.4/index.html">3.4</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.3/index.html">3.3</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.2/index.html">3.2</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.1/index.html">3.1</a>
@@ -330,27 +360,6 @@
         </li>
         <li class="version">
           <a href="/documentation/reference/2.7/index.html">2.7</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.6/index.html">2.6</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.5/index.html">2.5</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.4/index.html">2.4</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.3/index.html">2.3</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.2/index.html">2.2</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.1/index.html">2.1</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.0/index.html">2.0</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/1.9/index.html">1.9</a>
@@ -379,18 +388,14 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
                         <a class="version is-current" href="/reference/configuration/storage.html" data-hash="true">nightly</a>
-                        <a class="version" href="/documentation//reference/stable/configuration/storage.html" data-hash="true">3.2</a>
+                        <a class="version" href="/documentation//reference/stable/configuration/storage.html" data-hash="true">3.5</a>
+                        <a class="version" href="/documentation//reference/3.6/configuration/storage.html" data-hash="true">3.6</a>
+                        <a class="version" href="/documentation//reference/3.4/configuration/storage.html" data-hash="true">3.4</a>
                         <a class="version" href="/documentation//reference/3.3/configuration/storage.html" data-hash="true">3.3</a>
+                        <a class="version" href="/documentation//reference/3.2/configuration/storage.html" data-hash="true">3.2</a>
                     <a class="version is-missing" href="#">3.1</a>
                     <a class="version is-missing" href="#">3.0</a>
                     <a class="version is-missing" href="#">2.7</a>
-                    <a class="version is-missing" href="#">2.6</a>
-                    <a class="version is-missing" href="#">2.5</a>
-                    <a class="version is-missing" href="#">2.4</a>
-                    <a class="version is-missing" href="#">2.3</a>
-                    <a class="version is-missing" href="#">2.2</a>
-                    <a class="version is-missing" href="#">2.1</a>
-                    <a class="version is-missing" href="#">2.0</a>
                     <a class="version is-missing" href="#">1.9</a>
         </div>
         |
@@ -461,6 +466,7 @@
 <ul class="sectlevel2">
 <li><a href="#_offset_store_5">Offset Store</a></li>
 <li><a href="#_internal_schema_history_store_5">Internal schema history store</a></li>
+<li><a href="#_redis_configuration_examples">Redis Configuration Examples</a></li>
 </ul>
 </li>
 <li><a href="#_amazon_s3">Amazon S3</a>
@@ -1195,7 +1201,8 @@ id VARCHAR(36)      NOT NULL,
 offset_key          VARCHAR(1255),
 offset_val          VARCHAR(1255),
 record_insert_ts    TIMESTAMP NOT NULL,
-record_insert_seq   INTEGER NOT NULL)</pre>
+record_insert_seq   INTEGER NOT NULL),
+PRIMARY KEY (id)</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1341,7 +1348,7 @@ record_insert_seq   INTEGER NOT NULL)</pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="jdbc-history-schema-history-table-exists-select"></a><a href="#jdbc-history-schema-history-table-exists-select"><code>schema.history.internal.jdbc.table.exists.select</code></a></p>
+<p><a id="jdbc-history-schema-history-table-exists-select"></a><a href="#jdbc-history-schema-history-table-exists-select"><code>schema.history.internal.jdbc.table.exists</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="#jdbc-history-schema-history-table-exists-select-default">Data Exist Query</a></p>
@@ -1480,7 +1487,7 @@ record_insert_seq   INTEGER NOT NULL)</pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a id="deprecated-jdbc-history-schema-history-table-exists-select"></a><a href="#deprecated-jdbc-history-schema-history-table-exists-select"><code>schema.history.internal.jdbc.schema.history.table.exists.select</code></a></p>
+<p><a id="deprecated-jdbc-history-schema-history-table-exists-select"></a><a href="#deprecated-jdbc-history-schema-history-table-exists-select"><code>schema.history.internal.jdbc.schema.history.table.exists</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="#jdbc-history-schema-history-table-exists-select-default">Data Exist Query</a></p>
@@ -1516,7 +1523,8 @@ record_insert_seq   INTEGER NOT NULL)</pre>
     history_data VARCHAR(65000),
     history_data_seq INTEGER,
     record_insert_ts TIMESTAMP NOT NULL,
-    record_insert_seq INTEGER NOT NULL
+    record_insert_seq INTEGER NOT NULL,
+    PRIMARY KEY (id, history_data_seq)
 )</pre>
 </div>
 </div>
@@ -1553,6 +1561,24 @@ record_insert_seq   INTEGER NOT NULL)</pre>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Debezium can use a <a href="https://redis.io/docs/latest/develop/clients/jedis/">Jedis client</a> to store data in a Redis cache.</p>
+</div>
+<div class="paragraph">
+<p>Debezium can use either a single Redis instance or use <a href="https://redis.io/docs/latest/operate/oss_and_stack/reference/cluster-spec/">Redis Cluster mode</a>:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Single instance mode</dt>
+<dd>
+<p>Connects to a single Redis server instance.</p>
+</dd>
+<dt class="hdlist1">Cluster mode</dt>
+<dd>
+<p>Connects to a Redis Cluster for high availability and horizontal scaling.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>To enable Redis Cluster mode, set the <code>redis.cluster.enabled</code> property to <code>true</code> and provide comma-separated host:port addresses in the <code>redis.address</code> property.</p>
 </div>
 <div class="sect2">
 <h3 id="_offset_store_5"><a class="anchor" href="#_offset_store_5"></a>Offset Store</h3>
@@ -1633,7 +1659,7 @@ record_insert_seq   INTEGER NOT NULL)</pre>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The database index (0..15) that Debezium uses to access Redis to store offset data..</p>
+<p>The database index (0&#8212;&#8203;15) that Debezium uses to access Redis to store offset data.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1824,6 +1850,18 @@ If a data packet is not transferred with the specified interval, Debezium closes
 <p>Specifies the time, in milliseconds, that Debezium waits after a failure before it resubmits a request to Redis to confirm data is written to a replica shard.</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="offset-storage-redis-cluster-enabled"></a><a href="#offset-storage-redis-cluster-enabled"><code>offset.storage.redis.cluster.enabled</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>false</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>If you configure Debezium Server to store offsets in Redis, set this property to specify whether to use Redis Cluster mode.
+Set the value to <code>true</code> to configure Debezium to use a <a href="https://redis.io/docs/latest/develop/clients/jedis/connect/#connect-to-a-redis-cluster">JedisCluster client</a> to route offset data to Redis nodes.</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -1906,7 +1944,7 @@ If a data packet is not transferred with the specified interval, Debezium closes
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The database index (0..15) that Debezium uses to access Redis to store schema history data.</p>
+<p>The database index (0&#8212;&#8203;15) that Debezium uses to access Redis to store schema history data.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2097,8 +2135,73 @@ If a data packet is not transferred with the specified interval, Debezium closes
 <p>Specifies the time, in milliseconds, that Debezium waits after a failure before it resubmits a request to Redis to confirm data is written to a replica shard.</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="schema-history-internal-redis-cluster-enabled"></a><a href="#schema-history-internal-redis-cluster-enabled"><code>schema.history.internal.storage.redis.cluster.enabled</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>false</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>If you configure Debezium Server to store schema history in Redis, set this property to specify whether to use Redis Cluster mode.
+Set the value to <code>true</code> to configure Debezium to use a <a href="https://redis.io/docs/latest/develop/clients/jedis/connect/#connect-to-a-redis-cluster">JedisCluster client</a> to route history data to Redis nodes.</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
+</div>
+<div class="sect2">
+<h3 id="_redis_configuration_examples"><a class="anchor" href="#_redis_configuration_examples"></a>Redis Configuration Examples</h3>
+<div class="sect3">
+<h4 id="_single_instance_mode"><a class="anchor" href="#_single_instance_mode"></a>Single Instance Mode</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties"># Offset storage configuration
+offset.storage=io.debezium.storage.redis.offset.RedisOffsetBackingStore
+offset.storage.redis.address=localhost:6379
+offset.storage.redis.password=password
+offset.storage.redis.cluster.enabled=false
+
+# Schema history storage configuration
+schema.history.internal=io.debezium.storage.redis.history.RedisSchemaHistory
+schema.history.internal.storage.redis.address=localhost:6379
+schema.history.internal.storage.redis.password=password
+schema.history.internal.storage.redis.cluster.enabled=false</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cluster_mode"><a class="anchor" href="#_cluster_mode"></a>Cluster Mode</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties"># Offset storage configuration
+offset.storage=io.debezium.storage.redis.offset.RedisOffsetBackingStore
+offset.storage.redis.address=redis-node-1:7001,redis-node-2:7002,redis-node-3:7003
+offset.storage.redis.password=password
+offset.storage.redis.cluster.enabled=true
+
+# Schema history storage configuration
+schema.history.internal=io.debezium.storage.redis.history.RedisSchemaHistory
+schema.history.internal.storage.redis.address=redis-node-1:7001,redis-node-2:7002,redis-node-3:7003
+schema.history.internal.storage.redis.password=password
+schema.history.internal.storage.redis.cluster.enabled=true</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you configure Debezium to use Redis Cluster mode,
+ensure that your Redis Cluster is properly configured and accessible.
+The Debezium Server instance must be able to communicate with the cluster nodes.
+</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -2267,6 +2370,20 @@ Typically, you would use Azure Blob storage when you deploy Debezium in the <a h
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="schema-history-internal-azure-storage-account-endpoint"></a><a href="#schema-history-internal-azure-storage-account-endpoint"><code>schema.history.internal.azure.storage.account.blob.endpoint</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>No default</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An optional Azure Blob Storage account endpoint URL.
+Use this to override the default public endpoint (<code><a href="https://&lt;account&gt;.blob.core.windows.net" class="bare">https://&lt;account&gt;.blob.core.windows.net</a></code>) for sovereign clouds such as Azure Government (<code><a href="https://&lt;account&gt;.blob.core.usgovcloudapi.net" class="bare">https://&lt;account&gt;.blob.core.usgovcloudapi.net</a></code>) or Azure China (<code><a href="https://&lt;account&gt;.blob.core.chinacloudapi.cn" class="bare">https://&lt;account&gt;.blob.core.chinacloudapi.cn</a></code>).
+Only used when <code>schema.history.internal.azure.storage.account.connectionstring</code> is not set.
+Should not be set together with <code>schema.history.internal.azure.storage.account.name</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="schema-history-internal-azure-storage-account-container-name"></a><a href="#schema-history-internal-azure-storage-account-container-name"><code>schema.history.internal.azure.storage.account.container.name</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -2428,7 +2545,7 @@ This field must include a value if <a href="#schema-history-internal-rocketmq-ac
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/902dd6422c9d4eec1c7391107c3e974075fc0cb7">902dd642</a></span>)
+            <div class="copyright">Copyright &copy; 2026 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/1d381a8915e007c99e034748be22264d1466e105">1d381a89</a></span>)
             
         </div>
     </footer>

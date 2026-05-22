@@ -38,7 +38,7 @@
     </div>
   </nav>
 </header><div class="body">
-<div class="nav-container" data-component="reference" data-version="stable">
+<div class="nav-container" data-component="reference" data-version="3.2">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -143,6 +143,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/jdbc.html">JDBC</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/mongodb-sink.html">MongoDB Sink</a>
   </li>
 </ul>
   </li>
@@ -307,11 +310,20 @@
         <li class="version">
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
-        <li class="version is-current">
-          <a href="/documentation/reference/3.2/index.html">3.2</a>
+        <li class="version">
+          <a href="/documentation/reference/3.5/index.html">3.5</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.6/index.html">3.6</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.4/index.html">3.4</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.3/index.html">3.3</a>
+        </li>
+        <li class="version is-current">
+          <a href="/documentation/reference/3.2/index.html">3.2</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.1/index.html">3.1</a>
@@ -321,27 +333,6 @@
         </li>
         <li class="version">
           <a href="/documentation/reference/2.7/index.html">2.7</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.6/index.html">2.6</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.5/index.html">2.5</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.4/index.html">2.4</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.3/index.html">2.3</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.2/index.html">2.2</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.1/index.html">2.1</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.0/index.html">2.0</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/1.9/index.html">1.9</a>
@@ -356,7 +347,7 @@
 <main role="main" class="main">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../index.html" class="home-link"></a>
+  <a href="../../stable/index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Debezium Documentation</a></li>
@@ -370,18 +361,14 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">3.2</button>
         <div class="version-menu">
                         <a class="version" href="/documentation//reference/configuration/signalling.html" data-hash="true">nightly</a>
-                        <a class="version is-current" href="/reference/stable/configuration/signalling.html" data-hash="true">3.2</a>
+                        <a class="version" href="/documentation//reference/stable/configuration/signalling.html" data-hash="true">3.5</a>
+                        <a class="version" href="/documentation//reference/3.6/configuration/signalling.html" data-hash="true">3.6</a>
+                        <a class="version" href="/documentation//reference/3.4/configuration/signalling.html" data-hash="true">3.4</a>
                         <a class="version" href="/documentation//reference/3.3/configuration/signalling.html" data-hash="true">3.3</a>
+                        <a class="version is-current" href="/reference/3.2/configuration/signalling.html" data-hash="true">3.2</a>
                         <a class="version" href="/documentation//reference/3.1/configuration/signalling.html" data-hash="true">3.1</a>
                         <a class="version" href="/documentation//reference/3.0/configuration/signalling.html" data-hash="true">3.0</a>
                         <a class="version" href="/documentation//reference/2.7/configuration/signalling.html" data-hash="true">2.7</a>
-                        <a class="version" href="/documentation//reference/2.6/configuration/signalling.html" data-hash="true">2.6</a>
-                        <a class="version" href="/documentation//reference/2.5/configuration/signalling.html" data-hash="true">2.5</a>
-                        <a class="version" href="/documentation//reference/2.4/configuration/signalling.html" data-hash="true">2.4</a>
-                        <a class="version" href="/documentation//reference/2.3/configuration/signalling.html" data-hash="true">2.3</a>
-                        <a class="version" href="/documentation//reference/2.2/configuration/signalling.html" data-hash="true">2.2</a>
-                        <a class="version" href="/documentation//reference/2.1/configuration/signalling.html" data-hash="true">2.1</a>
-                        <a class="version" href="/documentation//reference/2.0/configuration/signalling.html" data-hash="true">2.0</a>
                         <a class="version" href="/documentation//reference/1.9/configuration/signalling.html" data-hash="true">1.9</a>
         </div>
         |
@@ -410,7 +397,12 @@
 <div class="article-cell1">
 <article class="doc">
         
-    <!-- This partial is a placeholder -->            <h1 class="page">Sending signals to a Debezium connector</h1>
+    <div class="version-banner version-banner-outdated">
+    You are viewing documentation for an outdated version of Debezium.
+    <br/>
+            If you want to view the latest stable version of this page, please go <a href=/documentation/reference/stable/index.html>here</a>.
+            
+</div>            <h1 class="page">Sending signals to a Debezium connector</h1>
         <div id="preamble">
 <div class="sectionbody">
 <div id="toc" class="toc">
@@ -423,6 +415,7 @@
 </li>
 <li><a href="#debezium-signaling-enabling-source-signaling-channel">Enabling source signaling channel</a>
 <ul class="sectlevel2">
+<li><a href="#format-for-specifying-fully-qualified-names-for-data-collections">Formats for specifying fully qualified names for data collections</a></li>
 <li><a href="#debezium-signaling-data-collection-structure">Structure of a signaling data collection</a></li>
 <li><a href="#debezium-signaling-creating-a-signal-data-collection">Creating a signaling data collection</a></li>
 </ul>
@@ -564,50 +557,95 @@ For information about the required structure of the signaling data collection, s
 <p>For source databases such as Db2 or SQL Server that implement a native change data capture (CDC) mechanism, enable CDC for the signaling table.</p>
 </li>
 <li>
-<p>Add the name of the signaling data collection to the Debezium connector configuration.<br>
-  In the connector configuration, add the property <code>signal.data.collection</code>, and set its value to the fully-qualified name of the signaling data collection that you created in Step 1.<br>
-<br>
-For example, <code>signal.data.collection = inventory.debezium_signals</code>.<br>
-<br>
-The format for the fully-qualified name of the signaling collection depends on the connector.<br>
-The following example shows the naming formats to use for each connector:</p>
+<p>Add the name of the signaling data collection to the Debezium connector configuration:</p>
+<div class="paragraph">
+<p>In the connector configuration, add the property <code>signal.data.collection</code>, and set its value to the fully-qualified name of the signaling data collection that you created in Step 1.
+The name of the data collection is case-sensitive.</p>
+</div>
+<div class="paragraph">
+<p>For example,</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>signal.data.collection = inventory.debezium_signals</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For more information about setting the <code>signal.data.collection</code> property, see the table of configuration properties for your connector.</p>
+</div>
 </li>
 </ol>
 </div>
-<div id="format-for-specifying-fully-qualified-names-for-data-collections" class="dlist">
-<div class="title">Fully qualified table names</div>
-<dl>
-<dt class="hdlist1">Db2</dt>
-<dd>
+<div class="ulist">
+<div class="title">Additional resources</div>
+<ul>
+<li>
+<p><a href="#format-for-specifying-fully-qualified-names-for-data-collections">Formats for specifying fully qualified names for data collections</a>.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="format-for-specifying-fully-qualified-names-for-data-collections"><a class="anchor" href="#format-for-specifying-fully-qualified-names-for-data-collections"></a>Formats for specifying fully qualified names for data collections</h3>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Db2
+</td>
+<td class="hdlist2">
 <p><code><em>&lt;schemaName&gt;</em>.<em>&lt;tableName&gt;</em></code></p>
-</dd>
-<dt class="hdlist1">MariaDB (Technology Preview)</dt>
-<dd>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+MariaDB
+</td>
+<td class="hdlist2">
 <p><code><em>&lt;databaseName&gt;</em>.<em>&lt;tableName&gt;</em></code></p>
-</dd>
-<dt class="hdlist1">MongoDB</dt>
-<dd>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+MongoDB
+</td>
+<td class="hdlist2">
 <p><code><em>&lt;databaseName&gt;</em>.<em>&lt;collectionName&gt;</em></code></p>
-</dd>
-<dt class="hdlist1">MySQL</dt>
-<dd>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+MySQL
+</td>
+<td class="hdlist2">
 <p><code><em>&lt;databaseName&gt;</em>.<em>&lt;tableName&gt;</em></code></p>
-</dd>
-<dt class="hdlist1">Oracle</dt>
-<dd>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Oracle
+</td>
+<td class="hdlist2">
 <p><code><em>&lt;databaseName&gt;</em>.<em>&lt;schemaName&gt;</em>.<em>&lt;tableName&gt;</em></code></p>
-</dd>
-<dt class="hdlist1">PostgreSQL</dt>
-<dd>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+PostgreSQL
+</td>
+<td class="hdlist2">
 <p><code><em>&lt;schemaName&gt;</em>.<em>&lt;tableName&gt;</em></code></p>
-</dd>
-<dt class="hdlist1">SQL Server</dt>
-<dd>
-<p><code><em>&lt;databaseName&gt;</em>.<em>&lt;schemaName&gt;</em>.<em>&lt;tableName&gt;</em></code><br>
-<br>
-For more information about setting the <code>signal.data.collection</code> property, see the table of configuration properties for your connector.</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+SQL Server
+</td>
+<td class="hdlist2">
+<p><code><em>&lt;databaseName&gt;</em>.<em>&lt;schemaName&gt;</em>.<em>&lt;tableName&gt;</em></code></p>
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="debezium-signaling-data-collection-structure"><a class="anchor" href="#debezium-signaling-data-collection-structure"></a>Structure of a signaling data collection</h3>
@@ -1865,7 +1903,7 @@ For example,</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;properties&gt;
-    &lt;version.debezium&gt;3.2.2.Final&lt;/version.debezium&gt;
+    &lt;version.debezium&gt;3.2.7.Final&lt;/version.debezium&gt;
 &lt;/properties&gt;</code></pre>
 </div>
 </div>
@@ -1916,7 +1954,7 @@ To use a custom action with multiple connectors, you must place a copy of the cu
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/f0476537bb6d91e814b289bf5abc5ce4a63c818a">f0476537</a></span>)
+            <div class="copyright">Copyright &copy; 2026 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/7e02c26630bb22918d6d8fcd5d924b126b624934">7e02c266</a></span>)
             
         </div>
     </footer>

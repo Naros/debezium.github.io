@@ -52,7 +52,13 @@
     <span class="nav-text">Getting Started</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../tutorial.html">Tutorial</a>
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../tutorials.html">Tutorials</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../kc-tutorial.html">Kafka Connect</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -147,6 +153,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="jdbc.html">JDBC</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mongodb-sink.html">MongoDB Sink</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -196,6 +205,9 @@
     <a class="nav-link" href="../transformations/timezone-converter.html">Timezone Converter</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/geometry-format-transformer.html">Geometry Format Conversion</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/timescaledb.html">TimescaleDB Integration</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -203,6 +215,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/vector-to-json.html">Vector Data Types to JSON Types</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/swap-geometry-coordinates.html">Swap Geometry Coordinates</a>
   </li>
 </ul>
   </li>
@@ -253,6 +268,9 @@
     <a class="nav-link" href="../integrations/quarkus-debezium-engine-extension.html">Debezium Extensions for Quarkus</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../integrations/hibernate-cache.html">Hibernate Cache Invalidation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../integrations/testcontainers.html">Integration Testing with Testcontainers</a>
   </li>
 </ul>
@@ -263,6 +281,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../ai/embeddings.html">Embeddings Transformation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ai/docling.html">Docling Transformation</a>
   </li>
 </ul>
   </li>
@@ -317,10 +338,19 @@
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version">
-          <a href="/documentation/reference/3.2/index.html">3.2</a>
+          <a href="/documentation/reference/3.5/index.html">3.5</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.6/index.html">3.6</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.4/index.html">3.4</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.3/index.html">3.3</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.2/index.html">3.2</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.1/index.html">3.1</a>
@@ -330,27 +360,6 @@
         </li>
         <li class="version">
           <a href="/documentation/reference/2.7/index.html">2.7</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.6/index.html">2.6</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.5/index.html">2.5</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.4/index.html">2.4</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.3/index.html">2.3</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.2/index.html">2.2</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.1/index.html">2.1</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.0/index.html">2.0</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/1.9/index.html">1.9</a>
@@ -379,18 +388,14 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
                         <a class="version is-current" href="/reference/connectors/mysql.html" data-hash="true">nightly</a>
-                        <a class="version" href="/documentation//reference/stable/connectors/mysql.html" data-hash="true">3.2</a>
+                        <a class="version" href="/documentation//reference/stable/connectors/mysql.html" data-hash="true">3.5</a>
+                        <a class="version" href="/documentation//reference/3.6/connectors/mysql.html" data-hash="true">3.6</a>
+                        <a class="version" href="/documentation//reference/3.4/connectors/mysql.html" data-hash="true">3.4</a>
                         <a class="version" href="/documentation//reference/3.3/connectors/mysql.html" data-hash="true">3.3</a>
+                        <a class="version" href="/documentation//reference/3.2/connectors/mysql.html" data-hash="true">3.2</a>
                         <a class="version" href="/documentation//reference/3.1/connectors/mysql.html" data-hash="true">3.1</a>
                         <a class="version" href="/documentation//reference/3.0/connectors/mysql.html" data-hash="true">3.0</a>
                         <a class="version" href="/documentation//reference/2.7/connectors/mysql.html" data-hash="true">2.7</a>
-                        <a class="version" href="/documentation//reference/2.6/connectors/mysql.html" data-hash="true">2.6</a>
-                        <a class="version" href="/documentation//reference/2.5/connectors/mysql.html" data-hash="true">2.5</a>
-                        <a class="version" href="/documentation//reference/2.4/connectors/mysql.html" data-hash="true">2.4</a>
-                        <a class="version" href="/documentation//reference/2.3/connectors/mysql.html" data-hash="true">2.3</a>
-                        <a class="version" href="/documentation//reference/2.2/connectors/mysql.html" data-hash="true">2.2</a>
-                        <a class="version" href="/documentation//reference/2.1/connectors/mysql.html" data-hash="true">2.1</a>
-                        <a class="version" href="/documentation//reference/2.0/connectors/mysql.html" data-hash="true">2.0</a>
                         <a class="version" href="/documentation//reference/1.9/connectors/mysql.html" data-hash="true">1.9</a>
         </div>
         |
@@ -441,6 +446,12 @@
 <li><a href="#mysql-snapshot-events">Operation type of snapshot events</a></li>
 <li><a href="#connector-custom-snapshot">Custom snapshotter SPI</a></li>
 <li><a href="#mysql-blocking-snapshots">Blocking snapshots</a></li>
+<li><a href="#_setting_the_binlog_position_via_a_signal">Setting the binlog position via a signal</a></li>
+</ul>
+</li>
+<li><a href="#format-of-a-set-binlog-position-signal">Format of a <code>set-binlog-position</code> signal</a></li>
+<li><a href="#proc-setting-binlog-position-via-signal_mysql">Send a signal to reposition the stream</a>
+<ul class="sectlevel2">
 <li><a href="#mysql-topic-names">Topic names</a></li>
 <li><a href="#mysql-transaction-metadata">Transaction metadata</a></li>
 </ul>
@@ -763,13 +774,13 @@ The message contains a logical representation of the table schema.</p>
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
   "schema": { },
   "payload": {
-      "source": {  <i class="conum" data-value="1"></i><b>(1)</b>
-        "version": "3.3.0.Beta1",
+      "source": {
+        "version": "3.6.0.Alpha2",
         "connector": "mysql",
         "name": "mysql",
-        "ts_ms": 1651535750218, <i class="conum" data-value="2"></i><b>(2)</b>
-        "ts_us": 1651535750218000, <i class="conum" data-value="2"></i><b>(2)</b>
-        "ts_ns": 1651535750218000000, <i class="conum" data-value="2"></i><b>(2)</b>
+        "ts_ms": 1651535750218,
+        "ts_us": 1651535750218000,
+        "ts_ns": 1651535750218000000,
         "snapshot": "false",
         "db": "inventory",
         "sequence": null,
@@ -782,19 +793,19 @@ The message contains a logical representation of the table schema.</p>
         "thread": null,
         "query": null
       },
-      "databaseName": "inventory", <i class="conum" data-value="3"></i><b>(3)</b>
+      "databaseName": "inventory",
       "schemaName": null,
-      "ddl": "ALTER TABLE customers ADD middle_name varchar(255) AFTER first_name", <i class="conum" data-value="4"></i><b>(4)</b>
-      "tableChanges": [  <i class="conum" data-value="5"></i><b>(5)</b>
+      "ddl": "ALTER TABLE customers ADD middle_name varchar(255) AFTER first_name",
+      "tableChanges": [
         {
-          "type": "ALTER", <i class="conum" data-value="6"></i><b>(6)</b>
-          "id": "\"inventory\".\"customers\"", <i class="conum" data-value="7"></i><b>(7)</b>
-          "table": {    <i class="conum" data-value="8"></i><b>(8)</b>
+          "type": "ALTER",
+          "id": "\"inventory\".\"customers\"",
+          "table": {
             "defaultCharsetName": "utf8mb4",
-            "primaryKeyColumnNames": [  <i class="conum" data-value="9"></i><b>(9)</b>
+            "primaryKeyColumnNames": [
               "id"
             ],
-            "columns": [  <i class="conum" data-value="10"></i><b>(10)</b>
+            "columns": [
               {
                 "name": "id",
                 "jdbcType": 4,
@@ -866,7 +877,7 @@ The message contains a logical representation of the table schema.</p>
                 "generated": false
             }
           ],
-          "attributes": [ <i class="conum" data-value="11"></i><b>(11)</b>
+          "attributes": [
             {
               "customAttribute": "attributeValue"
             }
@@ -878,65 +889,46 @@ The message contains a logical representation of the table schema.</p>
 }</code></pre>
 </div>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. Descriptions of fields in messages emitted to the schema change topic</caption>
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 40%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Item</th>
-<th class="tableblock halign-left valign-top">Field name</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>source</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>source</code> field is structured exactly as standard data change events that the connector writes to table-specific topics.
-This field is useful to correlate events on different topics.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ts_ms</code>, <code>ts_us</code>, <code>ts_ns</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Optional field that displays the time at which the connector processed the event.
-The time is based on the system clock in the JVM running the Kafka Connect task.<br>
-<br>
-In the source object, ts_ms indicates the time that the change was made in the database. By comparing the value for payload.source.ts_ms with the value for payload.ts_ms, you can determine the lag between the source database update and Debezium.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>databaseName</code><br>
-<code>schemaName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Identifies the database and the schema that contains the change.
-The value of the <code>databaseName</code> field is used as the message key for the record.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ddl</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">This field contains the DDL that is responsible for the schema change.
-The <code>ddl</code> field can contain multiple DDL statements.
-Each statement applies to the database in the <code>databaseName</code> field.
-Multiple DDL statements appear in the order in which they were applied to the database.<br>
-<br>
-Clients can submit multiple DDL statements that apply to multiple databases.
-If MySQL applies them atomically, the connector takes the DDL statements in order, groups them by database, and creates a schema change event for each group.
-If MySQL applies them individually, the connector creates a separate schema change event for each statement.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tableChanges</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An array of one or more items that contain the schema changes generated by a DDL command.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Describes the kind of change. The value is one of the following:</p>
+<div class="paragraph">
+<p>The following list describes select fields in the preceding example:</p>
 </div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>source</code></dt>
+<dd>
+<p>The structure of the <code>payload.source</code> field reflects the structure of standard data change events that the connector writes to table-specific topics.
+This field is useful to correlate events on different topics.</p>
+</dd>
+<dt class="hdlist1"><code>ts_ms</code>, <code>ts_us</code>, <code>ts_ns</code></dt>
+<dd>
+<p>Displays timestamps in milliseconds, microseconds, and nanoseconds that indicate when the connector processed the event.
+The time is based on the system clock in the JVM running the Kafka Connect task.</p>
+</dd>
+<dt class="hdlist1"><code>databaseName</code>, <code>schemaName</code></dt>
+<dd>
+<p>These two fields provide the names of the database and schema that contain the change.
+The value of the <code>databaseName</code> field serves as the message key for the event record.</p>
+</dd>
+<dt class="hdlist1"><code>ddl</code></dt>
+<dd>
+<p>Provides the DDL that produced the schema change.
+The <code>ddl</code> field can contain multiple DDL statements.
+Each statement applies to the database that is specified in the <code>databaseName</code> field.
+Multiple DDL statements appear in the order in which they were applied to the database.</p>
+<div class="paragraph">
+<p>Clients can submit multiple DDL statements that apply to multiple databases.
+If MySQL applies them atomically, the connector processes the DDL statements in order, groups them by database, and creates a schema change event for each group.
+If MySQL applies them individually, the connector creates a separate schema change event for each statement.</p>
+</div>
+</dd>
+<dt class="hdlist1"><code>tableChanges</code></dt>
+<dd>
+<p>An array of one or more items that contain the schema changes generated by a DDL command.</p>
+</dd>
+<dt class="hdlist1"><code>type</code></dt>
+<dd>
+<p>Describes the kind of change.
+This field can contain one of the following values:</p>
 <div class="dlist">
 <dl>
 <dt class="hdlist1"><code>CREATE</code></dt>
@@ -952,38 +944,33 @@ If MySQL applies them individually, the connector creates a separate schema chan
 <p>Table deleted.</p>
 </dd>
 </dl>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Full identifier of the table that was created, altered, or dropped.
-In the case of a table rename, this identifier is a concatenation of <code><em>&lt;old&gt;</em>,<em>&lt;new&gt;</em></code> table names.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>table</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Represents table metadata after the applied change.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>primaryKeyColumnNames</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">List of columns that compose the table&#8217;s primary key.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>columns</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Metadata for each column in the changed table.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">11</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>attributes</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Custom attribute metadata for each table change.</p></td>
-</tr>
-</tbody>
-</table>
+</div>
+</dd>
+<dt class="hdlist1"><code>id</code></dt>
+<dd>
+<p>Specifies the full identifier of the table that was created, altered, or dropped.
+In the case of a table rename, this identifier is a concatenation of <code><em>&lt;old&gt;</em>,<em>&lt;new&gt;</em></code> table names.</p>
+</dd>
+<dt class="hdlist1"><code>table</code></dt>
+<dd>
+<p>Represents table metadata after the applied change.</p>
+</dd>
+<dt class="hdlist1"><code>primaryKeyColumnNames</code></dt>
+<dd>
+<p>List of columns that compose the table&#8217;s primary key.</p>
+</dd>
+<dt class="hdlist1"><code>columns</code></dt>
+<dd>
+<p>Metadata for each column in the changed table.</p>
+</dd>
+<dt class="hdlist1"><code>attributes</code></dt>
+<dd>
+<p>Custom attribute metadata for each table change.</p>
+</dd>
+</dl>
+</div>
 <div class="paragraph">
-<p>For more information, see <a href="#mysql-schema-history-topic">schema history topic</a>.</p>
+<p>For more information about schema change events, see <a href="#mysql-schema-history-topic">schema history topic</a>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1058,16 +1045,10 @@ The connector retains the global read lock while it reads the binlog position, a
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>4
-:leveloffset: +1</p>
+<p>4</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Start a transaction with <a href="https://dev.mysql.com/doc/refman/8.2/en/innodb-consistent-read.html">repeatable read semantics</a> to ensure that all subsequent reads within the transaction are done against the <em>consistent snapshot</em>.<br></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>+</pre>
-</div>
+<p>Start a transaction with <a href="https://dev.mysql.com/doc/refman/8.2/en/innodb-consistent-read.html">repeatable read semantics</a> to ensure that all subsequent reads within the transaction are done against the <em>consistent snapshot</em>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1112,9 +1093,10 @@ The schema history provides information about the structure that is in effect wh
 <td class="content">
 <div class="paragraph">
 <p>By default, the connector captures the schema of every table in the database, including tables that are not configured for capture.
-If tables are not configured for capture, the initial snapshot captures only their structure; it does not capture any table data.<br>
-<br>
-For more information about why snapshots persist schema information for tables that you did not include in the initial snapshot, see <a href="#understanding-why-initial-snapshots-capture-the-schema-history-for-all-tables">Understanding why initial snapshots capture the schema for all tables</a>.</p>
+If tables are not configured for capture, the initial snapshot captures only their structure; it does not capture any table data.</p>
+</div>
+<div class="paragraph">
+<p>For more information about why snapshots persist schema information for tables that you did not include in the initial snapshot, see <a href="#understanding-why-initial-snapshots-capture-the-schema-history-for-all-tables">Understanding why initial snapshots capture the schema for all tables</a>.</p>
 </div>
 </td>
 </tr>
@@ -1235,10 +1217,9 @@ To have the connector capture a subset of tables or table elements, you can set 
 <td class="tableblock halign-left valign-top"><p class="tableblock">Obtain table-level locks.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">4
-:leveloffset: +1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Start a transaction with <a href="https://dev.mysql.com/doc/refman/8.2/en/innodb-consistent-read.html">repeatable read semantics</a> to ensure that all subsequent reads within the transaction are done against the <em>consistent snapshot</em>.<br></p>
+<p>Start a transaction with <a href="https://dev.mysql.com/doc/refman/8.2/en/innodb-consistent-read.html">repeatable read semantics</a> to ensure that all subsequent reads within the transaction are done against the <em>consistent snapshot</em>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1320,7 +1301,7 @@ Other database clients can now write to any previously locked tables.</p></td>
 </tbody>
 </table>
 <table id="mysql-connector-snapshot-mode-options" class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 2. Settings for <code>snapshot.mode</code> connector configuration property</caption>
+<caption class="title">Table 1. Settings for <code>snapshot.mode</code> connector configuration property</caption>
 <colgroup>
 <col style="width: 30%;">
 <col style="width: 70%;">
@@ -1375,15 +1356,6 @@ After the snapshot completes, the connector stops, and does not stream event rec
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The connector captures the structure of all relevant tables, performing all the steps described in the <a href="#mysql-initial-snapshot-workflow-with-global-read-lock">default workflow for creating an initial snapshot</a>, except that it does not create <code>READ</code> events to represent the data set at the point of the connector&#8217;s start-up (Step 7.2).</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>never</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>When the connector starts, rather than performing a snapshot, it immediately begins to stream event records for subsequent database changes.
-This option is under consideration for future deprecation, in favor of the <code>no_data</code> option.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1772,7 +1744,7 @@ Also, the snapshot can capture a subset of the contents of the table(s) in the d
 Set the type of the <code>execute-snapshot</code> signal to <code>incremental</code> or <code>blocking</code>, and provide the names of the tables to include in the snapshot, as described in the following table:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 3. Example of an ad hoc <code>execute-snapshot</code> signal record</caption>
+<caption class="title">Table 2. Example of an ad hoc <code>execute-snapshot</code> signal record</caption>
 <colgroup>
 <col style="width: 20%;">
 <col style="width: 20%;">
@@ -1980,10 +1952,11 @@ Debezium currently supports the <code>incremental</code> and <code>blocking</cod
 <p>To specify the tables to include in the snapshot, provide a <code>data-collections</code> array that lists the tables, or an array of regular expressions used to match tables, for example,<br></p>
 </div>
 <div class="paragraph">
-<p><code>{"data-collections": ["public.MyFirstTable", "public.MySecondTable"]}</code><br></p>
+<p><code>{"data-collections": ["public.MyFirstTable", "public.MySecondTable"]}</code></p>
 </div>
 <div class="paragraph">
-<p>The <code>data-collections</code> array for an incremental snapshot signal has no default value.
+<p>Data collection names are case-sensitive.
+The <code>data-collections</code> array for an incremental snapshot signal has no default value.
 If the <code>data-collections</code> array is empty, Debezium interprets the empty array to mean that no action is required, and it does not perform a snapshot.</p>
 </div>
 <div class="admonitionblock note">
@@ -2005,7 +1978,7 @@ For example, to include a table that exists in the <code><strong>db1</strong></c
 <div class="title">Prerequisites</div>
 <ul>
 <li>
-<p><a href="../configuration/signalling.html#debezium-signaling-enabling-source-signaling-channel" class="xref page">Signaling is enabled</a>.<br></p>
+<p><a href="../configuration/signalling.html#debezium-signaling-enabling-source-signaling-channel" class="xref page">Signaling is enabled</a>.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -2036,80 +2009,167 @@ For example, to include a table that exists in the <code><strong>db1</strong></c
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO db1.debezium_signal (id, type, data) <i class="conum" data-value="1"></i><b>(1)</b>
-values ('ad-hoc-1',   <i class="conum" data-value="2"></i><b>(2)</b>
-    'execute-snapshot',  <i class="conum" data-value="3"></i><b>(3)</b>
-    '{"data-collections": ["db1.table1", "db1.table2"], <i class="conum" data-value="4"></i><b>(4)</b>
-    "type":"incremental", <i class="conum" data-value="5"></i><b>(5)</b>
-    "additional-conditions":[{"data-collection": "db1.table1" ,"filter":"color=\'blue\'"}]}'); <i class="conum" data-value="6"></i><b>(6)</b></code></pre>
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO db1.debezium_signal (id, type, data)
+values ('ad-hoc-1',
+    'execute-snapshot',
+    '{"data-collections": ["db1.table1", "db1.table2"],
+    "type":"incremental",
+    "additional-conditions":[{"data-collection": "db1.table1" ,"filter":"color=\'blue\'"}]}');</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>The values of the <code>id</code>,<code>type</code>, and <code>data</code> parameters in the command correspond to the <a href="../configuration/signalling.html#debezium-signaling-description-of-required-structure-of-a-signaling-data-collection" class="xref page">fields of the signaling table</a>.<br>
-The following table describes the parameters in the example:</p>
+<p>The values of the <code>id</code>,<code>type</code>, and <code>data</code> parameters in the command correspond to the <a href="../configuration/signalling.html#debezium-signaling-description-of-required-structure-of-a-signaling-data-collection" class="xref page">fields of the signaling table</a>.
+The following list describes the parameters in the preceding example:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>INSERT INTO database.debezium_signal</code></dt>
+<dd>
+<p>Specifies the fully-qualified name of the signaling table on the source database.</p>
+</dd>
+<dt class="hdlist1"><code>values</code></dt>
+<dd>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>id</code></dt>
+<dd>
+<p>The <code>id</code> parameter contains the value <code>ad-hoc</code>, an arbitrary string that serves as the <code>id</code> identifier for the signal request.</p>
+</dd>
+<dt class="hdlist1"><code>type</code></dt>
+<dd>
+<p>The <code>type</code> parameter specifies the type of operation to perform, in this case, <code>execute-snapshot</code>.</p>
+</dd>
+<dt class="hdlist1"><code>data</code></dt>
+<dd>
+<p>The the <code>data</code> field of a signal contains the following fields:</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>data-collections</code></dt>
+<dd>
+<p>An array of table names or regular expressions to match table names to include in the snapshot.</p>
+</dd>
+<dt class="hdlist1"><code>type</code></dt>
+<dd>
+<p>An optional <code>type</code> component of the <code>data</code> field of a signal that specifies the type of snapshot operation to run.</p>
+<div class="paragraph">
+<p>Valid values are <code>incremental</code> and <code>blocking</code>.</p>
+</div>
+<div class="paragraph">
+<p>If you do not specify a value, the connector defaults to performing an incremental snapshot.</p>
+</div>
+</dd>
+<dt class="hdlist1"><code>additional-conditions</code></dt>
+<dd>
+<p>An optional array that specifies a set of additional conditions that the connector evaluates to determine the subset of records to include in a snapshot.
+Each additional condition in the array is an object with <code>data-collection</code> and <code>filter</code> properties.</p>
+<div class="paragraph">
+<p>Each <code>data-collection</code> in the <code>additional-conditions</code> array is specified by its fully-qualified name.
+You can specify one or more data collections.
+Each collection can be paired with an optional <code>filter</code> parameter.
+You can pair a unique filter with each data collection.
+The value of a <code>filter</code> property consists a column label and a value.
+When the snapshot runs, for each collection that is named in the array, it captures only the rows that contain the specified filter criteria.</p>
+</div>
+<div class="paragraph">
+<p>In the example, for the <code>table1</code> data collection, the signal results in a snapshot that captures only the rows that include the field <code>color</code> where the field value is <code>'blue'</code>.</p>
+</div>
+<div class="paragraph">
+<p>For more information about the <code>additional-conditions</code> parameter, see <a href="#mysql-incremental-snapshots-additional-conditions">Running an ad hoc incremental snapshots with <code>additional-conditions</code></a>.</p>
+</div>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
+</li>
+</ol>
+</div>
+<div id="mysql-incremental-snapshots-physical-row-identifiers" class="paragraph">
+<div class="title">Using physical row identifiers as surrogate keys</div>
+<p>Some databases provide physical row identifiers, which are pseudo-columns that represent the physical location of a row on disk.
+These identifiers can provide significant performance improvements for incremental snapshot chunking.</p>
+</div>
+<div class="paragraph">
+<p>Physical row identifiers are particularly useful in the following scenarios:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Tables with composite primary keys</dt>
+<dd>
+<p>When a table has no single-column surrogate key and uses multiple columns as the primary key, chunking queries become complex and inefficient.</p>
+</dd>
+<dt class="hdlist1">Inefficient index utilization</dt>
+<dd>
+<p>Database query optimizers often cannot use indexes effectively with the disjunction of conditions generated by incremental snapshot chunking queries, resulting in full table scans.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>By using a physical row identifier as the surrogate key, Debezium can generate simpler range-based queries that leverage the inherent ordering of row identifiers, significantly improving performance.</p>
+</div>
+<div class="paragraph">
+<p>Debezium supports the following physical row identifiers as surrogate keys:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 4. Descriptions of fields in a SQL command for sending an incremental snapshot signal to the signaling table</caption>
 <colgroup>
-<col style="width: 11.1111%;">
-<col style="width: 22.2222%;">
-<col style="width: 66.6667%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 66.6668%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Item</th>
-<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Database</th>
+<th class="tableblock halign-left valign-top">Identifier</th>
 <th class="tableblock halign-left valign-top">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>database.debezium_signal</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the fully-qualified name of the signaling table on the source database.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ad-hoc-1</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>id</code> parameter specifies an arbitrary string that is assigned as the <code>id</code> identifier for the signal request.<br>
-Use this string to identify logging messages to entries in the signaling table.
-Debezium does not use this string.
-Rather, during the snapshot, Debezium generates its own <code>id</code> string as a watermarking signal.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>execute-snapshot</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>type</code> parameter specifies the operation that the signal is intended to trigger.<br></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data-collections</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A required component of the <code>data</code> field of a signal that specifies an array of table names or regular expressions to match table names to include in the snapshot.<br>
-The array lists regular expressions that use the format <code>database.table</code> to match the fully-qualified names of the tables.
-This format is the same as the one that you use to specify the name of the connector&#8217;s <a href="../configuration/signalling.html#format-for-specifying-fully-qualified-names-for-data-collections" class="xref page">signaling table</a>.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>incremental</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An optional <code>type</code> component of the <code>data</code> field of a signal that specifies the type of snapshot operation to run.<br>
-Valid values are <code>incremental</code> and <code>blocking</code>.<br>
-If you do not specify a value, the connector defaults to performing an incremental snapshot.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>additional-conditions</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An optional array that specifies a set of additional conditions that the connector evaluates to determine the subset of records to include in a snapshot.<br>
-Each additional condition is an object with <code>data-collection</code> and <code>filter</code> properties.
-You can specify different filters for each data collection.<br>
-* The <code>data-collection</code> property is the fully-qualified name of the data collection that the filter applies to.
-For more information about the <code>additional-conditions</code> parameter, see <a href="#mysql-incremental-snapshots-additional-conditions">Running an ad hoc incremental snapshots with <code>additional-conditions</code></a>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Oracle</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ROWID</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The physical address of a row in an Oracle table.
+Using <code>ROWID</code> can significantly improve incremental snapshot performance, especially for tables with composite primary keys or inefficient indexes.</p>
+</div></div></td>
 </tr>
 </tbody>
 </table>
-</li>
-</ol>
+<div class="paragraph">
+<p>The following example shows a SQL query to trigger an incremental snapshot using Oracle&#8217;s <code>ROWID</code> as the surrogate key:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO db1.myschema.debezium_signal (id, type, data)
+VALUES ('ad-hoc-1',
+    'execute-snapshot',
+    '{"data-collections": ["db1.myschema.mytable"],
+      "type": "incremental",
+      "surrogate-key": "ROWID"}');</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Physical row identifiers can change under certain circumstances, which may affect snapshot consistency.
+Oracle <code>ROWID</code> can change during table reorganization operations such as <code>ALTER TABLE MOVE</code>, partition maintenance, or <code>SHRINK SPACE</code> operations.</p>
+</div>
+<div class="paragraph">
+<p>To ensure data consistency, when an incremental snapshot that uses a physical row identifier is in progress, do not perform table maintenance operations, such as table moves, partition management, or shrink operations.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect3">
@@ -2190,9 +2250,9 @@ For example, using the <code>products</code> table from the previous example, yo
     },
     "source": {
         ...
-        "snapshot":"incremental" <i class="conum" data-value="1"></i><b>(1)</b>
+        "snapshot":"incremental"
     },
-    "op":"r", <i class="conum" data-value="2"></i><b>(2)</b>
+    "op":"r",
     "ts_ms":"1620393591654",
     "ts_us":"1620393591654547",
     "ts_ns":"1620393591654547920",
@@ -2202,37 +2262,22 @@ For example, using the <code>products</code> table from the previous example, yo
 </div>
 </div>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 5. Description of fields in an incremental snapshot event message</caption>
-<colgroup>
-<col style="width: 16.6666%;">
-<col style="width: 16.6666%;">
-<col style="width: 66.6668%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Item</th>
-<th class="tableblock halign-left valign-top">Field name</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>snapshot</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the type of snapshot operation to run.<br>
-Currently, the only valid options are <code>blocking</code> and <code>incremental</code>.<br>
-Specifying a <code>type</code> value in the SQL query that you submit to the signaling table is optional.<br>
-If you do not specify a value, the connector runs an incremental snapshot.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>op</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the event type.<br>
-The value for snapshot events is <code>r</code>, signifying a <code>READ</code> operation.</p></td>
-</tr>
-</tbody>
-</table>
+<div class="paragraph">
+<p>The following list describes select fields in the preceding example of an incremental snapshot event message:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>snapshot</code></dt>
+<dd>
+<p>Specifies the type of the snapshot.</p>
+</dd>
+<dt class="hdlist1"><code>op</code></dt>
+<dd>
+<p>Specifies the type of operation.
+For snapshot events, the value of the <code>op</code> field value is <code>r</code>, because a snapshot is a <code>READ</code> operation.</p>
+</dd>
+</dl>
+</div>
 </div>
 <div class="sect3">
 <h4 id="mysql-triggering-an-incremental-snapshot-kafka"><a class="anchor" href="#mysql-triggering-an-incremental-snapshot-kafka"></a>Using the Kafka signaling channel to trigger an incremental snapshot</h4>
@@ -2249,7 +2294,7 @@ The value for snapshot events is <code>r</code>, signifying a <code>READ</code> 
 <p>The signal type is <code>execute-snapshot</code>, and the <code>data</code> field must have the following fields:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 6. Execute snapshot data fields</caption>
+<caption class="title">Table 3. Execute snapshot data fields</caption>
 <colgroup>
 <col style="width: 20%;">
 <col style="width: 20%;">
@@ -2276,22 +2321,38 @@ See the next section for more details.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data-collections</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>N/A</em></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>An array of comma-separated regular expressions that match the fully-qualified names of tables to include in the snapshot.<br>
-Specify the names by using the same format as is required for the <a href="#mysql-property-signal-data-collection">signal.data.collection</a> configuration option.</p>
+<p>An array of comma-separated regular expressions that match the fully-qualified names of tables to include in the snapshot.</p>
+</div>
+<div class="paragraph">
+<p>Specify the names by using the same format as is required for the <a href="#mysql-property-signal-data-collection">signal.data.collection</a> configuration option.
+Data collection names are case-sensitive.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>additional-conditions</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>N/A</em></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>An optional array of additional conditions that specifies criteria that the connector evaluates to designate a subset of records to include in a snapshot.<br>
-Each additional condition is an object that specifies the criteria for filtering the data that an ad hoc snapshot captures.
-You can set the following parameters for each additional condition:
-<code>data-collection</code>:: The fully-qualified name of the table that the filter applies to.
-You can apply different filters to each table.
-<code>filter</code>:: Specifies column values that must be present in a database record for the snapshot to include it, for example,  <code>"color='blue'"</code>.<br>
-<br>
-The values that you assign to the <code>filter</code> parameter are the same types of values that you might specify in the <code>WHERE</code> clause of <code>SELECT</code> statements when you set the <code>snapshot.select.statement.overrides</code> property for a blocking snapshot.</p>
+<p>An optional array of additional conditions that specifies criteria that the connector evaluates to designate a subset of records to include in a snapshot.</p>
+</div>
+<div class="paragraph">
+<p>Each additional condition is an object that specifies the criteria for filtering the data that an ad hoc snapshot captures.
+You can set the following parameters for each additional condition:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>data-collection</code></dt>
+<dd>
+<p>The fully-qualified name of the table that the filter applies to.
+You can apply different filters to each table.</p>
+</dd>
+<dt class="hdlist1"><code>filter</code></dt>
+<dd>
+<p>Specifies column values that must be present in a database record for the snapshot to include it, for example,  <code>"color='blue'"</code>.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The values that you assign to the <code>filter</code> parameter are the same types of values that you might specify in the <code>WHERE</code> clause of <code>SELECT</code> statements when you set the <code>snapshot.select.statement.overrides</code> property for a blocking snapshot.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2325,8 +2386,7 @@ Value = `{"type":"execute-snapshot","data": {"data-collections": ["{collection-c
 <p><code>SELECT * FROM <em>&lt;data-collection&gt;</em> WHERE <em>&lt;filter&gt;</em> &#8230;&#8203;.</code></p>
 </div>
 <div class="paragraph">
-<p>For example, given a <code>products</code> table with the columns <code>id</code> (primary key), <code>color</code>, and <code>brand</code>, if you want a snapshot to include only content for which <code>color='blue'</code>, when you request the snapshot, you could add the <code>additional-conditions</code> property to filter the content:
-:leveloffset: +1</p>
+<p>For example, given a <code>products</code> table with the columns <code>id</code> (primary key), <code>color</code>, and <code>brand</code>, if you want a snapshot to include only content for which <code>color='blue'</code>, when you request the snapshot, you could add the <code>additional-conditions</code> property to filter the content:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2337,8 +2397,7 @@ Value = `{"type":"execute-snapshot","data": {"data-collections": ["db1.products"
 </div>
 <div class="paragraph">
 <p>You can also use the <code>additional-conditions</code> property to pass conditions based on multiple columns.
-For example, using the same <code>products</code> table as in the previous example, if you want a snapshot to include only the content from the <code>products</code> table for which <code>color='blue'</code>, and <code>brand='MyBrand'</code>, you could send the following request:
-:leveloffset: +1</p>
+For example, using the same <code>products</code> table as in the previous example, if you want a snapshot to include only the content from the <code>products</code> table for which <code>color='blue'</code>, and <code>brand='MyBrand'</code>, you could send the following request:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2409,11 +2468,14 @@ values ('ad-hoc-1',   <i class="conum" data-value="2"></i><b>(2)</b>
 </div>
 </div>
 <div class="paragraph">
-<p>The values of the <code>id</code>, <code>type</code>, and <code>data</code> parameters in the signal command correspond to the <a href="../configuration/signalling.html#debezium-signaling-description-of-required-structure-of-a-signaling-data-collection" class="xref page">fields of the signaling table</a>.<br>
+<p>The values of the <code>id</code>, <code>type</code>, and <code>data</code> parameters in the signal command correspond to the <a href="../configuration/signalling.html#debezium-signaling-description-of-required-structure-of-a-signaling-data-collection" class="xref page">fields of the signaling table</a>.
 The following table describes the parameters in the example:</p>
 </div>
+</li>
+</ol>
+</div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 7. Descriptions of fields in a SQL command for sending a stop incremental snapshot signal to the signaling table</caption>
+<caption class="title">Table 4. Descriptions of fields in a SQL command for sending a stop incremental snapshot signal to the signaling table</caption>
 <colgroup>
 <col style="width: 11.1111%;">
 <col style="width: 22.2222%;">
@@ -2460,9 +2522,6 @@ If you do not specify a <code>type</code> value, the signal fails to stop the in
 </tr>
 </tbody>
 </table>
-</li>
-</ol>
-</div>
 </div>
 <div class="sect3">
 <h4 id="mysql-stopping-an-incremental-snapshot-kafka"><a class="anchor" href="#mysql-stopping-an-incremental-snapshot-kafka"></a>Using the Kafka signaling channel to stop an incremental snapshot</h4>
@@ -2479,7 +2538,7 @@ If you do not specify a <code>type</code> value, the signal fails to stop the in
 <p>The signal type is <code>stop-snapshot</code>, and the <code>data</code> field must have the following fields:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 8. Execute snapshot data fields</caption>
+<caption class="title">Table 5. Execute snapshot data fields</caption>
 <colgroup>
 <col style="width: 20%;">
 <col style="width: 20%;">
@@ -2812,6 +2871,190 @@ As a result of this delay, after the snapshot completes, the connector might emi
 </div>
 </div>
 <div class="sect2">
+<h3 id="_setting_the_binlog_position_via_a_signal"><a class="anchor" href="#_setting_the_binlog_position_via_a_signal"></a>Setting the binlog position via a signal</h3>
+<div class="paragraph">
+<p>In certain situations it can be useful to precisely control the point in the binlog from which the connector begins to capture database changes.
+You can send a Debezium <code>set-binlog-position</code> signal at run time to dynamically specify where the MySQL connector begins reading from the database binlog (binary log).</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Depending on the position that you specify in the <code>set-binlog-position</code> signal, the connector either excludes events from the log, or sends duplicate events.</p>
+</div>
+<div class="paragraph">
+<p>If you specify a binlog position that is later than the current position, the connector skips change events in the history between the current position and the new position.
+The connector does not capture or stream changes in the skipped range.</p>
+</div>
+<div class="paragraph">
+<p>On the other hand, if the signal directs the connector to resume reading from a point earlier than the current position, the connector replays log entries that it previously sent, emitting duplicate events to the destination topic.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You might want to reset the connector&#8217;s binlog position under the following circumstances:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Disaster recovery</dt>
+<dd>
+<p>Direct the connector to resume streaming from the last known good position in the log after a system failure.
+Restarting from a specified position helps to maintain data consistency across the pipeline by ensuring that data is not lost or duplicated.</p>
+</dd>
+<dt class="hdlist1">Corrupted data</dt>
+<dd>
+<p>You detect corrupted or incorrect data in the database or in the destination Kafka topics, and want to skip the corrupted data and resume from a known good position.</p>
+</dd>
+<dt class="hdlist1">Avoid replaying old data after a database refresh</dt>
+<dd>
+<p>After you refresh a database from another source, such as a backup, the connector might attempt to replay all historical events from an old binlog position, which can result in duplicate topic data, and lead to heavy resource consumption.
+By resuming streaming from a specific recent point, you skip historical events that you don&#8217;t need, and can help save cost and time.</p>
+</dd>
+<dt class="hdlist1">Partial replication</dt>
+<dd>
+<p>When diverting captured data to a new Kafka topic, you want the connector to process the log from a specific point to exclude the full event history and send only a specific subset of database changes.
+By using this approach, you prevent the connector from processing obsolete, older data so that the connector captures only the relevant recent changes.</p>
+</dd>
+<dt class="hdlist1">Testing</dt>
+<dd>
+<p>Test the connector with a specific subset of data, excluding the full history captured by snapshots.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="format-of-a-set-binlog-position-signal"><a class="anchor" href="#format-of-a-set-binlog-position-signal"></a>Format of a <code>set-binlog-position</code> signal</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Debezium <code>set-binlog-position</code> signal message includes the standard <code>id</code>, <code>type</code>, and <code>data</code> properties.
+The exact format of the message depends on which signaling channel you use.
+For more information about the format of Debezium signals, see <a href="../configuration/signalling.html#debezium-signaling-overview}" class="xref page">Sending signals to a Debezium connector</a>.</p>
+</div>
+<div class="paragraph">
+<p>To designate the binlog position in a <code>set-binlog-position</code> signal, in the data portion of the signal, you specify either the binlog file and position, or a GTID set, depending on whether GTID (Global Transaction Identifier) mode is enabled.
+You cannot use both formats in the same signal.</p>
+</div>
+<div class="paragraph">
+<p>The following examples illustrate the two formats for specifying the binlog position in a signal:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Binlog file and position format</dt>
+<dd>
+<p>When GTID mode is disabled, specify the binlog filename and position in the signal, as in the following example:</p>
+<div class="exampleblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{"binlog_filename": "mysql-bin.000003", "binlog_position": 1234}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>binlog_filename</code> must match the MySQL binlog naming pattern (for example, <code>mysql-bin.000001</code>).</p>
+</div>
+<div class="paragraph">
+<p>The <code>binlog_position</code> must be a non-negative integer.</p>
+</div>
+</dd>
+<dt class="hdlist1">GTID set format</dt>
+<dd>
+<p>When GTID mode is enabled, specify the GTID set, for example:</p>
+<div class="exampleblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{"gtid_set": "3E11FA47-71CA-11E1-9E33-C80AA9429562:23"}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The value of the <code>gtid_set</code> attribute must be a valid GTID set string.</p>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="proc-setting-binlog-position-via-signal_mysql"><a class="anchor" href="#proc-setting-binlog-position-via-signal_mysql"></a>Send a signal to reposition the stream</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Send a Debezium <code>set-binlog-position</code> signal at run time to specify the binlog reading position for  the MySQL connector.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>The connector is configured to use one of the available <a href="../configuration/signalling.html#sending-signals-to-a-debezium-connector" class="xref page">Debezium signaling channels</a>.</p>
+</li>
+<li>
+<p>A <a href="../configuration/signalling.html#debezium-signaling-enabling-source-signaling-channel" class="xref page">signaling data collection</a> exists on the source database.</p>
+</li>
+<li>
+<p>The connector configuration property <code>heartbeat.interval.ms</code> is set to ensure that offset changes are persisted.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Determine the target position in your database history (binlog file and position, or GTID set).</p>
+</li>
+<li>
+<p>Send a <code>set-binlog-position</code> signal that includes the standard <code>id</code>, <code>type</code>, and <code>data</code> properties in the format that is required for your preferred signaling channel.</p>
+<div class="paragraph">
+<p>In the data portion of the signal specify the target position, as determined in step 1.</p>
+</div>
+<div class="paragraph">
+<p>For example, for the source signaling channel, add one of the following SQL commands to the <code>data</code> component of the signal, depending on whether GTID is enabled:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">SQL to use when GTID is disabled (uses the binlog file and position)</dt>
+<dd>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO debezium_signal (id, type, data) VALUES (
+  'set-position-001',
+  'set-binlog-position',
+  '{"binlog_filename": "mysql-bin.000003", "binlog_position": 1234}'
+);</code></pre>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">SQL to use when GTID is enabled (specifies GTID set)</dt>
+<dd>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">INSERT INTO debezium_signal (id, type, data) VALUES (
+  'set-gtid-001',
+  'set-binlog-position',
+  '{"gtid_set": "3E11FA47-71CA-11E1-9E33-C80AA9429562:1-100"}'
+);</code></pre>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+</li>
+<li>
+<p>Restart the connector to begin streaming from the new position.</p>
+</li>
+</ol>
+</div>
+<div class="sect2">
 <h3 id="mysql-topic-names"><a class="anchor" href="#mysql-topic-names"></a>Topic names</h3>
 <div class="paragraph">
 <p>By default, the MySQL connector writes change events for all of the <code>INSERT</code>, <code>UPDATE</code>, and <code>DELETE</code> operations that occur in a table to a single Apache Kafka topic that is specific to that table.</p>
@@ -3001,70 +3244,74 @@ This field provides information about every event in the form of a composite of 
 <p>The Debezium MySQL connector generates a data change event for each row-level <code>INSERT</code>, <code>UPDATE</code>, and <code>DELETE</code> operation. Each event contains a key and a value. The structure of the key and the value depends on the table that was changed.</p>
 </div>
 <div class="paragraph">
-<p>Debezium and Kafka Connect are designed around <em>continuous streams of event messages</em>. However, the structure of these events may change over time, which can be difficult for consumers to handle. To address this, each event contains the schema for its content or, if you are using a schema registry, a schema ID that a consumer can use to obtain the schema from the registry. This makes each event self-contained.</p>
+<p>Debezium and Kafka Connect are designed around <em>continuous streams of event messages</em>.
+However, the structure of these events may change over time, which can be difficult for consumers to handle.
+To address this, each event contains the schema for its content or, if you are using a schema registry, a schema ID that a consumer can use to obtain the schema from the registry.
+This makes each event self-contained.</p>
 </div>
 <div class="paragraph">
-<p>The following skeleton JSON shows the basic four parts of a change event. However, how you configure the Kafka Connect converter that you choose to use in your application determines the representation of these four parts in change events. A <code>schema</code> field is in a change event only when you configure the converter to produce it. Likewise, the event key and event payload are in a change event only if you configure a converter to produce it. If you use the JSON converter and you configure it to produce all four basic change event parts, change events have this structure:</p>
+<p>The following skeleton JSON shows the four basic components of a change event.
+The exact way that Debezium represents these components in a change event message depends on how you configure the Kafka Connect converter in your application.
+Change events only contain <code>schema</code> fields if you configure the converter to produce them.
+Likewise, change events only contain the event key and event payload if you configure the converter to produce them.
+If you use the JSON converter and you configure it to produce all four of the basic change event components, a change event has the following structure:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
- "schema": { <i class="conum" data-value="1"></i><b>(1)</b>
+ "schema": {
    ...
   },
- "payload": { <i class="conum" data-value="2"></i><b>(2)</b>
+ "payload": {
    ...
  },
- "schema": { <i class="conum" data-value="3"></i><b>(3)</b>
+ "schema": {
    ...
  },
- "payload": { <i class="conum" data-value="4"></i><b>(4)</b>
+ "payload": {
    ...
  },
 }</code></pre>
 </div>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 9. Overview of change event basic content</caption>
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 20%;">
-<col style="width: 70%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Item</th>
-<th class="tableblock halign-left valign-top">Field name</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>schema</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The first <code>schema</code> field is part of the event key. It specifies a Kafka Connect schema that describes what is in the event key&#8217;s <code>payload</code> portion. In other words, the first <code>schema</code> field describes the structure of the primary key, or the unique key if the table does not have a primary key, for the table that was changed.<br>
-<br>
-It is possible to override the table&#8217;s primary key by setting the <a href="#mysql-property-message-key-columns"><code>message.key.columns</code> connector configuration property</a>. In this case, the first schema field describes the structure of the key identified by that property.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>payload</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The first <code>payload</code> field is part of the event key. It has the structure described by the previous <code>schema</code> field, and it contains the key for the row that was changed.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>schema</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The second <code>schema</code> field is part of the event value. It specifies the Kafka Connect schema that describes what is in the event value&#8217;s <code>payload</code> portion. In other words, the second <code>schema</code> describes the structure of the row that was changed. Typically, this schema contains nested schemas.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>payload</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The second <code>payload</code> field is part of the event value. It has the structure described by the previous <code>schema</code> field and it contains the actual data for the row that was changed.</p></td>
-</tr>
-</tbody>
-</table>
 <div class="paragraph">
-<p>By default, the connector streams change event records to topics with names that are the same as the event&#8217;s originating table. See <a href="#mysql-topic-names">topic names</a>.</p>
+<p>The following list provides details about the components that are shown in the preceding change event structure:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>schema</code></dt>
+<dd>
+<p>This first <code>schema</code> field in the event message is part of the event key.
+The event key schema is a Kafka Connect schema that defines the structure and data types that are present in the <code>payload</code> portion of the event key.
+The event key structure reflects the structure of the primary key for the table that was changed by the database operation.
+If the source table has no primary key, the event key structure maps represents the structure of the source table&#8217;s unique key.</p>
+<div class="paragraph">
+<p>It is possible to override the table&#8217;s primary key by setting the <a href="#mysql-property-message-key-columns"><code>message.key.columns</code> connector configuration property</a>.
+In this case, the first schema field describes the structure of the key identified by that property.</p>
+</div>
+</dd>
+<dt class="hdlist1"><code>payload</code></dt>
+<dd>
+<p>The first <code>payload</code> field is part of the event key.
+The payload structure reflects the structure of the preceding event key <code>schema</code>, and it contains the key for the row that was changed.</p>
+</dd>
+<dt class="hdlist1"><code>schema</code></dt>
+<dd>
+<p>The second <code>schema</code> field is part of the event value.
+This event value schema represents the Kafka Connect schema that defines the structure and data types present in the <code>payload</code> portion of the event value.
+This schema values reflects the structure of the row that the database operation changed.
+Typically, the event value schema contains nested schemas.</p>
+</dd>
+<dt class="hdlist1"><code>payload</code></dt>
+<dd>
+<p>The second <code>payload</code> field is part of the event value.
+The payload structure reflects the structure of the preceding event value <code>schema</code>, and it contains the actual data for the row that was changed.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>By default, the connector streams change event records to topics with names that are the same as the event&#8217;s originating table.
+For more information, see <a href="#mysql-topic-names">topic names</a>.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -3086,7 +3333,8 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
 <div class="sect2">
 <h3 id="mysql-change-event-keys"><a class="anchor" href="#mysql-change-event-keys"></a>Change event keys</h3>
 <div class="paragraph">
-<p>A change event&#8217;s key contains the schema for the changed table&#8217;s key and the changed row&#8217;s actual key. Both the schema and its corresponding payload contain a field for each column in the changed table&#8217;s <code>PRIMARY KEY</code> (or unique constraint) at the time the connector created the event.</p>
+<p>A change event&#8217;s key contains the schema for the changed table&#8217;s key and the changed row&#8217;s actual key.
+Both the schema and its corresponding payload contain a field for each column in the changed table&#8217;s <code>PRIMARY KEY</code> (or unique constraint) at the time the connector created the event.</p>
 </div>
 <div class="paragraph">
 <p>Consider the following <code>customers</code> table, which is followed by an example of a change event key for this table.</p>
@@ -3102,16 +3350,19 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
 </div>
 </div>
 <div class="paragraph">
-<p>Every change event that captures a change to the <code>customers</code> table has the same event key schema. For as long as the <code>customers</code> table has the previous definition, every change event that captures a change to the <code>customers</code> table has the following key structure. In JSON, it looks like this:</p>
+<p>Every change event that captures a change to the <code>customers</code> table has the same event key schema.
+Thus, for every change event that Debezium emits for the table, the event message has the same key structure.
+Key consistency remains stable as long as the schema of the <code>customers</code> table remains unchanged.
+The preceding table definiton results in a key structure such as the one in the following JSON example:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
- "schema": { <i class="conum" data-value="1"></i><b>(1)</b>
+ "schema": {
     "type": "struct",
-    "name": "mysql-server-1.inventory.customers.Key", <i class="conum" data-value="2"></i><b>(2)</b>
-    "optional": false, <i class="conum" data-value="3"></i><b>(3)</b>
-    "fields": [ <i class="conum" data-value="4"></i><b>(4)</b>
+    "name": "mysql-server-1.inventory.customers.Key",
+    "optional": false,
+    "fields": [
       {
         "field": "id",
         "type": "int32",
@@ -3119,69 +3370,75 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
       }
     ]
   },
- "payload": { <i class="conum" data-value="5"></i><b>(5)</b>
+ "payload": {
     "id": 1001
   }
 }</code></pre>
 </div>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 10. Description of change event key</caption>
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 20%;">
-<col style="width: 70%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Item</th>
-<th class="tableblock halign-left valign-top">Field name</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>schema</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The schema portion of the key specifies a Kafka Connect schema that describes what is in the key&#8217;s <code>payload</code> portion.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mysql-server-1.inventory.customers.Key</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Name of the schema that defines the structure of the key&#8217;s payload. This schema describes the structure of the primary key for the table that was changed. Key schema names have the format <em>connector-name</em>.<em>database-name</em>.<em>table-name</em>.<code>Key</code>. In this example:<br></p>
+<div class="paragraph">
+<p>The following list describes some of the elements in the event key of a change event message that Debezium emits from the <code>customers</code> table:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>mysql-server-1</code> is the name of the connector that generated this event.<br></p>
-</li>
-<li>
-<p><code>inventory</code> is the database that contains the table that was changed.<br></p>
-</li>
-<li>
-<p><code>customers</code> is the table that was updated.</p>
-</li>
-</ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>optional</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates whether the event key must contain a value in its <code>payload</code> field. In this example, a value in the key&#8217;s payload is required. A value in the key&#8217;s payload field is optional when a table does not have a primary key.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>fields</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies each field that is expected in the <code>payload</code>, including each field&#8217;s name, type, and whether it is required.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>payload</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Contains the key for the row for which this change event was generated. In this example, the key, contains a single <code>id</code> field whose value is <code>1001</code>.</p></td>
-</tr>
-</tbody>
-</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>schema</code></dt>
+<dd>
+<p>The schema element of the key specifies the Kafka Connect schema that defines the structure and data types that are present in the <code>payload</code> portion of the event key.</p>
+</dd>
+<dt class="hdlist1"><code>name</code></dt>
+<dd>
+<p>Specifies the name of the schema that defines the structure of the key&#8217;s payload.
+This schema describes the structure of the primary key for the table that was changed.
+The schema name of an event key has the following format: <em>connector-name</em>.<em>database-name</em>.<em>table-name</em>.<code>Key</code>.</p>
+<div class="paragraph">
+<p>In the preceding event message, the schema name is made up of the following elements:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>mysql-server-1</code></dt>
+<dd>
+<p>Specifies the name of the connector that generated this event.</p>
+</dd>
+<dt class="hdlist1"><code>inventory</code></dt>
+<dd>
+<p>Specifies the database that contains the table that was changed.</p>
+</dd>
+<dt class="hdlist1"><code>customers</code></dt>
+<dd>
+<p>Specifies the table that was changed.</p>
+</dd>
+</dl>
+</div>
+</dd>
+<dt class="hdlist1"><code>fields</code></dt>
+<dd>
+<p>Specifies the required fields in the <code>payload</code>.
+The <code>fields</code> element includes the following attributes:</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>field</code></dt>
+<dd>
+<p>The name of the field, for example, <code>id</code>.</p>
+</dd>
+<dt class="hdlist1"><code>type</code></dt>
+<dd>
+<p>The data type of the field, for example, <code>int32</code>.</p>
+</dd>
+<dt class="hdlist1"><code>optional</code></dt>
+<dd>
+<p>A Boolean value that specifies whether a value is required in the payload field of the event key
+A value in the key&#8217;s payload field is optional when a table does not have a primary key.</p>
+</dd>
+</dl>
+</div>
+</dd>
+<dt class="hdlist1"><code>payload</code></dt>
+<dd>
+<p>Specifies the key of the row for which this change event was generated.
+In the preceding example, the <code>payload</code> contains a single field, <code>id</code>, which has the value <code>1001</code>.</p>
+</dd>
+</dl>
+</div>
 </div>
 <div class="sect2">
 <h3 id="mysql-change-event-values"><a class="anchor" href="#mysql-change-event-values"></a>Change event values</h3>
@@ -3235,7 +3492,7 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-json hljs" data-lang="json">{
-  "schema": { <i class="conum" data-value="1"></i><b>(1)</b>
+  "schema": {
     "type": "struct",
     "fields": [
       {
@@ -3263,7 +3520,7 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
           }
         ],
         "optional": true,
-        "name": "mysql-server-1.inventory.customers.Value", <i class="conum" data-value="2"></i><b>(2)</b>
+        "name": "mysql-server-1.inventory.customers.Value",
         "field": "before"
       },
       {
@@ -3380,7 +3637,7 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
           }
         ],
         "optional": false,
-        "name": "io.debezium.connector.mysql.Source", <i class="conum" data-value="3"></i><b>(3)</b>
+        "name": "io.debezium.connector.mysql.Source",
         "field": "source"
       },
       {
@@ -3405,22 +3662,22 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
       }
     ],
     "optional": false,
-    "name": "mysql-server-1.inventory.customers.Envelope" <i class="conum" data-value="4"></i><b>(4)</b>
+    "name": "mysql-server-1.inventory.customers.Envelope"
   },
-  "payload": { <i class="conum" data-value="5"></i><b>(5)</b>
-    "op": "c", <i class="conum" data-value="6"></i><b>(6)</b>
-    "ts_ms": 1465491411815, <i class="conum" data-value="7"></i><b>(7)</b>
-    "ts_us": 1465491411815437, <i class="conum" data-value="7"></i><b>(7)</b>
-    "ts_ns": 1465491411815437158, <i class="conum" data-value="7"></i><b>(7)</b>
-    "before": null, <i class="conum" data-value="8"></i><b>(8)</b>
-    "after": { <i class="conum" data-value="9"></i><b>(9)</b>
+  "payload": {
+    "op": "c",
+    "ts_ms": 1465491411815,
+    "ts_us": 1465491411815437,
+    "ts_ns": 1465491411815437158,
+    "before": null,
+    "after": {
       "id": 1004,
       "first_name": "Anne",
       "last_name": "Kretchmar",
       "email": "annek@noanswer.org"
     },
-    "source": { <i class="conum" data-value="10"></i><b>(10)</b>
-      "version": "3.3.0.Beta1",
+    "source": {
+      "version": "3.6.0.Alpha2",
       "connector": "mysql",
       "name": "mysql-server-1",
       "ts_ms": 0,
@@ -3441,153 +3698,183 @@ It is possible to override the table&#8217;s primary key by setting the <a href=
 }</code></pre>
 </div>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 11. Descriptions of <em>create</em> event value fields</caption>
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 20%;">
-<col style="width: 70%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Item</th>
-<th class="tableblock halign-left valign-top">Field name</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>schema</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The value&#8217;s schema, which describes the structure of the value&#8217;s payload.
-A change event&#8217;s value schema is the same in every change event that the connector generates for a particular table.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>In the <code>schema</code> section, each <code>name</code> field specifies the schema for a field in the value&#8217;s payload.<br>
-<br>
-<code>mysql-server-1.inventory.customers.Value</code> is the schema for the payload&#8217;s <code>before</code> and <code>after</code> fields.
-This schema is specific to the <code>customers</code> table.<br>
-<br>
-Names of schemas for <code>before</code> and <code>after</code> fields are of the form <code><em>logicalName</em>.<em>tableName</em>.Value</code>, which ensures that the schema name is unique in the database.
-This means that when using the <a href="../configuration/avro.html#avro-serialization" class="xref page">Avro converter</a>, the resulting Avro schema for each table in each logical source has its own evolution and history.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>io.debezium.connector.mysql.Source</code> is the schema for the payload&#8217;s <code>source</code> field.
+<div class="paragraph">
+<p>The following list describes select fields in the value portion of the preceding <code>create</code> event message:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>schema</code></dt>
+<dd>
+<p>Specifies the schema of the event value.
+The schema describes the structure of the value&#8217;s payload.
+Every change event that Debezium emits for a table uses the same value schema, as long as the table schema remains unchanged.</p>
+</dd>
+<dt class="hdlist1"><code>name</code></dt>
+<dd>
+<p>The <code>schema</code> section can contain multiple <code>name</code> fields.
+Each <code>name</code> field specifies the schema for a field in the payload of the event value.</p>
+<div class="paragraph">
+<p><code>mysql-server-1.inventory.customers.Value</code> is the schema for the payload&#8217;s <code>before</code> and <code>after</code> fields.
+This schema is specific to the <code>customers</code> table.</p>
+</div>
+<div class="paragraph">
+<p>The schema names of the <code>before</code> and <code>after</code> fields are of the form <code><em>logicalName</em>.<em>tableName</em>.Value</code>.
+This format ensures that schema names are unique within the database.
+In environments that use the <a href="../configuration/avro.html#avro-serialization" class="xref page">Avro converter</a>, having unique schema names ensures that the Avro schema for each table in each logical source has its own evolution and history.</p>
+</div>
+</dd>
+<dt class="hdlist1"><code>"name": "io.debezium.connector.mysql.Source"</code></dt>
+<dd>
+<p><code>io.debezium.connector.mysql.Source</code> is the schema for the payload&#8217;s <code>source</code> field.
 This schema is specific to the MySQL connector.
-The connector uses it for all events that it generates.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mysql-server-1.inventory.customers.Envelope</code> is the schema for the overall structure of the payload, where <code>mysql-server-1</code> is the connector name, <code>inventory</code> is the database, and <code>customers</code> is the table.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>payload</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The value&#8217;s actual data.
-This is the information that the change event is providing.<br>
-<br>
-It may appear that the JSON representations of the events are much larger than the rows they describe.
-This is because the JSON representation must include the schema and the payload portions of the message.
-However, by using the <a href="../configuration/avro.html#avro-serialization" class="xref page">Avro converter</a>, you can significantly decrease the size of the messages that the connector streams to Kafka topics.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>op</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Mandatory string that describes the type of operation that caused the connector to generate the event.
-In this example, <code>c</code> indicates that the operation created a row. Valid values are:</p>
+The connector uses it for all events that it generates.</p>
+</dd>
+<dt class="hdlist1"><code>"name": "mysql-server-1.inventory.customers.Envelope"</code></dt>
+<dd>
+<p>Specifies the name of the schema for the overall structure of the payload.
+The schema name is made up of the following elements:</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>mysql-server-1</code></dt>
+<dd>
+<p>Specifies the name of the connector that generated this event.</p>
+</dd>
+<dt class="hdlist1"><code>inventory</code></dt>
+<dd>
+<p>Specifies the database that contains the table that was changed.</p>
+</dd>
+<dt class="hdlist1"><code>customers</code></dt>
+<dd>
+<p>Specifies the table that was changed.</p>
+</dd>
+</dl>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>c</code> = create</p>
-</li>
-<li>
-<p><code>u</code> = update</p>
-</li>
-<li>
-<p><code>d</code> = delete</p>
-</li>
-<li>
-<p><code>r</code> = read (applies to only snapshots)</p>
-</li>
-</ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ts_ms</code>, <code>ts_us</code>, <code>ts_ns</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Optional field that displays the time at which the connector processed the event.
-The time is based on the system clock in the JVM running the Kafka Connect task. <br>
-<br>
-In the <code>source</code> object, <code>ts_ms</code> indicates the time that the change was made in the database.
-By comparing the value for <code>payload.source.ts_ms</code> with the value for <code>payload.ts_ms</code>, you can determine the lag between the source database update and Debezium.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>before</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An optional field that specifies the state of the row before the event occurred.
-When the <code>op</code> field is <code>c</code> for create, as it is in this example, the <code>before</code> field is <code>null</code> since this change event is for new content.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>after</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An optional field that specifies the state of the row after the event occurred.
-In this example, the <code>after</code> field contains the values of the new row&#8217;s <code>id</code>, <code>first_name</code>, <code>last_name</code>, and <code>email</code> columns.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>source</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Mandatory field that describes the source metadata for the event.
-This field contains information that you can use to compare this event with other events, with regard to the origin of the events, the order in which the events occurred, and whether events were part of the same transaction. The source metadata includes:</p>
+</dd>
+<dt class="hdlist1"><code>payload</code></dt>
+<dd>
+<p>Specifies the actual data for the row that was changed.</p>
+<div class="paragraph">
+<p>Because the JSON representation of an event includes both the schema and the payload portions of the message, it is often larger than the row that it describes.
+To reduce the size of the messages that the connector streams to Kafka topics, you can use the <a href="../configuration/avro.html#avro-serialization" class="xref page">Avro converter</a>.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Debezium version</p>
-</li>
-<li>
-<p>Connector name</p>
-</li>
-<li>
-<p>binlog name where the event was recorded</p>
-</li>
-<li>
-<p>binlog position</p>
-</li>
-<li>
-<p>Row within the event</p>
-</li>
-<li>
-<p>If the event was part of a snapshot</p>
-</li>
-<li>
-<p>Name of the database and table that contain the new row</p>
-</li>
-<li>
-<p>ID of the MySQL thread that created the event (non-snapshot only)</p>
-</li>
-<li>
-<p>MySQL server ID (if available)</p>
-</li>
-<li>
-<p>Timestamp for when the change was made in the database</p>
-</li>
-</ul>
-</div></div></td>
+</dd>
+<dt class="hdlist1"><code>op</code></dt>
+<dd>
+<p>Specifies the type of operation that caused the connector to generate the event.
+In this example, <code>c</code> indicates that a <code>create</code> operation was performed resulting in a new row.
+This field can contain one of the following values:</p>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+<code>c</code>
+</td>
+<td class="hdlist2">
+<p>Create a row.</p>
+</td>
 </tr>
-</tbody>
+<tr>
+<td class="hdlist1">
+<code>u</code>
+</td>
+<td class="hdlist2">
+<p>Update a row.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>d</code>
+</td>
+<td class="hdlist2">
+<p>Delete a row.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>r</code>
+</td>
+<td class="hdlist2">
+<p>Read a row (applies to only snapshots).</p>
+</td>
+</tr>
 </table>
+</div>
+</dd>
+<dt class="hdlist1"><code>ts_ms</code>, <code>ts_us</code>, <code>ts_ns</code></dt>
+<dd>
+<p>Displays timestamps in milliseconds, microseconds, and nanoseconds that indicate when the connector processed the event.
+The time is based on the system clock in the JVM that runs the Kafka Connect task.</p>
+</dd>
+<dt class="hdlist1"><code>before</code></dt>
+<dd>
+<p>An optional field that specifies the state of the row before the event occurred.
+Because the <code>op</code> field in the preceding example is <code>c</code> (create), this change event is describes new data, so the value of the <code>before</code> field is <code>null</code>.</p>
+</dd>
+<dt class="hdlist1"><code>after</code></dt>
+<dd>
+<p>An optional field that specifies the state of the row after the event occurred.
+In this example, the <code>after</code> field contains the values of the new row&#8217;s <code>id</code>, <code>first_name</code>, <code>last_name</code>, and <code>email</code> columns.</p>
+</dd>
+<dt class="hdlist1"><code>source</code></dt>
+<dd>
+<p>Mandatory field that describes the source metadata for the event.
+This field contains information that you can use to compare this event to other events, with regard to the origin of the events, the order in which the events occurred, and whether events were part of the same transaction.
+The source metadata provides the following information:</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>version</code></dt>
+<dd>
+<p>Debezium version.</p>
+</dd>
+<dt class="hdlist1"><code>name</code></dt>
+<dd>
+<p>Connector name.</p>
+</dd>
+<dt class="hdlist1"><code>connector</code></dt>
+<dd>
+<p>The type of connector.</p>
+</dd>
+<dt class="hdlist1"><code>ts_ms, ts_us, ts_ns</code></dt>
+<dd>
+<p>Displays timestamps in milliseconds, microseconds, and nanoseconds that indicate when the change was made in the database.</p>
+</dd>
+<dt class="hdlist1"><code>snapshot</code></dt>
+<dd>
+<p>Specifies whether the event resulted from a snapshot operation.</p>
+</dd>
+<dt class="hdlist1"><code>db</code>, <code>table</code></dt>
+<dd>
+<p>Names of the database and table that contain the new row.</p>
+</dd>
+<dt class="hdlist1"><code>server_id</code></dt>
+<dd>
+<p>MySQL server ID (if available).</p>
+</dd>
+<dt class="hdlist1"><code>file</code></dt>
+<dd>
+<p>Binary log name where the event was recorded.</p>
+</dd>
+<dt class="hdlist1"><code>pos</code></dt>
+<dd>
+<p>Binary log position.</p>
+</dd>
+<dt class="hdlist1"><code>row</code></dt>
+<dd>
+<p>Row within the event.</p>
+</dd>
+<dt class="hdlist1"><code>thread</code></dt>
+<dd>
+<p>ID of the MySQL thread that created the event (non-snapshot only).</p>
+</dd>
+<dt class="hdlist1"><code>query</code></dt>
+<dd>
+<p>SQL command that performed the operation on the source table.</p>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
 </div>
 <div class="sect2">
 <h3 id="mysql-update-events"><a class="anchor" href="#mysql-update-events"></a><em>update</em> events</h3>
@@ -3599,20 +3886,20 @@ This field contains information that you can use to compare this event with othe
 <pre class="highlightjs highlight nowrap"><code class="language-json hljs" data-lang="json">{
   "schema": { ... },
   "payload": {
-    "before": { <i class="conum" data-value="1"></i><b>(1)</b>
+    "before": {
       "id": 1004,
       "first_name": "Anne",
       "last_name": "Kretchmar",
       "email": "annek@noanswer.org"
     },
-    "after": { <i class="conum" data-value="2"></i><b>(2)</b>
+    "after": {
       "id": 1004,
       "first_name": "Anne Marie",
       "last_name": "Kretchmar",
       "email": "annek@noanswer.org"
     },
-    "source": { <i class="conum" data-value="3"></i><b>(3)</b>
-      "version": "3.3.0.Beta1",
+    "source": {
+      "version": "3.6.0.Alpha2",
       "name": "mysql-server-1",
       "connector": "mysql",
       "ts_ms": 1465581029100,
@@ -3629,115 +3916,109 @@ This field contains information that you can use to compare this event with othe
       "thread": 7,
       "query": "UPDATE customers SET first_name='Anne Marie' WHERE id=1004"
     },
-    "op": "u", <i class="conum" data-value="4"></i><b>(4)</b>
-    "ts_ms": 1465581029523, <i class="conum" data-value="5"></i><b>(5)</b>
-    "ts_us": 1465581029523758, <i class="conum" data-value="6"></i><b>(6)</b>
-    "ts_ns": 1465581029523758914 <i class="conum" data-value="7"></i><b>(7)</b>
+    "op": "u",
+    "ts_ms": 1465581029523,
+    "ts_us": 1465581029523758,
+    "ts_ns": 1465581029523758914
   }
 }</code></pre>
 </div>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 12. Descriptions of <em>update</em> event value fields</caption>
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 20%;">
-<col style="width: 70%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Item</th>
-<th class="tableblock halign-left valign-top">Field name</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>before</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An optional field that specifies the state of the row before the event occurred. In an <em>update</em> event value, the <code>before</code> field contains a field for each table column and the value that was in that column before the database commit. In this example, the <code>first_name</code> value is <code>Anne.</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>after</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An optional field that specifies the state of the row after the event occurred. You can compare the <code>before</code> and <code>after</code> structures to determine what the update to this row was. In the example, the <code>first_name</code> value is now <code>Anne Marie</code>.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>source</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Mandatory field that describes the source metadata for the event. The <code>source</code> field structure has the same fields as in a <em>create</em> event, but some values are different, for example, the sample <em>update</em> event is from a different position in the binlog. The source metadata includes:</p>
+<div class="paragraph">
+<p>The following list describes select fields in the value portion of the preceding <code>update</code> event message:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Debezium version</p>
-</li>
-<li>
-<p>Connector name</p>
-</li>
-<li>
-<p>binlog name where the event was recorded</p>
-</li>
-<li>
-<p>binlog position</p>
-</li>
-<li>
-<p>Row within the event</p>
-</li>
-<li>
-<p>If the event was part of a snapshot</p>
-</li>
-<li>
-<p>Name of the database and table that contain the updated row</p>
-</li>
-<li>
-<p>ID of the MySQL thread that created the event (non-snapshot only)</p>
-</li>
-<li>
-<p>MySQL server ID (if available)</p>
-</li>
-<li>
-<p>Timestamp for when the change was made in the database</p>
-</li>
-</ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>op</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Mandatory string that describes the type of operation. In an <em>update</em> event value, the <code>op</code> field value is <code>u</code>, signifying that this row changed because of an update.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ts_ms</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Optional field that displays the time at which the connector processed the event.
-The time is based on the system clock in the JVM running the Kafka Connect task. <br>
-<br>
-In the <code>source</code> object, <code>ts_ms</code> indicates the time that the change was made in the database. By comparing the value for <code>payload.source.ts_ms</code> with the value for <code>payload.ts_ms</code>, you can determine the lag between the source database update and Debezium.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ts_us</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Optional field that displays the time at which the connector processed the event, in microseconds.
-The time is based on the system clock in the JVM running the Kafka Connect task.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ts_ns</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Optional field that displays the time at which the connector processed the event, in nanoseconds.
-The time is based on the system clock in the JVM running the Kafka Connect task.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>before</code></dt>
+<dd>
+<p>Shows the state of the row before the event occurred.
+In an <em>update</em> event value, the <code>before</code> field contains a field for each table column and the value that was in that column before the database commit.
+In this example, the <code>first_name</code> value is <code>Anne.</code></p>
+</dd>
+<dt class="hdlist1"><code>after</code></dt>
+<dd>
+<p>Shows the state of the row after the event occurred.
+You can compare the <code>before</code> and <code>after</code> structures to determine what the update to this row was.
+In the example, the <code>first_name</code> value is now <code>Anne Marie</code>.</p>
+</dd>
+<dt class="hdlist1"><code>source</code></dt>
+<dd>
+<p>Represents the source metadata for the event.
+The <code>source</code> field structure has the same fields as in a <em>create</em> event, but some values are different, for example, the sample <em>update</em> event is from a different position in the binlog.
+The <code>source</code> fields in an <em>update</em> event value provides the following metadata:</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>version</code></dt>
+<dd>
+<p>Debezium version.</p>
+</dd>
+<dt class="hdlist1"><code>name</code></dt>
+<dd>
+<p>Connector name.</p>
+</dd>
+<dt class="hdlist1"><code>connector</code></dt>
+<dd>
+<p>The type of connector.</p>
+</dd>
+<dt class="hdlist1"><code>ts_ms, ts_us, ts_ns</code></dt>
+<dd>
+<p>Displays timestamps in milliseconds, microseconds, and nanoseconds that indicate when the change was made in the database.</p>
+</dd>
+<dt class="hdlist1"><code>snapshot</code></dt>
+<dd>
+<p>Specifies whether the event resulted from a snapshot operation.</p>
+</dd>
+<dt class="hdlist1"><code>db</code>, <code>table</code></dt>
+<dd>
+<p>Names of the database and table that contain the new row.</p>
+</dd>
+<dt class="hdlist1"><code>server_id</code></dt>
+<dd>
+<p>MySQL server ID (if available).</p>
+</dd>
+<dt class="hdlist1"><code>file</code></dt>
+<dd>
+<p>Binary log name where the event was recorded.</p>
+</dd>
+<dt class="hdlist1"><code>pos</code></dt>
+<dd>
+<p>Binary log position.</p>
+</dd>
+<dt class="hdlist1"><code>row</code></dt>
+<dd>
+<p>Row within the event.</p>
+</dd>
+<dt class="hdlist1"><code>thread</code></dt>
+<dd>
+<p>ID of the MySQL thread that created the event (non-snapshot only).</p>
+</dd>
+<dt class="hdlist1"><code>query</code></dt>
+<dd>
+<p>SQL command that performed the operation on the source table.</p>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>op</code></dt>
+<dd>
+<p>Specifies the type of operation.
+In an <em>update</em> event value, the <code>op</code> field value is <code>u</code>, signifying that this row changed because of an update.</p>
+</dd>
+<dt class="hdlist1"><code>ts_ms</code>, <code>ts_us</code>, <code>ts_ns</code></dt>
+<dd>
+<p>Displays timestamps in milliseconds, microseconds, and nanoseconds that indicate when the connector processed the event.
+The time is based on the system clock in the JVM that runs the Kafka Connect task.</p>
+<div class="paragraph">
+<p>In the <code>source</code> object, <code>ts_ms</code> indicates the time that the change was made in the database.
+By comparing the value of <code>payload.source.ts_ms</code> with the value of <code>payload.ts_ms</code>, you can determine the lag between the source database update and Debezium.</p>
+</div>
+</dd>
+</dl>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -3746,7 +4027,24 @@ The time is based on the system clock in the JVM running the Kafka Connect task.
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Updating the columns for a row&#8217;s primary/unique key changes the value of the row&#8217;s key. When a key changes, Debezium outputs <em>three</em> events: a <code>DELETE</code> event and a <a href="#mysql-tombstone-events">tombstone event</a> with the old key for the row, followed by an event with the new key for the row. Details are in the next section.</p>
+<p>Updating the columns for a row&#8217;s primary or unique key changes the value of the row&#8217;s key.
+After a key changes, Debezium generates the following three events:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A <code>DELETE</code> event.</p>
+</li>
+<li>
+<p>A <a href="#mysql-tombstone-events">Tombstone event</a> that specifies the old key for the row.</p>
+</li>
+<li>
+<p>A <code>CREATE</code> event that provides the new primary key for the row.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For more information, see <a href="#mysql-primary-key-updates">Primary key updates</a>.</p>
 </div>
 </td>
 </tr>
@@ -3780,15 +4078,15 @@ as a primary key change. For a primary key change, in place of an <code>UPDATE</
 <pre class="highlightjs highlight nowrap"><code class="language-json hljs" data-lang="json">{
   "schema": { ... },
   "payload": {
-    "before": { <i class="conum" data-value="1"></i><b>(1)</b>
+    "before": {
       "id": 1004,
       "first_name": "Anne Marie",
       "last_name": "Kretchmar",
       "email": "annek@noanswer.org"
     },
-    "after": null, <i class="conum" data-value="2"></i><b>(2)</b>
-    "source": { <i class="conum" data-value="3"></i><b>(3)</b>
-      "version": "3.3.0.Beta1",
+    "after": null,
+    "source": {
+      "version": "3.6.0.Alpha2",
       "connector": "mysql",
       "name": "mysql-server-1",
       "ts_ms": 1465581902300,
@@ -3805,120 +4103,117 @@ as a primary key change. For a primary key change, in place of an <code>UPDATE</
       "thread": 7,
       "query": "DELETE FROM customers WHERE id=1004"
     },
-    "op": "d", <i class="conum" data-value="4"></i><b>(4)</b>
-    "ts_ms": 1465581902461, <i class="conum" data-value="5"></i><b>(5)</b>
-    "ts_us": 1465581902461842, <i class="conum" data-value="6"></i><b>(6)</b>
-    "ts_ns": 1465581902461842579 <i class="conum" data-value="7"></i><b>(7)</b>
+    "op": "d",
+    "ts_ms": 1465581902461,
+    "ts_us": 1465581902461842,
+    "ts_ns": 1465581902461842579
   }
 }</code></pre>
 </div>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 13. Descriptions of <em>delete</em> event value fields</caption>
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 20%;">
-<col style="width: 70%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Item</th>
-<th class="tableblock halign-left valign-top">Field name</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>before</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Optional field that specifies the state of the row before the event occurred. In a <em>delete</em> event value, the <code>before</code> field contains the values that were in the row before it was deleted with the database commit.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>after</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Optional field that specifies the state of the row after the event occurred. In a <em>delete</em> event value, the <code>after</code> field is <code>null</code>, signifying that the row no longer exists.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>source</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Mandatory field that describes the source metadata for the event. In a <em>delete</em> event value, the <code>source</code> field structure is the same as for <em>create</em> and <em>update</em> events for the same table. Many <code>source</code> field values are also the same. In a <em>delete</em> event value, the <code>ts_ms</code> and <code>pos</code> field values, as well as other values, might have changed. But the <code>source</code> field in a <em>delete</em> event value provides the same metadata:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Debezium version</p>
-</li>
-<li>
-<p>Connector name</p>
-</li>
-<li>
-<p>binlog name where the event was recorded</p>
-</li>
-<li>
-<p>binlog position</p>
-</li>
-<li>
-<p>Row within the event</p>
-</li>
-<li>
-<p>If the event was part of a snapshot</p>
-</li>
-<li>
-<p>Name of the database and table that contain the updated row</p>
-</li>
-<li>
-<p>ID of the MySQL thread that created the event (non-snapshot only)</p>
-</li>
-<li>
-<p>MySQL server ID (if available)</p>
-</li>
-<li>
-<p>Timestamp for when the change was made in the database</p>
-</li>
-</ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>op</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Mandatory string that describes the type of operation. The <code>op</code> field value is <code>d</code>, signifying that this row was deleted.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ts_ms</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Optional field that displays the time at which the connector processed the event.
-The time is based on the system clock in the JVM running the Kafka Connect task. <br>
-<br>
-In the <code>source</code> object, <code>ts_ms</code> indicates the time that the change was made in the database. By comparing the value for <code>payload.source.ts_ms</code> with the value for <code>payload.ts_ms</code>, you can determine the lag between the source database update and Debezium.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ts_us</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Optional field that displays the time at which the connector processed the event, in microseconds.
-The time is based on the system clock in the JVM running the Kafka Connect task.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ts_ns</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Optional field that displays the time at which the connector processed the event, in nanoseconds.
-The time is based on the system clock in the JVM running the Kafka Connect task.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
 <div class="paragraph">
-<p>A <em>delete</em> change event record provides a consumer with the information it needs to process the removal of this row. The old values are included because some consumers might require them in order to properly handle the removal.</p>
+<p>The following list describes select fields in the value portion of the preceding <code>delete</code> event message:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>before</code></dt>
+<dd>
+<p>Specifies the state of the row before the event occurred.
+In a <em>delete</em> event value, the <code>before</code> field contains the values that were in the row before it was deleted with the database commit.</p>
+</dd>
+<dt class="hdlist1"><code>after</code></dt>
+<dd>
+<p>Specifies the state of the row after the event occurred.
+In a <em>delete</em> event value, the <code>after</code> field is <code>null</code>, signifying that the row no longer exists.</p>
+</dd>
+<dt class="hdlist1"><code>source</code></dt>
+<dd>
+<p>Specifies the source metadata for the event.
+In a <em>delete</em> event value, the <code>source</code> field structure is the same as for <em>create</em> and <em>update</em> events for the same table.
+Many <code>source</code> field values are also the same.
+In a <em>delete</em> event value, the <code>ts_ms</code> and <code>pos</code> field values, as well as other values, might have changed.
+The <code>source</code> field in a <em>delete</em> event value provides the following metadata:</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>version</code></dt>
+<dd>
+<p>Debezium version.</p>
+</dd>
+<dt class="hdlist1"><code>name</code></dt>
+<dd>
+<p>Connector name.</p>
+</dd>
+<dt class="hdlist1"><code>connector</code></dt>
+<dd>
+<p>The type of connector.</p>
+</dd>
+<dt class="hdlist1"><code>ts_ms, ts_us, ts_ns</code></dt>
+<dd>
+<p>Displays timestamps in milliseconds, microseconds, and nanoseconds that indicate when the change was made in the database.</p>
+</dd>
+<dt class="hdlist1"><code>snapshot</code></dt>
+<dd>
+<p>Specifies whether the event resulted from a snapshot operation.</p>
+</dd>
+<dt class="hdlist1"><code>db</code>, <code>table</code></dt>
+<dd>
+<p>Names of the database and table that contain the new row.</p>
+</dd>
+<dt class="hdlist1"><code>server_id</code></dt>
+<dd>
+<p>MySQL server ID (if available).</p>
+</dd>
+<dt class="hdlist1"><code>file</code></dt>
+<dd>
+<p>Binary log name where the event was recorded.</p>
+</dd>
+<dt class="hdlist1"><code>pos</code></dt>
+<dd>
+<p>Binary log position.</p>
+</dd>
+<dt class="hdlist1"><code>row</code></dt>
+<dd>
+<p>Row within the event.</p>
+</dd>
+<dt class="hdlist1"><code>thread</code></dt>
+<dd>
+<p>ID of the MySQL thread that created the event (non-snapshot only).</p>
+</dd>
+<dt class="hdlist1"><code>query</code></dt>
+<dd>
+<p>SQL command that performed the operation on the source table.</p>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>op</code></dt>
+<dd>
+<p>Specifies the type of operation.
+In this example, the <code>d</code> value indicates that a <code>DELETE</code> operation was performed, resulting in removal of a row.</p>
+</dd>
+<dt class="hdlist1"><code>ts_ms</code>, <code>ts_us</code>, <code>ts_ns</code></dt>
+<dd>
+<p>Displays timestamps in milliseconds, microseconds, and nanoseconds that indicate when the connector processed the event.
+The time is based on the system clock in the JVM that runs the Kafka Connect task.</p>
+<div class="paragraph">
+<p>In the source object, these fields indicate the time when the change was made in the database.
+By comparing the value for <code>payload.source.ts_ms</code> with the value for <code>payload.ts_ms</code>, you can determine the lag between the source database update and Debezium.</p>
+</div>
+</dd>
+</dl>
 </div>
 <div class="paragraph">
-<p>MySQL connector events are designed to work with <a href="https://kafka.apache.org/documentation/#compaction">Kafka log compaction</a>. Log compaction enables removal of some older messages as long as at least the most recent message for every key is kept. This lets Kafka reclaim storage space while ensuring that the topic contains a complete data set and can be used for reloading key-based state.</p>
+<p>A <em>delete</em> change event record provides a consumer with the information it needs to process the removal of this row.
+The old values are included because some consumers might require them in order to properly handle the removal.</p>
+</div>
+<div class="paragraph">
+<p>MySQL connector events are designed to work with <a href="https://kafka.apache.org/documentation/#compaction">Kafka log compaction</a>.
+Log compaction enables removal of some older messages as long as at least the most recent message for every key is kept.
+Kafka can thus reclaim storage space while still ensuring that the topic contains a complete data set that can be used for reloading key-based state.</p>
 </div>
 </div>
 <div class="sect2">
@@ -3941,8 +4236,8 @@ The message value resembles the following example:</p>
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
     "schema": { ... },
     "payload": {
-        "source": { <i class="conum" data-value="1"></i><b>(1)</b>
-            "version": "3.3.0.Beta1",
+        "source": {
+            "version": "3.6.0.Alpha2",
             "name": "mysql-server-1",
             "connector": "mysql",
             "name": "mysql-server-1",
@@ -3958,108 +4253,96 @@ The message value resembles the following example:</p>
             "pos": 484,
             "row": 0,
             "thread": 7,
-            "query": "UPDATE customers SET first_name='Anne Marie' WHERE id=1004"
         },
-        "op": "t", <i class="conum" data-value="2"></i><b>(2)</b>
-        "ts_ms": 1465581029523, <i class="conum" data-value="3"></i><b>(3)</b>
-        "ts_us": 1465581029523468, <i class="conum" data-value="4"></i><b>(4)</b>
-        "ts_ns": 1465581029523468471 <i class="conum" data-value="5"></i><b>(5)</b>
+        "op": "t",
+        "ts_ms": 1465581029523,
+        "ts_us": 1465581029523468,
+        "ts_ns": 1465581029523468471
     }
 }</code></pre>
 </div>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 14. Descriptions of <em>truncate</em> event value fields</caption>
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 20%;">
-<col style="width: 70%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Item</th>
-<th class="tableblock halign-left valign-top">Field name</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>source</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Mandatory field that describes the source metadata for the event. In a <em>truncate</em> event value, the <code>source</code> field structure is the same as for <em>create</em>, <em>update</em>, and <em>delete</em> events for the same table, provides this metadata:</p>
+<div class="paragraph">
+<p>The following list describes select fields in the value portion of the preceding <code>truncate</code> event message:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Debezium version</p>
-</li>
-<li>
-<p>Connector type and name</p>
-</li>
-<li>
-<p>Binlog name where the event was recorded</p>
-</li>
-<li>
-<p>Binlog position</p>
-</li>
-<li>
-<p>Row within the event</p>
-</li>
-<li>
-<p>If the event was part of a snapshot</p>
-</li>
-<li>
-<p>Name of the database and table</p>
-</li>
-<li>
-<p>ID of the MySQL thread that truncated the event (non-snapshot only)</p>
-</li>
-<li>
-<p>MySQL server ID (if available)</p>
-</li>
-<li>
-<p>Timestamp for when the change was made in the database</p>
-</li>
-</ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>op</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Mandatory string that describes the type of operation. The <code>op</code> field value is <code>t</code>, signifying that this table was truncated.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ts_ms</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Optional field that displays the time at which the connector processed the event.
-The time is based on the system clock in the JVM running the Kafka Connect task. <br>
-<br>
-In the <code>source</code> object, <code>ts_ms</code> indicates the time that the change was made in the database.
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>source</code></dt>
+<dd>
+<p>Mandatory field that describes the source metadata for the event.
+In a <em>truncate</em> event value, the <code>source</code> field structure is the same as for <em>create</em>, <em>update</em>, and <em>delete</em> events for the same table.
+The <code>source</code> field provides the following metadata:</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>version</code></dt>
+<dd>
+<p>Debezium version.</p>
+</dd>
+<dt class="hdlist1"><code>name</code></dt>
+<dd>
+<p>Connector name.</p>
+</dd>
+<dt class="hdlist1"><code>connector</code></dt>
+<dd>
+<p>The type of connector.</p>
+</dd>
+<dt class="hdlist1"><code>ts_ms, ts_us, ts_ns</code></dt>
+<dd>
+<p>Displays timestamps in milliseconds, microseconds, and nanoseconds that indicate when the change was made in the database.</p>
+</dd>
+<dt class="hdlist1"><code>snapshot</code></dt>
+<dd>
+<p>Specifies whether the event resulted from a snapshot operation.</p>
+</dd>
+<dt class="hdlist1"><code>db</code>, <code>table</code></dt>
+<dd>
+<p>Names of the database and table that contain the new row.</p>
+</dd>
+<dt class="hdlist1"><code>server_id</code></dt>
+<dd>
+<p>MySQL server ID (if available).</p>
+</dd>
+<dt class="hdlist1"><code>file</code></dt>
+<dd>
+<p>Binary log name where the event was recorded.</p>
+</dd>
+<dt class="hdlist1"><code>pos</code></dt>
+<dd>
+<p>Binary log position.</p>
+</dd>
+<dt class="hdlist1"><code>row</code></dt>
+<dd>
+<p>Row within the event.</p>
+</dd>
+<dt class="hdlist1"><code>thread</code></dt>
+<dd>
+<p>ID of the MySQL thread that created the event (non-snapshot only).</p>
+</dd>
+</dl>
+</div>
+</dd>
+<dt class="hdlist1"><code>op</code></dt>
+<dd>
+<p>Specifies the type of operation.
+In this example, the <code>t</code> value indicates that a <code>TRUNCATE</code> operation was performed, resulting in removal of a row.
+<code>op</code>:
+Mandatory string that describes the type of operation. The <code>op</code> field value is <code>t</code>, signifying that this table was truncated.</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>ts_ms, ts_us, ts_ns</code></dt>
+<dd>
+<p>Displays timestamps in milliseconds, microseconds, and nanoseconds that indicate when the connector processed the event.
+The time is based on the system clock in the JVM that runs the Kafka Connect task.</p>
+<div class="paragraph">
+<p>In the source object, these fields indicate the time when the change was made in the database.
 By comparing the value for <code>payload.source.ts_ms</code> with the value for <code>payload.ts_ms</code>, you can determine the lag between the source database update and Debezium.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ts_us</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Optional field that displays the time at which the connector processed the event, in microseconds.
-The time is based on the system clock in the JVM running the Kafka Connect task.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ts_ns</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Optional field that displays the time at which the connector processed the event, in nanoseconds.
-The time is based on the system clock in the JVM running the Kafka Connect task.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
+</div>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
 <div class="paragraph">
 <p>If a single <code>TRUNCATE</code> statement applies to multiple tables, the connector emits one <em>truncate</em> change event record for each truncated table.</p>
 </div>
@@ -4119,7 +4402,7 @@ The MySQL connector uses the column&#8217;s character set when reading the binar
 <p>The following table shows how the connector maps basic MySQL data types.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 15. Descriptions of basic type mappings</caption>
+<caption class="title">Table 6. Descriptions of basic type mappings</caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 20%;">
@@ -4522,7 +4805,7 @@ The time zone will be queried from the server by default.</p>
 <dd>
 <p>The MySQL connector determines the literal type and semantic type based on the column&#8217;s data type definition so that events represent exactly the values in the database. All time fields are in microseconds. Only positive <code>TIME</code> field values in the range of <code>00:00:00.000000</code> to <code>23:59:59.999999</code> can be captured correctly.</p>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 16. Mappings when <code>time.precision.mode=adaptive_time_microseconds</code></caption>
+<caption class="title">Table 7. Mappings when <code>time.precision.mode=adaptive_time_microseconds</code></caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 20%;">
@@ -4590,9 +4873,13 @@ Represents the number of microseconds past the epoch and does not include time z
 </dd>
 <dt class="hdlist1">time.precision.mode=connect</dt>
 <dd>
-<p>The MySQL connector uses defined Kafka Connect logical types. This approach is less precise than the default approach and the events could be less precise if the database column has a <em>fractional second precision</em> value of greater than <code>3</code>. Values in only the range of <code>00:00:00.000</code> to <code>23:59:59.999</code> can be handled. Set <code>time.precision.mode=connect</code> only if you can ensure that the <code>TIME</code> values in your tables never exceed the supported ranges. The <code>connect</code> setting is expected to be removed in a future version of Debezium.</p>
+<p>The MySQL connector uses defined Kafka Connect logical types.
+This approach is less precise than the default approach and the events could be less precise if the database column has a <em>fractional second precision</em> value of greater than <code>3</code>.
+Values in only the range of <code>00:00:00.000</code> to <code>23:59:59.999</code> can be handled.
+Set <code>time.precision.mode=connect</code> only if you can ensure that the <code>TIME</code> values in your tables never exceed the supported ranges.
+The <code>connect</code> setting is expected to be removed in a future version of Debezium.</p>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 17. Mappings when <code>time.precision.mode=connect</code></caption>
+<caption class="title">Table 8. Mappings when <code>time.precision.mode=connect</code></caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 20%;">
@@ -4658,7 +4945,7 @@ Represents the number of milliseconds since the epoch, and does not include time
 <dt class="hdlist1">decimal.handling.mode=precise</dt>
 <dd>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 18. Mappings when <code>decimal.handling.mode=precise</code></caption>
+<caption class="title">Table 9. Mappings when <code>decimal.handling.mode=precise</code></caption>
 <colgroup>
 <col style="width: 30%;">
 <col style="width: 15%;">
@@ -4702,7 +4989,7 @@ The <code>scale</code> schema parameter contains an integer that represents how 
 <dt class="hdlist1">decimal.handling.mode=double</dt>
 <dd>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 19. Mappings when <code>decimal.handling.mode=double</code></caption>
+<caption class="title">Table 10. Mappings when <code>decimal.handling.mode=double</code></caption>
 <colgroup>
 <col style="width: 30%;">
 <col style="width: 30%;">
@@ -4744,7 +5031,7 @@ The <code>scale</code> schema parameter contains an integer that represents how 
 <dt class="hdlist1">decimal.handling.mode=string</dt>
 <dd>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 20. Mappings when <code>decimal.handling.mode=string</code></caption>
+<caption class="title">Table 11. Mappings when <code>decimal.handling.mode=string</code></caption>
 <colgroup>
 <col style="width: 30%;">
 <col style="width: 30%;">
@@ -4833,7 +5120,7 @@ boolean.selector=db1.table1.*, db1.table2.column1</code></pre>
 <p>Currently, the Debezium MySQL connector supports the following spatial data types.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 21. Description of spatial type mappings</caption>
+<caption class="title">Table 12. Description of spatial type mappings</caption>
 <colgroup>
 <col style="width: 35%;">
 <col style="width: 15%;">
@@ -4849,13 +5136,25 @@ boolean.selector=db1.table1.*, db1.table2.column1</code></pre>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>GEOMETRY,<br>
-LINESTRING,<br>
-POLYGON,<br>
-MULTIPOINT,<br>
-MULTILINESTRING,<br>
-MULTIPOLYGON,<br>
-GEOMETRYCOLLECTION</code></p>
+<p><code>GEOMETRY</code></p>
+</div>
+<div class="paragraph">
+<p><code>LINESTRING</code></p>
+</div>
+<div class="paragraph">
+<p><code>POLYGON</code></p>
+</div>
+<div class="paragraph">
+<p><code>MULTIPOINT</code></p>
+</div>
+<div class="paragraph">
+<p><code>MULTILINESTRING</code></p>
+</div>
+<div class="paragraph">
+<p><code>MULTIPOLYGON</code></p>
+</div>
+<div class="paragraph">
+<p><code>GEOMETRYCOLLECTION</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>STRUCT</code></p>
@@ -4880,11 +5179,13 @@ Contains a structure with two fields:</p>
 </div>
 <div class="sect2">
 <h3 id="mysql-vector-types"><a class="anchor" href="#mysql-vector-types"></a>Vector types</h3>
+<div class="sect3">
+<h4 id="_vector_types"><a class="anchor" href="#_vector_types"></a>Vector types</h4>
 <div class="paragraph">
 <p>Currently, the Debezium MySQL connector supports the following vector data types.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 22. Description of vector type mappings</caption>
+<caption class="title">Table 13. Description of vector type mappings</caption>
 <colgroup>
 <col style="width: 35%;">
 <col style="width: 15%;">
@@ -4906,11 +5207,12 @@ Contains a structure with two fields:</p>
 <p><code>ARRAY (FLOAT32)</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>io.debezium.data.FloatVector</code><br></p>
+<p><code>io.debezium.data.FloatVector</code></p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 </div>
 </div>
@@ -5056,8 +5358,13 @@ If using a hosted option such as Amazon RDS or Amazon Aurora that does not allow
 <pre class="highlightjs highlight"><code class="language-SQL hljs" data-lang="SQL">mysql&gt; FLUSH PRIVILEGES;</code></pre>
 </div>
 </div>
-<table id="permissions-explained-mysql-connector" class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 23. Descriptions of user permissions</caption>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="permissions-explained-mysql-connector"><a class="anchor" href="#permissions-explained-mysql-connector"></a>Descriptions of user permissions</h4>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 14. Descriptions of user permissions</caption>
 <colgroup>
 <col style="width: 30%;">
 <col style="width: 70%;">
@@ -5121,8 +5428,6 @@ If using a hosted option such as Amazon RDS or Amazon Aurora that does not allow
 </tr>
 </tbody>
 </table>
-</li>
-</ol>
 </div>
 </div>
 <div class="sect2">
@@ -5194,8 +5499,13 @@ FROM performance_schema.global_variables WHERE variable_name='log_bin';</code></
 <li>
 <p>If you run MySQL on Amazon RDS, you must enable automated backups for your database instance for binary logging to occur.
 If the database instance is not configured to perform automated backups, the binlog is disabled, even if you apply the settings described in the previous steps.</p>
-<table id="binlog-configuration-properties-mysql-connector" class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 24. Descriptions of MySQL binlog configuration properties</caption>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="binlog-configuration-properties-mysql-connector"><a class="anchor" href="#binlog-configuration-properties-mysql-connector"></a>Descriptions of MySQL binlog configuration properties</h4>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 15. Descriptions of MySQL binlog configuration properties</caption>
 <colgroup>
 <col style="width: 20%;">
 <col style="width: 80%;">
@@ -5233,8 +5543,6 @@ For more information, see <a href="#mysql-purges-binlog-files-used-by-debezium">
 </tr>
 </tbody>
 </table>
-</li>
-</ol>
 </div>
 </div>
 <div class="sect2">
@@ -5297,7 +5605,7 @@ For more information, see <a href="#mysql-purges-binlog-files-used-by-debezium">
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 25. Descriptions of GTID options</caption>
+<caption class="title">Table 16. Descriptions of GTID options</caption>
 <colgroup>
 <col style="width: 30%;">
 <col style="width: 70%;">
@@ -5386,7 +5694,7 @@ You can prevent this behavior by configuring <code>interactive_timeout</code> an
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 26. Descriptions of MySQL session timeout options</caption>
+<caption class="title">Table 17. Descriptions of MySQL session timeout options</caption>
 <colgroup>
 <col style="width: 30%;">
 <col style="width: 70%;">
@@ -5546,7 +5854,7 @@ To enable the connector to consume <strong>UPDATE</strong> events, this variable
 <div class="title">Procedure</div>
 <ol class="arabic">
 <li>
-<p>Download the Debezium <a href="https://central.sonatype.com/repository/maven-snapshots/io/debezium/debezium-connector-mysql/3.3.0-SNAPSHOT/debezium-connector-mysql-3.3.0-20250918.000117-280-plugin.tar.gz">MySQL connector plug-in</a>.</p>
+<p>Download the Debezium <a href="https://central.sonatype.com/repository/maven-snapshots/io/debezium/debezium-connector-mysql/3.6.0-SNAPSHOT/debezium-connector-mysql-3.6.0-20260522.065326-200-plugin.tar.gz">MySQL connector plug-in</a>.</p>
 </li>
 <li>
 <p>Extract the files into your Kafka Connect environment.</p>
@@ -5587,84 +5895,89 @@ To mitigate risk in production deployments, deploy only containers that are acti
 <div class="sect2">
 <h3 id="mysql-example-configuration"><a class="anchor" href="#mysql-example-configuration"></a>MySQL connector configuration example</h3>
 <div class="paragraph">
-<p>Following is an example of the configuration for a connector instance that captures data from a MySQL server on port 3306 at 192.168.99.100, which we logically name <code>fullfillment</code>.
+<p>The following example shows the configuration for a connector instance that captures data from a MySQL database server on port 3306 at 192.168.99.100, which we logically name <code>fullfillment</code>.
 Typically, you configure the Debezium MySQL connector in a JSON file by setting the configuration properties that are available for the connector.</p>
 </div>
 <div class="paragraph">
 <p>You can choose to produce events for a subset of the schemas and tables in a database.
-Optionally, you can ignore, mask, or truncate columns that contain sensitive data, that are larger than a specified size, or that you do not need.</p>
+Optionally, you can ignore, mask, or truncate columns that contain sensitive data, those that are larger than a specified size, or those that you do not need to support downstream applications.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
-    "name": "inventory-connector", <i class="conum" data-value="1"></i><b>(1)</b>
+    "name": "inventory-connector",
     "config": {
-        "connector.class": "io.debezium.connector.{context}.{connector-name}Connector", <i class="conum" data-value="2"></i><b>(2)</b>
-        "database.hostname": "192.168.99.100", <i class="conum" data-value="3"></i><b>(3)</b>
-        "database.port": "3306", <i class="conum" data-value="4"></i><b>(4)</b>
-        "database.user": "debezium-user", <i class="conum" data-value="5"></i><b>(5)</b>
-        "database.password": "debezium-user-pw", <i class="conum" data-value="6"></i><b>(6)</b>
-        "database.server.id": "184054", <i class="conum" data-value="7"></i><b>(7)</b>
-        "topic.prefix": "fullfillment", <i class="conum" data-value="8"></i><b>(8)</b>
-        "database.include.list": "inventory", <i class="conum" data-value="9"></i><b>(9)</b>
-        "schema.history.internal.kafka.bootstrap.servers": "kafka:9092", <i class="conum" data-value="10"></i><b>(10)</b>
-        "schema.history.internal.kafka.topic": "schemahistory.fullfillment", <i class="conum" data-value="11"></i><b>(11)</b>
-        "include.schema.changes": "true" <i class="conum" data-value="12"></i><b>(12)</b>
+        "connector.class": "io.debezium.connector.{context}.{connector-name}Connector",
+        "database.hostname": "192.168.99.100",
+        "database.port": "3306",
+        "database.user": "debezium-user",
+        "database.password": "debezium-user-pw",
+        "database.server.id": "184054",
+        "topic.prefix": "fullfillment",
+        "database.include.list": "inventory",
+        "schema.history.internal.kafka.bootstrap.servers": "kafka:9092",
+        "schema.history.internal.kafka.topic": "schemahistory.fullfillment",
+        "include.schema.changes": "true"
     }
 }</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Connector&#8217;s name when registered with the Kafka Connect service.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Connector&#8217;s class name.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>MySQL server address.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>MySQL server port number.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>MySQL user with the appropriate privileges.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>MySQL user&#8217;s password.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="7"></i><b>7</b></td>
-<td>Unique ID of the connector.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="8"></i><b>8</b></td>
-<td>Topic prefix for the MySQL server or cluster.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="9"></i><b>9</b></td>
-<td>List of databases hosted by the specified server.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="10"></i><b>10</b></td>
-<td>List of Kafka brokers that the connector uses to write and recover DDL statements to the database schema history topic.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="11"></i><b>11</b></td>
-<td>Name of the database schema history topic. This topic is for internal use only and should not be used by consumers.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="12"></i><b>12</b></td>
-<td>Flag that specifies if the connector should generate events for DDL changes and emit them to the <code>fulfillment</code> schema change topic for use by consumers.</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>The following list describes each of the fields in the preceding configuration example:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>name</code></dt>
+<dd>
+<p>Specifies the connector name (<code>inventory-connector</code>) to register with the Kafka Connect service.</p>
+</dd>
+<dt class="hdlist1"><code>connector.class</code></dt>
+<dd>
+<p>Specifies the name of the Java connector class.</p>
+</dd>
+<dt class="hdlist1"><code>database.hostname</code></dt>
+<dd>
+<p>Specifies the address or hostname of the MySQL server.</p>
+</dd>
+<dt class="hdlist1"><code>database.port</code></dt>
+<dd>
+<p>Species the port number that the connector uses to access the MySQL server.</p>
+</dd>
+<dt class="hdlist1"><code>database.user</code></dt>
+<dd>
+<p>Specifies the name of the MySQL user account that the connector uses to access the database.
+The specified account must have sufficient privileges, as described in the table <a href="#permissions-explained-mysql-connector">Descriptions of user permissions</a>.</p>
+</dd>
+<dt class="hdlist1"><code>database.password</code></dt>
+<dd>
+<p>Specifies the password for the MySQL user account that Debezium uses to access the database.</p>
+</dd>
+<dt class="hdlist1"><code>database.server.id</code></dt>
+<dd>
+<p>Specifies the unique ID of the connector.</p>
+</dd>
+<dt class="hdlist1"><code>topic.prefix</code></dt>
+<dd>
+<p>Speciies the topic prefix for the MySQL server or cluster.</p>
+</dd>
+<dt class="hdlist1"><code>database.include.list</code></dt>
+<dd>
+<p>Specifies databases on the specified server that you want the connector to capture from.</p>
+</dd>
+<dt class="hdlist1"><code>schema.history.internal.kafka.bootstrap.servers</code></dt>
+<dd>
+<p>Specifies the Kafka brokers that the connector uses to write and recover DDL statements to the database schema history topic.</p>
+</dd>
+<dt class="hdlist1"><code>schema.history.internal.kafka.topic</code></dt>
+<dd>
+<p>Specifies the name of the database schema history topic.
+This topic is for internal use only and should not be used by consumers.</p>
+</dd>
+<dt class="hdlist1"><code>include.schema.changes</code></dt>
+<dd>
+<p>Specifies whether the connector should generate events for DDL changes and emit them to the <code>fulfillment</code> schema change topic for use by consumers.</p>
+</dd>
+</dl>
 </div>
 <div class="paragraph">
 <p>For the complete list of the configuration properties that you can set for the Debezium MySQL connector,
@@ -6495,6 +6808,29 @@ That is, the specified expression is matched against the GTID&#8217;s domain ide
 </dd>
 </dl>
 </div>
+<div id="mysql-property-gtid-ignore-on-recovery" class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#mysql-property-gtid-ignore-on-recovery"><code>gtid.ignore.on.recovery</code></a></dt>
+<dd>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Default value</dt>
+<dd>
+<p><code>false</code></p>
+</dd>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>Boolean value that specifies whether the connector ignores the GTID set in stored offsets during recovery.
+When set to <code>true</code>, the connector starts from the stored binlog file and position instead of attempting GTID-based positioning.</p>
+<div class="paragraph">
+<p>After streaming resumes, the connector captures GTIDs normally and stores refreshed GTID state in subsequent offsets.</p>
+</div>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
 <div id="mysql-property-include-query" class="dlist">
 <dl>
 <dt class="hdlist1"><a href="#mysql-property-include-query"><code>include.query</code></a></dt>
@@ -7014,6 +7350,80 @@ It is expected that this feature is not completely polished.
 </dd>
 </dl>
 </div>
+<div id="mysql-property-binlog-net-read-timeout" class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#mysql-property-binlog-net-read-timeout"><code>binlog.net.read.timeout</code></a></dt>
+<dd>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Default value</dt>
+<dd>
+<p><code>0</code></p>
+</dd>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>The number of seconds to wait for a read from the binlog connection to complete before the server times out.
+A value of <code>0</code> means that the connector uses the MySQL server default.</p>
+<div class="paragraph">
+<p>In high-latency network environments, the default server value for <code>net_read_timeout</code> might be too low, causing the server to close the binlog streaming connection prematurely with an <code>EOFException</code>.
+Increase this value to prevent unexpected disconnects during binlog streaming.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This value is set at the session level on the binlog streaming connection using <code>SET net_read_timeout=&lt;value&gt;</code>.
+It does not affect the global server setting.
+</td>
+</tr>
+</table>
+</div>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
+<div id="mysql-property-binlog-net-write-timeout" class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#mysql-property-binlog-net-write-timeout"><code>binlog.net.write.timeout</code></a></dt>
+<dd>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Default value</dt>
+<dd>
+<p><code>0</code></p>
+</dd>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>The number of seconds to wait for a write to the binlog connection to complete before the server times out.
+A value of <code>0</code> means that the connector uses the MySQL server default.</p>
+<div class="paragraph">
+<p>When the server transfers large data volumes through the binlog, the default server value for <code>net_write_timeout</code> might be too low, causing the server to close the connection with an <code>EOFException</code>.
+Increase this value to prevent unexpected disconnects during streaming of large transactions.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This value is set at the session level on the binlog streaming connection using <code>SET net_write_timeout=&lt;value&gt;</code>.
+It does not affect the global server setting.
+</td>
+</tr>
+</table>
+</div>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
 <div id="mysql-property-connect-keep-alive" class="dlist">
 <dl>
 <dt class="hdlist1"><a href="#mysql-property-connect-keep-alive"><code>connect.keep.alive</code></a></dt>
@@ -7112,6 +7522,51 @@ You can define tags to identify particular application instances, environments, 
 </div>
 </dd>
 </dl>
+</div>
+<div id="mysql-property-custom-sanitize-pattern" class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#mysql-property-custom-sanitize-pattern"><code>custom.sanitize.pattern</code></a></dt>
+<dd>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Default value</dt>
+<dd>
+<p><code>.*secret$|.*password$|.*sasl\.jaas\.config$|.*basic\.auth\.user\.info|.*registry\.auth\.client-secret</code></p>
+</dd>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>An optional regular expression that specifies a custom pattern for masking sensitive configuration keys.</p>
+<div class="paragraph">
+<p>By default, Debezium masks the value of configuration keys that match a predefined pattern for commonly known sensitive properties such as passwords and authentication tokens.
+To customize the way that the connector masks configuration key values, set this property to a regular expression that matches specific configuration key values that you want to mask.</p>
+</div>
+<div class="paragraph">
+<p>For example, to mask keys the contain the strings <code>api.key</code> or <code>token</code>, set this property to the following value:
+<code>"custom.sanitize.pattern": ".<strong>api\\.key.</strong>\\|.<strong>token.</strong>"</code></p>
+</div>
+<div class="paragraph">
+<p>If you set this property for the connector, Debezium masks any matching instances of configuration key values that it returns for display, logging, or in response to API calls.
+A string of asterisks replaces the original values, for example,  <code>********</code>.</p>
+</div>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The pattern that you specify for the <code>custom.sanitize.pattern</code> property overrides the default Debezium masking pattern; the specified value does not extend or augment the default pattern.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div id="mysql-property-database-initial-statements" class="dlist">
 <dl>
@@ -7280,6 +7735,47 @@ If the server TLS certificate does not match any valid CA certificates, the conn
 <dd>
 <p>The password for the trust store file.
 Used to check the integrity of the truststore, and unlock the truststore.</p>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
+<div id="mysql-property-ddl-parser-type" class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#mysql-property-ddl-parser-type"><code>ddl.parser.type</code></a></dt>
+<dd>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Default value</dt>
+<dd>
+<p><code>default</code></p>
+</dd>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>Specifies which ANTLR grammar to use for parsing MySQL DDL statements.</p>
+<div class="paragraph">
+<p>Set one of the following options:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>default</code></dt>
+<dd>
+<p>(Default) Uses the Oracle MySQL grammar, which is actively maintained and supports MySQL 8.0+ features.
+This grammar is based on the official MySQL grammar specification and is recommended for production use.</p>
+</dd>
+<dt class="hdlist1"><code>legacy</code></dt>
+<dd>
+<p>Uses the Positive Technologies (PT) MySQL grammar.
+This option is provided for backward compatibility with existing deployments.
+The PT grammar may not support all MySQL 8.0+ features.</p>
+<div class="paragraph">
+<p>In most cases, you should use the <code>default</code> grammar.
+Use the <code>legacy</code> grammar only if you encounter compatibility issues with existing DDL statements during migration.</p>
+</div>
+</dd>
+</dl>
+</div>
 </dd>
 </dl>
 </div>
@@ -7766,6 +8262,9 @@ Use the following format to specify the collection name:</p>
 <div class="paragraph">
 <p><code><em>&lt;databaseName&gt;</em>.<em>&lt;tableName&gt;</em></code></p>
 </div>
+<div class="paragraph">
+<p>Collection names are case-sensitive.</p>
+</div>
 </dd>
 </dl>
 </div>
@@ -7928,7 +8427,7 @@ By contrast, if you set this property, performance problems can result, because 
 <p>An optional, comma-separated list of regular expressions that match the fully-qualified names (<code><em>&lt;databaseName&gt;.&lt;tableName&gt;</em></code>) of the tables to include in a snapshot.
 The specified items must be named in the connector&#8217;s <a href="#mysql-property-table-include-list"><code>table.include.list</code></a> property.</p>
 <div class="paragraph">
-<p>This property takes effect only if the connector&#8217;s <a href="#mysql-property-snapshot-mode"><code>snapshot.mode</code></a> property is set to a value other than <code>never</code>.
+<p>This property takes effect only if the connector&#8217;s <a href="#mysql-property-snapshot-mode"><code>snapshot.mode</code></a> property is set to a value other than <code>no_data</code>.
 This property does not affect the behavior of incremental snapshots.</p>
 </div>
 <div class="paragraph">
@@ -8136,11 +8635,6 @@ You can also set the property to periodically prune a database schema history to
 </tr>
 </table>
 </div>
-</dd>
-<dt class="hdlist1"><code>never</code></dt>
-<dd>
-<p>When the connector starts, rather than performing a snapshot, it immediately begins to stream event records for subsequent database changes.
-This option is under consideration for future deprecation, in favor of the <code>no_data</code> option.</p>
 </dd>
 <dt class="hdlist1"><code>when_needed</code></dt>
 <dd>
@@ -8357,47 +8851,91 @@ For more information, see <a href="#connector-custom-snapshot">custom snapshotte
 </dd>
 <dt class="hdlist1">Description</dt>
 <dd>
-<p>Specifies the table rows to include in a snapshot.
-Use the property if you want a snapshot to include only a subset of the rows in a table.
-This property affects snapshots only.
-It does not apply to events that the connector reads from the log.</p>
+<p>Specifies the tables for which the connector uses custom <code>SELECT</code> statements to determine which rows to include in a snapshot.</p>
 <div class="paragraph">
-<p>The property contains a comma-separated list of fully-qualified table names in the form <code><em>&lt;databaseName&gt;.&lt;tableName&gt;</em></code>. For example,</p>
+<p>This property affects snapshots only.
+It does not apply to events that the connector reads from the log during the streaming phase.</p>
+</div>
+<div class="paragraph">
+<p>This property consists of two parts that work together:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Main property</dt>
+<dd>
+<p>A comma-separated list of fully-qualified table names in the format <code><em>&lt;databaseName&gt;.&lt;tableName&gt;</em></code>.
+This list identifies the tables for which you want to specify custom snapshot queries.</p>
+<div class="paragraph">
+<p>For example:</p>
 </div>
 <div class="paragraph">
 <p><code>"snapshot.select.statement.overrides": "inventory.products,customers.orders"</code></p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the fully qualified schema or table name contains special characters, such as spaces, square brackets (<code>[</code> or <code>]</code>), or period characters (<code>.</code>),
+enclose the string in double quotes to prevent the connector from interpreting the special characters as delimiters.
+Double quotes around table names are optional if the fully qualified table name does not include spaces or special characters.
+</td>
+</tr>
+</table>
+</div>
+</dd>
+<dt class="hdlist1">Secondary properties</dt>
+<dd>
+<p>For each table listed in the main property, you must define a corresponding <code>snapshot.select.statement.overrides.<em>&lt;databaseName&gt;</em>.<em>&lt;tableName&gt;</em></code> property that specifies the custom <code>SELECT</code> statement to run during the snapshot.</p>
 <div class="paragraph">
-<p>For each table in the list, add a further configuration property that specifies the <code>SELECT</code> statement for the connector to run on the table when it takes a snapshot.
-The specified <code>SELECT</code> statement determines the subset of table rows to include in the snapshot.
-Use the following format to specify the name of this <code>SELECT</code> statement property:</p>
+<p>The <code>SELECT</code> statement determines which rows from the table to include in the snapshot.</p>
 </div>
 <div class="paragraph">
-<p><code>snapshot.select.statement.overrides.<em>&lt;databaseName&gt;</em>.<em>&lt;tableName&gt;</em></code></p>
-</div>
-<div class="paragraph">
-<p>For example,</p>
+<p>For example, to specify the <code>SELECT</code> statement for the <code>customers.orders</code> table:, add the following property:</p>
 </div>
 <div class="paragraph">
 <p><code>snapshot.select.statement.overrides.customers.orders</code></p>
 </div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>From a <code>customers.orders</code> table that includes the soft-delete column, <code>delete_flag</code>, add the following properties if you want a snapshot to include only those records that are not soft-deleted:</p>
+<p>If a table is listed in the main property but its corresponding secondary property is missing, the connector logs a warning and uses the default snapshot behavior for that table.</p>
 </div>
+</td>
+</tr>
+</table>
+</div>
+</dd>
+<dt class="hdlist1">Example configuration</dt>
+<dd>
+<div class="paragraph">
+<p>The following example shows how to configure the <code>snapshot.select.statement.overrides</code> property to perform a snapshot of the <code>customers.orders</code> table that includes only records that are not soft-deleted; that is, the value of the soft-delete field, <code>delete_flag</code>, is set to <code>0</code>.</p>
+</div>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
+<div class="exampleblock">
+<div class="content">
 <div class="listingblock">
 <div class="content">
 <pre>"snapshot.select.statement.overrides": "customer.orders",
-"snapshot.select.statement.overrides.customer.orders": "SELECT * FROM [customers].[orders] WHERE delete_flag = 0 ORDER BY id DESC"</pre>
+"snapshot.select.statement.overrides.customer.orders": "SELECT * FROM customers.orders WHERE delete_flag = 0 ORDER BY id DESC"</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>In the resulting snapshot, the connector includes only the records for which <code>delete_flag = 0</code>.</p>
 </div>
-</dd>
-</dl>
-</div>
-</dd>
-</dl>
 </div>
 <div id="mysql-property-snapshot-tables-order-by-row-count" class="dlist">
 <dl>
@@ -8458,6 +8996,75 @@ Use the following format to specify the name of this <code>SELECT</code> stateme
 </div>
 </dd>
 </dl>
+</div>
+<div id="mysql-property-statistics-metrics-enabled" class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#mysql-property-statistics-metrics-enabled"><code>statistics.metrics.enabled</code></a></dt>
+<dd>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Default value</dt>
+<dd>
+<p><code>true</code></p>
+</dd>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>Specifies whether the connector collects advanced statistical metrics for streaming metrics, such as quantiles.</p>
+<div class="paragraph">
+<p>When set to <code>true</code>, the connector collects the following statistics:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Minimum value</p>
+</li>
+<li>
+<p>Maximum value</p>
+</li>
+<li>
+<p>Average value</p>
+</li>
+<li>
+<p>P50 (median) percentile</p>
+</li>
+<li>
+<p>P95 percentile</p>
+</li>
+<li>
+<p>P99 percentile</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Currently only <code>MilliSecondsBehindSource</code> metric supports collecting quantiles.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The statistics are computed using a probabilistic data structure (DDSketch) that provides approximate quantile values with 1% relative accuracy.</p>
+</div>
+<div class="paragraph">
+<p>+
+When set to <code>false</code>, the connector does not collect quantiles, and the quantile JMX metrics return <code>null</code> values.
+The connector continues to collect minimum, maximum, and average values.
+Disabling quantile collection reduces memory overhead slightly.</p>
+</div>
+<div class="paragraph">
+<p>+
+For more information, see <a href="#mysql-streaming-metrics">Streaming metrics</a>.</p>
 </div>
 <div id="mysql-property-streaming-delay-ms" class="dlist">
 <dl>
@@ -8560,6 +9167,37 @@ The topic name takes the following format:</p>
 <div class="paragraph">
 <p>For example, when you set the default value for this property, and the topic prefix is <code>fulfillment</code>, the topic name is <code>__debezium-heartbeat.fulfillment</code>.</p>
 </div>
+<div class="paragraph">
+<p>This property is ignored if <code>topic.heartbeat.name</code> is set.</p>
+</div>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
+<div id="mysql-property-topic-heartbeat-name" class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#mysql-property-topic-heartbeat-name"><code>topic.heartbeat.name</code></a></dt>
+<dd>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Default value</dt>
+<dd>
+<p><em>empty</em></p>
+</dd>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>Specifies an explicit, full name for the topic to which the connector sends heartbeat messages, overriding the prefix-based naming derived from <code>topic.heartbeat.prefix</code> and <code>topic.prefix</code>.</p>
+<div class="paragraph">
+<p>When set, all heartbeat messages are routed to this exact topic name, regardless of the connector&#8217;s <code>topic.prefix</code>. This is useful when running multiple connectors and you want to consolidate heartbeat events into a single shared topic, avoiding the creation of a large number of single-partition heartbeat topics.</p>
+</div>
+<div class="paragraph">
+<p>For example, setting this to <code>debezium-heartbeat</code> routes all heartbeat messages to a topic named <code>debezium-heartbeat</code>.</p>
+</div>
+<div class="paragraph">
+<p>If this property is empty or unset, the connector falls back to the default behavior: <em>topic.heartbeat.prefix</em>.<em>topic.prefix</em>.</p>
+</div>
 </dd>
 </dl>
 </div>
@@ -8633,6 +9271,60 @@ For more information, see <a href="https://github.com/osheroff/mysql-binlog-conn
 </dd>
 </dl>
 </div>
+<div id="mysql-property-guardrail-collections-max" class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#mysql-property-guardrail-collections-max"><code>guardrail.collections.max</code></a></dt>
+<dd>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Default value</dt>
+<dd>
+<p><code>0</code></p>
+</dd>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>Specifies the maximum number of tables that the connector can capture.
+This limit applies not only to tables being captured for data changes but also to any tables whose schemas are tracked as part of schema history.
+Exceeding this limit triggers the action specified by <code>guardrail.collections.limit.action</code>.
+Set this property to  <code>0</code> to prevent the connector from triggering guardrail actions.</p>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
+<div id="mysql-property-guardrail-collections-limit-action" class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#mysql-property-guardrail-collections-limit-action"><code>guardrail.collections.limit.action</code></a></dt>
+<dd>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Default value</dt>
+<dd>
+<p><code>warn</code></p>
+</dd>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>Specifies the action to trigger if the number of tables that the connector captures exceeds the number that you specify in the <code>guardrail.collections.max</code> property.
+Set the property to one of the following values:</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>fail</code></dt>
+<dd>
+<p>The connector fails and reports an exception.</p>
+</dd>
+<dt class="hdlist1"><code>warn</code></dt>
+<dd>
+<p>The connector logs a warning.</p>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
 </div>
 <div class="sect3">
 <h4 id="debezium-mysql-connector-database-history-configuration-properties"><a class="anchor" href="#debezium-mysql-connector-database-history-configuration-properties"></a>Debezium connector database schema history configuration properties</h4>
@@ -8643,7 +9335,7 @@ For more information, see <a href="https://github.com/osheroff/mysql-binlog-conn
 <p>The following table describes the <code>schema.history.internal</code> properties for configuring the Debezium connector.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 27. Connector database schema history configuration properties</caption>
+<caption class="title">Table 18. Connector database schema history configuration properties</caption>
 <colgroup>
 <col style="width: 33%;">
 <col style="width: 17%;">
@@ -8838,7 +9530,7 @@ schema.history.internal.consumer.ssl.key.password=test1234</code></pre>
 <p>The following table describes the Kafka <code>signal</code> properties.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 28. Kafka signals configuration properties</caption>
+<caption class="title">Table 19. Kafka signals configuration properties</caption>
 <colgroup>
 <col style="width: 33%;">
 <col style="width: 17%;">
@@ -8920,7 +9612,7 @@ Each pair references the Kafka cluster that is used by the Debezium Kafka Connec
 <h5 id="debezium-mysql-connector-pass-through-signals-kafka-consumer-client-configuration-properties"><a class="anchor" href="#debezium-mysql-connector-pass-through-signals-kafka-consumer-client-configuration-properties"></a>Pass-through properties for configuring the Kafka consumer client for the signaling channel</h5>
 <div class="paragraph">
 <p>The Debezium connector provides for pass-through configuration of the signals Kafka consumer.
-Pass-through signals properties begin with the prefix <code>signals.consumer.*</code>.
+Pass-through signals properties begin with the prefix <code>signal.consumer.*</code>.
 For example, the connector passes properties such as <code>signal.consumer.security.protocol=SSL</code> to the Kafka consumer.</p>
 </div>
 <div class="paragraph">
@@ -8933,7 +9625,7 @@ For example, the connector passes properties such as <code>signal.consumer.secur
 <p>The following table describes properties that you can use to configure the Debezium sink <code>notification</code> channel.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 29. Sink notification configuration properties</caption>
+<caption class="title">Table 20. Sink notification configuration properties</caption>
 <colgroup>
 <col style="width: 33%;">
 <col style="width: 17%;">
@@ -9069,9 +9761,9 @@ If you specify multiple key-value pairs, all of the specified pairs are appended
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
+<col style="width: 35%;">
+<col style="width: 20%;">
 <col style="width: 45%;">
-<col style="width: 25%;">
-<col style="width: 30%;">
 </colgroup>
 <thead>
 <tr>
@@ -9101,6 +9793,21 @@ If you specify multiple key-value pairs, all of the specified pairs are appended
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The number of milliseconds since the connector has read and processed the most recent event.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-snaps-metric-numberoferroneousevents_mysql"></a><a href="#connectors-snaps-metric-numberoferroneousevents_mysql"><code>NumberOfErroneousEvents</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>long</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Records the number of change events that the connector identifies as erroneous during a snapshot operation.
+The connector increments this metric each time that it encounters an event that it cannot process during an initial, incremental, or ad hoc snapshot.
+Events might fail processing if they are malformed, are incompatible with the schema, or if they encounter failures during transformation.
+The metric value persists for the lifetime of the connector task.
+If the snapshot is interrupted, and the connector task restarts, the metric count resets to <code>0</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -9272,6 +9979,28 @@ Updates every 10,000 rows scanned and upon completing a table.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-snaps-metric-tablechunkcounts_mysql"></a><a href="#connectors-snaps-metric-tablechunkcounts_mysql"><code>TableChunkCounts</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>Map&lt;String, Long&gt;</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Map containing the number of chunks for each table in the snapshot when using chunk-based multithreaded snapshots.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-snaps-metric-tablechunkscompletedcounts_mysql"></a><a href="#connectors-snaps-metric-tablechunkscompletedcounts_mysql"><code>TableChunksCompletedCounts</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>Map&lt;String, Long&gt;</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Map containing the number of chunks that have completed for each table in the snapshot when using chunk-based multithreaded snapshots.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="connectors-snaps-metric-maxqueuesizeinbytes_mysql"></a><a href="#connectors-snaps-metric-maxqueuesizeinbytes_mysql"><code>MaxQueueSizeInBytes</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -9402,9 +10131,9 @@ This metric is set to a Boolean value that indicates whether the connector curre
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
+<col style="width: 35%;">
+<col style="width: 20%;">
 <col style="width: 45%;">
-<col style="width: 25%;">
-<col style="width: 30%;">
 </colgroup>
 <thead>
 <tr>
@@ -9434,6 +10163,21 @@ This metric is set to a Boolean value that indicates whether the connector curre
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The number of milliseconds since the connector has read and processed the most recent event.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-strm-metric-numberoferroneousevents_mysql"></a><a href="#connectors-strm-metric-numberoferroneousevents_mysql"><code>NumberOfErroneousEvents</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>long</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Records the number of change events that the connector identifies as erroneous during streaming.
+The connector increments this metric each time that it encounters an event that it cannot process during the lifetime of the streaming session.
+Events might fail processing if they are malformed, are incompatible with the schema, or if they encounter failures during transformation.
+The metric value persists for the lifetime of the connector task.
+After a connector restart, the metric count resets to <code>0</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -9494,6 +10238,17 @@ Represents the data change workload for Debezium to process.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-strm-metric-numberofunchangedeventsskipped_mysql"></a><a href="#connectors-strm-metric-numberofunchangedeventsskipped_mysql"><code>NumberOfUnchangedEventsSkipped</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>long</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Number of update events skipped since the last connector start or metrics reset because no monitored columns changed. Defaults to <code>-1</code> if <a href="#mysql-property-skip-messages-without-change"><code>skip.messages.without.change</code></a> is <code>false</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="connectors-strm-metric-capturedtables_mysql"></a><a href="#connectors-strm-metric-capturedtables_mysql"><code>CapturedTables</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -9546,6 +10301,78 @@ Represents the data change workload for Debezium to process.</p>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The number of milliseconds between the last change event&#8217;s timestamp and the connector processing it.
 The values will incorporate any differences between the clocks on the machines where the database server and the connector are running.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-strm-metric-millisecondsbehindsourceminvalue_mysql"></a><a href="#connectors-strm-metric-millisecondsbehindsourceminvalue_mysql"><code>MilliSecondsBehindSourceMinValue</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>long</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The minimum lag in milliseconds behind the source that is observed during the connector&#8217;s runtime.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-strm-metric-millisecondsbehindsourcemaxvalue_mysql"></a><a href="#connectors-strm-metric-millisecondsbehindsourcemaxvalue_mysql"><code>MilliSecondsBehindSourceMaxValue</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>long</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The maximum lag in milliseconds behind the source that is observed during the connector&#8217;s runtime.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-strm-metric-millisecondsbehindsourceaveragevalue_mysql"></a><a href="#connectors-strm-metric-millisecondsbehindsourceaveragevalue_mysql"><code>MilliSecondsBehindSourceAverageValue</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>double</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The average lag in milliseconds behind the source calculated across all observations during the connector&#8217;s runtime.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-strm-metric-millisecondsbehindsourcep50_mysql"></a><a href="#connectors-strm-metric-millisecondsbehindsourcep50_mysql"><code>MilliSecondsBehindSourceP50</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>double</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The 50th percentile (median) of the lag in milliseconds behind the source.
+This metric provides a more robust measure of typical lag than the average, as it is less affected by outlier values.
+Available when <a href="#mysql-property-statistics-metrics-enabled"><code>statistics.metrics.enabled</code></a> is set to <code>true</code> (default).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-strm-metric-millisecondsbehindsourcep95_mysql"></a><a href="#connectors-strm-metric-millisecondsbehindsourcep95_mysql"><code>MilliSecondsBehindSourceP95</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>double</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The 95th percentile of the lag in milliseconds behind the source.
+This metric indicates that 95% of lag measurements are below this value, useful for identifying tail latencies and setting SLA thresholds.
+Available when <a href="#mysql-property-statistics-metrics-enabled"><code>statistics.metrics.enabled</code></a> is set to <code>true</code> (default).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-strm-metric-millisecondsbehindsourcep99_mysql"></a><a href="#connectors-strm-metric-millisecondsbehindsourcep99_mysql"><code>MilliSecondsBehindSourceP99</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>double</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The 99th percentile of the lag in milliseconds behind the source.
+This metric indicates that 99% of lag measurements are below this value, useful for understanding worst-case performance scenarios.
+Available when <a href="#mysql-property-statistics-metrics-enabled"><code>statistics.metrics.enabled</code></a> is set to <code>true</code> (default).</p>
 </div></div></td>
 </tr>
 <tr>
@@ -9609,7 +10436,7 @@ The values will incorporate any differences between the clocks on the machines w
 <p>The Debezium MySQL connector also provides the following additional streaming metrics:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 30. Descriptions of additional MySQL streaming metrics</caption>
+<caption class="title">Table 21. Descriptions of additional MySQL streaming metrics</caption>
 <colgroup>
 <col style="width: 30%;">
 <col style="width: 20%;">
@@ -9910,7 +10737,7 @@ If the snapshot is disabled, the connector fails with an error.</p>
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/902dd6422c9d4eec1c7391107c3e974075fc0cb7">902dd642</a></span>)
+            <div class="copyright">Copyright &copy; 2026 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/1d381a8915e007c99e034748be22264d1466e105">1d381a89</a></span>)
             
         </div>
     </footer>

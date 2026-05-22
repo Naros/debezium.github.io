@@ -52,7 +52,13 @@
     <span class="nav-text">Getting Started</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../tutorial.html">Tutorial</a>
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../tutorials.html">Tutorials</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../kc-tutorial.html">Kafka Connect</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -147,6 +153,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="jdbc.html">JDBC</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mongodb-sink.html">MongoDB Sink</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -196,6 +205,9 @@
     <a class="nav-link" href="../transformations/timezone-converter.html">Timezone Converter</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/geometry-format-transformer.html">Geometry Format Conversion</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/timescaledb.html">TimescaleDB Integration</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -203,6 +215,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/vector-to-json.html">Vector Data Types to JSON Types</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/swap-geometry-coordinates.html">Swap Geometry Coordinates</a>
   </li>
 </ul>
   </li>
@@ -253,6 +268,9 @@
     <a class="nav-link" href="../integrations/quarkus-debezium-engine-extension.html">Debezium Extensions for Quarkus</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../integrations/hibernate-cache.html">Hibernate Cache Invalidation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../integrations/testcontainers.html">Integration Testing with Testcontainers</a>
   </li>
 </ul>
@@ -263,6 +281,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../ai/embeddings.html">Embeddings Transformation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ai/docling.html">Docling Transformation</a>
   </li>
 </ul>
   </li>
@@ -317,10 +338,19 @@
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version">
-          <a href="/documentation/reference/3.2/index.html">3.2</a>
+          <a href="/documentation/reference/3.5/index.html">3.5</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.6/index.html">3.6</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.4/index.html">3.4</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.3/index.html">3.3</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.2/index.html">3.2</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.1/index.html">3.1</a>
@@ -330,27 +360,6 @@
         </li>
         <li class="version">
           <a href="/documentation/reference/2.7/index.html">2.7</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.6/index.html">2.6</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.5/index.html">2.5</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.4/index.html">2.4</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.3/index.html">2.3</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.2/index.html">2.2</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.1/index.html">2.1</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.0/index.html">2.0</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/1.9/index.html">1.9</a>
@@ -379,18 +388,14 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
                         <a class="version is-current" href="/reference/connectors/cassandra.html" data-hash="true">nightly</a>
-                        <a class="version" href="/documentation//reference/stable/connectors/cassandra.html" data-hash="true">3.2</a>
+                        <a class="version" href="/documentation//reference/stable/connectors/cassandra.html" data-hash="true">3.5</a>
+                        <a class="version" href="/documentation//reference/3.6/connectors/cassandra.html" data-hash="true">3.6</a>
+                        <a class="version" href="/documentation//reference/3.4/connectors/cassandra.html" data-hash="true">3.4</a>
                         <a class="version" href="/documentation//reference/3.3/connectors/cassandra.html" data-hash="true">3.3</a>
+                        <a class="version" href="/documentation//reference/3.2/connectors/cassandra.html" data-hash="true">3.2</a>
                         <a class="version" href="/documentation//reference/3.1/connectors/cassandra.html" data-hash="true">3.1</a>
                         <a class="version" href="/documentation//reference/3.0/connectors/cassandra.html" data-hash="true">3.0</a>
                         <a class="version" href="/documentation//reference/2.7/connectors/cassandra.html" data-hash="true">2.7</a>
-                        <a class="version" href="/documentation//reference/2.6/connectors/cassandra.html" data-hash="true">2.6</a>
-                        <a class="version" href="/documentation//reference/2.5/connectors/cassandra.html" data-hash="true">2.5</a>
-                        <a class="version" href="/documentation//reference/2.4/connectors/cassandra.html" data-hash="true">2.4</a>
-                        <a class="version" href="/documentation//reference/2.3/connectors/cassandra.html" data-hash="true">2.3</a>
-                        <a class="version" href="/documentation//reference/2.2/connectors/cassandra.html" data-hash="true">2.2</a>
-                        <a class="version" href="/documentation//reference/2.1/connectors/cassandra.html" data-hash="true">2.1</a>
-                        <a class="version" href="/documentation//reference/2.0/connectors/cassandra.html" data-hash="true">2.0</a>
                         <a class="version" href="/documentation//reference/1.9/connectors/cassandra.html" data-hash="true">1.9</a>
         </div>
         |
@@ -1171,7 +1176,7 @@ VALUES (
   }
   },
   "source": {
-    "version": "3.3.0.Beta1",
+    "version": "3.6.0.Alpha2",
     "connector": "cassandra",
     "cluster": "cassandra-cluster-1",
     "snapshot": false,
@@ -1226,7 +1231,7 @@ WHERE id = 1001 AND registration_date = 1562202942545</code></pre>
   }
   },
   "source": {
-    "version": "3.3.0.Beta1",
+    "version": "3.6.0.Alpha2",
     "connector": "cassandra",
     "cluster": "cassandra-cluster-1",
     "snapshot": false,
@@ -1297,7 +1302,7 @@ WHERE id = 1001 AND registration_date = 1562202942545;</code></pre>
   "email": null
   },
   "source": {
-    "version": "3.3.0.Beta1",
+    "version": "3.6.0.Alpha2",
     "connector": "cassandra",
     "cluster": "cassandra-cluster-1",
     "snapshot": false,
@@ -2681,7 +2686,26 @@ The topic name has the following pattern:<br>
 <br>
 <em>topic.heartbeat.prefix</em>.<em>topic.prefix</em><br>
 <br>
-For example, if the database server name or topic prefix is <code>fulfillment</code>, the default topic name is <code>__debezium-heartbeat.fulfillment</code>.</p>
+For example, if the database server name or topic prefix is <code>fulfillment</code>, the default topic name is <code>__debezium-heartbeat.fulfillment</code>.<br>
+<br>
+This property is ignored if <code>topic.heartbeat.name</code> is set.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="cassandra-property-topic-heartbeat-name"></a><a href="#cassandra-property-topic-heartbeat-name"><code>topic.heartbeat.name</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><em>empty</em></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specifies an explicit, full name for the topic to which the connector sends heartbeat messages, overriding the prefix-based naming derived from <code>topic.heartbeat.prefix</code> and <code>topic.prefix</code>.<br>
+<br>
+When set, all heartbeat messages are routed to this exact topic name, regardless of the connector&#8217;s <code>topic.prefix</code>. This is useful when running multiple connectors and you want to consolidate heartbeat events into a single shared topic, avoiding the creation of a large number of single-partition heartbeat topics.<br>
+<br>
+For example, setting this to <code>debezium-heartbeat</code> routes all heartbeat messages to a topic named <code>debezium-heartbeat</code>.<br>
+<br>
+If this property is empty or unset, the connector falls back to the default behavior: <em>topic.heartbeat.prefix</em>.<em>topic.prefix</em>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2778,6 +2802,47 @@ For example, if the database server name or topic prefix is <code>fulfillment</c
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The custom metric tags will accept key-value pairs to customize the MBean object name which should be appended the end of regular name, each key would represent a tag for the MBean object name, and the corresponding value would be the value of that tag the key is. For example: <code>k1=v1,k2=v2</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="cassandra-property-custom-sanitize-pattern"></a><a href="#cassandra-property-custom-sanitize-pattern"><code>custom.sanitize.pattern</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>.*secret$|.*password$|.*sasl\.jaas\.config$|.*basic\.auth\.user\.info$|.*registry\.auth\.client-secret</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An optional regular expression that specifies a custom pattern for masking sensitive configuration keys.</p>
+</div>
+<div class="paragraph">
+<p>By default, Debezium masks the value of configuration keys that match a predefined pattern for commonly known sensitive properties such as passwords and authentication tokens.
+To customize the way that the connector masks configuration key values, set this property to a regular expression that matches specific configuration key values that you want to mask.</p>
+</div>
+<div class="paragraph">
+<p>For example, to mask keys the contain the strings <code>api.key</code> or <code>token</code>, set this property to the following value:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>"custom.sanitize.pattern": ".*api\\.key.*\|.*token.*"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you set this property for the connector, Debezium masks any matching instances of configuration key values that it returns for display, logging, or in response to API calls.
+A string of asterisks replaces the original values, for example,  <code>********</code>.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The pattern that you specify for the <code>custom.sanitize.pattern</code> property overrides the default Debezium masking pattern; the specified value does not extend or augment the default pattern.</p>
+</div>
+</td>
+</tr>
+</table>
 </div></div></td>
 </tr>
 <tr>
@@ -2924,7 +2989,7 @@ com.blueapron.connect.protobuf.ProtobufConverter</code></pre>
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/902dd6422c9d4eec1c7391107c3e974075fc0cb7">902dd642</a></span>)
+            <div class="copyright">Copyright &copy; 2026 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/1d381a8915e007c99e034748be22264d1466e105">1d381a89</a></span>)
             
         </div>
     </footer>

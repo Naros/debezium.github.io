@@ -52,7 +52,13 @@
     <span class="nav-text">Getting Started</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../tutorial.html">Tutorial</a>
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../tutorials.html">Tutorials</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../kc-tutorial.html">Kafka Connect</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -147,6 +153,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="jdbc.html">JDBC</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mongodb-sink.html">MongoDB Sink</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -196,6 +205,9 @@
     <a class="nav-link" href="../transformations/timezone-converter.html">Timezone Converter</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/geometry-format-transformer.html">Geometry Format Conversion</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/timescaledb.html">TimescaleDB Integration</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -203,6 +215,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../transformations/vector-to-json.html">Vector Data Types to JSON Types</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../transformations/swap-geometry-coordinates.html">Swap Geometry Coordinates</a>
   </li>
 </ul>
   </li>
@@ -253,6 +268,9 @@
     <a class="nav-link" href="../integrations/quarkus-debezium-engine-extension.html">Debezium Extensions for Quarkus</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../integrations/hibernate-cache.html">Hibernate Cache Invalidation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../integrations/testcontainers.html">Integration Testing with Testcontainers</a>
   </li>
 </ul>
@@ -263,6 +281,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../ai/embeddings.html">Embeddings Transformation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../ai/docling.html">Docling Transformation</a>
   </li>
 </ul>
   </li>
@@ -317,10 +338,19 @@
           <a href="/documentation/reference/nightly/index.html">nightly</a>
         </li>
         <li class="version">
-          <a href="/documentation/reference/3.2/index.html">3.2</a>
+          <a href="/documentation/reference/3.5/index.html">3.5</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.6/index.html">3.6</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.4/index.html">3.4</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.3/index.html">3.3</a>
+        </li>
+        <li class="version">
+          <a href="/documentation/reference/3.2/index.html">3.2</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/3.1/index.html">3.1</a>
@@ -330,27 +360,6 @@
         </li>
         <li class="version">
           <a href="/documentation/reference/2.7/index.html">2.7</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.6/index.html">2.6</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.5/index.html">2.5</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.4/index.html">2.4</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.3/index.html">2.3</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.2/index.html">2.2</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.1/index.html">2.1</a>
-        </li>
-        <li class="version">
-          <a href="/documentation/reference/2.0/index.html">2.0</a>
         </li>
         <li class="version">
           <a href="/documentation/reference/1.9/index.html">1.9</a>
@@ -379,18 +388,14 @@
         <button class="version-menu-toggle versions-menu-current" title="Show other versions of page">nightly</button>
         <div class="version-menu">
                         <a class="version is-current" href="/reference/connectors/mongodb.html" data-hash="true">nightly</a>
-                        <a class="version" href="/documentation//reference/stable/connectors/mongodb.html" data-hash="true">3.2</a>
+                        <a class="version" href="/documentation//reference/stable/connectors/mongodb.html" data-hash="true">3.5</a>
+                        <a class="version" href="/documentation//reference/3.6/connectors/mongodb.html" data-hash="true">3.6</a>
+                        <a class="version" href="/documentation//reference/3.4/connectors/mongodb.html" data-hash="true">3.4</a>
                         <a class="version" href="/documentation//reference/3.3/connectors/mongodb.html" data-hash="true">3.3</a>
+                        <a class="version" href="/documentation//reference/3.2/connectors/mongodb.html" data-hash="true">3.2</a>
                         <a class="version" href="/documentation//reference/3.1/connectors/mongodb.html" data-hash="true">3.1</a>
                         <a class="version" href="/documentation//reference/3.0/connectors/mongodb.html" data-hash="true">3.0</a>
                         <a class="version" href="/documentation//reference/2.7/connectors/mongodb.html" data-hash="true">2.7</a>
-                        <a class="version" href="/documentation//reference/2.6/connectors/mongodb.html" data-hash="true">2.6</a>
-                        <a class="version" href="/documentation//reference/2.5/connectors/mongodb.html" data-hash="true">2.5</a>
-                        <a class="version" href="/documentation//reference/2.4/connectors/mongodb.html" data-hash="true">2.4</a>
-                        <a class="version" href="/documentation//reference/2.3/connectors/mongodb.html" data-hash="true">2.3</a>
-                        <a class="version" href="/documentation//reference/2.2/connectors/mongodb.html" data-hash="true">2.2</a>
-                        <a class="version" href="/documentation//reference/2.1/connectors/mongodb.html" data-hash="true">2.1</a>
-                        <a class="version" href="/documentation//reference/2.0/connectors/mongodb.html" data-hash="true">2.0</a>
                         <a class="version" href="/documentation//reference/1.9/connectors/mongodb.html" data-hash="true">1.9</a>
         </div>
         |
@@ -1163,8 +1168,7 @@ If the <code>data-collections</code> array is empty, Debezium detects that no ac
 </td>
 <td class="content">
 <div class="paragraph">
-<p>If the name of a collection that you want to include in a snapshot contains a dot (<code>.</code>) in the name of the database, schema, or table, to add the collection to the <code>data-collections</code> array, you must escape each part of the name in double quotes.<br>
-<br>
+<p>If the name of a collection that you want to include in a snapshot contains a dot (<code>.</code>) in the name of the database or table, to add the collection to the <code>data-collections</code> array, you must escape each part of the name in double quotes.
 For example, to include a data collection that exists in the <code><strong>public</strong></code> database, and that has the name <code><strong>My.Collection</strong></code>, use the following format: <code><strong>"public"."My.Collection"</strong></code>.</p>
 </div>
 </td>
@@ -1190,10 +1194,10 @@ For example, to include a data collection that exists in the <code><strong>publi
 </ul>
 </div>
 <div class="olist arabic">
-<div class="title">Using a source signaling channel to trigger an incremental snapshot</div>
+<div class="title">Procedure</div>
 <ol class="arabic">
 <li>
-<p>Insert a snapshot signal document into the signaling collection:</p>
+<p>Insert an execute snapshot signal document into the source signaling collection by using the following syntax:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"><em>&lt;signalDataCollection&gt;</em>.insert({"<em>id" : _&lt;idNumber&gt;</em>,"type" : <em>&lt;snapshotType&gt;</em>, "data" : {"data-collections" ["<em>&lt;collectionName&gt;</em>", "<em>&lt;collectionName&gt;</em>"],"type": <em>&lt;snapshotType&gt;</em>, "additional-conditions" : [{"data-collections" : "<em>&lt;collectionName&gt;</em>", "filter" : "<em>&lt;additional-condition&gt;</em>"}] }});</code></pre>
@@ -1204,12 +1208,12 @@ For example, to include a data collection that exists in the <code><strong>publi
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">db.debeziumSignal.insert({ <i class="conum" data-value="1"></i><b>(1)</b>
-"type" : "execute-snapshot", <i class="conum" data-value="2"></i><b>(2)</b> <i class="conum" data-value="3"></i><b>(3)</b>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">db.debeziumSignal.insert({
+"type" : "execute-snapshot",
 "data" : {
-"data-collections" ["\"public\".\"Collection1\"", "\"public\".\"Collection2\""], <i class="conum" data-value="4"></i><b>(4)</b>
-"type": "incremental"} <i class="conum" data-value="5"></i><b>(5)</b>
-"additional-conditions":[{"data-collection": "schema1.table1" ,"filter":"color=\'blue\'"}]}'); <i class="conum" data-value="6"></i><b>(6)</b>
+"data-collections" ["\"public\".\"Collection1\"", "\"public\".\"Collection2\""],
+"type": "incremental"}
+"additional-conditions":[{"data-collection": "public.Collection1" ,"filter":"color=\'blue\'"}]}');
 });</code></pre>
 </div>
 </div>
@@ -1217,74 +1221,55 @@ For example, to include a data collection that exists in the <code><strong>publi
 <p>The values of the <code>id</code>,<code>type</code>, and <code>data</code> parameters in the command correspond to the <a href="../configuration/signalling.html#debezium-signaling-description-of-required-structure-of-a-signaling-data-collection" class="xref page">fields of the signaling collection</a>.</p>
 </div>
 <div class="paragraph">
-<p>The following table describes the parameters in the example:</p>
+<p>The following list describes the parameters in the incremental snapshot example:</p>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 3. Descriptions of fields in a MongoDB insert() command for sending an incremental snapshot signal to the signaling collection</caption>
-<colgroup>
-<col style="width: 11.1111%;">
-<col style="width: 22.2222%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Item</th>
-<th class="tableblock halign-left valign-top">Value</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>db.debeziumSignal</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the fully-qualified name of the signaling collection on the source database.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">null</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>_id</code> parameter specifies an arbitrary string that is assigned as the <code>id</code> identifier for the signal request.<br>
-The insert method in the preceding example omits use of the optional <code>_id</code> parameter.
-Because the document does not explicitly assign a value for the parameter, the arbitrary id that MongoDB automatically assigns to the document becomes the <code>id</code> identifier for the signal request.<br>
-Use this string to identify logging messages to entries in the signaling collection.
-Debezium does not use this identifier string.
-Rather, during the snapshot, Debezium generates its own <code>id</code> string as a watermarking signal.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>execute-snapshot</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies <code>type</code> parameter specifies the operation that the signal is intended to trigger.<br></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data-collections</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A required component of the <code>data</code> field of a signal that specifies an array of collection names or regular expressions to match collection names to include in the snapshot.<br>
-The array lists regular expressions which match collections by their fully-qualified names, using the same format as you use to specify the name of the connector&#8217;s signaling collection in the <a href="#mongodb-property-signal-data-collection"><code>signal.data.collection</code></a> configuration property.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>incremental</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An optional <code>type</code> component of the <code>data</code> field of a signal that specifies the type of snapshot operation to run.<br>
-Currently supports the <code>incremental</code> and <code>blocking</code> types.<br>
-If you do not specify a value, the connector runs an incremental snapshot.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>additional-conditions</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An optional array that specifies a set of additional conditions that the connector evaluates to determine the subset of records to include in a snapshot.<br>
-Each element in the <code>additional-conditions</code> array is an object that includes the following keys:</p>
-<p class="tableblock"><code>data-collection</code>:: The fully-qualified name of the data collection for which the filter will be applied.
-<code>filter</code>:: Specifies the column values that must be present in a data collection record for the snapshot to include it, for example, <code>"color='blue'"</code>.</p></td>
-</tr>
-</tbody>
-</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>db.debeziumSignal.insert</code></dt>
+<dd>
+<p>Insert command that specifies the signaling collection to which you want to add the snapshot signal document.
+The data collection is specified by its fully-qualified name.</p>
+</dd>
+<dt class="hdlist1"><code>type</code></dt>
+<dd>
+<p>Specifies the kind of signal to send, in this case, an <code>execute-snapshot</code> signal.</p>
+</dd>
+<dt class="hdlist1"><code>_id</code></dt>
+<dd>
+<p>An optional parameter that assigns an arbitrary string to be the identifier for the signal request.
+In the preceding example, the signal omits the optional <code>_id</code> parameter.
+Because the signal does not explicitly assign a value to the parameter, MongoDB automatically assigns an arbitrary id to the document.
+This <code>id</code> becomes the identifier for the signal request.
+Debezium does not use this identifier string; however you can use the <code>id</code> to collate log messages with documents in the signaling collection.</p>
+</dd>
+<dt class="hdlist1"><code>data.data-collections</code></dt>
+<dd>
+<p>A required component in the <code>data</code> field of an execute snapshot signal that specifies an array of collection names or regular expressions that represent the collections that you want to include in the snapshot, in this case, <code>public.Collection1</code> and <code>public.Collection2</code>.</p>
+</dd>
+<dt class="hdlist1"><code>data.type</code></dt>
+<dd>
+<p>An optional <code>type</code> component of the <code>data</code> field of a signal that specifies the type of snapshot operation to run.
+Valid values are <code>incremental</code> or <code>blocking</code>.</p>
+</dd>
+<dt class="hdlist1"><code>additional-conditions</code></dt>
+<dd>
+<p>An optional array that specifies a set of additional conditions that the connector evaluates to determine the subset of records to include in a snapshot.
+You can specify one or more data collections and set a filter parameter for each collection.
+Each filter instructs the snapshot to capture only documents that contain a field with a specified value.
+In this case, the parameter instructs the signal to capture documents in the <code>public.Collection1</code> collection only if they include the field <code>color</code> with the value <code>'blue'</code>.</p>
+</dd>
+</dl>
+</div>
 </li>
 </ol>
 </div>
 <div class="paragraph">
 <p>The following example, shows the JSON for an incremental snapshot event that is captured by a connector.</p>
 </div>
+<div class="exampleblock">
+<div class="title">Example 1. Example: Incremental snapshot event message</div>
+<div class="content">
 <div class="listingblock">
-<div class="title">Example: Incremental snapshot event message</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
     "before":null,
@@ -1294,9 +1279,9 @@ Each element in the <code>additional-conditions</code> array is an object that i
     },
     "source": {
         ...
-        "snapshot":"incremental" <i class="conum" data-value="1"></i><b>(1)</b>
+        "snapshot":"incremental"
     },
-    "op":"r", <i class="conum" data-value="2"></i><b>(2)</b>
+    "op":"r",
     "ts_ms":"1620393591654",
     "ts_us":"1620393591654962",
     "ts_ns":"1620393591654962147",
@@ -1304,36 +1289,24 @@ Each element in the <code>additional-conditions</code> array is an object that i
 }</code></pre>
 </div>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 16.6666%;">
-<col style="width: 16.6666%;">
-<col style="width: 66.6668%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Item</th>
-<th class="tableblock halign-left valign-top">Field name</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>snapshot</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the type of snapshot operation to run.<br>
-Currently, the only valid options are <code>blocking</code> and <code>incremental</code>.<br>
-Specifying a <code>type</code> value in the SQL query that you submit to the signaling collection is optional.<br>
-If you do not specify a value, the connector runs an incremental snapshot.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>op</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the event type.<br>
-The value for snapshot events is <code>r</code>, signifying a <code>READ</code> operation.</p></td>
-</tr>
-</tbody>
-</table>
+</div>
+</div>
+<div class="paragraph">
+<p>The following list describes select parameters in the preceding event message example:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>snapshot</code></dt>
+<dd>
+<p>Specifies the type of snapshot operation, in this case an incremental snapshot.</p>
+</dd>
+<dt class="hdlist1"><code>op</code></dt>
+<dd>
+<p>Specifies the event type.
+The value for snapshot events is <code>r</code>, signifying a <code>READ</code> operation.</p>
+</dd>
+</dl>
+</div>
 </div>
 <div class="sect3">
 <h4 id="mongodb-triggering-an-incremental-snapshot-kafka"><a class="anchor" href="#mongodb-triggering-an-incremental-snapshot-kafka"></a>Using the Kafka signaling channel to trigger an incremental snapshot</h4>
@@ -1350,7 +1323,7 @@ The value for snapshot events is <code>r</code>, signifying a <code>READ</code> 
 <p>The signal type is <code>execute-snapshot</code>, and the <code>data</code> field must have the following fields:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 4. Execute snapshot data fields</caption>
+<caption class="title">Table 3. Execute snapshot data fields</caption>
 <colgroup>
 <col style="width: 20%;">
 <col style="width: 20%;">
@@ -1377,28 +1350,44 @@ See the next section for more details.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data-collections</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>N/A</em></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>An array of comma-separated regular expressions that match the fully-qualified names of tables to include in the snapshot.<br>
-Specify the names by using the same format as is required for the <a href="#mongodb-property-signal-data-collection">signal.data.collection</a> configuration option.</p>
+<p>An array of comma-separated regular expressions that match the fully-qualified names of tables to include in the snapshot.</p>
+</div>
+<div class="paragraph">
+<p>Specify the names by using the same format as is required for the <a href="#mongodb-property-signal-data-collection">signal.data.collection</a> configuration option.
+Data collection names are case-sensitive.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>additional-conditions</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>N/A</em></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>An optional array of additional conditions that specifies criteria that the connector evaluates to designate a subset of records to include in a snapshot.<br>
-Each additional condition is an object that specifies the criteria for filtering the data that an ad hoc snapshot captures.
-You can set the following parameters for each additional condition:
-<code>data-collection</code>:: The fully-qualified name of the collection that the filter applies to.
-You can apply different filters to each collection.
-<code>filter</code>:: Specifies column values that must be present in a database record for the snapshot to include it, for example,  <code>"color='blue'"</code>.<br>
-<br>
-The values that you assign to the <code>filter</code> parameter are the same types of values that you might specify in the <code>WHERE</code> clause of <code>SELECT</code> statements when you set the <code>snapshot.select.statement.overrides</code> property for a blocking snapshot.</p>
+<p>An optional array of additional conditions that specifies criteria that the connector evaluates to designate a subset of records to include in a snapshot.</p>
+</div>
+<div class="paragraph">
+<p>Each additional condition is an object that specifies the criteria for filtering the data that an ad hoc snapshot captures.
+You can set the following parameters for each additional condition:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>data-collection</code></dt>
+<dd>
+<p>The fully-qualified name of the collection that the filter applies to.
+You can apply different filters to each collection.</p>
+</dd>
+<dt class="hdlist1"><code>filter</code></dt>
+<dd>
+<p>Specifies column values that must be present in a database record for the snapshot to include it, for example,  <code>"color='blue'"</code>.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The values that you assign to the <code>filter</code> parameter are the same types of values that you might specify in the <code>WHERE</code> clause of <code>SELECT</code> statements when you set the <code>snapshot.select.statement.overrides</code> property for a blocking snapshot.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 <div class="exampleblock">
-<div class="title">Example 1. An <code>execute-snapshot</code> Kafka message</div>
+<div class="title">Example 2. An <code>execute-snapshot</code> Kafka message</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -1426,8 +1415,7 @@ Value = `{"type":"execute-snapshot","data": {"data-collections": ["{collection-c
 <p><code>SELECT * FROM <em>&lt;data-collection&gt;</em> WHERE <em>&lt;filter&gt;</em> &#8230;&#8203;.</code></p>
 </div>
 <div class="paragraph">
-<p>For example, given a <code>products</code> collection with the columns <code>id</code> (primary key), <code>color</code>, and <code>brand</code>, if you want a snapshot to include only content for which <code>color='blue'</code>, when you request the snapshot, you could add the <code>additional-conditions</code> property to filter the content:
-:leveloffset: +1</p>
+<p>For example, given a <code>products</code> collection with the columns <code>id</code> (primary key), <code>color</code>, and <code>brand</code>, if you want a snapshot to include only content for which <code>color='blue'</code>, when you request the snapshot, you could add the <code>additional-conditions</code> property to filter the content:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1438,8 +1426,7 @@ Value = `{"type":"execute-snapshot","data": {"data-collections": ["db1.products"
 </div>
 <div class="paragraph">
 <p>You can also use the <code>additional-conditions</code> property to pass conditions based on multiple columns.
-For example, using the same <code>products</code> collection as in the previous example, if you want a snapshot to include only the content from the <code>products</code> collection for which <code>color='blue'</code>, and <code>brand='MyBrand'</code>, you could send the following request:
-:leveloffset: +1</p>
+For example, using the same <code>products</code> collection as in the previous example, if you want a snapshot to include only the content from the <code>products</code> collection for which <code>color='blue'</code>, and <code>brand='MyBrand'</code>, you could send the following request:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1484,7 +1471,7 @@ After Debezium detects the change in the signaling collection, it reads the sign
 </ul>
 </div>
 <div class="olist arabic">
-<div class="title">Using a source signaling channel to stop an incremental snapshot</div>
+<div class="title">Procedure</div>
 <ol class="arabic">
 <li>
 <p>Insert a stop snapshot signal document into the signaling collection:</p>
@@ -1498,11 +1485,11 @@ After Debezium detects the change in the signaling collection, it reads the sign
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">db.debeziumSignal.insert({ <i class="conum" data-value="1"></i><b>(1)</b>
-"type" : "stop-snapshot", <i class="conum" data-value="2"></i><b>(2)</b> <i class="conum" data-value="3"></i><b>(3)</b>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">db.debeziumSignal.insert({
+"type" : "stop-snapshot",
 "data" : {
-"data-collections" ["\"public\".\"Collection1\"", "\"public\".\"Collection2\""], <i class="conum" data-value="4"></i><b>(4)</b>
-"type": "incremental"} <i class="conum" data-value="5"></i><b>(5)</b>
+"data-collections" ["\"public\".\"Collection1\"", "\"public\".\"Collection2\""],
+"type": "incremental"}
 });</code></pre>
 </div>
 </div>
@@ -1510,57 +1497,38 @@ After Debezium detects the change in the signaling collection, it reads the sign
 <p>The values of the <code>id</code>, <code>type</code>, and <code>data</code> parameters in the signal command correspond to the <a href="../configuration/signalling.html#debezium-signaling-description-of-required-structure-of-a-signaling-data-collection" class="xref page">fields of the signaling collection</a>.</p>
 </div>
 <div class="paragraph">
-<p>The following table describes the parameters in the example:</p>
+<p>The following list describes the parameters in the example:</p>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 5. Descriptions of fields in an insert command for sending a stop incremental snapshot document to the signaling collection</caption>
-<colgroup>
-<col style="width: 11.1111%;">
-<col style="width: 22.2222%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Item</th>
-<th class="tableblock halign-left valign-top">Value</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>db.debeziumSignal</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the fully-qualified name of the signaling collection on the source database.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">null</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The insert method in the preceding example omits use of the optional <code>_id</code> parameter.
-Because the document does not explicitly assign a value for the parameter, the arbitrary id that MongoDB automatically assigns to the document becomes the <code>id</code> identifier for the signal request.<br>
-Use this string to identify logging messages to entries in the signaling collection.
-Debezium does not use this identifier string.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>stop-snapshot</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>type</code> parameter specifies the operation that the signal is intended to trigger.<br></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data-collections</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An optional component of the <code>data</code> field of a signal that specifies an array of collection names or regular expressions to match collection names to remove from the snapshot.<br>
-The array lists regular expressions that match collections by their fully-qualified names in the format <code>database.collection</code>.</p>
-<p class="tableblock">If you omit the <code>data-collections</code> array from the <code>data</code> field, the signal stops the entire incremental snapshot that is in progress.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>incremental</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A required component of the <code>data</code> field of a signal that specifies the type of snapshot operation that is to be stopped.<br>
-Currently, the only valid option is <code>incremental</code>.<br>
-If you do not specify a <code>type</code> value, the signal fails to stop the incremental snapshot.</p></td>
-</tr>
-</tbody>
-</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>db.debeziumSignal.insert</code></dt>
+<dd>
+<p>Specifies the fully-qualified name of the signaling collection on the source database.</p>
+</dd>
+<dt class="hdlist1"><code>type</code></dt>
+<dd>
+<p>Specifies the kind of signal to send, in this case a <code>stop-snapshot</code> signal.</p>
+</dd>
+<dt class="hdlist1"><code>_id</code></dt>
+<dd>
+<p>This optional field is omitted in the preceding signal.
+Because the document does not explicitly assign a value to the parameter, MongoDB automatically assigns an arbitrary id to the document.
+This <code>_id</code> becomes the identifier for the signal request.
+Debezium does not use this identifier string; however you can use the <code>id</code> to collate log messages with documents in the signaling collection.</p>
+</dd>
+<dt class="hdlist1">data.data-collections</dt>
+<dd>
+<p>An optional component in the <code>data</code> field of the signal that specifies an array of collection names or regular expressions that represent collections that you want to exclude from the snapshot.
+The regular expressions in the array match the fully-qualified names of collections in the format <code>database.collection</code>.</p>
+</dd>
+<dt class="hdlist1">data.type</dt>
+<dd>
+<p>A required component in the <code>data</code> field of a stop snapshot signal that specifies the type of snapshot operation that is to be stopped.
+Currently, the only valid option is <code>incremental</code>.
+If you do not specify a <code>type</code> value, the signal fails to stop the incremental snapshot.</p>
+</dd>
+</dl>
+</div>
 </li>
 </ol>
 </div>
@@ -1580,7 +1548,7 @@ If you do not specify a <code>type</code> value, the signal fails to stop the in
 <p>The signal type is <code>stop-snapshot</code>, and the <code>data</code> field must have the following fields:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 6. Execute snapshot data fields</caption>
+<caption class="title">Table 4. Execute snapshot data fields</caption>
 <colgroup>
 <col style="width: 20%;">
 <col style="width: 20%;">
@@ -2122,7 +2090,7 @@ This field provides information about every event in the form of a composite of 
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 7. Overview of change event basic content</caption>
+<caption class="title">Table 5. Overview of change event basic content</caption>
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 20%;">
@@ -2224,7 +2192,7 @@ The value of this field is the document&#8217;s identifier represented as a stri
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 8. Description of change event key</caption>
+<caption class="title">Table 6. Description of change event key</caption>
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 20%;">
@@ -2284,7 +2252,7 @@ The value of this field is the document&#8217;s identifier represented as a stri
 <p>This example uses a document with an integer identifier, but any valid MongoDB document identifier works the same way, including a document identifier. For a document identifier, an event key&#8217;s <code>payload.id</code> value is a string that represents the updated document&#8217;s original <code>_id</code> field as a MongoDB extended JSON serialization that uses strict mode. The following table provides examples of how different types of <code>_id</code> fields are represented.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch code-wordbreak-col2 code-wordbreak-col3">
-<caption class="title">Table 9. Examples of representing document <code>_id</code> fields in event key payloads</caption>
+<caption class="title">Table 7. Examples of representing document <code>_id</code> fields in event key payloads</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2491,7 +2459,7 @@ The value of this field is the document&#8217;s identifier represented as a stri
     "payload": { <i class="conum" data-value="5"></i><b>(5)</b>
       "after": "{\"_id\" : {\"$numberLong\" : \"1004\"},\"first_name\" : \"Anne\",\"last_name\" : \"Kretchmar\",\"email\" : \"annek@noanswer.org\"}", <i class="conum" data-value="6"></i><b>(6)</b>
       "source": { <i class="conum" data-value="7"></i><b>(7)</b>
-        "version": "3.3.0.Beta1",
+        "version": "3.6.0.Alpha2",
         "connector": "mongodb",
         "name": "fulfillment",
         "ts_ms": 1558965508000,
@@ -2513,7 +2481,7 @@ The value of this field is the document&#8217;s identifier represented as a stri
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 10. Descriptions of <em>create</em> event value fields</caption>
+<caption class="title">Table 8. Descriptions of <em>create</em> event value fields</caption>
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 20%;">
@@ -2705,7 +2673,7 @@ There is a new structured field <code>updateDescription</code> with a few additi
         "truncatedArrays": null
       },
       "source": { <i class="conum" data-value="6"></i><b>(6)</b>
-        "version": "3.3.0.Beta1",
+        "version": "3.6.0.Alpha2",
         "connector": "mongodb",
         "name": "fulfillment",
         "ts_ms": 1558965508000,
@@ -2727,7 +2695,7 @@ There is a new structured field <code>updateDescription</code> with a few additi
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 11. Descriptions of <em>update</em> event value fields</caption>
+<caption class="title">Table 9. Descriptions of <em>update</em> event value fields</caption>
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 20%;">
@@ -2847,7 +2815,7 @@ It is thus possible if multiple updates are closely following one after the othe
       "ts_ns": 1465495462115748263, <i class="conum" data-value="2"></i><b>(2)</b>
       "before":"{\"_id\": {\"$numberLong\": \"1004\"},\"first_name\": \"Anne Marie\",\"last_name\": \"Kretchmar\",\"email\": \"annek@noanswer.org\"}",<i class="conum" data-value="3"></i><b>(3)</b>
       "source": { <i class="conum" data-value="4"></i><b>(4)</b>
-        "version": "3.3.0.Beta1",
+        "version": "3.6.0.Alpha2",
         "connector": "mongodb",
         "name": "fulfillment",
         "ts_ms": 1558965508000,
@@ -2865,7 +2833,7 @@ It is thus possible if multiple updates are closely following one after the othe
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 12. Descriptions of <em>delete</em> event value fields</caption>
+<caption class="title">Table 10. Descriptions of <em>delete</em> event value fields</caption>
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 20%;">
@@ -3048,7 +3016,7 @@ If Debezium were to fail during this time, its last oplog position is likely to 
 <ol class="arabic">
 <li>
 <p>Download the
-<a href="https://central.sonatype.com/repository/maven-snapshots/io/debezium/debezium-connector-mongodb/3.3.0-SNAPSHOT/debezium-connector-mongodb-3.3.0-20250918.000117-280-plugin.tar.gz">connector&#8217;s plug-in archive</a>,</p>
+<a href="https://central.sonatype.com/repository/maven-snapshots/io/debezium/debezium-connector-mongodb/3.6.0-SNAPSHOT/debezium-connector-mongodb-3.6.0-20260522.065326-200-plugin.tar.gz">connector&#8217;s plug-in archive</a>,</p>
 </li>
 <li>
 <p>Extract the JAR files into your Kafka Connect environment.</p>
@@ -3084,7 +3052,7 @@ To mitigate risk in production deployments, deploy only containers that are acti
 <p>You can also <a href="../operations/openshift.html" class="xref page">run Debezium on Kubernetes and OpenShift</a>.</p>
 </div>
 <div class="paragraph">
-<p>The Debezium <a href="../tutorial.html" class="xref page">tutorial</a> walks you through using these images, and this is a great way to learn about Debezium.</p>
+<p>The Debezium <a href="../kc-tutorial.html" class="xref page">tutorial</a> walks you through using these images, and this is a great way to learn about Debezium.</p>
 </div>
 <div class="sect2">
 <h3 id="mongodb-example-configuration"><a class="anchor" href="#mongodb-example-configuration"></a>MongoDB connector configuration example</h3>
@@ -3617,9 +3585,32 @@ Set <a href="#mongodb-property-capture-mode-full-update-type">capture.mode.full.
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="mongodb-property-capture-start-op-time"></a><a href="#mongodb-property-capture-start-op-time"><code>capture.start.op.time</code></a></p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Specifies the <a href="https://www.mongodb.com/docs/manual/changeStreams/#ref-start-time-id1">startAtOperationTime</a> change stream parameter. The value ought to be a long representation of Bson timestamp.</p>
+<p>No default value</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specifies the <a href="https://www.mongodb.com/docs/manual/changeStreams/#ref-start-time-id1">startAtOperationTime</a> change stream parameter.
+Set the value to be a long representation of the BSON timestamp.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The ability to set the <code>capture.start.op.time`</code> property to override the normal offset-based behavior and begin streaming from a specific timestamp is a Technology Preview feature.
+Technology Preview features are not supported with Red&#160;Hat production service level agreements (SLAs) and might not be functionally complete.
+Red&#160;Hat does not recommend using them in production.
+These features provide early access to upcoming product features, enabling customers to test functionality and provide feedback during the development process.</p>
+</div>
+<div class="paragraph">
+<p>For more information about the support scope of Red&#160;Hat Technology Preview features, see <a href="https://access.redhat.com/support/offerings/techpreview/">Technology Preview Features Support Scope</a>.</p>
+</div>
+</td>
+</tr>
+</table>
 </div></div></td>
 </tr>
 <tr>
@@ -3787,7 +3778,7 @@ After a source record is deleted, emitting a tombstone event (the default behavi
 <p><code>avro</code> replaces the characters that cannot be used in the Avro type name with underscore.<br></p>
 </li>
 <li>
-<p><code>avro_unicode</code> replaces the underscore or characters that cannot be used in the Avro type name with corresponding unicode like _uxxxx. Note: _ is an escape sequence like backslash in Java<br></p>
+<p><code>avro_unicode</code> replaces the underscore or characters that cannot be used in the Avro type name with corresponding unicode like _uxxxx. Note: _ is an escape sequence like backslash in Java.</p>
 </li>
 </ul>
 </div>
@@ -4131,7 +4122,7 @@ Defaults to 0, which indicates that the server chooses an appropriate fetch size
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>An optional, comma-separated list of regular expressions that match the fully-qualified names (<code><em>&lt;databaseName&gt;</em>.<em>&lt;collectionName&gt;</em></code>) of the schemas that you want to include in a snapshot.
 The specified items must be named in the connectors&#8217;s <a href="#mongodb-property-collection-include-list"><code>collection.include.list</code></a> property.
-This property takes effect only if the connector&#8217;s <a href="#mongodb-property-snapshot-mode"><code>snapshot.mode</code></a> property is set to a value other than <code>never</code>.<br>
+This property takes effect only if the connector&#8217;s <a href="#mongodb-property-snapshot-mode"><code>snapshot.mode</code></a> property is set to a value other than <code>no_data</code>.<br>
 This property does not affect the behavior of incremental snapshots.<br></p>
 </div>
 <div class="paragraph">
@@ -4180,10 +4171,6 @@ After the snapshot completes, the connector begins to stream event records for s
 <p>The connector performs a database a snapshot only when no offsets have been recorded for the logical server name.
 After the snapshot completes, the connector stops.
 It does not transition to streaming event records for subsequent database changes.</p>
-</dd>
-<dt class="hdlist1"><code>never</code></dt>
-<dd>
-<p>Deprecated, see <code>no_data</code>.</p>
 </dd>
 <dt class="hdlist1"><code>no_data</code></dt>
 <dd>
@@ -4470,8 +4457,13 @@ A value of <code>0</code> indicates using the server/driver default wait timeout
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Fully-qualified name of the data collection that is used to send <a href="../configuration/signalling.html#debezium-signaling-enabling-source-signaling-channel" class="xref page">signals</a> to the connector.
-Use the following format to specify the collection name:<br>
-<code><em>&lt;databaseName&gt;</em>.<em>&lt;collectionName&gt;</em></code><br></p>
+The collection name is case-sensitive.</p>
+</div>
+<div class="paragraph">
+<p>Use the following format to specify the collection name:</p>
+</div>
+<div class="paragraph">
+<p><code><em>&lt;databaseName&gt;</em>.<em>&lt;collectionName&gt;</em></code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -4616,7 +4608,26 @@ Set this option to prevent rapid growth of the signaling data collection.</p>
 <br>
 <em>topic.heartbeat.prefix</em>.<em>topic.prefix</em><br>
 <br>
-For example, if the topic prefix is <code>fulfillment</code>, the default topic name is <code>__debezium-heartbeat.fulfillment</code>.</p>
+For example, if the topic prefix is <code>fulfillment</code>, the default topic name is <code>__debezium-heartbeat.fulfillment</code>.<br>
+<br>
+This property is ignored if <code>topic.heartbeat.name</code> is set.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="mongodb-property-topic-heartbeat-name"></a><a href="#mongodb-property-topic-heartbeat-name"><code>topic.heartbeat.name</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><em>empty</em></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specifies an explicit, full name for the topic to which the connector sends heartbeat messages, overriding the prefix-based naming derived from <code>topic.heartbeat.prefix</code> and <code>topic.prefix</code>.<br>
+<br>
+When set, all heartbeat messages are routed to this exact topic name, regardless of the connector&#8217;s <code>topic.prefix</code>. This is useful when running multiple connectors and you want to consolidate heartbeat events into a single shared topic, avoiding the creation of a large number of single-partition heartbeat topics.<br>
+<br>
+For example, setting this to <code>debezium-heartbeat</code> routes all heartbeat messages to a topic named <code>debezium-heartbeat</code>.<br>
+<br>
+If this property is empty or unset, the connector falls back to the default behavior: <em>topic.heartbeat.prefix</em>.<em>topic.prefix</em>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4656,6 +4667,47 @@ For more information, see <a href="#customized-mbean-names">Customized MBean nam
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="mongodb-property-custom-sanitize-pattern"></a><a href="#mongodb-property-custom-sanitize-pattern"><code>custom.sanitize.pattern</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>.*secret$|.*password$|.*sasl\.jaas\.config$|.*basic\.auth\.user\.info$|.*registry\.auth\.client-secret</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An optional regular expression that specifies a custom pattern for masking sensitive configuration keys.</p>
+</div>
+<div class="paragraph">
+<p>By default, Debezium masks the value of configuration keys that match a predefined pattern for commonly known sensitive properties such as passwords and authentication tokens.
+To customize the way that the connector masks configuration key values, set this property to a regular expression that matches specific configuration key values that you want to mask.</p>
+</div>
+<div class="paragraph">
+<p>For example, to mask keys the contain the strings <code>api.key</code> or <code>token</code>, set this property to the following value:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>"custom.sanitize.pattern": ".*api\\.key.*\|.*token.*"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you set this property for the connector, Debezium masks any matching instances of configuration key values that it returns for display, logging, or in response to API calls.
+A string of asterisks replaces the original values, for example,  <code>********</code>.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The pattern that you specify for the <code>custom.sanitize.pattern</code> property overrides the default Debezium masking pattern; the specified value does not extend or augment the default pattern.</p>
+</div>
+</td>
+</tr>
+</table>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="mongodb-property-errors-max-retires"></a><a href="#mongodb-property-errors-max-retires"><code>errors.max.retries</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -4680,6 +4732,43 @@ User intervention is required to restart the connector.</p>
 <dd>
 <p>The connector restarts automatically until it reaches the specified maximum number of retries.
 After the next failure, the connector stops, and user intervention is required to restart it.</p>
+</dd>
+</dl>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="mongodb-property-guardrail-collections-max"></a><a href="#mongodb-property-guardrail-collections-max"><code>guardrail.collections.max</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>0</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specifies the maximum number of collections that the connector can capture.
+Exceeding this limit triggers the action specified by <code>guardrail.collections.limit.action</code>.
+Set this property to  <code>0</code> to prevent the connector from triggering guardrail actions.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="mongodb-property-guardrail-collections-limit-action"></a><a href="#mongodb-property-guardrail-collections-limit-action"><code>guardrail.collections.limit.action</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>warn</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Specifies the action to trigger if the number of collections that the connector captures exceeds the number that you specify in the <code>guardrail.collections.max</code> property.
+Set the property to one of the following values:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>fail</code></dt>
+<dd>
+<p>The connector fails and reports an exception.</p>
+</dd>
+<dt class="hdlist1"><code>warn</code></dt>
+<dd>
+<p>The connector logs a warning.</p>
 </dd>
 </dl>
 </div></div></td>
@@ -4729,7 +4818,7 @@ After the next failure, the connector stops, and user intervention is required t
 <p>The following table describes the Kafka <code>signal</code> properties.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 13. Kafka signals configuration properties</caption>
+<caption class="title">Table 11. Kafka signals configuration properties</caption>
 <colgroup>
 <col style="width: 33%;">
 <col style="width: 17%;">
@@ -4813,7 +4902,7 @@ Each pair references the Kafka cluster that is used by the Debezium Kafka Connec
 <p>The following table describes properties that you can use to configure the Debezium sink <code>notification</code> channel.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 14. Sink notification configuration properties</caption>
+<caption class="title">Table 12. Sink notification configuration properties</caption>
 <colgroup>
 <col style="width: 33%;">
 <col style="width: 17%;">
@@ -4899,7 +4988,7 @@ If you specify multiple key-value pairs, all of the specified pairs are appended
 <p>The following example illustrates how tags modify the default MBean name.</p>
 </div>
 <div class="exampleblock">
-<div class="title">Example 2. How custom tags modify the connector MBean name</div>
+<div class="title">Example 3. How custom tags modify the connector MBean name</div>
 <div class="content">
 <div class="paragraph">
 <p>By default, the MongoDB connector uses the following MBean name for streaming metrics:
@@ -4934,9 +5023,9 @@ If you specify multiple key-value pairs, all of the specified pairs are appended
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
+<col style="width: 35%;">
+<col style="width: 20%;">
 <col style="width: 45%;">
-<col style="width: 25%;">
-<col style="width: 30%;">
 </colgroup>
 <thead>
 <tr>
@@ -4966,6 +5055,21 @@ If you specify multiple key-value pairs, all of the specified pairs are appended
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The number of milliseconds since the connector has read and processed the most recent event.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-snaps-metric-numberoferroneousevents_mongodb"></a><a href="#connectors-snaps-metric-numberoferroneousevents_mongodb"><code>NumberOfErroneousEvents</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>long</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Records the number of change events that the connector identifies as erroneous during a snapshot operation.
+The connector increments this metric each time that it encounters an event that it cannot process during an initial, incremental, or ad hoc snapshot.
+Events might fail processing if they are malformed, are incompatible with the schema, or if they encounter failures during transformation.
+The metric value persists for the lifetime of the connector task.
+If the snapshot is interrupted, and the connector task restarts, the metric count resets to <code>0</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5137,6 +5241,28 @@ Updates every 10,000 rows scanned and upon completing a table.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-snaps-metric-tablechunkcounts_mongodb"></a><a href="#connectors-snaps-metric-tablechunkcounts_mongodb"><code>TableChunkCounts</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>Map&lt;String, Long&gt;</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Map containing the number of chunks for each table in the snapshot when using chunk-based multithreaded snapshots.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-snaps-metric-tablechunkscompletedcounts_mongodb"></a><a href="#connectors-snaps-metric-tablechunkscompletedcounts_mongodb"><code>TableChunksCompletedCounts</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>Map&lt;String, Long&gt;</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Map containing the number of chunks that have completed for each table in the snapshot when using chunk-based multithreaded snapshots.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="connectors-snaps-metric-maxqueuesizeinbytes_mongodb"></a><a href="#connectors-snaps-metric-maxqueuesizeinbytes_mongodb"><code>MaxQueueSizeInBytes</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -5194,9 +5320,9 @@ Updates every 10,000 rows scanned and upon completing a table.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
+<col style="width: 35%;">
+<col style="width: 20%;">
 <col style="width: 45%;">
-<col style="width: 25%;">
-<col style="width: 30%;">
 </colgroup>
 <thead>
 <tr>
@@ -5226,6 +5352,21 @@ Updates every 10,000 rows scanned and upon completing a table.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The number of milliseconds since the connector has read and processed the most recent event.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-strm-metric-numberoferroneousevents_mongodb"></a><a href="#connectors-strm-metric-numberoferroneousevents_mongodb"><code>NumberOfErroneousEvents</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>long</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Records the number of change events that the connector identifies as erroneous during streaming.
+The connector increments this metric each time that it encounters an event that it cannot process during the lifetime of the streaming session.
+Events might fail processing if they are malformed, are incompatible with the schema, or if they encounter failures during transformation.
+The metric value persists for the lifetime of the connector task.
+After a connector restart, the metric count resets to <code>0</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5286,6 +5427,18 @@ Represents the data change workload for Debezium to process.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-strm-metric-numberofunchangedeventsskipped_mongodb"></a><a href="#connectors-strm-metric-numberofunchangedeventsskipped_mongodb"><code>NumberOfUnchangedEventsSkipped</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>long</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Number of update events skipped since the last connector start or metrics reset because no monitored columns changed. Defaults to <code>-1</code> if <a href="#mongodb-property-skip-messages-without-change"><code>skip.messages.without.change</code></a> is <code>false</code>.
+May remain <code>0</code> for MongoDB and other connectors that do not support skipping unchanged events, even if the property is set to <code>true</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a id="connectors-strm-metric-capturedtables_mongodb"></a><a href="#connectors-strm-metric-capturedtables_mongodb"><code>CapturedTables</code></a></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
@@ -5338,6 +5491,78 @@ Represents the data change workload for Debezium to process.</p>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The number of milliseconds between the last change event&#8217;s timestamp and the connector processing it.
 The values will incorporate any differences between the clocks on the machines where the database server and the connector are running.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-strm-metric-millisecondsbehindsourceminvalue_mongodb"></a><a href="#connectors-strm-metric-millisecondsbehindsourceminvalue_mongodb"><code>MilliSecondsBehindSourceMinValue</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>long</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The minimum lag in milliseconds behind the source that is observed during the connector&#8217;s runtime.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-strm-metric-millisecondsbehindsourcemaxvalue_mongodb"></a><a href="#connectors-strm-metric-millisecondsbehindsourcemaxvalue_mongodb"><code>MilliSecondsBehindSourceMaxValue</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>long</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The maximum lag in milliseconds behind the source that is observed during the connector&#8217;s runtime.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-strm-metric-millisecondsbehindsourceaveragevalue_mongodb"></a><a href="#connectors-strm-metric-millisecondsbehindsourceaveragevalue_mongodb"><code>MilliSecondsBehindSourceAverageValue</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>double</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The average lag in milliseconds behind the source calculated across all observations during the connector&#8217;s runtime.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-strm-metric-millisecondsbehindsourcep50_mongodb"></a><a href="#connectors-strm-metric-millisecondsbehindsourcep50_mongodb"><code>MilliSecondsBehindSourceP50</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>double</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The 50th percentile (median) of the lag in milliseconds behind the source.
+This metric provides a more robust measure of typical lag than the average, as it is less affected by outlier values.
+Available when <a href="#mongodb-property-statistics-metrics-enabled"><code>statistics.metrics.enabled</code></a> is set to <code>true</code> (default).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-strm-metric-millisecondsbehindsourcep95_mongodb"></a><a href="#connectors-strm-metric-millisecondsbehindsourcep95_mongodb"><code>MilliSecondsBehindSourceP95</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>double</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The 95th percentile of the lag in milliseconds behind the source.
+This metric indicates that 95% of lag measurements are below this value, useful for identifying tail latencies and setting SLA thresholds.
+Available when <a href="#mongodb-property-statistics-metrics-enabled"><code>statistics.metrics.enabled</code></a> is set to <code>true</code> (default).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a id="connectors-strm-metric-millisecondsbehindsourcep99_mongodb"></a><a href="#connectors-strm-metric-millisecondsbehindsourcep99_mongodb"><code>MilliSecondsBehindSourceP99</code></a></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>double</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The 99th percentile of the lag in milliseconds behind the source.
+This metric indicates that 99% of lag measurements are below this value, useful for understanding worst-case performance scenarios.
+Available when <a href="#mongodb-property-statistics-metrics-enabled"><code>statistics.metrics.enabled</code></a> is set to <code>true</code> (default).</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5799,7 +6024,7 @@ As a result, the secondary node that is elected as the new primary node might be
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2025 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/902dd6422c9d4eec1c7391107c3e974075fc0cb7">902dd642</a></span>)
+            <div class="copyright">Copyright &copy; 2026 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/1d381a8915e007c99e034748be22264d1466e105">1d381a89</a></span>)
             
         </div>
     </footer>
