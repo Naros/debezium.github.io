@@ -369,6 +369,9 @@
     <a class="nav-link" href="../install-kafka-connect.html">Kafka Connect</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../install-operator.html">Operator</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../postgres-plugins.html">PostgreSQL Decoding Plugins</a>
   </li>
 </ul>
@@ -456,6 +459,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="milvus.html">Milvus</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sqlite.html">SQLite</a>
   </li>
 </ul>
   </li>
@@ -5028,10 +5034,14 @@ The MariaDB connector uses the column&#8217;s character set when reading the bin
 <p><code>REAL[(M,D)]</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>FLOAT32</code></p>
+<p><code>FLOAT32</code> or <code>FLOAT64</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><em>n/a</em></p>
+<p>The mapping is controlled by the <a href="#mariadb-property-real-handling-mode"><code>real.handling.mode</code></a> connector configuration property.</p>
+</div>
+<div class="paragraph">
+<p>By default, <code>REAL</code> is a synonym for <code>DOUBLE</code>, and the connector maps it to <code>FLOAT64</code>.
+Set <code>real.handling.mode</code> to <code>float</code> to map <code>REAL</code> to <code>FLOAT32</code>, for example, when the server uses the <code>REAL_AS_FLOAT</code> SQL mode.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5256,7 +5266,8 @@ A precision <code>P</code> from 24 to 53 results in an 8-byte double-precision <
 <p><code>io.debezium.data.Enum</code></p>
 </div>
 <div class="paragraph">
-<p>The <code>allowed</code> schema parameter contains the comma-separated list of allowed values.</p>
+<p>The <code>allowed</code> schema parameter contains the comma-separated list of allowed values.
+Repeated quotation marks that escape a quote in a SQL option are represented as one literal quotation mark in the <code>allowed</code> parameter and event values.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5270,7 +5281,8 @@ A precision <code>P</code> from 24 to 53 results in an 8-byte double-precision <
 <p><code>io.debezium.data.EnumSet</code></p>
 </div>
 <div class="paragraph">
-<p>The <code>allowed</code> schema parameter contains the comma-separated list of allowed values.</p>
+<p>The <code>allowed</code> schema parameter contains the comma-separated list of allowed values.
+Repeated quotation marks that escape a quote in a SQL option are represented as one literal quotation mark in the <code>allowed</code> parameter and event values.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5301,6 +5313,12 @@ MariaDB allows the fractional seconds precision <code>fsp</code> to be in the ra
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>For <code>BIT</code> columns, the connector omits the Kafka Connect schema default when a streamed DDL statement specifies an exponent-form numeric default, such as <code>1e30</code>, whose floating-point value is outside the signed 64-bit integer range.
+MariaDB&#8217;s conversion of these values can produce different results across server builds, so the connector cannot reliably infer the default from the DDL.
+This does not affect captured row values or the database default.
+During a snapshot, the connector can still capture the default normalized by the server.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="mariadb-temporal-types"><a class="anchor" href="#mariadb-temporal-types"></a>Temporal types</h3>
@@ -5739,8 +5757,10 @@ The Debezium JDBC sink connector can consume these structured temporal schemas d
 <p><code>STRUCT</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>io.debezium.time.StructuredDate</code><br>
-Contains <code>year</code>, <code>month</code>, and <code>day</code> fields.</p>
+<p><code>io.debezium.time.StructuredDate</code></p>
+</div>
+<div class="paragraph">
+<p>Contains <code>year</code>, <code>month</code>, and <code>day</code> fields.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5751,8 +5771,10 @@ Contains <code>year</code>, <code>month</code>, and <code>day</code> fields.</p>
 <p><code>STRUCT</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>io.debezium.time.StructuredDuration</code><br>
-Contains signed <code>years</code>, <code>months</code>, <code>days</code>, <code>hours</code>, <code>minutes</code>, <code>seconds</code>, <code>nanos</code>, and optional <code>precision</code> fields.</p>
+<p><code>io.debezium.time.StructuredDuration</code></p>
+</div>
+<div class="paragraph">
+<p>Contains signed <code>years</code>, <code>months</code>, <code>days</code>, <code>hours</code>, <code>minutes</code>, <code>seconds</code>, <code>nanos</code>, and optional <code>precision</code> fields.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5763,8 +5785,10 @@ Contains signed <code>years</code>, <code>months</code>, <code>days</code>, <cod
 <p><code>STRUCT</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>io.debezium.time.StructuredTimestamp</code><br>
-Contains <code>year</code>, <code>month</code>, <code>day</code>, <code>hour</code>, <code>minute</code>, <code>second</code>, <code>nanos</code>, and optional <code>precision</code> fields.</p>
+<p><code>io.debezium.time.StructuredTimestamp</code></p>
+</div>
+<div class="paragraph">
+<p>Contains <code>year</code>, <code>month</code>, <code>day</code>, <code>hour</code>, <code>minute</code>, <code>second</code>, <code>nanos</code>, and optional <code>precision</code> fields.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -5775,8 +5799,10 @@ Contains <code>year</code>, <code>month</code>, <code>day</code>, <code>hour</co
 <p><code>STRUCT</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>io.debezium.time.StructuredZonedTimestamp</code><br>
-Contains calendar and clock component fields, <code>offsetSeconds</code>, optional <code>zoneId</code>, and optional <code>precision</code>.</p>
+<p><code>io.debezium.time.StructuredZonedTimestamp</code></p>
+</div>
+<div class="paragraph">
+<p>Contains calendar and clock component fields, <code>offsetSeconds</code>, optional <code>zoneId</code>, and optional <code>precision</code>.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -6119,6 +6145,9 @@ jdbc-sink.treat.real.as.double=true</code></pre>
 </div>
 <div class="paragraph">
 <p>In the preceding example, the <code>selector.*</code> and <code>treat.real.as.double</code> configuration properties are optional.</p>
+</div>
+<div class="paragraph">
+<p>If <code>selector.real</code> matches a column, the <code>treat.real.as.double</code> converter setting determines the emitted schema for that column and takes precedence over the connector-level <code>real.handling.mode</code> setting.</p>
 </div>
 <div class="paragraph">
 <p>The <code>selector.*</code> properties specify comma-separated lists of regular expressions that specify which tables and columns that the converter applies to.
@@ -6801,7 +6830,7 @@ To enable the connector to consume <strong>UPDATE</strong> events, this variable
 <div class="title">Procedure</div>
 <ol class="arabic">
 <li>
-<p>Download the Debezium <a href="https://central.sonatype.com/repository/maven-snapshots/io/debezium/debezium-connector-mariadb/3.8.0-SNAPSHOT/debezium-connector-mariadb-3.8.0-20261013.002203-24-plugin.tar.gz">MariaDB connector plug-in</a>.</p>
+<p>Download the Debezium <a href="https://central.sonatype.com/repository/maven-snapshots/io/debezium/debezium-connector-mariadb/3.8.0-SNAPSHOT/debezium-connector-mariadb-3.8.0-20261018.120950-35-plugin.tar.gz">MariaDB connector plug-in</a>.</p>
 </li>
 <li>
 <p>Extract the files into your Kafka Connect environment.</p>
@@ -7968,6 +7997,62 @@ This property is required by all Kafka Connect connectors.</p>
 </div>
 </dd>
 </dl>
+</div>
+<div id="mariadb-property-real-handling-mode" class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#mariadb-property-real-handling-mode"><code>real.handling.mode</code></a></dt>
+<dd>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Default value</dt>
+<dd>
+<p><code>double</code></p>
+</dd>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>Specifies how the connector interprets the <code>REAL</code> type name when it parses DDL from a snapshot, the schema history, or the binlog.
+Set one of the following options:</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>double</code></dt>
+<dd>
+<p>Represents <code>REAL</code> values as double-precision (<code>FLOAT64</code>) values.
+This default matches the default MariaDB behavior, in which <code>REAL</code> is a synonym for <code>DOUBLE</code>.</p>
+</dd>
+<dt class="hdlist1"><code>float</code></dt>
+<dd>
+<p>Represents <code>REAL</code> values as single-precision (<code>FLOAT32</code>) values.
+Use this option when the source server uses the <code>REAL_AS_FLOAT</code> SQL mode, or to retain an existing <code>FLOAT32</code> schema contract.</p>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The setting does not change the mapping of columns that are explicitly declared as <code>FLOAT</code> or <code>DOUBLE</code>.</p>
+</div>
+<div class="paragraph">
+<p>+</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The default <code>double</code> mode changes the schema of <code>REAL</code> columns from <code>FLOAT32</code> to <code>FLOAT64</code> when the connector parses a <code>REAL</code> type name from the schema history or the binlog.
+Before upgrading an existing connector, verify that downstream schema compatibility rules permit this change.
+To retain the previous <code>FLOAT32</code> mapping, explicitly set <code>real.handling.mode</code> to <code>float</code>.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div id="mariadb-property-schema-name-adjustment-mode" class="dlist">
 <dl>
@@ -11922,7 +12007,7 @@ If the snapshot is disabled, the connector fails with an error.</p>
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2026 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/0d0a319fac130826d64c8c2c8d7004777f2006bd">0d0a319f</a></span>)
+            <div class="copyright">Copyright &copy; 2026 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/667cef1af75f5278db479d13c32caa07e524c3ea">667cef1a</a></span>)
             
         </div>
     </footer>

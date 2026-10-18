@@ -369,6 +369,9 @@
     <a class="nav-link" href="../install-kafka-connect.html">Kafka Connect</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../install-operator.html">Operator</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../postgres-plugins.html">PostgreSQL Decoding Plugins</a>
   </li>
 </ul>
@@ -456,6 +459,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../connectors/milvus.html">Milvus</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../connectors/sqlite.html">SQLite</a>
   </li>
 </ul>
   </li>
@@ -873,6 +879,9 @@ When Debezium detects that a new <a href="#debezium-signaling-example-of-a-loggi
 <p>Db2</p>
 </li>
 <li>
+<p>Informix</p>
+</li>
+<li>
 <p>MariaDB</p>
 </li>
 <li>
@@ -985,6 +994,14 @@ Db2
 </td>
 <td class="hdlist2">
 <p><code><em>&lt;schemaName&gt;</em>.<em>&lt;tableName&gt;</em></code></p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Informix
+</td>
+<td class="hdlist2">
+<p><code><em>&lt;databaseName&gt;</em>.<em>&lt;schemaName&gt;</em>.<em>&lt;tableName&gt;</em>`</code></p>
 </td>
 </tr>
 <tr>
@@ -1771,6 +1788,9 @@ You can initiate ad hoc snapshots at any time.</p>
 <p>Db2</p>
 </li>
 <li>
+<p>Informix</p>
+</li>
+<li>
 <p>MariaDB</p>
 </li>
 <li>
@@ -1857,6 +1877,12 @@ You can initiate ad hoc snapshots at any time.</p>
 <p><a href="../connectors/db2.html#debezium-db2-incremental-snapshots" class="xref page">Db2 connector incremental snapshots</a></p>
 </li>
 <li>
+<p><a href="../connectors/informix.html#debezium-informix-incremental-snapshots" class="xref page">Informix connector incremental snapshots</a></p>
+</li>
+<li>
+<p><a href="../connectors/mariadb.html#debezium-mariadb-incremental-snapshots" class="xref page">MariaDB connector incremental snapshots</a></p>
+</li>
+<li>
 <p><a href="../connectors/mongodb.html#debezium-mongodb-incremental-snapshots" class="xref page">MongoDB connector incremental snapshots</a></p>
 </li>
 <li>
@@ -1890,6 +1916,9 @@ After processing the signal, the connector will stop the current in-progress sna
 </li>
 <li>
 <p>Db2</p>
+</li>
+<li>
+<p>Informix</p>
 </li>
 <li>
 <p>MariaDB</p>
@@ -1993,6 +2022,9 @@ Therefor it&#8217;s not possible to specify the data collection as the snapshot 
 <p>Db2</p>
 </li>
 <li>
+<p>Informix</p>
+</li>
+<li>
 <p>MariaDB</p>
 </li>
 <li>
@@ -2058,6 +2090,9 @@ After processing the signal, the connector will resume previously paused snapsho
 <p>Db2</p>
 </li>
 <li>
+<p>Informix</p>
+</li>
+<li>
 <p>MariaDB</p>
 </li>
 <li>
@@ -2117,6 +2152,12 @@ The <code>data</code> field is ignored.</p>
 <p><a href="../connectors/db2.html#debezium-db2-incremental-snapshots" class="xref page">Db2 connector incremental snapshots</a></p>
 </li>
 <li>
+<p><a href="../connectors/informix.html#debezium-informix-incremental-snapshots" class="xref page">Informix connector incremental snapshots</a></p>
+</li>
+<li>
+<p><a href="../connectors/mariadb.html#debezium-mariadb-incremental-snapshots" class="xref page">MariaDB connector incremental snapshots</a></p>
+</li>
+<li>
 <p><a href="../connectors/mongodb.html#debezium-mongodb-incremental-snapshots" class="xref page">MongoDB connector incremental snapshots</a></p>
 </li>
 <li>
@@ -2155,6 +2196,9 @@ You can initiate ad hoc blocking snapshots at any time.</p>
 </li>
 <li>
 <p>Db2</p>
+</li>
+<li>
+<p>Informix</p>
 </li>
 <li>
 <p>MariaDB</p>
@@ -2240,7 +2284,13 @@ You can initiate ad hoc blocking snapshots at any time.</p>
 <p><a href="../connectors/db2.html#db2-blocking-snapshots" class="xref page">Db2 connector ad hoc blocking snapshots</a></p>
 </li>
 <li>
+<p><a href="../connectors/informix.html#informix-blocking-snapshots" class="xref page">Informix connector ad hoc blocking snapshots</a></p>
+</li>
+<li>
 <p><a href="../connectors/mongodb.html#mongodb-blocking-snapshots" class="xref page">MongoDB connector ad hoc blocking snapshots</a></p>
+</li>
+<li>
+<p><a href="../connectors/mariadb.html#mariadb-blocking-snapshots" class="xref page">MariaDB connector ad hoc blocking snapshots</a></p>
 </li>
 <li>
 <p><a href="../connectors/mysql.html#mysql-blocking-snapshots" class="xref page">MySQL connector ad hoc blocking snapshots</a></p>
@@ -2382,7 +2432,7 @@ To use a custom action with multiple connectors, you must place a copy of the cu
 
 <div id="toc-rightbar"></div>    <footer class="footer">
         <div class="wrapper">
-            <div class="copyright">Copyright &copy; 2026 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/0d0a319fac130826d64c8c2c8d7004777f2006bd">0d0a319f</a></span>)
+            <div class="copyright">Copyright &copy; 2026 Debezium Community (Rev: <span class="truncated"><a href="https://github.com/debezium/debezium/commit/667cef1af75f5278db479d13c32caa07e524c3ea">667cef1a</a></span>)
             
         </div>
     </footer>
